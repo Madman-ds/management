@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 //mapper接口位置
-@MapperScan("com.ds.mapper")
+@MapperScan("com.ds.*.mapper")
 @SpringBootApplication
 public class ManagementApplication  extends SpringBootServletInitializer {
 

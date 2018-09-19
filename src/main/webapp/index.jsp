@@ -11,8 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-    <script>
-        location.href = "findUser";
-    </script>
+hello
 </body>
 </html>

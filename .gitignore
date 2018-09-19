@@ -98,7 +98,4 @@ local.properties
 mvnw
 mvnw.cmd
 src/test/
-/src/main/resources/static/
-/src/main/resources/templates/
-!/.gitignore
 /LOG_PATH_IS_UNDEFINED/

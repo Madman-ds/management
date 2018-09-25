@@ -40,7 +40,7 @@
 
 
 
-<div id="YWaitDialog"
+<%--<div id="YWaitDialog"
     style="background-color: #e0e0e0;
 	position: absolute;
 	margin: auto;
@@ -52,7 +52,7 @@
     <p style="text-align: center; vertical-align: central;">
         请等待，正在查询数据
     </p>
-</div>
+</div>--%>
 <script type="text/javascript">
 
 

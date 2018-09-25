@@ -19,7 +19,13 @@ public class LoginController {
     private final static Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
     private LoginServcie loginServcie;
-
+    /**
+     * @作者: 李勇奇
+     * @功能描述: 登录方法
+     * @时间: 2018/9/25 21:00
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("Login")
     public String Login(){
         logger.info("=============登陆方法开始=================");

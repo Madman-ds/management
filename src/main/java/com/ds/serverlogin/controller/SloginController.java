@@ -3,6 +3,7 @@ package com.ds.serverlogin.controller;
 import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.serverlogin.service.SloginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,17 @@ public class SloginController {
 
     @Autowired
     private SloginService sloginService;
-
+    /**
+     * @作者: 段大神经
+     * @功能描述: 添加了根方法
+     * @时间: 2018/9/25 23:19
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @RequestMapping("/")
+    public String index(){
+        return "index";
+    }
     /**
      * @作者: yuboyake
      * @功能描述: 登陆验证

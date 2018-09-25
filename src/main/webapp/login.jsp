@@ -65,7 +65,7 @@
     }*/
 
     function userButton(){
-        $('#YWaitDialog').show();
+        //$('#YWaitDialog').show();
         $.ajax({
             url:'<%=request.getContextPath() %>/server/queryUser',
             type:'get',
@@ -75,7 +75,7 @@
                 // alert(data.useFlag);
                 if(data.useFlag == 100 || data.useFlag == "100"){
                     alert("登陆成功");
-                    location.href="/Vtree.jsp";
+                    location.href="toList";
                 }else if(data.useFlag == 101 || data.useFlag == "101"){
                     alert("用户名错误");
                 }else if(data.useFlag == 102 || data.useFlag == "102"){
@@ -85,7 +85,7 @@
                 }else if(data.useFlag == 104 || data.useFlag == "104"){
                     alert("密码错误");
                 }
-                $('#YWaitDialog').hide();
+                //$('#YWaitDialog').hide();
             },error:function(useFlag){
                 alert("请求走丢了，请检查是否已连接网络！");
             }

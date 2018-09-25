@@ -14,7 +14,7 @@ import java.util.Map;
  * @类名称: SloginController
  * @作者: yuboyake
  * @创建时间: 2018/9/24 15:04
- * @说明:
+ * @说明:登陆控制器
  */
 @RestController
 @RequestMapping("server")

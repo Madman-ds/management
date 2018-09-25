@@ -4,6 +4,64 @@
     <head>
         <meta charset="UTF-8">
         <title>后台管理</title>
+        <style>
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                overflow: hidden;
+                background-color: #FFFFFF;
+                font-family: "Microsoft YaHei", sans-serif;
+            }
+            .pageSidebar{
+                width: 240px;
+                height:100%;
+                padding-bottom: 30px;
+                overflow: auto;
+                background-color: #e3e3e3;
+            }
+            .splitter {
+                width: 5px;
+                height: 100%;
+                bottom: 0;
+                left: 240px;
+                position: absolute;
+                overflow: hidden;
+                background-color: #fff;
+            }
+            .pageContent{
+                height: 100%;
+                min-width: 768px;
+                left: 246px;
+                top: 0;
+                right: 0;
+                z-index: 3;
+                padding-bottom: 30px;
+                position: absolute;
+            }
+            .pageContainer{
+                bottom: 0;
+                left:0;
+                right: 0;
+                top: 53px;
+                overflow: auto;
+                position: absolute;
+                width: 100%;
+            }
+            .footer {
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                margin-top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                position: absolute;
+                z-index: 10;
+                background-color:#DFDFDF;
+            }
+        </style>
+
         <!-- 核心样式文件 -->
         <link href="<%=request.getContextPath() %>/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="<%=request.getContextPath() %>/js/bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
@@ -25,71 +83,55 @@
         <script type="text/javascript" src="<%=request.getContextPath() %>/js/bootstrap-fileinput/js/fileinput.min.js"></script>
         <script type="text/javascript" src="<%=request.getContextPath() %>/js/bootstrap-fileinput/js/locales/zh.js"></script>
     </head>
-<style type="text/css">
-    body {
-        padding: 20px;
-    }
-
-    .headLeft {
-        float: left;
-    }
-
-    .headRight {
-        padding-top: 40px;
-        padding-left: 340px;
-    }
-
-    .search {
-        margin-bottom: 10px;
-    }
-
-    .search .toolbar {}
-</style>
-<!--必须使用较新版本的BootStrap才有如下效果-->
-
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <nav class="navbar navbar-fixed-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand " href="#">后台管理系统</a>
-                    </div>
-                    <div id="navbar" class="navbar-right">
-                        <a class="navbar-brand" href="#">当前用户：xx</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <div class="row" style="padding-top: 45px">
-        <div class="col-md-3">
-            <div class="list-group">
-                <!--激活，作为标题-->
-                <a href="#" class="list-group-item active ">
-                    系统菜单
-                </a>
-                <a href="#" class="list-group-item">设备管理</a>
-                <a href="#" class="list-group-item">检查项赋权</a>
-                <a href="#" class="list-group-item">用户管理</a>
-                <a href="#" class="list-group-item">数据备份</a>
+    <body>
+    <!--顶部导航栏部分-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" title="logoTitle" href="#">Neo Yang</a>
             </div>
-        </div>
-        <div class="col-md-9">
-            <div>
-                <ol class="breadcrumb">
-                    <li><span class="glyphicon glyphicon-home"></span>&nbsp;
-                        <a href="#">主页</a>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li role="presentation">
+                        <a href="#">当前用户：<span class="badge">TestUser</span></a>
                     </li>
-                    <li class="active"></li>
-                </ol>
-            </div>
-            <div align="center" style="padding-top: 50px;">
-                <h1>热等静压安全管理系统</h1>
+                    <li>
+                        <a href="../login/logout">
+                            <span class="glyphicon glyphicon-lock"></span>退出登录</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+    <!-- 中间主体内容部分 -->
+    <div class="pageContainer">
+        <!-- 左侧导航栏 -->
+        <div class="pageSidebar">
+            <ul class="nav nav-stacked nav-pills">
+                <li role="presentation">
+                    <a href="../Vtree.jsp" target="mainFrame" >导航链接1</a>
+                </li>
+                <li role="presentation">
+                    <a href="nav2.html" target="mainFrame">导航链接2</a>
+                </li>
+                <li role="presentation">
+                    <a href="nav3.html" target="mainFrame">导航链接3</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 左侧导航和正文内容的分隔线 -->
+        <div class="splitter"></div>
+        <!-- 正文内容部分 -->
+        <div class="pageContent">
+            <iframe src="index.html" id="mainFrame" name="mainFrame" frameborder="0" width="100%"  height="100%" frameBorder="0"></iframe>
+        </div>
     </div>
-</div>
+    <!-- 选中蓝条 -->
+    <script>
+        $(".nav li").click(function() {
+            $(".active").removeClass('active');
+            $(this).addClass("active");
+        });
+    </script>
 </body>
 </html>

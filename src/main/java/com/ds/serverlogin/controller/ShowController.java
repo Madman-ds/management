@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @类名称：ShowController
  * @作者: 段大神经
  * @创建时间: 2018/9/25 23:57
- * @说明:
+ * @说明:页跳转控制器
  */
 @Controller
 public class ShowController {

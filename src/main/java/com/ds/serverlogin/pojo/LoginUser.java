@@ -29,5 +29,5 @@ public class LoginUser {
     /**
      *卡号
      */
-    private String kh;
+    private String user_kh;
 }

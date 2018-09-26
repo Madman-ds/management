@@ -88,7 +88,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" title="logoTitle" href="#">Neo Yang</a>
+                <a class="navbar-brand" title="logoTitle" href="#">后台管理系统</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -109,13 +109,16 @@
         <div class="pageSidebar">
             <ul class="nav nav-stacked nav-pills">
                 <li role="presentation">
-                    <a href="../Vtree.jsp" target="mainFrame" >导航链接1</a>
+                    <a href="../Vtree.jsp" target="mainFrame" >设备管理</a>
                 </li>
                 <li role="presentation">
-                    <a href="nav2.html" target="mainFrame">导航链接2</a>
+                    <a href="nav2.html" target="mainFrame">检查项赋权</a>
                 </li>
                 <li role="presentation">
-                    <a href="nav3.html" target="mainFrame">导航链接3</a>
+                    <a href="nav3.html" target="mainFrame">用户管理</a>
+                </li>
+                <li role="presentation">
+                    <a href="nav3.html" target="mainFrame">数据备份</a>
                 </li>
             </ul>
         </div>

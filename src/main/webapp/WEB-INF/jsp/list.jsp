@@ -93,7 +93,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li role="presentation">
-                        <a href="#">当前用户：<span class="badge">TestUser</span></a>
+                        <a href="#">当前用户：<span class="badge">${user.user_name}</span></a>
                     </li>
                     <li>
                         <a href="../login/logout">

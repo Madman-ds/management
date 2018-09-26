@@ -56,7 +56,7 @@ public class AttributesController {
      * @参数:  * @param
      * @返回值: int
      **/
-    @PostMapping
+    @PostMapping("insertAttributes")
     public int insertAttributes(Attributes attributes){
         //获取返回的主键用于关联表存储
         System.out.print(attributes.getSx_id());

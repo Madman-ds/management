@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.equipment.mapper.EquipmentMapper">
+
+    <!--条件查询总条数-->
+    <select id="getEquipmentCount" resultType="java.lang.Integer">
+        select count(*) from t_equipment
+    </select>
+
+    <!--条件查询集合-->
+    <select id="getEquipmentList" resultType="com.ds.equipment.pojo.Equipment" parameterType="com.ds.equipment.pojo.Equipment">
+        select * from t_equipment
+        where 1 = 1
+        LIMIT #{startIndex},#{rows}
+    </select>
+
+    <!--批量删除设备-->
+    <delete id="delEquipment" parameterType="com.ds.equipment.pojo.Equipment" >
+        delete FROM  t_equipment  where sb_id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getEquipmentidById" parameterType="string" resultType="com.ds.equipment.pojo.Equipment">
+        select *
+        FROM
+        t_equipment t
+        where t.sb_id = #{id}
+    </select>
+
+    <!--条件查询-->
+    <sql id="where">
+        <if test="tname != '' and tname != null">
+
+            and t.tname like CONCAT('%',#{tname},'%')
+        </if>
+        <if test=" titleHonorId != ''and titleHonorId != -1 ">
+            and t.title_honor_id = #{titleHonorId}
+        </if>
+        <if test="StartTime !='' and StartTime != null ">
+            and t.create_time >=#{StartTime}
+        </if>
+        <if test="EndTime !='' and EndTime != null ">
+            and t.create_time &lt;=#{EndTime}
+        </if>
+    </sql>
+
+</mapper>

@@ -39,4 +39,17 @@ public class ShowController {
         session.removeAttribute("loginUser");
         return "index";
     }
+
+    /**
+     * @作者: yuboyake
+     * @功能描述: 去展示页面
+     * @时间: 2018/9/26 23:57
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping(value="toEquipmentList")
+    public String toEquipmentList(){
+        return "/WEB-INF/jsp/equipment/equipmentList";
+    }
+
 }

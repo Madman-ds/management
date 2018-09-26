@@ -109,7 +109,7 @@
         <div class="pageSidebar">
             <ul class="nav nav-stacked nav-pills">
                 <li role="presentation">
-                    <a href="../Vtree.jsp" target="mainFrame" >设备管理</a>
+                    <a href="<%=request.getContextPath() %>/equipment/toEquipmentList" target="mainFrame" >设备管理</a>
                 </li>
                 <li role="presentation">
                     <a href="nav2.html" target="mainFrame">检查项赋权</a>
@@ -126,7 +126,7 @@
         <div class="splitter"></div>
         <!-- 正文内容部分 -->
         <div class="pageContent">
-            <iframe src="index.html" id="mainFrame" name="mainFrame" frameborder="0" width="100%"  height="100%" frameBorder="0"></iframe>
+            <iframe src="/images/logo.jpg" id="mainFrame" name="mainFrame" frameborder="0" width="100%" height="100%" frameBorder="0"></iframe>
         </div>
     </div>
     <!-- 选中蓝条 -->

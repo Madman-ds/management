@@ -4,9 +4,7 @@ import com.ds.equipment.pojo.Equipment;
 import com.ds.equipment.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
  * @创建时间: 2018/9/26 22:33
  * @说明:
  */
-@Controller
+@RestController
 @RequestMapping("equipment")
 public class EquipmentController {
 
@@ -31,8 +29,7 @@ public class EquipmentController {
      * @参数:  * @param equipment
      * @返回值: java.util.HashMap<java.lang.String,java.lang.Object>
      **/
-    @RequestMapping(value = "getEquipmentList")
-    @ResponseBody
+    @GetMapping(value = "getEquipmentList")
     public HashMap<String, Object> getEquipmentList(Equipment equipment){
         equipment.calculate();
         //获取总数据
@@ -48,32 +45,25 @@ public class EquipmentController {
 
     /**
      * @作者: yuboyake
-     * @功能描述: 去展示页面
-     * @时间: 2018/9/26 23:57
-     * @参数:  * @param
-     * @返回值: java.lang.String
-     **/
-    @RequestMapping(value="toEquipmentList")
-    public String toEquipmentList(){
-        return "/WEB-INF/jsp/equipment/equipmentList";
-    }
-
-    /**
-     * @作者: yuboyake
      * @功能描述: 批量删除
      * @时间: 2018/9/26 23:45
      * @参数:  * @param ids
      * @返回值: boolean
      **/
-    @RequestMapping(value="delEquipment",method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value="delEquipment")
     public boolean delEquipment(String ids){
         boolean isOK = equipmentService.delEquipment(ids);
         return isOK;
     }
 
-    @RequestMapping(value="getEquipmentById",method = RequestMethod.POST)
-    @ResponseBody
+    /**
+     * @作者: 段大神经
+     * @功能描述: 根据id查询设备
+     * @时间: 2018/9/27 0:19
+     * @参数:  * @param id
+     * @返回值: java.lang.Object
+     **/
+    @PostMapping(value="getEquipmentById")
     public Object getEquipmentById(String id){
         Equipment equipment = equipmentService.getEquipmentById(id);
         return equipment;

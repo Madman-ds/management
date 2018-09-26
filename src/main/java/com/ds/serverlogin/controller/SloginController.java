@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class SloginController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index(){
         return "index";
     }
@@ -45,10 +46,9 @@ public class SloginController {
      *                            103 此用户存在重复
      *                            104 密码错误
      **/
-    @RequestMapping("/queryUser")
-    public Map<String, Object> queryUser(LoginUser loginUser){
-        Map<String, Object> map = sloginService.queryUser(loginUser);
-        System.out.println(map);
+    @GetMapping("/queryUser")
+    public Map<String, Object> queryUser(LoginUser loginUser, HttpSession session){
+        Map<String, Object> map = sloginService.queryUser(loginUser,session);
         return map;
     }
 
@@ -60,7 +60,7 @@ public class SloginController {
      * @参数:  * @param
      * @返回值: com.ds.serverlogin.pojo.LoginUser
      **/
-    @RequestMapping("/queryUserAll")
+    @GetMapping("/queryUserAll")
     public LoginUser queryUserAll(){
         LoginUser loginUser= sloginService.queryUserAll();
         return loginUser;

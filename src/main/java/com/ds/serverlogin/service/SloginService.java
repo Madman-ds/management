@@ -2,6 +2,7 @@ package com.ds.serverlogin.service;
 
 import com.ds.serverlogin.pojo.LoginUser;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 public interface SloginService {
 
-    Map<String,Object> queryUser(LoginUser loginUser);
+    Map<String,Object> queryUser(LoginUser loginUser, HttpSession session);
 
     LoginUser queryUserAll();
 }

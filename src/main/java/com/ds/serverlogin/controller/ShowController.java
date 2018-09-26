@@ -1,7 +1,10 @@
 package com.ds.serverlogin.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @类名称：ShowController
@@ -20,7 +23,8 @@ public class ShowController {
      * @返回值: java.lang.String
      **/
     @GetMapping("toList")
-    public String toList(){
+    public String toList(ModelMap modelMap, HttpSession session){
+        modelMap.addAttribute("user",session.getAttribute("loginUser"));
         return "WEB-INF/jsp/list";
     }
 }

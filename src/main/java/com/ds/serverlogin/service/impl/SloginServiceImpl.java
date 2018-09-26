@@ -6,6 +6,7 @@ import com.ds.serverlogin.service.SloginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,14 +22,15 @@ public class SloginServiceImpl implements SloginService {
     private SloginMapper sloginMapper;
 
     @Override
-    public Map<String, Object> queryUser(LoginUser loginUser) {
+    public Map<String, Object> queryUser(LoginUser loginUser, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
         if (loginUser.getUser_name() !=null || !"".equals(loginUser.getUser_name())){
             int userNameCount = sloginMapper.queryUserName(loginUser);
             if (userNameCount == 1){
                 if (loginUser.getPassword() !=null || !"".equals(loginUser.getPassword())){
-                    int passwordCount = sloginMapper.queryUser(loginUser);
-                    if(passwordCount ==1){
+                     LoginUser user = sloginMapper.queryUser(loginUser);
+                    if(user != null){
+                        session.setAttribute("loginUser",user);
                         map.put("useFlag",100);//登陆成功
                     }else{
                         map.put("useFlag",104);//密码错误

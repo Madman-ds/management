@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface SloginMapper {
 
-    int queryUser(LoginUser loginUser);
+    LoginUser queryUser(LoginUser loginUser);
 
     int queryUserName(LoginUser loginUser);
 

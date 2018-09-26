@@ -51,5 +51,15 @@ public class ShowController {
     public String toEquipmentList(){
         return "/WEB-INF/jsp/equipment/equipmentList";
     }
-
+    /**
+     * @作者: 段大神经
+     * @功能描述: 项目访问根页面，也就是登陆页面
+     * @时间: 2018/9/27 0:30
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("/")
+    public String index(){
+        return "index";
+    }
 }

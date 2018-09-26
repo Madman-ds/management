@@ -6,8 +6,8 @@
         select count(*) from t_user where user_name = #{user_name}
     </select>
     <!--查询密码是否正确-->
-    <select id="queryUser" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="java.lang.Integer">
-        select count(*) from t_user where user_name = #{user_name} and password = #{password}
+    <select id="queryUser" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.serverlogin.pojo.LoginUser">
+        select * from t_user where user_name = #{user_name} and password = #{password}
     </select>
     <!--查询所有用户-->
     <select id="queryUserAll" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.serverlogin.pojo.LoginUser">

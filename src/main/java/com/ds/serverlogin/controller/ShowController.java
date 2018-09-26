@@ -27,4 +27,16 @@ public class ShowController {
         modelMap.addAttribute("user",session.getAttribute("loginUser"));
         return "WEB-INF/jsp/list";
     }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 退出方法
+     * @时间: 2018/9/26 22:14
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("loginUser");
+        return "index";
+    }
 }

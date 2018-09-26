@@ -96,7 +96,7 @@
                         <a href="#">当前用户：<span class="badge">${user.user_name}</span></a>
                     </li>
                     <li>
-                        <a href="../login/logout">
+                        <a href="logout">
                             <span class="glyphicon glyphicon-lock"></span>退出登录</a>
                     </li>
                 </ul>

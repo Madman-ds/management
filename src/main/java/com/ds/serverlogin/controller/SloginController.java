@@ -23,17 +23,7 @@ public class SloginController {
 
     @Autowired
     private SloginService sloginService;
-    /**
-     * @作者: 段大神经
-     * @功能描述: 添加了根方法
-     * @时间: 2018/9/25 23:19
-     * @参数:  * @param
-     * @返回值: java.lang.String
-     **/
-    @GetMapping("/")
-    public String index(){
-        return "index";
-    }
+
     /**
      * @作者: yuboyake
      * @功能描述: 登陆验证

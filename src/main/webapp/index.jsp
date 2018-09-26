@@ -26,7 +26,19 @@
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/bootstrap-fileinput/js/fileinput.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/bootstrap-fileinput/js/locales/zh.js"></script>
 </head>
-<body background="/gif/login.jpg">
+<style type="text/css">
+    html{
+        height: 100%;
+    }
+    body{
+        padding: 0;
+        margin: 0;
+        background: url("/images/logo.jpg") no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+    }
+</style>
+<body >
 <div onclick="tanchu()" style="border-color: #0f0f0f">
     <div id="login"></div>
 </div>

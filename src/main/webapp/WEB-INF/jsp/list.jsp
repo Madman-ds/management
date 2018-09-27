@@ -93,13 +93,13 @@
                     <a href="<%=request.getContextPath() %>/equipment/toEquipmentList" target="mainFrame" >设备管理</a>
                 </li>
                 <li role="presentation">
-                    <a href="nav2.html" target="mainFrame">检查项赋权</a>
+                    <a href="<%=request.getContextPath() %>/toInspectionItem" target="mainFrame">检查项赋权</a>
                 </li>
                 <li role="presentation">
-                    <a href="nav3.html" target="mainFrame">用户管理</a>
+                    <a href="<%=request.getContextPath() %>/toUserList" target="mainFrame">用户管理</a>
                 </li>
                 <li role="presentation">
-                    <a href="nav3.html" target="mainFrame">数据备份</a>
+                    <a href="<%=request.getContextPath() %>/toDatabackUp" target="mainFrame">数据备份</a>
                 </li>
             </ul>
         </div>

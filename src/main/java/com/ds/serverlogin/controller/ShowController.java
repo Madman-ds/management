@@ -42,7 +42,7 @@ public class ShowController {
 
     /**
      * @作者: yuboyake
-     * @功能描述: 去展示页面
+     * @功能描述: 去设备管理展示页面
      * @时间: 2018/9/26 23:57
      * @参数:  * @param
      * @返回值: java.lang.String
@@ -71,6 +71,28 @@ public class ShowController {
      **/
     @GetMapping("/toInspectionItem")
     public String toInspectionItem(){
-        return "/WEB-INF/jsp/equipment/equipmentList";
+        return "/WEB-INF/jsp/inspection/inspectionitem";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去用户管理页面
+     * @时间: 2018/9/27 21:23
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("/toUserList")
+    public String toUserList(){
+        return "/WEB-INF/jsp/user/userlist";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去数据备份主页面
+     * @时间: 2018/9/27 21:26
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("/toDatabackUp")
+    public String toDatabackUp(){
+        return "/WEB-INF/jsp/databackup/databackup";
     }
 }

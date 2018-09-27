@@ -9,21 +9,22 @@
           t_inspectionrecord
         <where>
             <if test="sb_name !=null and sb_name!=''">
-               AND i.sb_name = #{sb_name}
+               AND sb_name = #{sb_name}
             </if>
             <if test="sb_xh !=null and sb_xh!=''">
-               AND i.sb_xh = #{sb_xh}
+               AND sb_xh = #{sb_xh}
             </if>
             <if test="sb_number !=null and sb_number!=''">
-               AND i.sb_number = #{sb_number}
+               AND sb_number = #{sb_number}
             </if>
             <if test="start_time !=null and start_time!=''">
-               AND i.jc_time &gt;= #{start_time}
+               AND jc_time &gt;= #{start_time}
             </if>
             <if test="end_time !=null and end_time!=''">
-               AND i.jc_time &lt;= #{end_time}
+               AND jc_time &lt;= #{end_time}
             </if>
         </where>
+          order by xj_id desc
     </select>
     <!-- 添加巡检记录 -->
     <insert id="insertDataBackup" parameterType="com.ds.databackup.pojo.DataBackup">

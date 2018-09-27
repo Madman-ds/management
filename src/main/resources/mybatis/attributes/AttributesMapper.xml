@@ -12,6 +12,7 @@
                 AND sx_v = #{sx_v}
               </if>
           </where>
+        order by sx_id desc
     </select>
     <!-- 删除属性 -->
     <delete id="deleteAttributes" parameterType="long">

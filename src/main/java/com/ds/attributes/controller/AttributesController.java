@@ -22,16 +22,15 @@ import java.util.List;
 public class AttributesController {
     @Autowired
     private AttributesService attributesService;
-    /**
-     * @作者: 段大神经
-     * @功能描述: 查询所有或者条件查询属性，当属性类为null时查询所有
-     * @时间: 2018/9/26 23:03
-     * @参数:  * @param
-     * @返回值: java.util.List
-     **/
+   /**
+    * @作者: 段大神经
+    * @功能描述: 条件或全部查询属性
+    * @时间: 2018/9/27 22:07
+    * @参数:  * @param attributes
+    * @返回值: java.util.List
+    **/
     @GetMapping("findAttributes")
-    public List findAttributes(){
-        Attributes attributes = null;
+    public List findAttributes(Attributes attributes){
         return attributesService.findAttributes(attributes);
     }
     /**

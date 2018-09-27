@@ -11,18 +11,19 @@
     <select id="getEquipmentList" resultType="com.ds.equipment.pojo.Equipment" parameterType="com.ds.equipment.pojo.Equipment">
         select * from t_equipment
         where 1 = 1
+        order by sb_id desc
         LIMIT #{startIndex},#{rows}
     </select>
 
     <!--批量删除设备-->
-    <delete id="delEquipment" parameterType="com.ds.equipment.pojo.Equipment" >
+    <delete id="delEquipment" parameterType="list" >
         delete FROM  t_equipment  where sb_id in
         <foreach collection="array" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
 
-    <select id="getEquipmentidById" parameterType="string" resultType="com.ds.equipment.pojo.Equipment">
+    <select id="getEquipmentidById" parameterType="long" resultType="com.ds.equipment.pojo.Equipment">
         select *
         FROM
         t_equipment t
@@ -39,10 +40,10 @@
             and t.title_honor_id = #{titleHonorId}
         </if>
         <if test="StartTime !='' and StartTime != null ">
-            and t.create_time >=#{StartTime}
+            and t.create_time &gt;= #{StartTime}
         </if>
         <if test="EndTime !='' and EndTime != null ">
-            and t.create_time &lt;=#{EndTime}
+            and t.create_time &lt;= #{EndTime}
         </if>
     </sql>
 

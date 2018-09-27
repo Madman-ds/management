@@ -65,7 +65,7 @@ public class EquipmentController {
      **/
     @PostMapping(value="getEquipmentById")
     public Object getEquipmentById(String id){
-        Integer sb_id = Integer.valueOf(id);
+        Long sb_id = Long.valueOf(id);
         Equipment equipment = equipmentService.getEquipmentById(sb_id);
         return equipment;
     }

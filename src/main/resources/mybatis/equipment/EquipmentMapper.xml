@@ -23,6 +23,7 @@
         </foreach>
     </delete>
 
+    <!--回显-->
     <select id="getEquipmentidById" parameterType="int" resultType="com.ds.equipment.pojo.Equipment">
         select *
         FROM
@@ -30,11 +31,13 @@
         where t.sb_id = #{sb_id}
     </select>
 
+    <!--添加-->
     <insert id="addEquipment" parameterType="com.ds.equipment.pojo.Equipment">
         insert into t_equipment(sb_name,sb_number,sb_xh)
         values(#{sb_name},#{sb_number},#{sb_xh})
     </insert>
 
+    <!--修改-->
     <insert id="updateEquipment" parameterType="com.ds.equipment.pojo.Equipment">
         update t_equipment set sb_name = #{sb_name},sb_number = #{sb_number},sb_xh = #{sb_xh} where sb_id = #{sb_id}
     </insert>

@@ -4,10 +4,9 @@
     <!-- 条件或全部查询数据备份 -->
     <select id="findDataBackup" parameterType="com.ds.databackup.pojo.DataBackup" resultType="com.ds.databackup.pojo.DataBackup">
         select
-           i.xj_id,i.user_name,i.jcx_name,i.jc_jg,i.jc_time,i.jc_yq,i.qr_time,i.sb_name,
-			i.sb_number,i.sb_xh,r.bz_nr
+           *
         from 
-          t_inspectionrecord i,t_remarks r
+          t_inspectionrecord
         <where>
             <if test="sb_name !=null and sb_name!=''">
                AND i.sb_name = #{sb_name}
@@ -24,13 +23,8 @@
             <if test="end_time !=null and end_time!=''">
                AND i.jc_time &lt;= #{end_time}
             </if>
-            AND i.bz_id = r.bz_id
         </where>
     </select>
-    <!-- 添加备注并返回添加主键 -->
-    <insert id="insertRemarks" parameterType="" useGeneratedKeys="true" keyProperty="bz_id">
-        insert into t_remarks(bz_nr) value(#{bz_nr})
-    </insert>
     <!-- 添加巡检记录 -->
     <insert id="insertDataBackup" parameterType="com.ds.databackup.pojo.DataBackup">
         insert into

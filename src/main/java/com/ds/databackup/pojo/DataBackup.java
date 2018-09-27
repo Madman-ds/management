@@ -61,10 +61,6 @@ public class DataBackup {
      */
     private Date end_time;
     /**
-     * 备注ID
-     */
-    private Long bz_id;
-    /**
      * 备注内容
      */
     private String bz_nr;

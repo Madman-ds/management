@@ -4,11 +4,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
+    <title>后台系统登陆页面</title>
     <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     <style type="text/css">
         .form-group {
-
             width: 65%;
             height: 100px;
         }
@@ -36,10 +35,6 @@
             </button>
     </div>
 </form>
-
-
-
-
 <%--<div id="YWaitDialog"
     style="background-color: #e0e0e0;
 	position: absolute;
@@ -54,16 +49,12 @@
     </p>
 </div>--%>
 <script type="text/javascript">
-
-
-
 /*    function reButton(){
         BootstrapDialog.show({
             title:"注册页面",
             message: $('<div></div>').load('regies.jsp')
         });
     }*/
-
     function userButton(){
         //$('#YWaitDialog').show();
         $.ajax({
@@ -91,7 +82,6 @@
             }
         })
     }
-
 </script>
 </body>
 </html>

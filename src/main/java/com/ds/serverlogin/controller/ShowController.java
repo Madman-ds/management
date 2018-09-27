@@ -47,7 +47,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping(value="toEquipmentList")
+    @GetMapping(value="equipment/toEquipmentList")
     public String toEquipmentList(){
         return "/WEB-INF/jsp/equipment/equipmentList";
     }

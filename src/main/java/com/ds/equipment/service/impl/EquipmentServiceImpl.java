@@ -43,6 +43,13 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentMapper.getEquipmentList(equipment);
     }
 
+    /**
+     * @作者: yuboyake
+     * @功能描述: 批量删除
+     * @时间: 2018/9/28 6:36
+     * @参数:  * @param ids
+     * @返回值: boolean
+     **/
     @Override
     public boolean delEquipment(String ids) {
         try {
@@ -67,6 +74,13 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentMapper.getEquipmentidById(sb_id);
     }
 
+    /**
+     * @作者: yuboyake
+     * @功能描述: 添加
+     * @时间: 2018/9/28 6:36
+     * @参数:  * @param equipment
+     * @返回值: boolean
+     **/
     @Override
     public boolean addEquipment(Equipment equipment) {
         try {
@@ -78,6 +92,13 @@ public class EquipmentServiceImpl implements EquipmentService {
         }
     }
 
+    /**
+     * @作者: yuboyake
+     * @功能描述: 修改
+     * @时间: 2018/9/28 6:36
+     * @参数:  * @param equipment
+     * @返回值: boolean
+     **/
     @Override
     public boolean updateEquipment(Equipment equipment) {
         try {

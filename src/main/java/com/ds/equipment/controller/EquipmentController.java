@@ -71,12 +71,26 @@ public class EquipmentController {
     }
 
 
+    /**
+     * @作者: yuboyake
+     * @功能描述: 添加
+     * @时间: 2018/9/28 6:35
+     * @参数:  * @param equipment
+     * @返回值: boolean
+     **/
     @PostMapping(value="addEquipment")
     public boolean addEquipment(Equipment equipment){
         boolean isOK = equipmentService.addEquipment(equipment);
         return isOK;
     }
 
+    /**
+     * @作者: yuboyake
+     * @功能描述: 修改
+     * @时间: 2018/9/28 6:35
+     * @参数:  * @param equipment
+     * @返回值: boolean
+     **/
     @PostMapping(value="updateEquipment")
     public boolean updateEquipment(Equipment equipment){
         boolean isOK = equipmentService.updateEquipment(equipment);

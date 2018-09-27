@@ -1,7 +1,6 @@
 package com.ds.databackup.controller;
 
 import com.ds.databackup.pojo.DataBackup;
-import com.ds.databackup.pojo.Remarks;
 import com.ds.databackup.service.DataBackupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,21 +39,6 @@ public class DataBackupController {
      **/
     @PostMapping("insertDataBackup")
     public int insertDataBackup(DataBackup dataBackup){
-        Long aLong = this.insertRemarks(dataBackup.getBz_nr());
-        dataBackup.setBz_id(aLong);
         return dataBackupService.insertDataBackup(dataBackup);
-    }
-    /**
-     * @作者: 段大神经
-     * @功能描述: 添加日志信息返回主键
-     * @时间: 2018/9/27 22:52
-     * @参数:  * @param bz_nr
-     * @返回值: java.lang.Long
-     **/
-    protected Long insertRemarks(String bz_nr){
-        Remarks remarks = new Remarks();
-        remarks.setBz_nr(bz_nr);
-        int c = dataBackupService.insertRemarks(remarks);
-        return remarks.getBz_id();
     }
 }

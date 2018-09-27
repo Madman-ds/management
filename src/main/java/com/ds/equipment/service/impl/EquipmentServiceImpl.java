@@ -63,7 +63,7 @@ public class EquipmentServiceImpl implements EquipmentService {
      * @返回值: com.ds.equipment.pojo.Equipment
      **/
     @Override
-    public Equipment getEquipmentById(Integer sb_id) {
+    public Equipment getEquipmentById(Long sb_id) {
         return equipmentMapper.getEquipmentidById(sb_id);
     }
 

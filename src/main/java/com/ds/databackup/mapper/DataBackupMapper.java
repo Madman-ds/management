@@ -1,7 +1,6 @@
 package com.ds.databackup.mapper;
 
 import com.ds.databackup.pojo.DataBackup;
-import com.ds.databackup.pojo.Remarks;
 
 import java.util.List;
 
@@ -13,8 +12,6 @@ import java.util.List;
  */
 public interface DataBackupMapper {
     List findDataBackup(DataBackup dataBackup);
-
-    int insertRemarks(Remarks remarks);
 
     int insertDataBackup(DataBackup dataBackup);
 }

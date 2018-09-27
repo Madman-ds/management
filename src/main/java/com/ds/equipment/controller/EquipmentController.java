@@ -29,7 +29,7 @@ public class EquipmentController {
      * @参数:  * @param equipment
      * @返回值: java.util.HashMap<java.lang.String,java.lang.Object>
      **/
-    @GetMapping(value = "getEquipmentList")
+    @PostMapping(value = "getEquipmentList")
     public HashMap<String, Object> getEquipmentList(Equipment equipment){
         equipment.calculate();
         //获取总数据
@@ -65,7 +65,21 @@ public class EquipmentController {
      **/
     @PostMapping(value="getEquipmentById")
     public Object getEquipmentById(String id){
-        Equipment equipment = equipmentService.getEquipmentById(id);
+        Integer sb_id = Integer.valueOf(id);
+        Equipment equipment = equipmentService.getEquipmentById(sb_id);
         return equipment;
+    }
+
+
+    @PostMapping(value="addEquipment")
+    public boolean addEquipment(Equipment equipment){
+        boolean isOK = equipmentService.addEquipment(equipment);
+        return isOK;
+    }
+
+    @PostMapping(value="updateEquipment")
+    public boolean updateEquipment(Equipment equipment){
+        boolean isOK = equipmentService.updateEquipment(equipment);
+        return isOK;
     }
 }

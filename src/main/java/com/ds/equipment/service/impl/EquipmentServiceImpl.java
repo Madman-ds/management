@@ -63,7 +63,29 @@ public class EquipmentServiceImpl implements EquipmentService {
      * @返回值: com.ds.equipment.pojo.Equipment
      **/
     @Override
-    public Equipment getEquipmentById(String id) {
-        return equipmentMapper.getEquipmentidById();
+    public Equipment getEquipmentById(Integer sb_id) {
+        return equipmentMapper.getEquipmentidById(sb_id);
+    }
+
+    @Override
+    public boolean addEquipment(Equipment equipment) {
+        try {
+            equipmentMapper.addEquipment(equipment);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateEquipment(Equipment equipment) {
+        try {
+            equipmentMapper.updateEquipment(equipment);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -18,5 +18,9 @@ public interface EquipmentService {
 
     boolean delEquipment(String ids);
 
-    Equipment getEquipmentById(String id);
+    Equipment getEquipmentById(Integer sb_id);
+
+    boolean addEquipment(Equipment equipment);
+
+    boolean updateEquipment(Equipment equipment);
 }

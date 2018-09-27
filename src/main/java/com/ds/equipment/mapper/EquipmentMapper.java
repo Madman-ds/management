@@ -17,5 +17,9 @@ public interface EquipmentMapper {
 
     void delEquipment(String[] id);
 
-    Equipment getEquipmentidById();
+    Equipment getEquipmentidById(Integer sb_id);
+
+    void addEquipment(Equipment equipment);
+
+    void updateEquipment(Equipment equipment);
 }

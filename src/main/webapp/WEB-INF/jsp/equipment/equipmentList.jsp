@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>设备管理页面</title>
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../jscore.jsp"></jsp:include>

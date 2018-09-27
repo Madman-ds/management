@@ -62,4 +62,15 @@ public class ShowController {
     public String index(){
         return "index";
     }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去检查项赋权页面
+     * @时间: 2018/9/27 21:14
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("/toInspectionItem")
+    public String toInspectionItem(){
+        return "/WEB-INF/jsp/equipment/equipmentList";
+    }
 }

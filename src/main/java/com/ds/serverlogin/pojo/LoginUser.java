@@ -25,7 +25,7 @@ public class LoginUser {
     /**
      * 权限
      */
-    private char  user_qx;
+    private Integer  user_qx;
     /**
      *卡号
      */

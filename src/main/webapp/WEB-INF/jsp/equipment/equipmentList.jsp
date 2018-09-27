@@ -39,6 +39,10 @@
                         <i class="glyphicon glyphicon-search">
                         </i>搜索
                     </button>
+                    <button onclick="resetForm()" class="btn btn-danger" type="button">
+                        <i class="glyphicon glyphicon-repeat">
+                        </i>重置
+                    </button>
                 </div>
             </div>
         </form>
@@ -52,8 +56,8 @@
             <i class="glyphicon glyphicon-minus"></i>
             批量删除
         </button>
-        <button onclick="addEquipment()" class="btn btn-danger"  type="button">
-            <i class="glyphicon glyphicon-minus"></i>
+        <button onclick="addEquipment()" class="btn btn-success"  type="button">
+            <i class="glyphicon glyphicon-plus"></i>
             添加
         </button>
     </div>
@@ -110,7 +114,11 @@
 </body>
 <script>
 
-
+    //重置
+    function resetForm(){
+        $("#searchForm")[0].reset();
+        whereSearch();
+    }
     //条件查询
     function whereSearch(){
         $("#myTable").bootstrapTable('refresh',{pageNumber:1});
@@ -159,17 +167,17 @@
         },
         columns:[
             {checkbox:true},
-            {field:'sb_id',title:'ID',align:'center',width:20},
-            {field:'sb_name',title:'设备名称',align:'center',width:150},
-            {field:'sb_number',title:'设备编号',align:'center',width:150},
-            {field:'sb_xh',title:'设备型号',align:'center',width:150},
-            {field:'cc',title:'操作',width:300,formatter:function(value,rows,index){
+            {field:'sb_id',title:'ID',align:'center',width:50},
+            {field:'sb_name',title:'设备名称',align:'center',width:350},
+            {field:'sb_number',title:'设备编号',align:'center',width:450},
+            {field:'sb_xh',title:'设备型号',align:'center',width:350},
+            {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
                     // str+="<button class='btn btn-info dim' type='button' onclick='del(\""+rows.id+"\")' ><i class='fa fa-paste'></i>删除</button>";
                     str+="<button class='btn btn-info dim' type='button' onclick='updateEquipment(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>修改</button>";
                     return  str;
                 }
-            },
+            }
 
         ]
     });

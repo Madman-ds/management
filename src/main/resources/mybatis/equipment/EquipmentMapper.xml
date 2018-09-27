@@ -11,6 +11,7 @@
     <select id="getEquipmentList" resultType="com.ds.equipment.pojo.Equipment" parameterType="com.ds.equipment.pojo.Equipment">
         select * from t_equipment
         where 1 = 1
+        <include refid="where"></include>
         LIMIT #{startIndex},#{rows}
     </select>
 
@@ -22,27 +23,33 @@
         </foreach>
     </delete>
 
-    <select id="getEquipmentidById" parameterType="string" resultType="com.ds.equipment.pojo.Equipment">
+    <select id="getEquipmentidById" parameterType="int" resultType="com.ds.equipment.pojo.Equipment">
         select *
         FROM
         t_equipment t
-        where t.sb_id = #{id}
+        where t.sb_id = #{sb_id}
     </select>
+
+    <insert id="addEquipment" parameterType="com.ds.equipment.pojo.Equipment">
+        insert into t_equipment(sb_name,sb_number,sb_xh)
+        values(#{sb_name},#{sb_number},#{sb_xh})
+    </insert>
+
+    <insert id="updateEquipment" parameterType="com.ds.equipment.pojo.Equipment">
+        update t_equipment set sb_name = #{sb_name},sb_number = #{sb_number},sb_xh = #{sb_xh} where sb_id = #{sb_id}
+    </insert>
+
 
     <!--条件查询-->
     <sql id="where">
-        <if test="tname != '' and tname != null">
-
-            and t.tname like CONCAT('%',#{tname},'%')
+        <if test="sb_name != '' and sb_name != null">
+            and sb_name like CONCAT('%',#{sb_name},'%')
         </if>
-        <if test=" titleHonorId != ''and titleHonorId != -1 ">
-            and t.title_honor_id = #{titleHonorId}
+        <if test="sb_number != ''and sb_number != null ">
+            and sb_number = #{sb_number}
         </if>
-        <if test="StartTime !='' and StartTime != null ">
-            and t.create_time >=#{StartTime}
-        </if>
-        <if test="EndTime !='' and EndTime != null ">
-            and t.create_time &lt;=#{EndTime}
+        <if test="sb_xh !='' and sb_xh != null ">
+            and sb_xh = #{sb_xh}
         </if>
     </sql>
 

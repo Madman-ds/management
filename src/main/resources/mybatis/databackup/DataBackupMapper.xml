@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ds.databackup.mapper.DataBackupMapper">
+    <!-- 查询条件 -->
+    <sql id="whereSql">
+        <where>
+            <if test="sb_name !=null and sb_name!=''">
+                AND sb_name = #{sb_name}
+            </if>
+            <if test="sb_xh !=null and sb_xh!=''">
+                AND sb_xh = #{sb_xh}
+            </if>
+            <if test="sb_number !=null and sb_number!=''">
+                AND sb_number = #{sb_number}
+            </if>
+            <if test="start_time !=null">
+                AND jc_time &gt;= #{start_time}
+            </if>
+            <if test="end_time !=null">
+                AND jc_time &lt;= #{end_time}
+            </if>
+        </where>
+    </sql>
     <!-- 条件或全部查询数据备份 -->
     <select id="findDataBackup" parameterType="com.ds.databackup.pojo.DataBackup" resultType="com.ds.databackup.pojo.DataBackup">
         select
            *
         from 
           t_inspectionrecord
-        <where>
-            <if test="sb_name !=null and sb_name!=''">
-               AND sb_name = #{sb_name}
-            </if>
-            <if test="sb_xh !=null and sb_xh!=''">
-               AND sb_xh = #{sb_xh}
-            </if>
-            <if test="sb_number !=null and sb_number!=''">
-               AND sb_number = #{sb_number}
-            </if>
-            <if test="start_time !=null and start_time!=''">
-               AND jc_time &gt;= #{start_time}
-            </if>
-            <if test="end_time !=null and end_time!=''">
-               AND jc_time &lt;= #{end_time}
-            </if>
-        </where>
-          order by xj_id desc
+        <include refid="whereSql"></include>
+        order by xj_id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+    <!-- 条件或全部查询数据备份数量 -->
+    <select id="getDataBackupCount" parameterType="com.ds.databackup.pojo.DataBackup" resultType="java.lang.Integer">
+        select
+           count(*)
+        from
+          t_inspectionrecord
+        <include refid="whereSql"></include>
     </select>
     <!-- 添加巡检记录 -->
     <insert id="insertDataBackup" parameterType="com.ds.databackup.pojo.DataBackup">

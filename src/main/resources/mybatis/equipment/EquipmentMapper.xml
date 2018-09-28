@@ -5,6 +5,8 @@
     <!--条件查询总条数-->
     <select id="getEquipmentCount" resultType="java.lang.Integer">
         select count(*) from t_equipment
+        where 1 = 1
+        <include refid="where"></include>
     </select>
 
     <!--条件查询集合-->

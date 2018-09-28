@@ -3,6 +3,7 @@ package com.ds.databackup.mapper;
 import com.ds.databackup.pojo.DataBackup;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @接口名称：DataBackupMapper
@@ -11,7 +12,9 @@ import java.util.List;
  * @说明:
  */
 public interface DataBackupMapper {
-    List findDataBackup(DataBackup dataBackup);
+    List findDataBackup(Map map);
 
     int insertDataBackup(DataBackup dataBackup);
+
+    int getDataBackupCount(Map map);
 }

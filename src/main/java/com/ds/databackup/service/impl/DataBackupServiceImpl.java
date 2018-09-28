@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @类名称：DataBackupServiceImpl
@@ -20,12 +21,17 @@ public class DataBackupServiceImpl implements DataBackupService {
     private DataBackupMapper dataBackupMapper;
 
     @Override
-    public List findDataBackup(DataBackup dataBackup) {
-        return dataBackupMapper.findDataBackup(dataBackup);
+    public List findDataBackup(Map map) {
+        return dataBackupMapper.findDataBackup(map);
     }
 
     @Override
     public int insertDataBackup(DataBackup dataBackup) {
         return dataBackupMapper.insertDataBackup(dataBackup);
+    }
+
+    @Override
+    public int getDataBackupCount(Map map) {
+        return dataBackupMapper.getDataBackupCount(map);
     }
 }

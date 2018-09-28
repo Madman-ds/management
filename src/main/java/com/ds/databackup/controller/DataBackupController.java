@@ -4,9 +4,11 @@ import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.service.DataBackupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -26,8 +28,9 @@ public class DataBackupController {
      * @参数:  * @param dataBackup
      * @返回值: java.util.List
      **/
-    @GetMapping("findDataBackup")
-    public List findDataBackup(DataBackup dataBackup){
+    @PostMapping("findDataBackup")
+    public List findDataBackup(HttpServletRequest request){
+        DataBackup dataBackup = null;
         return dataBackupService.findDataBackup(dataBackup);
     }
     /**

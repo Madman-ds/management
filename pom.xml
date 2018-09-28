@@ -82,6 +82,12 @@
             <version>2.0.4.RELEASE</version>
             <optional>true</optional>
         </dependency>
+        <!-- poi工具jar -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.6</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -30,4 +30,8 @@ public class LoginUser {
      *卡号
      */
     private String user_kh;
+    /**
+     * 是否为管理员   1：是；0：否
+     */
+    private Integer is_management;
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,8 +66,12 @@
             success:function(data){
                 // alert(data.useFlag);
                 if(data.useFlag == 100 || data.useFlag == "100"){
-                    alert("登陆成功");
-                    location.href="toList";
+                    //alert("登陆成功");
+                    if (data.msg == 1){
+                        location.href="toList";
+                    } else {
+                        alert("无访问权限");
+                    }
                 }else if(data.useFlag == 101 || data.useFlag == "101"){
                     alert("用户名错误");
                 }else if(data.useFlag == 102 || data.useFlag == "102"){

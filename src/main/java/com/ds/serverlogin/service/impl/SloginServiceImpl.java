@@ -31,6 +31,7 @@ public class SloginServiceImpl implements SloginService {
                      LoginUser user = sloginMapper.queryUser(loginUser);
                     if(user != null){
                         session.setAttribute("loginUser",user);
+                        map.put("msg",user.getIs_management());
                         map.put("useFlag",100);//登陆成功
                     }else{
                         map.put("useFlag",104);//密码错误

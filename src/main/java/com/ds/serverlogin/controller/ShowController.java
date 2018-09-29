@@ -108,12 +108,12 @@ public class ShowController {
     }
     /**
      * @作者: 段聪祺
-     * @功能描述: 去前台展示页面
+     * @功能描述: 去前台登陆
      * @时间: 2018/9/29 16:43
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("/")
+    @GetMapping("/login")
     public String toViewLogin(){
         return "viewindex";
     }

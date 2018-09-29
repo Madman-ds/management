@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>后台系统登陆页面</title>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <style type="text/css">
         .form-group {
             width: 65%;
@@ -71,6 +71,7 @@
                         location.href="toList";
                     } else {
                         alert("无访问权限");
+                        location.href = "logout";
                     }
                 }else if(data.useFlag == 101 || data.useFlag == "101"){
                     alert("用户名错误");

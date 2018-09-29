@@ -23,10 +23,6 @@ public class LoginUser {
      */
     private String password;
     /**
-     * 权限
-     */
-    private Integer  user_qx;
-    /**
      *卡号
      */
     private String user_kh;

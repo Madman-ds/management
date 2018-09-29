@@ -2,6 +2,7 @@ package com.ds.databackup.controller;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.service.DataBackupService;
+import com.ds.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
@@ -39,41 +40,23 @@ public class DataBackupController {
         String sb_number = req.getParameter("sb_number");
         String sb_xh = req.getParameter("sb_xh");
         String user_name = req.getParameter("user_name");
-        String parameter2 = req.getParameter("start_time");
-        String parameter3 = req.getParameter("end_time");
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date parse=null;
-        if (parameter2!=null&& !"".equals(parameter2)) {
-            try {
-                parse = sdf.parse(parameter2);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-        Date parse2=null;
-        if (parameter3!=null && !"".equals(parameter3)) {
-            try {
-                parse2 = sdf.parse(parameter3);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
+        String start_time = req.getParameter("start_time");
+        String end_time = req.getParameter("end_time");
         String parameter4 = req.getParameter("offset");
         String parameter5 = req.getParameter("limit");
         int  offset =Integer.valueOf(parameter4);
         int  limit =Integer.valueOf(parameter5);
-        Map<String,Object> map1 = new HashMap<String, Object>();
-        map1.put("sb_name", sb_name);
-        map1.put("sb_number", sb_number);
-        map1.put("sb_xh", sb_xh);
-        map1.put("user_name", user_name);
-        map1.put("start_time", parse2);
-        map1.put("end_time", parse2);
-        map1.put("offset", offset);
-        map1.put("limit", limit);
-        int count = dataBackupService.getDataBackupCount(map1);
-        List<DataBackup> list = dataBackupService.findDataBackup(map1);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("sb_name", sb_name);
+        map.put("sb_number", sb_number);
+        map.put("sb_xh", sb_xh);
+        map.put("user_name", user_name);
+        map.put("start_time", DateUtil.stringToDate(start_time,"yyyy-MM-dd hh:mm:ss"));
+        map.put("end_time", DateUtil.stringToDate(end_time,"yyyy-MM-dd hh:mm:ss"));
+        map.put("offset", offset);
+        map.put("limit", limit);
+        int count = dataBackupService.getDataBackupCount(map);
+        List<DataBackup> list = dataBackupService.findDataBackup(map);
         Map<String, Object> result=new HashMap<String, Object>();
         result.put("total", count);
         result.put("rows", list);

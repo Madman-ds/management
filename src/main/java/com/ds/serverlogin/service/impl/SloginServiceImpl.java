@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,8 +50,4 @@ public class SloginServiceImpl implements SloginService {
         return map;
     }
 
-    @Override
-    public LoginUser queryUserAll() {
-        return sloginMapper.queryUserAll();
-    }
 }

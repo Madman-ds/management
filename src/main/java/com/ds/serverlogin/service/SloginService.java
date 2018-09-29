@@ -3,6 +3,7 @@ package com.ds.serverlogin.service;
 import com.ds.serverlogin.pojo.LoginUser;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +15,4 @@ import java.util.Map;
 public interface SloginService {
 
     Map<String,Object> queryUser(LoginUser loginUser, HttpSession session);
-
-    LoginUser queryUserAll();
 }

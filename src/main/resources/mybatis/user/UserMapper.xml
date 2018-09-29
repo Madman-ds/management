@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.user.mapper.UserMappper">
+    <!-- 查询所有用户 -->
+    <select id="findAllUser" parameterType="map" resultType="com.ds.user.pojo.User">
+      select * from t_user  order by user_id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+    <!-- 查询用户总条数 -->
+    <select id="getUserCount" resultType="integer">
+      select count(*)from t_user
+    </select>
+    <!-- 条件查询用户是否存在 -->
+    <select id="selectUserByWhere" resultType="com.ds.user.pojo.User" parameterType="com.ds.user.pojo.User">
+      select * from t_user
+      <where>
+          <if test="user_id != null and user_id != ''">
+              AND user_id = #{user_id}
+          </if>
+          <if test="user_name != null and user_name != ''">
+              AND user_name = #{user_name}
+          </if>
+      </where>
+    </select>
+    <!-- 添加用户 -->
+    <insert id="insertUser" parameterType="com.ds.user.pojo.User" >
+      insert into
+        t_user(user_name,password,user_kh,is_management,create_time)
+      value(#{user_name},#{password},#{user_kh},#{is_management},NOW())
+    </insert>
+    <!-- 根据id修改用户 -->
+    <update id="updUser" parameterType="com.ds.user.pojo.User">
+      update
+        t_user
+      set
+        user_name = #{user_name},password = #{password},
+        user_kh = #{user_kh},is_management = #{is_management}
+      where
+        user_id = #{user_id}
+    </update>
+    <!-- 删除用户 -->
+    <delete id="delAllUser" parameterType="string" >
+        delete from t_user where user_id in (#ids)
+    </delete>
+</mapper>

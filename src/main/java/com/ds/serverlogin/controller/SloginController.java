@@ -46,19 +46,4 @@ public class SloginController {
         }
         return map;
     }
-
-
-    /**
-     * @作者: yuboyake
-     * @功能描述: test查询所有用户
-     * @时间: 2018/9/25 22:52
-     * @参数:  * @param
-     * @返回值: com.ds.serverlogin.pojo.LoginUser
-     **/
-    @GetMapping("/queryUserAll")
-    public LoginUser queryUserAll(){
-        LoginUser loginUser= sloginService.queryUserAll();
-        return loginUser;
-    }
-
 }

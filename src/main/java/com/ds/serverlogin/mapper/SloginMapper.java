@@ -2,6 +2,7 @@ package com.ds.serverlogin.mapper;
 
 import com.ds.serverlogin.pojo.LoginUser;
 
+import java.awt.*;
 import java.util.Map;
 
 /**
@@ -16,5 +17,4 @@ public interface SloginMapper {
 
     int queryUserName(LoginUser loginUser);
 
-    LoginUser queryUserAll();
 }

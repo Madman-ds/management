@@ -48,18 +48,7 @@
                 position: absolute;
                 width: 100%;
             }
-            .footer {
-                width: 100%;
-                height: 30px;
-                line-height: 30px;
-                margin-top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                position: absolute;
-                z-index: 10;
-                background-color:#DFDFDF;
-            }
+
         </style>
     <!-- 引入js核心文件 -->
     <jsp:include page="../../jscore.jsp"></jsp:include>

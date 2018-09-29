@@ -15,4 +15,6 @@ import java.util.Map;
 public interface SloginService {
 
     Map<String,Object> queryUser(LoginUser loginUser, HttpSession session);
+
+    Map<String,Object> queryUserKh(LoginUser loginUser,HttpSession session);
 }

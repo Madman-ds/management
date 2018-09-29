@@ -58,7 +58,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("/")
+    @GetMapping("/toIndex")
     public String index(){
         return "index";
     }
@@ -113,7 +113,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("toView")
+    @GetMapping("/")
     public String toViewLogin(){
         return "viewindex";
     }

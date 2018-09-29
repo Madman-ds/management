@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -53,9 +52,9 @@ public class SloginController {
      * @参数:  * @param
      * @返回值: java.util.Map<java.lang.String,java.lang.Object>
      **/
-    @GetMapping("queryUserKh")
-    public Map<String,Object> queryUserKh(){
-        System.out.println("进入");
-        return null;
+    @GetMapping("/queryUserKh")
+    public Map<String,Object> queryUserKh(LoginUser loginUser,HttpSession session){
+        Map<String, Object> map = sloginService.queryUserKh(loginUser,session);
+        return map;
     }
 }

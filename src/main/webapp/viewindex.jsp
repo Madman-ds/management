@@ -21,24 +21,27 @@
 </style>
 <body >
 <form class="form-horizontal" id="skuserForm">
-    <div class="form-group" style="margin-right: -15px;margin-left: 100px;margin-top: 15px;">
+        <div class="form-group" style="margin-right:500px;margin-left: 500px;margin-top: 180px;">
         <div class="input-group">
             <div class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
             </div>
-            <input type="text" class="form-control"  name="user_kh" placeholder="请刷卡">
+            <input type="text" class="form-control input-lg"  name="user_kh" placeholder="请刷卡">
         </div>
-    </div>
-    <div class="form-group" style="margin-right: -15px;margin-left: 100px;">
-        <button type="button" onclick="userButton()" class="btn btn-success btn-lg btn-block">
-            登陆
-        </button>
-        <button type="button" onclick="zmlogin()" class="btn btn-success btn-lg btn-block">
-            账号密码登陆
-        </button>
     </div>
 </form>
 <div id="viewlogin"></div>
+<div style="margin-left: 540px">
+    <button type="button" onclick="userButton()" class="btn btn-success btn-lg">
+        登陆
+    </button>
+    <button type="button"  class="btn btn-info btn-lg" onclick="zmlogin()">
+        账号密码登陆
+    </button>
+    <button type="button" onclick="toManagement()" class="btn btn-primary btn-lg">
+        登陆后台
+    </button>
+</div>
 <script type="text/javascript">
     function zmlogin(){
         BootstrapDialog.show({
@@ -46,18 +49,28 @@
             message: $("#viewlogin").load('viewlogin.jsp')
         });
     }
+
     function userButton(){
         $.ajax({
-            url:'<%=request.getContextPath() %>/queryUserKh',
+            url:'<%=request.getContextPath() %>/server/queryUserKh',
             type:'get',
             data:$("#skuserForm").serialize(),
             dataType:'json',
             success:function(data){
-
+                if(data.useFlag == 100 || data.useFlag == "100"){
+                     location.href = "toViewList";
+                }else if (data.useFlag == 101 || data.useFlag == "101"){
+                    alert("该卡号不存在");
+                }else if(data.useFlag == 102 || data.useFlag == "102"){
+                    alert("卡号重复");
+                }
             },error:function(){
                 alert("哇哦！程序走丢了");
             }
         })
+    }
+    function toManagement() {
+        location.href = "/toIndex";
     }
 </script>
 </body>

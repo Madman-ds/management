@@ -13,5 +13,12 @@
     <select id="queryUserAll" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.serverlogin.pojo.LoginUser">
         select * from t_user
     </select>
-
+    <!-- 查询卡号是否重复 -->
+    <select id="getKhCount" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="integer">
+      select count(*) from t_user where user_kh = #{user_kh}
+    </select>
+    <!-- 根据卡号查询用户 -->
+    <select id="queryUserByKh" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.serverlogin.pojo.LoginUser">
+        select * from t_user where user_kh = #{user_kh}
+    </select>
 </mapper>

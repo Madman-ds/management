@@ -17,4 +17,7 @@ public interface SloginMapper {
 
     int queryUserName(LoginUser loginUser);
 
+    int getKhCount(LoginUser loginUser);
+
+    LoginUser queryUserByKh(LoginUser loginUser);
 }

@@ -50,4 +50,22 @@ public class SloginServiceImpl implements SloginService {
         return map;
     }
 
+    @Override
+    public Map<String, Object> queryUserKh(LoginUser loginUser,HttpSession session) {
+        Map<String, Object> map = new HashMap();
+        LoginUser user = sloginMapper.queryUserByKh(loginUser);
+        if (user != null){
+            int count = sloginMapper.getKhCount(loginUser);
+            if(count > 1){
+                map.put("useFlag",101);//卡号重复
+            }else {
+                session.setAttribute("loginUser",user);
+                map.put("useFlag",100);
+            }
+        }else{
+            map.put("useFlag",101);//卡号不存在
+        }
+        return map;
+    }
+
 }

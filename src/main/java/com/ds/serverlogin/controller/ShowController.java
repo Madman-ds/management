@@ -113,7 +113,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("/login")
+    @GetMapping(value = {"/","/login"})
     public String toViewLogin(){
         return "viewindex";
     }

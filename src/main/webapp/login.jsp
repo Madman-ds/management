@@ -60,7 +60,7 @@
         //$('#YWaitDialog').show();
         $.ajax({
             url:'<%=request.getContextPath() %>/server/queryUser',
-            type:'get',
+            type:'post',
             data:$("#userForm").serialize(),
             dataType:'json',
             success:function(data){

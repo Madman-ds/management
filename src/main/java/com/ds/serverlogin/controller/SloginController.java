@@ -46,4 +46,16 @@ public class SloginController {
         }
         return map;
     }
+    /**
+     * @作者: 段聪祺
+     * @功能描述: 刷卡登录方法
+     * @时间: 2018/9/29 17:32
+     * @参数:  * @param
+     * @返回值: java.util.Map<java.lang.String,java.lang.Object>
+     **/
+    @GetMapping("queryUserKh")
+    public Map<String,Object> queryUserKh(){
+        System.out.println("进入");
+        return null;
+    }
 }

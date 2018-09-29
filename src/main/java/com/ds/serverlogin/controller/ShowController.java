@@ -106,4 +106,26 @@ public class ShowController {
     public String toShowLogo(){
         return "/WEB-INF/jsp/showlogo";
     }
+    /**
+     * @作者: 段聪祺
+     * @功能描述: 去前台展示页面
+     * @时间: 2018/9/29 16:43
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toView")
+    public String toViewLogin(){
+        return "viewindex";
+    }
+    /**
+     * @作者: 段聪祺
+     * @功能描述: 去前台住展示页面
+     * @时间: 2018/9/29 16:56
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toViewList")
+    public String toViewList(){
+        return "/WEB-INF/jsp/viewlist";
+    }
 }

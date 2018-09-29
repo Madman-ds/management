@@ -25,18 +25,22 @@ public class UserController {
     private UserService userService;
     /**
      * @作者: 段聪祺
-     * @功能描述: 查询所有用户
+     * @功能描述: 查询所有用户，前台条件查询为卡号和姓名
      * @时间: 2018/9/29 14:44
      * @参数:  * @param req
      * @返回值: java.util.Map<java.lang.String,java.lang.Object>
      **/
     @GetMapping("findAllUser")
     public Map<String, Object> findAllUser(HttpServletRequest req){
+        String user_name = req.getParameter("user_name");
+        String user_kh = req.getParameter("user_kh");
         String parameter4 = req.getParameter("offset");
         String parameter5 = req.getParameter("limit");
         int  offset =Integer.valueOf(parameter4);
         int  limit =Integer.valueOf(parameter5);
         Map<String,Object> map = new HashMap<String, Object>();
+        map.put("user_name",user_name);
+        map.put("user_kh",user_kh);
         map.put("offset", offset);
         map.put("limit", limit);
         int count = userService.getUserCount(map);

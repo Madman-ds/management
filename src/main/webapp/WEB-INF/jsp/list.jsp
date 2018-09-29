@@ -96,7 +96,7 @@
         <div class="splitter"></div>
         <!-- 正文内容部分 -->
         <div class="pageContent">
-            <iframe src="/images/logo.jpg" id="mainFrame" name="mainFrame" frameborder="0" width="100%" height="100%" frameBorder="0"></iframe>
+            <iframe src="<%=request.getContextPath() %>/toShowLogo" id="mainFrame" name="mainFrame" frameborder="0" width="100%" height="100%" frameBorder="0"></iframe>
         </div>
     </div>
     <!-- 选中蓝条 -->

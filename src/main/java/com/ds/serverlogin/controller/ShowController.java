@@ -95,4 +95,15 @@ public class ShowController {
     public String toDatabackUp(){
         return "/WEB-INF/jsp/databackup/databackup";
     }
+    /**
+     * @作者: 段聪祺
+     * @功能描述: 后台管理系统刚进来时展示的背景图片路径
+     * @时间: 2018/9/29 11:20
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("/toShowLogo")
+    public String toShowLogo(){
+        return "/WEB-INF/jsp/showlogo";
+    }
 }

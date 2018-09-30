@@ -14,8 +14,8 @@
     body{
         padding: 0;
         margin: 0;
-        background: url("/static/images/logo.jpg") no-repeat;
-        background-size: 100% 100%;
+        background: url("/static/images/logo.png") no-repeat;
+        background-size: 70% 20%;
         position: absolute;
     }
 </style>

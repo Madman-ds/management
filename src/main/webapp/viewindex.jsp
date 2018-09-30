@@ -122,7 +122,14 @@
     }
     <!-- 账号登录方法 -->
     function tologin(){
-
+        if ($("#user_name").val() == ""){
+            alert("请输入账号");
+            return false;
+        }
+        if ($("#password").val() == ""){
+            alert("请输入密码");
+            return false;
+        }
         $.ajax({
             url:'<%=request.getContextPath() %>/server/queryUser',
             type:'post',

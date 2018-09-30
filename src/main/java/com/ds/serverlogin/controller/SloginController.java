@@ -4,6 +4,7 @@ import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.serverlogin.service.SloginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +36,7 @@ public class SloginController {
      *                            103 此用户存在重复
      *                            104 密码错误
      **/
-    @GetMapping("/queryUser")
+    @PostMapping("/queryUser")
     public Map<String, Object> queryUser(LoginUser loginUser, HttpSession session){
         Map<String, Object> map = sloginService.queryUser(loginUser,session);
         LoginUser user = (LoginUser) session.getAttribute("loginUser");
@@ -49,7 +50,7 @@ public class SloginController {
      * @参数:  * @param
      * @返回值: java.util.Map<java.lang.String,java.lang.Object>
      **/
-    @GetMapping("/queryUserKh")
+    @PostMapping("/queryUserKh")
     public Map<String,Object> queryUserKh(LoginUser loginUser,HttpSession session){
         Map<String, Object> map = sloginService.queryUserKh(loginUser,session);
         return map;

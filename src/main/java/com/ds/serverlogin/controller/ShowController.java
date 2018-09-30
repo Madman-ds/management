@@ -37,7 +37,7 @@ public class ShowController {
     @GetMapping("logout")
     public String logout(HttpSession session){
         session.removeAttribute("loginUser");
-        return "index";
+        return "/";
     }
 
     /**

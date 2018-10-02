@@ -50,7 +50,7 @@ public class SloginController {
      * @参数:  * @param
      * @返回值: java.util.Map<java.lang.String,java.lang.Object>
      **/
-    @GetMapping("/queryUserKh")
+    @PostMapping("/queryUserKh")
     public Map<String,Object> queryUserKh(LoginUser loginUser,HttpSession session){
         Map<String, Object> map = sloginService.queryUserKh(loginUser,session);
         return map;

@@ -14,8 +14,8 @@
     body{
         padding: 0;
         margin: 0;
-        background: url("/static/images/logo.jpg") no-repeat;
-        background-size: 100% 100%;
+        background: url("/static/images/logo.png") no-repeat;
+        background-size: 70% 20%;
         position: absolute;
     }
 </style>
@@ -26,12 +26,11 @@
             <div class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
             </div>
-            <input type="text" class="form-control input-lg"  name="user_kh" placeholder="请刷卡">
+            <input type="text" class="form-control input-lg"  name="user_kh" placeholder="请刷卡或输入卡号" id="kw">
         </div>
     </div>
 </form>
-<form  id="viewuserForm" class="form-horizontal">
-<div class="modal inmodal fade" id="myModal2" tabindex="-1" role="dialog"  aria-hidden="true">
+<div class="modal inmodal fade" id="myModal2" tabindex="-1" role="dialog"  aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
@@ -39,7 +38,7 @@
                     <div class="alert alert-info" class="col-sm-2" style="align-content: center">
                         登陆系统
                     </div>
-                    <form id="equipmentAdd" role="form" class="form-horizontal m-t">
+                    <form id="viewuserForm" role="form" class="form-horizontal m-t">
                         <div class="form-group" style="margin-left: 180px">
                             <label for="user_name" class="col-sm-2 control-label" >账号：</label>
                             <div class="col-sm-6">
@@ -57,6 +56,7 @@
                             <div class="col-sm-3"></div>
                             <div class="col-sm-6 col-sm-offset-2" >
                                 <button class="btn btn-primary btn-lg" type="submit" onclick="tologin()">登陆</button>
+                                <button class="btn btn-primary btn-lg" type="submit" onclick="toreload()">返回</button>
                             </div>
                         </div>
                     </form>
@@ -65,26 +65,33 @@
         </div>
     </div>
 </div>
-</form>
 <div style="margin-left: 540px">
-    <button type="button" onclick="userButton()" class="btn btn-success btn-lg">
-        登陆
+    <button type="button" onclick="skButton()" class="btn btn-success btn-lg">
+        刷卡登陆
     </button>
-    <button type="button"  class="btn btn-info btn-lg" onclick="addEquipment()">
-        账号密码登陆
+    <button type="button"  class="btn btn-info btn-lg" onclick="toUserLogin()">
+        账号登陆
     </button>
-    <button type="button" onclick="toManagement()" class="btn btn-primary btn-lg">
+    <button type="button" onclick="toIndex()" class="btn btn-primary btn-lg">
         登陆后台
     </button>
 </div>
 <script type="text/javascript">
-    function addEquipment(){
-        $('#myModal2').modal('toggle');
-    }
-    function userButton(){
+    <!-- 页面加载时光标选中刷卡文本框 -->
+    $(function(){
+        $("#kw").focus();
+    })
+    <!-- 刷卡登录方法 -->
+    function skButton(){
+        if ($("#kw").val() == "" || $("#kw").val() == null){
+            alert("请刷卡或填入卡号");
+            $("#kw").focus();
+            return;
+        }
+
         $.ajax({
             url:'<%=request.getContextPath() %>/server/queryUserKh',
-            type:'get',
+            type:'post',
             data:$("#skuserForm").serialize(),
             dataType:'json',
             success:function(data){
@@ -100,10 +107,29 @@
             }
         })
     }
-    function toManagement() {
+    <!-- 后台登录 -->
+    function toIndex() {
         location.href = "/toIndex";
     }
+    <!-- 账号登录模态框 -->
+    function toUserLogin(){
+        $('#myModal2').modal('toggle');
+    }
+    <!-- 账号登录模态框点击退出 -->
+    function toreload() {
+        $('#myModal2').modal('hide')
+        $("#kw").focus();
+    }
+    <!-- 账号登录方法 -->
     function tologin(){
+        if ($("#user_name").val() == ""){
+            alert("请输入账号");
+            return false;
+        }
+        if ($("#password").val() == ""){
+            alert("请输入密码");
+            return false;
+        }
         $.ajax({
             url:'<%=request.getContextPath() %>/server/queryUser',
             type:'post',
@@ -122,7 +148,7 @@
                     alert("密码错误");
                 }
             },error:function(useFlag){
-                alert("请求走丢了，请检查是否已连接网络！");
+                alert("服务器走丢了，我们正在找寻中...");
             }
         })
     }

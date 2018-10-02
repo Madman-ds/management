@@ -37,7 +37,7 @@ public class ShowController {
     @GetMapping("logout")
     public String logout(HttpSession session){
         session.removeAttribute("loginUser");
-        return "index";
+        return "/";
     }
 
     /**
@@ -113,7 +113,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping(value = {"/","/login"})
+    @GetMapping(value = {"/login","/"})
     public String toViewLogin(){
         return "viewindex";
     }

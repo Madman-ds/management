@@ -4,6 +4,7 @@ import com.ds.databackup.pojo.DataBackup;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,7 +59,7 @@ public class UserController {
      * @返回值: com.ds.user.pojo.User
      **/
     @PostMapping("selectUserByWhere")
-    public User selectUserByWhere(User user){
+    public  User selectUserByWhere(User user){
         return userService.selectUserByWhere(user);
     }
     /**
@@ -85,7 +86,7 @@ public class UserController {
     }
     /**
      * @作者: 段聪祺
-     * @功能描述: 删除用户,admin用户无法删除
+     * @功能描述: 删除用户
      * @时间: 2018/9/29 16:02
      * @参数:  * @param request
      * @返回值: void

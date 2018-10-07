@@ -203,20 +203,20 @@
     //用户修改方法
     function updateUser(){
         var ids=$.map($("#userList").bootstrapTable('getSelections'),function(row){
-            return row.cid;
+            return row.user_id;
         });
         if(ids.length==1){
             var id = ids[0];
             BootstrapDialog.show({
                 title:"修改页面",
-                message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdUser.do?user_id='+user_id),
+                message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdUser?user_id='+id),
                 buttons: [ {
                     label: '保存',
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         $.ajax({
                             url:"<%=request.getContextPath()%>/updUser",
-                            data:$("#updid").serialize(),
+                            data:$("#updUserForm").serialize(),
                             dataType:"text",
                             type:"post",
                             success:function(data){
@@ -226,7 +226,7 @@
                             error:function(){
                                 BootstrapDialog.show({
                                     title:"温馨提示",
-                                    message: '系统操作有误'
+                                    message: '系统出现BUG！请联系管理员！'
                                 });
                             }
 
@@ -251,14 +251,14 @@
     function addUser(){
         BootstrapDialog.show({
             title:"添加商品信息",
-            message:$('<div><div>').load('<%=request.getContextPath()%>/comm/toadd.do'),
+            message:$('<div><div>').load('<%=request.getContextPath()%>/toInsertUser'),
             buttons:[{
                 label:"提交",
                 cssClass:'btn-primary',
                 action:function(data){
                     $.ajax({
-                        url:"<%=request.getContextPath()%>/comm/addcomm.do",
-                        data:$("#subAddUser").serialize(),
+                        url:"<%=request.getContextPath()%>/insertUser",
+                        data:$("#addUserForm").serialize(),
                         dataType:"text",
                         type:"post",
                         success:function(){

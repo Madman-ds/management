@@ -1,9 +1,14 @@
 package com.ds.serverlogin.controller;
 
+import com.ds.user.controller.UserController;
+import com.ds.user.pojo.User;
+import com.ds.user.servcie.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -15,6 +20,8 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class ShowController {
+    @Autowired
+    private UserService userService;
     /**
      * @作者: 段大神经
      * @功能描述: 登陆成功去展示页面
@@ -49,7 +56,7 @@ public class ShowController {
      **/
     @GetMapping(value="equipment/toEquipmentList")
     public String toEquipmentList(){
-        return "/WEB-INF/jsp/equipment/equipmentList";
+        return "WEB-INF/jsp/equipment/equipmentList";
     }
     /**
      * @作者: 段大神经
@@ -71,7 +78,7 @@ public class ShowController {
      **/
     @GetMapping("/toInspectionItem")
     public String toInspectionItem(){
-        return "/WEB-INF/jsp/inspection/inspectionitem";
+        return "WEB-INF/jsp/inspection/inspectionitem";
     }
     /**
      * @作者: 段大神经
@@ -82,7 +89,7 @@ public class ShowController {
      **/
     @GetMapping("/toUserList")
     public String toUserList(){
-        return "/WEB-INF/jsp/user/userlist";
+        return "WEB-INF/jsp/user/userlist";
     }
     /**
      * @作者: 段大神经
@@ -93,7 +100,7 @@ public class ShowController {
      **/
     @GetMapping("/toDatabackUp")
     public String toDatabackUp(){
-        return "/WEB-INF/jsp/databackup/databackup";
+        return "WEB-INF/jsp/databackup/databackup";
     }
     /**
      * @作者: 段聪祺
@@ -104,7 +111,7 @@ public class ShowController {
      **/
     @GetMapping("/toShowLogo")
     public String toShowLogo(){
-        return "/WEB-INF/jsp/showlogo";
+        return "WEB-INF/jsp/showlogo";
     }
     /**
      * @作者: 段聪祺
@@ -126,6 +133,32 @@ public class ShowController {
      **/
     @GetMapping("toViewList")
     public String toViewList(){
-        return "/WEB-INF/jsp/viewlist";
+        return "WEB-INF/jsp/viewlist";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去添加用户页面
+     * @时间: 2018/10/7 22:49
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toInsertUser")
+    public String toInsertUser(){
+        return "WEB-INF/jsp/user/adduser";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去用户修改页面
+     * @时间: 2018/10/7 22:20
+     * @参数:  * @param request
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toUpdUser")
+    public String toUpdUser(HttpServletRequest request, ModelMap modelMap){
+        User user = new User();
+        user.setUser_id(Long.valueOf(request.getParameter("user_id")));
+        User user1 = userService.selectUserByWhere(user);
+        modelMap.addAttribute("user",user1);
+        return "WEB-INF/jsp/user/upduser";
     }
 }

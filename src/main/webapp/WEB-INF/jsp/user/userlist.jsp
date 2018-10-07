@@ -40,7 +40,7 @@
         </form>
     </div>
     <div id="toolbar">
-        <button class="btn btn-success" type="button" onclick="addcomm()">
+        <button class="btn btn-success" type="button" onclick="addUser()">
             <i class="glyphicon glyphicon-plus">
             </i>新增
         </button>
@@ -48,7 +48,7 @@
             <i class="glyphicon glyphicon-minus">
             </i>删除
         </button>
-        <button type="button" class="btn btn-info" onclick="updatecomm()">
+        <button type="button" class="btn btn-info" onclick="updateUser()">
             <i class="glyphicon glyphicon-wrench">
             </i>修改
         </button>
@@ -199,6 +199,88 @@
                 message: '请选择要删除的数据'
             });
         }
+    }
+    //用户修改方法
+    function updateUser(){
+        var ids=$.map($("#userList").bootstrapTable('getSelections'),function(row){
+            return row.cid;
+        });
+        if(ids.length==1){
+            var id = ids[0];
+            BootstrapDialog.show({
+                title:"修改页面",
+                message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdUser.do?user_id='+user_id),
+                buttons: [ {
+                    label: '保存',
+                    cssClass: 'btn-primary',
+                    action: function(dialogItself){
+                        $.ajax({
+                            url:"<%=request.getContextPath()%>/updUser",
+                            data:$("#updid").serialize(),
+                            dataType:"text",
+                            type:"post",
+                            success:function(data){
+                                dialogItself.close();
+                                $('#userList').bootstrapTable("refresh");
+                            },
+                            error:function(){
+                                BootstrapDialog.show({
+                                    title:"温馨提示",
+                                    message: '系统操作有误'
+                                });
+                            }
+
+                        })
+                    }
+                }, {
+                    label: '取消',
+                    cssClass: 'btn-warning ',
+                    action: function(dialogItself){
+                        dialogItself.close();
+                    }
+                }]
+            });
+        }else{
+            BootstrapDialog.show({
+                title:"温馨提示",
+                message: '请选择一行进行修改'
+            });
+        }
+    }
+    //添加用户
+    function addUser(){
+        BootstrapDialog.show({
+            title:"添加商品信息",
+            message:$('<div><div>').load('<%=request.getContextPath()%>/comm/toadd.do'),
+            buttons:[{
+                label:"提交",
+                cssClass:'btn-primary',
+                action:function(data){
+                    $.ajax({
+                        url:"<%=request.getContextPath()%>/comm/addcomm.do",
+                        data:$("#subAddUser").serialize(),
+                        dataType:"text",
+                        type:"post",
+                        success:function(){
+                            data.close();
+                            $("#userList").bootstrapTable('refresh');
+                        },
+                        error:function(){
+                            BootstrapDialog.show({
+                                title:"fuck！！",
+                                message:'哇哦！系统走丢了！！'
+                            })
+                        }
+                    })
+                }
+            },{
+                label:"取消",
+                cssClass:'btn-warning',
+                action:function(data){
+                    data.close();
+                }
+            }]
+        })
     }
 </script>
 </html>

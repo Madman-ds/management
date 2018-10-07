@@ -14,10 +14,10 @@
                 AND sb_number = #{sb_number}
             </if>
             <if test="start_time !=null and start_time != ''">
-                AND jc_time &gt;= #{start_time}
+                AND qr_time &gt;= #{start_time}
             </if>
             <if test="end_time !=null and  end_time != ''">
-                AND jc_time &lt;= #{end_time}
+                AND qr_time &lt;= #{end_time}
             </if>
         </where>
     </sql>

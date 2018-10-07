@@ -51,8 +51,8 @@ public class DataBackupController {
         map.put("sb_number", sb_number);
         map.put("sb_xh", sb_xh);
         map.put("user_name", user_name);
-        map.put("start_time", DateUtil.stringToDate(start_time,"yyyy-MM-dd hh:mm:ss"));
-        map.put("end_time", DateUtil.stringToDate(end_time,"yyyy-MM-dd hh:mm:ss"));
+        map.put("start_time",start_time);
+        map.put("end_time",end_time );
         map.put("offset", offset);
         map.put("limit", limit);
         int count = dataBackupService.getDataBackupCount(map);

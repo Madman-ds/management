@@ -49,11 +49,11 @@
             </Pattern>
         </layout>
     </appender>
-
+    <logger name="com.ds.*.mapper" level="DEBUG" />
     <!-- <logger name="org.springframework" level="INFO"> <appender-ref ref="INFO_FILE"
         /> <appender-ref ref="ERROR_FILE" /> </logger> -->
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="console" />
         <appender-ref ref="INFO_FILE" />
         <appender-ref ref="ERROR_FILE" />

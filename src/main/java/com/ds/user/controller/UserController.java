@@ -92,7 +92,7 @@ public class UserController {
      **/
     @PostMapping("delAllUser")
     public void delAllUser(HttpServletRequest request){
-        String ids = request.getParameter("user_id");
+        String ids = request.getParameter("ids");
         userService.delAllUser(ids);
     }
 }

@@ -50,6 +50,6 @@
     </update>
     <!-- 删除用户 -->
     <delete id="delAllUser" parameterType="string" >
-        delete from t_user where user_id in (#ids)
+        delete from t_user where user_id in (#{ids})
     </delete>
 </mapper>

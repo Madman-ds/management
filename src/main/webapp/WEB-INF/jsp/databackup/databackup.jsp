@@ -22,12 +22,10 @@
                 <div class="col-sm-2">
                     <input type="text" class="form-control" id="select_sb_name" placeholder="请输入设备名称">
                 </div>
-
                 <label for="select_sb_number" class="col-sm-1 control-label">设备编号：</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control" id="select_sb_number" placeholder="请输入设备编号">
                 </div>
-
                 <label for="select_sb_xh" class="col-sm-1 control-label">设备型号：</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入设备型号">
@@ -38,30 +36,28 @@
                 </div>
                 <label  class="col-sm-1 control-label">确认时间：</label>
                 <div class="col-sm-2">
-                    <input type="text"  class="col-sm-1 control-label" id="datetimepicker" >
-                </div>
+                    <input type="text"  class="form-control date-picker" id="datetimepicker" placeholder="请选择开始时间">
+                </div>~
                 <div class="col-sm-2">
-                    <input type="text"  class="col-sm-1 control-label" id="datetimeend" >
-                </div>
-
-                <div class="col-sm-2">
-                    <button onclick="queryDataBackUp()" class="btn btn-primary" type="button">
-                        <i class="glyphicon glyphicon-search">
-                        </i>搜索
-                    </button>
-                    <button onclick="reset_table()" class="btn btn-danger" type="button">
-                        <i class="glyphicon glyphicon-repeat">
-                        </i>重置
-                    </button>
-                    <button onclick="" class="btn btn-danger" type="button">
-                        <i class="glyphicon glyphicon-repeat">
-                        </i>导出
-                    </button>
+                    <input type="text"  class="form-control date-picker" id="datetimeend" placeholder="请选择结束时间">
                 </div>
             </div>
         </form>
     </div>
-
+    <div id="toolbar">
+        <button onclick="queryDataBackUp()" class="btn btn-primary" type="button">
+            <i class="glyphicon glyphicon-search">
+            </i>搜索
+        </button>
+        <button onclick="reset_table()" class="btn btn-danger" type="button">
+            <i class="glyphicon glyphicon-repeat">
+            </i>重置
+        </button>
+        <button onclick="" class="btn btn-info" type="button">
+            <i class="glyphicon glyphicon-download-alt">
+            </i>导出
+        </button>
+    </div>
 </div>
 
 <div><table id="dataBackupShow" class="table table-bordered"></table></div>
@@ -118,19 +114,20 @@
             },
             {field:'user_name',title:'确认人',align:'center'},
             {field:'qr_time',title:'确认时间',align:'center',
+                //获取日期列的值进行转换
                 formatter: function (value, row, index) {
-                    return changeDateFormat(value)
+                    return changeDateFormat(value);
                 }
             },
             {field:'bz_nr',title:'备注',align:'center'}
         ],
         pagination:true,
         pageNumber:1,
-        pageSize:2,
+        pageSize:5,
         pageList:[2,4,6,20],
         clickToSelect: true,
         cache搜索: false,
-        sidePagination:"server",
+        sidePagination:"server"
     })
     <%-- 回车搜索 --%>
     function enterSearch(){
@@ -149,14 +146,13 @@
         language:"zh-CN",
         autoclose:true
     });
-    //修改——转换日期格式(时间戳转换为datetime格式)
+    //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
-        if (cellval != null) {
-        var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
-        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-        return date.getFullYear() + "-" + month + "-" + currentDate;
-       }
+        if (cellval != null){
+        var d = new Date(cellval);;
+        var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        return times;
+        }
     }
 </script>
 </body>

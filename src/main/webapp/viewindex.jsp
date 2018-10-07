@@ -14,12 +14,13 @@
     body{
         padding: 0;
         margin: 0;
-        background: url("/static/images/logo.png") no-repeat;
-        background-size: 70% 20%;
+        //background: url("") no-repeat;
+        //background-size: 70% 20%;
         position: absolute;
     }
 </style>
 <body >
+<img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 <form class="form-horizontal" id="skuserForm">
         <div class="form-group" style="margin-right:500px;margin-left: 500px;margin-top: 180px;">
         <div class="input-group">

@@ -207,31 +207,46 @@
         });
         if(ids.length==1){
             var id = ids[0];
-            BootstrapDialog.show({
+           BootstrapDialog.show({
                 title:"修改页面",
                 message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdUser?user_id='+id),
                 buttons: [ {
                     label: '保存',
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
+                        if ($("#user_name1").val()==""){
+                            alert("用户名不能为空")
+                            return false;
+                        }else if ($("#password1").val()=="" || $("#password1").val()==null){
+                            alert("密码不能为空")
+                            return false;
+                        }
+                        else if ($("#user_kh1").val()=="" || $("#user_kh1").val()==null){
+                            alert("卡号不能为空")
+                            return false;
+                        }
+                        else if ($("#is_management1").val()==""){
+                            alert("请选择权限")
+                            return false;
+                        }
                         $.ajax({
-                            url:"<%=request.getContextPath()%>/updUser",
-                            data:$("#updUserForm").serialize(),
-                            dataType:"text",
-                            type:"post",
-                            success:function(data){
-                                dialogItself.close();
-                                $('#userList').bootstrapTable("refresh");
-                            },
-                            error:function(){
-                                BootstrapDialog.show({
-                                    title:"温馨提示",
-                                    message: '系统出现BUG！请联系管理员！'
-                                });
-                            }
+                                url:"<%=request.getContextPath()%>/updUser",
+                                data:$("#updUserForm").serialize(),
+                                dataType:"text",
+                                type:"post",
+                                success:function(data){
+                                    dialogItself.close();
+                                    $('#userList').bootstrapTable("refresh");
+                                },
+                                error:function(){
+                                    BootstrapDialog.show({
+                                        title:"温馨提示",
+                                        message: '系统出现BUG！请联系管理员！'
+                                    });
+                                }
 
-                        })
-                    }
+                            })
+                        }
                 }, {
                     label: '取消',
                     cssClass: 'btn-warning ',
@@ -251,6 +266,7 @@
     function addUser(){
         BootstrapDialog.show({
             title:"添加商品信息",
+            closable: false,
             message:$('<div><div>').load('<%=request.getContextPath()%>/toInsertUser'),
             buttons:[{
                 label:"提交",

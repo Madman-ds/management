@@ -13,24 +13,23 @@
 </head>
 <body>
     <form id="updUserForm">
-        <input type="hidden" name="user_id" value="${user.user_id }">
+        <input type="hidden" name="user_id" value="${user.user_id }" >
         <input type="hidden" name="user_id" value="${user.create_time }">
         <label>用户姓名:</label>
-        <input type="text" name="user_name" class="form-control" value="${user.user_name }">
+        <input type="text" name="user_name" class="form-control" id="user_name1" value="${user.user_name }">
         <label>密码:</label>
-        <input type="text" name="password" class="form-control" value="${user.password }">
+        <input type="text" name="password" class="form-control" id="password1" value="${user.password }">
 
 
         <label>卡号:</label>
-        <input type="text" name="user_kh"  class="form-control" value="${user.user_kh }">
+        <input type="text" name="user_kh"  class="form-control" id="user_kh1" value="${user.user_kh }">
 
         <label>是否为管理员：</label>
-        <select class="form-control" name="is_management">
+        <select class="form-control" name="is_management" id="is_management1">
             <option value="">请选择</option>
             <option value="1" ${user.is_management == 1?"selected":"" }>是</option>
             <option value="2" ${user.is_management == 2?"selected":"" }>否</option>
-        </select><br>
-
+        </select>
     </form>
 </body>
 </html>

@@ -74,45 +74,83 @@
                             设备数据
                         </div>
                         <form id="equipmentAdd" role="form" class="form-horizontal m-t">
-                            <div class="form-group">
-                                <label for="sb_name" class="col-sm-2 control-label">设备名称</label>
-                                <div class="col-sm-6">
-                                    <input type="hidden"  class="form-control" id="sb_id" name="sb_id">
-                                    <input type="text"  class="form-control" id="sb_name" name="sb_name" placeholder="设备名称">
-                                </div>
+                            <button type="button" class="btn btn-primary" onclick="addRow()">新增设备属性</button>
+                            <button type="button" class="btn btn-primary" onclick="delRow()">删除设备属性</button>
+                            <table id="" style="border-style: dashed;">
+                                <tr>
+                                    <td style="width:160px" >设备属性</td>
+                                    <td style="width:160px" >属性值</td>
+                                    <td style="width:160px;" align="center">操作</td>
+                                </tr>
+                                <tr>
+                                    <td>设备名称</td>
+                                    <td><input type="hidden"  id="sb_id" name="sb_id">
+                                        <input type="text" style="width:160px;margin-top: 5px"  id="sb_name" name="sb_name" placeholder="设备名称">
+                                    </td>
+                                    <td style="width:160px;" align="center">不可删除</td>
+                                </tr>
+                                <tr>
+                                    <td>设备编号</td>
+                                    <td><input type="text" style="width:160px;margin-top: 5px" id="sb_number" name="sb_number" placeholder="设备编号">
+                                    </td>
+                                    <td align="center">不可删除</td>
+                                </tr>
+                                <tr>
+                                    <td>设备型号</td>
+                                    <td><input type="text" style="width:160px;margin-top: 5px"  id="sb_xh"  name="sb_xh" placeholder="设备型号">
+                                    </td>
+                                    <td align="center">不可删除</td>
+                                </tr>
+                            </table>
+                            <table id="mytableid" style="border-style: dashed;">
+
+                            </table>
+                            <input type="hidden" id="delTextId" />
+
+                            <div class="col-sm-6 col-sm-offset-2" id="addshow">
+                                <button class="btn btn-primary" type="submit" id="add">保存内容</button>
                             </div>
-                            <div class="form-group">
-                                <label for="sb_number" class="col-sm-2 control-label">设备编号</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="sb_number" name="sb_number" placeholder="设备编号">
-                                </div>
+                            <div class="col-sm-6 col-sm-offset-2" id="updateshow">
+                                <button class="btn btn-primary" type="submit" id="update">修改内容</button>
                             </div>
-                            <div class="form-group">
-                                <label for="sb_xh" class="col-sm-2 control-label">设备型号</label>
-                                <div class="col-sm-6">
-                                    <input type="text"  class="form-control" id="sb_xh"  name="sb_xh" placeholder="设备型号">
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group draggable">
-                                <div class="col-sm-2"></div>
-                                <div class="col-sm-6 col-sm-offset-2" id="addshow">
-                                    <button class="btn btn-primary" type="submit" id="add">保存内容</button>
-                                </div>
-                                <div class="col-sm-6 col-sm-offset-2" id="updateshow">
-                                    <button class="btn btn-primary" type="submit" id="update">修改内容</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 </div>
 </body>
 <script>
+
+    var num = 1;
+    function addRow() {
+        var tb = document.getElementById("mytableid");//获取表格
+        var row = tb.insertRow();//添加行
+        var cell = row.insertCell();//添加列
+        //cell.innerText = "第" + num + "行";//标识行
+        //num++;//第几行
+        //cell = row.insertCell();//添加列
+        // cell.innerHTML += "<td><input name='cell1'style='width:160px;margin-top: 5px'   type='text' placeholder='设备名称'></td>";
+        // cell.innerHTML += "<td><input name='cell2' style='width:160px;margin-top: 5px' type='text' placeholder='设备名称'><td>";
+        // cell.innerHTML += "<td style='align:center'><a onclick='delRow()' >删除一行</a></td>";
+        cell.innerHTML += "<td><input name='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
+        cell.innerHTML += "<td><input name='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
+        cell.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
+
+    }
+    function delRow() {
+        var rowIndex = document.getElementById("delTextId").value;
+        var tb = document.getElementById("mytableid");
+        tb.deleteRow(rowIndex);
+    }
+
+
+
+
+
 
     //重置
     function resetForm(){

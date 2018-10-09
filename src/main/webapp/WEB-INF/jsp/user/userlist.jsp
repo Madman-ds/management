@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <title>用户管理页面</title>
@@ -112,7 +113,7 @@
             formatter:function(value,row,index){
                 if (value == 1){
                     return "管理员";
-                } else if(value == 2){
+                } else {
                     return "普通员工";
                 }
             }
@@ -158,7 +159,7 @@
         var arr = $("#userList").bootstrapTable('getData');
         var ids = rows.join(",");
         if(ids!="" && ids.length>0){
-            BootstrapDialog.show({
+           BootstrapDialog.show({
                 title:"删除确认",
                 message:"确定要删除吗？",
                 buttons: [ {
@@ -207,13 +208,18 @@
         });
         if(ids.length==1){
             var id = ids[0];
-            BootstrapDialog.show({
+            var upddialog =  BootstrapDialog.show({
                 title:"修改页面",
                 message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdUser?user_id='+id),
                 buttons: [ {
                     label: '保存',
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
+                        var upduserflag=chenckUpdUserForm();
+                        alert(upduserflag);
+                        if(!upduserflag){
+                            return;
+                        }
                         $.ajax({
                             url:"<%=request.getContextPath()%>/updUser",
                             data:$("#updUserForm").serialize(),
@@ -251,11 +257,45 @@
     function addUser(){
         BootstrapDialog.show({
             title:"添加商品信息",
+            closable: false,
             message:$('<div><div>').load('<%=request.getContextPath()%>/toInsertUser'),
             buttons:[{
                 label:"提交",
                 cssClass:'btn-primary',
                 action:function(data){
+                    var chenckKh = "";
+
+                    if ($("#add_user_name").val()==""){
+                        alert("用户名不能为空")
+                        return false;
+                    }else if ($("#add_password").val()=="" || $("#add_password").val()==null){
+                        alert("密码不能为空")
+                        return false;
+                    }
+                    else if ($("#add_user_kh").val()=="" || $("#add_user_kh").val()==null){
+                        alert("卡号不能为空")
+                        return false;
+                    }
+                    else if ($("#add_is_management").val()==""){
+                        alert("请选择权限")
+                        return false;
+                    }
+                    if ($("#add_user_kh").val()!=""){
+                        $.ajax({
+                            url:"<%=request.getContextPath()%>/selectUserByWhere",
+                            data:{user_kh:$("#add_user_kh").val()},
+                            dataType:"json",
+                            type:"post",
+                            async:false,
+                            success:function(data){
+                                chenckKh =  data.user_kh;
+                            }
+                        })
+                    }
+                    if (chenckKh != "") {
+                        alert("卡号重复，请重新输入");
+                        return false;
+                    }
                     $.ajax({
                         url:"<%=request.getContextPath()%>/insertUser",
                         data:$("#addUserForm").serialize(),

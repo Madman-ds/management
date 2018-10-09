@@ -78,7 +78,6 @@
             return false;
         }
         if (upd_user_kh!="" ){
-            alert(upd_user_kh)
             $.ajax({
                 url:"<%=request.getContextPath()%>/selectUserByWhere",
                 data:{user_kh:upd_user_kh},

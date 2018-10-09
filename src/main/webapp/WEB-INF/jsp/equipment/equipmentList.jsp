@@ -51,7 +51,7 @@
 </div>
 
 <div class="rows">
-    <div id="toolBar"">
+    <div id="toolBar">
         <button onclick="delEquipmentAll()" class="btn btn-danger"  type="button">
             <i class="glyphicon glyphicon-minus"></i>
             删除
@@ -113,7 +113,6 @@
                             <div class="col-sm-6 col-sm-offset-2" id="updateshow">
                                 <button class="btn btn-primary" type="submit" id="update">修改内容</button>
                             </div>
-                        </div>
                     </form>
                     </div>
                 </div>

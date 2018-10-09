@@ -13,13 +13,13 @@
 <body>
     <form id="addUserForm">
         <label>用户姓名:</label>
-        <input type="text" name="user_name" class="form-control">
+        <input type="text" name="user_name" class="form-control" id="add_user_name">
         <label>密码:</label>
-        <input type="text" name="password" class="form-control">
+        <input type="text" name="password" class="form-control" id="add_password">
         <label>卡号:</label>
-        <input type="text" name="user_kh"  class="form-control">
+        <input type="text" name="user_kh"  class="form-control" id="add_user_kh">
         <label>是否为管理员：</label>
-        <select class="form-control" name="is_management">
+        <select class="form-control" name="is_management" id="add_is_management">
             <option value="">请选择</option>
             <option value="1">是</option>
             <option value="2">否</option>

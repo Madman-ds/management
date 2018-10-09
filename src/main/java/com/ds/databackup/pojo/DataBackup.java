@@ -57,11 +57,11 @@ public class DataBackup extends PageUtil {
     /**
      * 确认起始时间
      */
-    private Date start_time;
+    private String start_time;
     /**
      * 确认结束时间
      */
-    private Date end_time;
+    private String end_time;
     /**
      * 备注内容
      */

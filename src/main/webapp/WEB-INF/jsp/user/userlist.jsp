@@ -215,8 +215,11 @@
                     label: '保存',
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
-                        chenckUpdUserForm();
-
+                        var upduserflag=chenckUpdUserForm();
+                        alert(upduserflag);
+                        if(!upduserflag){
+                            return;
+                        }
                         $.ajax({
                             url:"<%=request.getContextPath()%>/updUser",
                             data:$("#updUserForm").serialize(),

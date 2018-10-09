@@ -1,6 +1,7 @@
 package com.ds.databackup.pojo;
 
 import com.ds.util.Page;
+import com.ds.util.PageUtil;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Date;
  * @说明: 数据备份相关实体类对应数据库t_inspectionrecord表
  */
 @Data
-public class DataBackup {
+public class DataBackup extends PageUtil {
     /**
      * 巡检id
      */

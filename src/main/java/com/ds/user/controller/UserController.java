@@ -1,18 +1,15 @@
 package com.ds.user.controller;
 
-import com.ds.databackup.pojo.DataBackup;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
+import com.ds.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @类名称: Controller
@@ -24,32 +21,21 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-    /**
-     * @作者: 段聪祺
-     * @功能描述: 查询所有用户，前台条件查询为卡号和姓名
-     * @时间: 2018/9/29 14:44
-     * @参数:  * @param req
-     * @返回值: java.util.Map<java.lang.String,java.lang.Object>
-     **/
+  /**
+   * @作者: 段大神经
+   * @功能描述: 查询所有用户，前台条件查询为卡号和姓名
+   * @时间: 2018/9/29 14:44
+   * @参数:  * @param user
+   * @返回值: com.ds.util.PageUtil
+   **/
     @GetMapping("findAllUser")
-    public Map<String, Object> findAllUser(HttpServletRequest req){
-        String user_name = req.getParameter("user_name");
-        String user_kh = req.getParameter("user_kh");
-        String parameter4 = req.getParameter("offset");
-        String parameter5 = req.getParameter("limit");
-        int  offset =Integer.valueOf(parameter4);
-        int  limit =Integer.valueOf(parameter5);
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("user_name",user_name);
-        map.put("user_kh",user_kh);
-        map.put("offset", offset);
-        map.put("limit", limit);
-        int count = userService.getUserCount(map);
-        List<DataBackup> list = userService.findAllUser(map);
-        Map<String, Object> result=new HashMap<String, Object>();
-        result.put("total", count);
-        result.put("rows", list);
-        return result;
+    public PageUtil findAllUser(User user){
+        Integer count = userService.getUserCount(user);
+        List<User> list = userService.findAllUser(user);
+        PageUtil page = new PageUtil();
+        page.setTotal(count);
+        page.setRows(list);
+        return page;
     }
     /**
      * @作者: 段聪祺

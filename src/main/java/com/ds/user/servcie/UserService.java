@@ -1,10 +1,8 @@
 package com.ds.user.servcie;
 
-import com.ds.databackup.pojo.DataBackup;
 import com.ds.user.pojo.User;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @接口名称: UserService
@@ -13,9 +11,9 @@ import java.util.Map;
  * @说明:
  */
 public interface UserService {
-    int getUserCount(Map<String, Object> map);
+    Integer getUserCount(User user);
 
-    List<DataBackup> findAllUser(Map<String, Object> map);
+    List<User> findAllUser(User user);
 
     User selectUserByWhere(User user);
 

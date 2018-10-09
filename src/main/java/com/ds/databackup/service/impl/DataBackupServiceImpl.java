@@ -21,8 +21,8 @@ public class DataBackupServiceImpl implements DataBackupService {
     private DataBackupMapper dataBackupMapper;
 
     @Override
-    public List findDataBackup(Map map) {
-        return dataBackupMapper.findDataBackup(map);
+    public List findDataBackup(DataBackup dataBackup) {
+        return dataBackupMapper.findDataBackup(dataBackup);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class DataBackupServiceImpl implements DataBackupService {
     }
 
     @Override
-    public int getDataBackupCount(Map map) {
-        return dataBackupMapper.getDataBackupCount(map);
+    public Integer getDataBackupCount(DataBackup dataBackup) {
+        return dataBackupMapper.getDataBackupCount(dataBackup);
     }
 }

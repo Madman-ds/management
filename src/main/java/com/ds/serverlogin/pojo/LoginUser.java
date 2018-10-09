@@ -1,5 +1,6 @@
 package com.ds.serverlogin.pojo;
 
+import com.ds.util.PageUtil;
 import lombok.Data;
 
 /**
@@ -9,7 +10,7 @@ import lombok.Data;
  * @说明:
  */
 @Data
-public class LoginUser {
+public class LoginUser extends PageUtil {
     /**
      * 用户id
      */

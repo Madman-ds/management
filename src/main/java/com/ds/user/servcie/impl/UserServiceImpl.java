@@ -1,6 +1,5 @@
 package com.ds.user.servcie.impl;
 
-import com.ds.databackup.pojo.DataBackup;
 import com.ds.user.mapper.UserMappper;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @类名称: UserServiceImpl
@@ -22,13 +20,13 @@ public class UserServiceImpl implements UserService {
     private UserMappper userMappper;
 
     @Override
-    public int getUserCount(Map<String, Object> map) {
-        return userMappper.getUserCount(map);
+    public Integer getUserCount(User user) {
+        return userMappper.getUserCount(user);
     }
 
     @Override
-    public List<DataBackup> findAllUser(Map<String, Object> map) {
-        return userMappper.findAllUser(map);
+    public List<User> findAllUser(User user) {
+        return userMappper.findAllUser(user);
     }
 
     @Override

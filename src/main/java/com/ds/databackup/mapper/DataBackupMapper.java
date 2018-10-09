@@ -12,9 +12,9 @@ import java.util.Map;
  * @说明:
  */
 public interface DataBackupMapper {
-    List findDataBackup(Map map);
+    List findDataBackup(DataBackup dataBackup);
 
     int insertDataBackup(DataBackup dataBackup);
 
-    int getDataBackupCount(Map map);
+    int getDataBackupCount(DataBackup dataBackup);
 }

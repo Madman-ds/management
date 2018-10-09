@@ -96,20 +96,30 @@
         },{
             field:"user_id",
             title:"用户编号",
-            visible: false
+            visible: false,
+            align:'center',
+            width:50
         },{
             field:"user_name",
-            title:"用户名"
+            title:"用户名",
+            align:'center',
+            width:200
         },{
             field:"password",
-            title:"密码"
+            title:"密码",
+            align:'center',
+            width:200
         },
             {
             field:"user_kh",
-            title:"卡号"
+            title:"卡号",
+            align:'center',
+            width:300
         },{
             field:"is_management",
             title:"角色",
+            align:'center',
+            width:200,
             formatter:function(value,row,index){
                 if (value == 1){
                     return "管理员";
@@ -120,6 +130,8 @@
         },{
             field:"create_time",
             title:"创建时间",
+            align:'center',
+            width:200,
             //获取日期列的值进行转换
             formatter: function (value, row, index) {
                 return changeDateFormat(value);

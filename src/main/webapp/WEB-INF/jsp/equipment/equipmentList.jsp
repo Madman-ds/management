@@ -51,10 +51,10 @@
 </div>
 
 <div class="rows">
-    <div id="toolBar" style="margin-left: 60px">
+    <div id="toolBar"">
         <button onclick="delEquipmentAll()" class="btn btn-danger"  type="button">
             <i class="glyphicon glyphicon-minus"></i>
-            批量删除
+            删除
         </button>
         <button onclick="addEquipment()" class="btn btn-success"  type="button">
             <i class="glyphicon glyphicon-plus"></i>
@@ -173,8 +173,9 @@
             {field:'sb_xh',title:'设备型号',align:'center',width:350},
             {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
-                    // str+="<button class='btn btn-info dim' type='button' onclick='del(\""+rows.id+"\")' ><i class='fa fa-paste'></i>删除</button>";
-                    str+="<button class='btn btn-info dim' type='button' onclick='updateEquipment(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>修改</button>";
+                    str+="<button class='btn btn-info dim' type='button' onclick='XXX(\""+rows.id+"\")' ><i class='fa fa-paste'></i>管理检查项</button>  ";
+                    str+="<button class='btn btn-info dim' type='button' onclick='updateEquipment(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>修改</button>  ";
+                    str+="<button class='btn btn-info dim' type='button' onclick='XXX(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>查看</button>";
                     return  str;
                 }
             }

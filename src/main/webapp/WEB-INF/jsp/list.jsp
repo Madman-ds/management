@@ -58,7 +58,10 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" title="logoTitle" href="#">后台管理系统</a>
+                <a class="navbar-brand" title="logoTitle" href="#">
+                    <div style="float: left"><img class="img-responsive" src="./static/images/logo.png" style="width: 200px;height: auto"></div>
+                    <div style="float: left;margin-left: 300px">后台管理系统</div>
+                </a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">

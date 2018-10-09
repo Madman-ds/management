@@ -30,11 +30,6 @@
             <option value="1" ${user.is_management == 1?"selected":"" }>是</option>
             <option value="2" ${user.is_management == 2?"selected":"" }>否</option>
         </select>
-        <%--<div class="form-group" style="margin-right: 60px;margin-left: 60px;margin-top: 10px">
-            <button type="button" onclick="chenckUpdUserForm()" class="btn btn-success btn-lg btn-block">
-                提交
-            </button>
-        </div>--%>
     </form>
 <script type="text/javascript">
     function chenckUpdUserForm() {
@@ -65,11 +60,11 @@
             return false;
         }
 
-        else if ($("#upd_password").val()=="" || $("#upd_password").val()==null){
+        else if ($("#upd_password").val()==""){
             alert("密码不能为空")
             return false;
         }
-        else if (upd_user_kh=="" || upd_user_kh==null){
+        else if (upd_user_kh==""){
             alert("卡号不能为空")
             return false;
         }

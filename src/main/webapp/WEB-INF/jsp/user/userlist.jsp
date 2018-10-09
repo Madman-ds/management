@@ -208,7 +208,7 @@
         });
         if(ids.length==1){
             var id = ids[0];
-            var upddialog =  BootstrapDialog.show({
+             BootstrapDialog.show({
                 title:"修改页面",
                 message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdUser?user_id='+id),
                 buttons: [ {
@@ -216,7 +216,6 @@
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         var upduserflag=chenckUpdUserForm();
-                        alert(upduserflag);
                         if(!upduserflag){
                             return;
                         }
@@ -263,38 +262,9 @@
                 label:"提交",
                 cssClass:'btn-primary',
                 action:function(data){
-                    var chenckKh = "";
-
-                    if ($("#add_user_name").val()==""){
-                        alert("用户名不能为空")
-                        return false;
-                    }else if ($("#add_password").val()=="" || $("#add_password").val()==null){
-                        alert("密码不能为空")
-                        return false;
-                    }
-                    else if ($("#add_user_kh").val()=="" || $("#add_user_kh").val()==null){
-                        alert("卡号不能为空")
-                        return false;
-                    }
-                    else if ($("#add_is_management").val()==""){
-                        alert("请选择权限")
-                        return false;
-                    }
-                    if ($("#add_user_kh").val()!=""){
-                        $.ajax({
-                            url:"<%=request.getContextPath()%>/selectUserByWhere",
-                            data:{user_kh:$("#add_user_kh").val()},
-                            dataType:"json",
-                            type:"post",
-                            async:false,
-                            success:function(data){
-                                chenckKh =  data.user_kh;
-                            }
-                        })
-                    }
-                    if (chenckKh != "") {
-                        alert("卡号重复，请重新输入");
-                        return false;
+                    var adduserflag = chenckAddUserForm();
+                    if (!adduserflag){
+                        return;
                     }
                     $.ajax({
                         url:"<%=request.getContextPath()%>/insertUser",

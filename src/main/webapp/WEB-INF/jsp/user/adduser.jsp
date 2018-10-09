@@ -26,4 +26,60 @@
         </select><br>
     </form>
 </body>
+<script type="text/javascript">
+    function chenckAddUserForm() {
+        var chenckKh = "";
+        var chenckName = "";
+        if ($("#add_user_name").val()==""){
+            alert("用户名不能为空")
+            return false;
+        }
+        if ($("#add_user_name").val()!=""){
+            $.ajax({
+                url:"<%=request.getContextPath()%>/selectUserByWhere",
+                data:{user_name:$("#add_user_name").val()},
+                dataType:"json",
+                type:"post",
+                async:false,
+                success:function(data){
+                    chenckName =  data.user_name;
+                }
+            })
+        }
+        if (chenckName != "") {
+            alert("您输入的用户名重复，请重新输入");
+            return false;
+        }
+
+        else if ($("#add_password").val()=="" ){
+            alert("密码不能为空")
+            return false;
+        }
+        else if ($("#add_user_kh").val()==""){
+            alert("卡号不能为空")
+            return false;
+        }
+        else if ($("#add_is_management").val()==""){
+            alert("请选择权限")
+            return false;
+        }
+        if ($("#add_user_kh").val()!="" ){
+            $.ajax({
+                url:"<%=request.getContextPath()%>/selectUserByWhere",
+                data:{user_kh:$("#add_user_kh").val()},
+                dataType:"json",
+                type:"post",
+                async:false,
+                success:function(data){
+                    chenckKh =  data.user_kh;
+                }
+            })
+        }
+        if (chenckKh != "") {
+            alert("您输入的卡号重复，请重新输入");
+            return false;
+        }
+        return true;
+    }
+</script>
 </html>

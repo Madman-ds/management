@@ -78,7 +78,6 @@
             return false;
         }
         if (upd_user_kh!="" ){
-            alert(upd_user_kh)
             $.ajax({
                 url:"<%=request.getContextPath()%>/selectUserByWhere",
                 data:{user_kh:upd_user_kh},
@@ -94,7 +93,7 @@
             alert("您修改的卡号重复，请重新输入");
             return false;
         }
-
+        return true;
     }
 </script>
 </body>

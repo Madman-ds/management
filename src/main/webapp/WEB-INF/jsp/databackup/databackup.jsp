@@ -53,7 +53,7 @@
             <i class="glyphicon glyphicon-repeat">
             </i>重置
         </button>
-        <button onclick="" class="btn btn-info" type="button">
+        <button onclick="daochu()" class="btn btn-info" type="button">
             <i class="glyphicon glyphicon-download-alt">
             </i>导出
         </button>
@@ -62,6 +62,29 @@
 
 <div><table id="dataBackupShow" class="table table-bordered"></table></div>
 <script type="text/javascript">
+
+    function daochu(){
+        var sb_name= $('#select_sb_name').val();
+        var sb_number = $('#select_sb_number').val();
+        var sb_xh = $('#select_sb_xh').val();
+        var user_name = $('#select_user_name').val();
+        var start_time = $('#datetimepicker').val();
+        var end_time = $('#datetimeend').val();
+        location.href="<%=request.getContextPath() %>/ExportDataBackup"+"?sb_name="+sb_name+"&"+"sb_number="+sb_number+"&"+"sb_xh="+sb_xh+"&"+"user_name="+user_name+"&"+"start_time="+start_time+"&"+"end_time="+end_time;
+        /* $.ajax({
+<%--url:'<%=request.getContextPath() %>/ExportDataBackup',--%>
+            type:'get',
+            data:{
+                sb_name:sb_name,
+                sb_number:sb_number
+            },
+            dataType:'json',
+            success:function(data){
+
+            }
+        })*/
+    }
+
     //条件查询
     function queryDataBackUp(){
         //点击查询，只是让表格刷新到第一页，具体查询参数，按照组装表格时候拿到的查询条件来用

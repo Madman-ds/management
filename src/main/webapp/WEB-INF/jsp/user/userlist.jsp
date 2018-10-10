@@ -70,8 +70,9 @@
         }
     }
     //重置
-    function reset_table(){
+    function resetUserForm(){
         $('#searchUserForm')[0].reset();
+        uerSearch();
     }
     $("#userList").bootstrapTable({
         url:"<%=request.getContextPath()%>/findAllUser",

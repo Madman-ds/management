@@ -34,4 +34,9 @@ public class DataBackupServiceImpl implements DataBackupService {
     public Integer getDataBackupCount(DataBackup dataBackup) {
         return dataBackupMapper.getDataBackupCount(dataBackup);
     }
+
+    @Override
+    public List<DataBackup> findDataBackupExcel(DataBackup dataBackup) {
+        return dataBackupMapper.findDataBackupExcel(dataBackup);
+    }
 }

@@ -24,13 +24,32 @@
     <!-- 条件或全部查询数据备份 -->
     <select id="findDataBackup" parameterType="com.ds.databackup.pojo.DataBackup" resultType="com.ds.databackup.pojo.DataBackup">
         select
-           *
-        from 
+            *
+        from
           t_inspectionrecord
         <include refid="whereSql"></include>
         order by xj_id desc
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
     </select>
+
+    <!-- 条件或全部查询数据备份 -->
+    <select id="findDataBackupExcel" parameterType="com.ds.databackup.pojo.DataBackup" resultType="com.ds.util.ExcelDataBackup">
+        select
+            sb_name,
+            sb_number,
+            sb_xh,
+            jcx_name,
+            jc_yq,
+            jc_jg,
+            user_name,
+            qr_time,
+            bz_nr
+        from
+        t_inspectionrecord
+        <include refid="whereSql"></include>
+    </select>
+
+
     <!-- 条件或全部查询数据备份数量 -->
     <select id="getDataBackupCount" parameterType="com.ds.databackup.pojo.DataBackup" resultType="java.lang.Integer">
         select

@@ -18,19 +18,19 @@
     <div class="panel-body">
         <form class="form-horizontal" id="dataBackUpForm">
                 <div class="form-group">
-                    <label for="select_sb_name" class="col-sm-1 control-label">设备名称：</label>
+                    <label for="select_sb_name" class="col-sm-2 control-label">设备名称：</label>
                     <div class="col-sm-2">
                         <div class="input-group">
                             <input type="text" class="form-control" id="select_sb_name" placeholder="请输入设备名称">
                         </div>
                     </div>
-                    <label for="select_sb_number" class="col-sm-1 control-label">设备编号：</label>
+                    <label for="select_sb_number" class="col-sm-2 control-label">设备编号：</label>
                     <div class="col-sm-2">
                         <div class="input-group">
                             <input type="text" class="form-control" id="select_sb_number" placeholder="请输入设备编号">
                         </div>
                     </div>
-                    <label for="select_sb_xh" class="col-sm-1 control-label">设备型号：</label>
+                    <label for="select_sb_xh" class="col-sm-2 control-label">设备型号：</label>
                     <div class="col-sm-2">
                         <div class="input-group">
                             <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入设备型号">
@@ -38,13 +38,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="select_user_name" class="col-sm-1 control-label">确认人：</label>
+                    <label for="select_user_name" class="col-sm-2 control-label">确认人：</label>
                     <div class="col-sm-2">
                         <div class="input-group">
                             <input type="text" class="form-control" id="select_user_name" placeholder="请输入确认人">
                         </div>
                     </div>
-                    <label  class="col-sm-1 control-label">确认时间：</label>
+                    <label  class="col-sm-2 control-label">确认时间：</label>
                     <div class="col-sm-5">
                         <div class="input-group col-sm-10">
                             <input  name="startDate" id="datetimepicker" class="form-control" placeholder="开始时间">

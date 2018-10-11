@@ -38,6 +38,17 @@ public class UserController {
         return page;
     }
     /**
+     * @作者: 段大神经
+     * @功能描述: 获取所有用户集合
+     * @时间: 2018/10/11 22:31
+     * @参数:  * @param
+     * @返回值: java.util.List
+     **/
+    @PostMapping("getUserList")
+    public List getUserList(){
+        return userService.findAllUser(null);
+    }
+    /**
      * @作者: 段聪祺
      * @功能描述: 条件查询用户，用于新增，修改回显
      * @时间: 2018/9/29 15:56

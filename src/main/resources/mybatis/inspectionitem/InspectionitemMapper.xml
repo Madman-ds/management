@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.inspectionitem.mapper.InspectionitemMapper">
+    <!-- 根据设备id查询检查项集合 -->
+    <select id="findAllInspectionitemBySbId" parameterType="long" resultType="com.ds.inspectionitem.pojo.Inspectionitem">
+        select * from t_inspectionitem where sb_id = #{sb_id}
+    </select>
+    <!-- 新增赋权数据 -->
+    <insert id="insertUserEquipment" parameterType="com.ds.inspectionitem.pojo.UserEquipment">
+        insert into t_userequipment(jcx_id,user_id,qx) value(#{jcx_id},#{user_id},#{qx})
+    </insert>
+</mapper>

@@ -98,7 +98,7 @@
         },
         columns:[
             {checkbox:true},
-            {field:'sb_id',title:'ID',align:'center',width:50},
+            {field:'sb_id',title:'ID',align:'center',visible: false},
             {field:'sb_name',title:'设备名称',align:'center',width:350},
             {field:'sb_number',title:'设备编号',align:'center',width:450},
             {field:'sb_xh',title:'设备型号',align:'center',width:350},

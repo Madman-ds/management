@@ -72,8 +72,9 @@ public class DataBackupController {
         List<DataBackup> list = dataBackupService.findDataBackupExcel(dataBackup);
         if(list != null){
             ExportExcelUtil<DataBackup> export = new ExportExcelUtil<DataBackup>();
-            String[] title = {"设备管理","设备编号","设备型号","检查项","检查要求","确认结果","确认人","确认时间","备注"};
-            export.exportExcel("shebei","用户",title,list,response,EXCEl_FILE_2007);
+            String[] title = {"设备名称","设备编号","设备型号","检查项","检查要求","确认结果","确认人","确认时间","备注"};
+            String fileName = DateUtil.dateToString(new Date(),"yyyyMMddHHmmss") +"shebei";
+            export.exportExcel(fileName,"用户",title,list,response,EXCEl_FILE_2007);
         }
     }
 }

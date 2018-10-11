@@ -26,7 +26,7 @@
     </delete>
 
     <!--回显-->
-    <select id="getEquipmentidById" parameterType="int" resultType="com.ds.equipment.pojo.Equipment">
+    <select id="getEquipmentidById" parameterType="java.lang.Long" resultType="com.ds.equipment.pojo.Equipment">
         select *
         FROM
         t_equipment t

@@ -21,8 +21,28 @@
             position: absolute;
         }
     </style>
+    <jsp:include page="../../jscore.jsp"></jsp:include>
 </head>
 <body>
 
 </body>
+<script type="text/javascript">
+    //1分钟内不执行操作倒计时300秒执行退出方法
+    var maxTime = 300; // seconds
+    var time = maxTime;
+    $('body').on('keydown mousemove mousedown', function(e) {
+        time = maxTime; // reset
+    });
+    var intervalId = setInterval(function() {
+        time--;
+        if (time <= 0) {
+            ShowInvalidLoginMessage();
+            clearInterval(intervalId);
+        }
+    }, 1000)
+    function ShowInvalidLoginMessage() {
+        alert("您已经长时间没操作了，即将退出系统");
+        location.href = "logout";
+    }
+</script>
 </html>

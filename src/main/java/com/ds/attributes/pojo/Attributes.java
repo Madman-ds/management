@@ -15,7 +15,15 @@ public class Attributes {
      */
     private Long sx_id;
     /**
+     * 属性名称
+     */
+    private String sx_name;
+    /**
      * 属性值
      */
-    private Long sx_v;
+    private String sx_v;
+    /**
+     * 属性值
+     */
+    private Long sb_id;
 }

@@ -35,7 +35,7 @@ public class AttributesController {
     }
     /**
      * @作者: 段大神经
-     * @功能描述: 根据id删除属性（批量删除或单删）
+     * @功能描述: 根据设备id删除属性（批量删除或单删）
      * @时间: 2018/9/26 23:28
      * @参数:  * @param request
      * @返回值: void

@@ -11,6 +11,9 @@
               <if test="sx_v != null and sx_v !=''">
                 AND sx_v = #{sx_v}
               </if>
+              <if test="sb_id != null and sb_id !=0">
+                AND sb_id = #{sb_id}
+              </if>
           </where>
         order by sx_id desc
     </select>
@@ -18,17 +21,17 @@
     <delete id="deleteAttributes" parameterType="long">
         delete * from t_attributes
         <where>
-            <if test="sx_id != null and sx_id != 0">
-                AND sx_id = #{sx_id}
+            <if test="sb_id != null and sb_id != 0">
+                AND sb_id = #{sb_id}
             </if>
         </where>
     </delete>
     <!-- 添加属性并返回主键 -->
     <insert id="insertAttributes" parameterType="com.ds.attributes.pojo.Attributes" useGeneratedKeys="true" keyProperty="sx_id">
-      insert into t_attributes(sx_v) value(#{sx_v})
+      insert into t_attributes(sx_name,sx_v,sb_id) value(#{sx_name},#{sx_v},#{sb_id})
     </insert>
     <!-- 修改属性 -->
     <update id="updateAttributes" parameterType="com.ds.attributes.pojo.Attributes">
-        update t_attributes set sx_v = #{sx_v} where sx_id = #{sx_id}
+        update t_attributes set sx_v = #{sx_name,sx_v,sb_id} where sb_id = #{sb_id}
     </update>
 </mapper>

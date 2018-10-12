@@ -161,4 +161,17 @@ public class ShowController {
         modelMap.addAttribute("user",user1);
         return "WEB-INF/jsp/user/upduser";
     }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去检查项赋权页面
+     * @时间: 2018/10/11 21:30
+     * @参数:  * @param request
+     * @param modelMap
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toJcxfq")
+    public String toJcxfq(HttpServletRequest request, ModelMap modelMap){
+        modelMap.addAttribute("sb_id",Long.valueOf(request.getParameter("sb_id")));
+        return "WEB-INF/jsp/inspectionitem/inspectionitem";
+    }
 }

@@ -27,7 +27,7 @@ public class InspectionitemController {
      * @参数:  * @param request
      * @返回值: java.util.List
      **/
-    @GetMapping("findAllInspectionitemBySbId")
+    @PostMapping("findAllInspectionitemBySbId")
     public List findAllInspectionitemBySbId(HttpServletRequest request){
         Long sb_id = Long.valueOf(request.getParameter("sb_id"));
         return inspectionitemService.findAllInspectionitemBySbId(sb_id);

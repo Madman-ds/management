@@ -97,14 +97,13 @@
             }
         },
         columns:[
-            {checkbox:true},
             {field:'sb_id',title:'ID',align:'center',visible: false},
             {field:'sb_name',title:'设备名称',align:'center',width:350},
             {field:'sb_number',title:'设备编号',align:'center',width:450},
             {field:'sb_xh',title:'设备型号',align:'center',width:350},
             {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
-                    str+="<button class='btn btn-info dim' type='button' onclick='updateEquipment11(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>检查项赋权</button>"+"  ";
+                    str+="<button class='btn btn-info dim' type='button' onclick='jcxfq(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>检查项赋权</button>"+"  ";
                     str+="<button class='btn btn-info dim' type='button' onclick='updateEquipment112(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>查看设备详细信息</button>";
                     return  str;
                 }
@@ -112,5 +111,52 @@
 
         ]
     });
+    //检查项赋权触发，去检查项赋权页面
+    function jcxfq(id) {
+        if(id != ""){
+            BootstrapDialog.show({
+                title:"检查项赋权",
+                message: $('<div></div>').load('<%=request.getContextPath()%>/toJcxfq?sb_id='+id),
+                buttons: [ {
+                    label: '保存',
+                    cssClass: 'btn-primary',
+                    action: function(dialogItself){/*
+                        var upduserflag=chenckUpdUserForm();
+                        if(!upduserflag){
+                            return;
+                        }
+                        $.ajax({
+                            url:"/updUser",
+                            data:$("#updUserForm").serialize(),
+                            dataType:"text",
+                            type:"post",
+                            success:function(data){
+                                dialogItself.close();
+                                $('#userList').bootstrapTable("refresh");
+                            },
+                            error:function(){
+                                BootstrapDialog.show({
+                                    title:"温馨提示",
+                                    message: '系统出现BUG！请联系管理员！'
+                                });
+                            }
+
+                        })*/
+                    }
+                }, {
+                    label: '取消',
+                    cssClass: 'btn-warning ',
+                    action: function(dialogItself){
+                        dialogItself.close();
+                    }
+                }]
+            });
+        }else{
+            BootstrapDialog.show({
+                title:"温馨提示",
+                message: '请选择一行进行修改'
+            });
+        }
+    }
 </script>
 </html>

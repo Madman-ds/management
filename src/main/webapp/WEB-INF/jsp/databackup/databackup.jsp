@@ -17,31 +17,42 @@
     <!-- 搜索 -->
     <div class="panel-body">
         <form class="form-horizontal" id="dataBackUpForm">
-            <div class="form-group" >
-                <label for="select_sb_name" class="col-sm-1 control-label">设备名称：</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="select_sb_name" placeholder="请输入设备名称">
+                <div class="form-group">
+                    <label for="select_sb_name" class="col-sm-2 control-label">设备名称：</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="select_sb_name" placeholder="请输入设备名称">
+                        </div>
+                    </div>
+                    <label for="select_sb_number" class="col-sm-2 control-label">设备编号：</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="select_sb_number" placeholder="请输入设备编号">
+                        </div>
+                    </div>
+                    <label for="select_sb_xh" class="col-sm-2 control-label">设备型号：</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入设备型号">
+                        </div>
+                    </div>
                 </div>
-                <label for="select_sb_number" class="col-sm-1 control-label">设备编号：</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="select_sb_number" placeholder="请输入设备编号">
+                <div class="form-group">
+                    <label for="select_user_name" class="col-sm-2 control-label">确认人：</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="select_user_name" placeholder="请输入确认人">
+                        </div>
+                    </div>
+                    <label  class="col-sm-2 control-label">确认时间：</label>
+                    <div class="col-sm-5">
+                        <div class="input-group col-sm-10">
+                            <input  name="startDate" id="datetimepicker" class="form-control" placeholder="开始时间">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input  name="endDate" id="datetimeend" class="form-control" placeholder="结束时间">
+                        </div>
+                    </div>
                 </div>
-                <label for="select_sb_xh" class="col-sm-1 control-label">设备型号：</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入设备型号">
-                </div>
-                <label for="select_user_name" class="col-sm-1 control-label">确认人：</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="select_user_name" placeholder="请输入确认人">
-                </div>
-                <label  class="col-sm-1 control-label">确认时间：</label>
-                <div class="col-sm-2">
-                    <input type="text"  class="form-control date-picker" id="datetimepicker" placeholder="请选择开始时间">
-                </div>~
-                <div class="col-sm-2">
-                    <input type="text"  class="form-control date-picker" id="datetimeend" placeholder="请选择结束时间">
-                </div>
-            </div>
         </form>
     </div>
     <div id="toolbar">
@@ -71,18 +82,6 @@
         var start_time = $('#datetimepicker').val();
         var end_time = $('#datetimeend').val();
         location.href="<%=request.getContextPath() %>/ExportDataBackup"+"?sb_name="+sb_name+"&"+"sb_number="+sb_number+"&"+"sb_xh="+sb_xh+"&"+"user_name="+user_name+"&"+"start_time="+start_time+"&"+"end_time="+end_time;
-        /* $.ajax({
-<%--url:'<%=request.getContextPath() %>/ExportDataBackup',--%>
-            type:'get',
-            data:{
-                sb_name:sb_name,
-                sb_number:sb_number
-            },
-            dataType:'json',
-            success:function(data){
-
-            }
-        })*/
     }
 
     //条件查询

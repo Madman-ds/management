@@ -18,4 +18,6 @@ public interface AttributesService {
     int insertAttributes(Attributes attributes);
 
     int updateAttributes(Attributes attributes);
+
+    void saveAttributes(Attributes attributes);
 }

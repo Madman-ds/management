@@ -2,22 +2,19 @@ package com.ds.databackup.controller;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.service.DataBackupService;
+import com.ds.util.ExcelDataBackup;
 import com.ds.util.DateUtil;
 import com.ds.util.ExportExcelUtil;
 import com.ds.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.ds.util.ExportExcelUtil.EXCEl_FILE_2007;
 
@@ -69,9 +66,9 @@ public class DataBackupController {
      **/
     @GetMapping("ExportDataBackup")
     public void ExportDataBackup(DataBackup dataBackup,HttpServletResponse response) throws IOException {
-        List<DataBackup> list = dataBackupService.findDataBackupExcel(dataBackup);
+        List<ExcelDataBackup> list = dataBackupService.findDataBackupExcel(dataBackup);
         if(list != null){
-            ExportExcelUtil<DataBackup> export = new ExportExcelUtil<DataBackup>();
+            ExportExcelUtil<ExcelDataBackup> export = new ExportExcelUtil<ExcelDataBackup>();
             String[] title = {"设备名称","设备编号","设备型号","检查项","检查要求","确认结果","确认人","确认时间","备注"};
             String fileName = DateUtil.dateToString(new Date(),"yyyyMMddHHmmss") +"shebei";
             export.exportExcel(fileName,"用户",title,list,response,EXCEl_FILE_2007);

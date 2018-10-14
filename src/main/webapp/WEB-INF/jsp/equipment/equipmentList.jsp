@@ -135,8 +135,8 @@
         // cell.innerHTML += "<td><input name='cell1'style='width:160px;margin-top: 5px'   type='text' placeholder='设备名称'></td>";
         // cell.innerHTML += "<td><input name='cell2' style='width:160px;margin-top: 5px' type='text' placeholder='设备名称'><td>";
         // cell.innerHTML += "<td style='align:center'><a onclick='delRow()' >删除一行</a></td>";
-        cell.innerHTML += "<td><input name='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
-        cell.innerHTML += "<td><input name='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
+        cell.innerHTML += "<td><input class='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
+        cell.innerHTML += "<td><input class='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
         cell.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
 
     }
@@ -266,18 +266,41 @@
      * 添加方法
      */
     $("#add").click(function(){
-            $.ajax({
-                url:'<%=request.getContextPath() %>/equipment/addEquipment',
-                type:'post',
-                data:
-                    $("#equipmentAdd").serialize(),
-                dataType:'json',
-                success:function(data){
-                    $('#myModal2').modal('hide');
-                    EquipmentSearch();
-                    // jQuery("#myModal5").trigger("refresh");
-                }
-            })
+        var numArr = []; // 定义一个空数组
+        var numArr2 = [];
+        var txt = $('#mytableid').find('.cell1'); // 获取所有文本框
+        var txt2 = $('#mytableid').find('.cell2'); // 获取所有文本框
+        for (var i = 0; i < txt.length; i++) {
+            numArr.push(txt.eq(i).val()); // 将文本框的值添加到数组中
+            numArr2.push(txt2.eq(i).val());
+        }
+        var numArra = JSON.stringify(numArr);
+        var numArr2 = JSON.stringify(numArr2);
+        $.ajax({
+            url:'<%=request.getContextPath() %>/equipment/addEquipment',
+            type:'post',
+            data:
+                $("#equipmentAdd").serialize(),
+            dataType:'json',
+            success:function(data){
+                $.ajax({
+                    url:'<%=request.getContextPath() %>/equipment/test',
+                    type:'post',
+                    data:{
+                        "sx_name":numArra,
+                        "sx_v":numArr2,
+                        "sb_id":data
+                    },
+                    dataType:'json',
+                    success:function(data){
+                        $('#myModal2').modal('hide');
+                        EquipmentSearch();
+                    }
+                })
+                $('#myModal2').modal('hide');
+                EquipmentSearch();
+            }
+        })
     })
 
     /**
@@ -303,6 +326,7 @@
      * @param sb_id
      */
     function updateEquipment(sb_id){
+        alert(1);
         $("#addshow").hide();
         $('#myModal2').modal('toggle');
         $.ajax({
@@ -314,6 +338,7 @@
             async:false,
             dataType:'json',
             success:function(data){
+                console.log(data)
                 $("#sb_id").val(data.sb_id);
                 $("#sb_name").val(data.sb_name);
                 $("#sb_number").val(data.sb_number);

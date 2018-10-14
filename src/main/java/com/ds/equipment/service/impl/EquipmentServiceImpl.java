@@ -82,13 +82,13 @@ public class EquipmentServiceImpl implements EquipmentService {
      * @返回值: boolean
      **/
     @Override
-    public boolean addEquipment(Equipment equipment) {
+    public Integer addEquipment(Equipment equipment) {
         try {
-            equipmentMapper.addEquipment(equipment);
-            return true;
+            return equipmentMapper.addEquipment(equipment);
+           //  equipment.getSb_id();
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

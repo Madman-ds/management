@@ -20,7 +20,7 @@ public interface EquipmentService {
 
     Equipment getEquipmentById(Long sb_id);
 
-    boolean addEquipment(Equipment equipment);
+    Integer addEquipment(Equipment equipment);
 
     boolean updateEquipment(Equipment equipment);
 }

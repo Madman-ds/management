@@ -1,11 +1,13 @@
 package com.ds.equipment.controller;
 
+import com.ds.attributes.pojo.Attributes;
+import com.ds.attributes.service.AttributesService;
 import com.ds.equipment.pojo.Equipment;
 import com.ds.equipment.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,8 +21,12 @@ import java.util.List;
 @RequestMapping("equipment")
 public class EquipmentController {
 
+    //设备
     @Autowired
     private EquipmentService equipmentService;
+    //属性
+    @Autowired
+    private AttributesService attributesService;
 
     /**
      * @作者: yuboyake
@@ -79,9 +85,9 @@ public class EquipmentController {
      * @返回值: boolean
      **/
     @PostMapping(value="addEquipment")
-    public boolean addEquipment(Equipment equipment){
-        boolean isOK = equipmentService.addEquipment(equipment);
-        return isOK;
+    public Long addEquipment(Equipment equipment){
+        Integer s = equipmentService.addEquipment(equipment);
+        return equipment.getSb_id();
     }
 
     /**
@@ -95,5 +101,29 @@ public class EquipmentController {
     public boolean updateEquipment(Equipment equipment){
         boolean isOK = equipmentService.updateEquipment(equipment);
         return isOK;
+    }
+
+    /**
+     * @作者: yuboyake
+     * @功能描述: 修改
+     * @时间: 2018/9/28 6:35
+     * @参数:  * @param equipment
+     * @返回值: boolean
+     **/
+    @PostMapping(value="test")
+    public void updateE(HttpServletRequest request){
+        String numArr  = request.getParameter("sx_name");
+        String numArr2 = request.getParameter("sx_v");
+        String numArr3 = request.getParameter("sb_id");
+        String[] s = numArr.substring(1).replaceAll("]","").split(",");
+        String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
+        Attributes attributes = null;
+        for (int i = 0; i < s.length; i++) {
+            attributes = new Attributes();
+            attributes.setSx_name(s[i].substring(1, s[i].length()-1));
+            attributes.setSx_v(s2[i].substring(1, s2[i].length()-1));
+            attributes.setSb_id(Long.valueOf(numArr3));
+            attributesService.saveAttributes(attributes);
+        }
     }
 }

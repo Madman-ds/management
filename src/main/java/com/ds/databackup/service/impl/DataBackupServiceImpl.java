@@ -3,11 +3,11 @@ package com.ds.databackup.service.impl;
 import com.ds.databackup.mapper.DataBackupMapper;
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.service.DataBackupService;
+import com.ds.util.ExcelDataBackup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @类名称：DataBackupServiceImpl
@@ -36,7 +36,7 @@ public class DataBackupServiceImpl implements DataBackupService {
     }
 
     @Override
-    public List<DataBackup> findDataBackupExcel(DataBackup dataBackup) {
+    public List<ExcelDataBackup> findDataBackupExcel(DataBackup dataBackup) {
         return dataBackupMapper.findDataBackupExcel(dataBackup);
     }
 }

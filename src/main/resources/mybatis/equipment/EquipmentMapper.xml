@@ -34,7 +34,7 @@
     </select>
 
     <!--添加-->
-    <insert id="addEquipment" parameterType="com.ds.equipment.pojo.Equipment">
+    <insert id="addEquipment" parameterType="com.ds.equipment.pojo.Equipment" useGeneratedKeys="true" keyProperty="sb_id">
         insert into t_equipment(sb_name,sb_number,sb_xh)
         values(#{sb_name},#{sb_number},#{sb_xh})
     </insert>

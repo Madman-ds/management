@@ -38,4 +38,9 @@ public class AttributesServiceImpl implements AttributesService {
     public int updateAttributes(Attributes attributes) {
         return attributesMapper.updateAttributes(attributes);
     }
+
+    @Override
+    public void saveAttributes(Attributes attributes) {
+        attributesMapper.saveAttributes(attributes);
+    }
 }

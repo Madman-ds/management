@@ -1,9 +1,9 @@
 package com.ds.databackup.service;
 
 import com.ds.databackup.pojo.DataBackup;
+import com.ds.util.ExcelDataBackup;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @接口名称：DataBackupService
@@ -18,5 +18,5 @@ public interface DataBackupService {
 
     Integer getDataBackupCount(DataBackup dataBackup);
 
-    List<DataBackup> findDataBackupExcel(DataBackup dataBackup);
+    List<ExcelDataBackup> findDataBackupExcel(DataBackup dataBackup);
 }

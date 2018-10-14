@@ -23,7 +23,7 @@ public class Attributes {
      */
     private String sx_v;
     /**
-     * 属性值
+     * 设备id  (关联设备id)
      */
     private Long sb_id;
 }

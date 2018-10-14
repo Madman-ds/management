@@ -18,4 +18,6 @@ public interface AttributesMapper {
     int insertAttributes(Attributes attributes);
 
     int updateAttributes(Attributes attributes);
+
+    void saveAttributes(Attributes attributes);
 }

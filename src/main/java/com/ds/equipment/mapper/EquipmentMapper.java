@@ -19,7 +19,7 @@ public interface EquipmentMapper {
 
     Equipment getEquipmentidById(Long sb_id);
 
-    void addEquipment(Equipment equipment);
+    Integer addEquipment(Equipment equipment);
 
     void updateEquipment(Equipment equipment);
 }

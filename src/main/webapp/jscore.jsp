@@ -31,5 +31,6 @@
 <script type="text/javascript" src="/static/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap-fileinput/js/fileinput.min.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap-fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="/static/jquery-transfer/js/jquery.transfer.js"></script>
 </body>
 </html>

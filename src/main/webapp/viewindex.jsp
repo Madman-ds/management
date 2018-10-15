@@ -22,7 +22,7 @@
 <body >
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 <form class="form-horizontal" id="skuserForm">
-        <div class="form-group" style="margin-right:500px;margin-left: 500px;margin-top: 180px;">
+        <div class="form-group" style="margin-right:600px;margin-left: 500px;margin-top: 180px;">
         <div class="input-group">
             <div class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>

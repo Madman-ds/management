@@ -32,9 +32,9 @@
     </insert>
     <!-- 修改属性 -->
     <update id="updateAttributes" parameterType="com.ds.attributes.pojo.Attributes">
-        update t_attributes set sx_v = #{sx_name,sx_v,sb_id} where sb_id = #{sb_id}
+        update t_attributes set sx_v = #{sx_v},sx_name = #{sx_name},sb_id = #{sb_id} where sb_id = #{sb_id}
     </update>
-
+    <!-- 添加属性 -->
     <insert id="saveAttributes" parameterType="com.ds.attributes.pojo.Attributes">
         insert into t_attributes(sx_name,sx_v,sb_id) value(#{sx_name},#{sx_v},#{sb_id})
     </insert>

@@ -28,9 +28,9 @@
 <div>
     <div id="userListShow" style="float: right">
         <select id="source" multiple="multiple">
-            <option value="1">第一项</option>
-            <option value="2" selected="selected">第二项</option>
-            <option value="3" selected>第三项</option>
+            <%--<option value="1">第一项</option>--%>
+            <%--<option value="2" selected="selected">第二项</option>--%>
+            <%--<option value="3" selected>第三项</option>--%>
         </select>
         <select id="target" multiple="multiple">
 
@@ -68,16 +68,14 @@
                         + "</option>";
                 });
                 $("#userSelect").append($("<option value="+0+">"+"请选择"+"</option>")).append(h);
-                $("#source").append("<option value='0'>请选择</option>").append(h);
+                $("#source").append(h);
+                //用户穿梭框
+                $('#userListShow').transfer({
+                    source:'#source',
+                    target:'#target'
+                });
             }
         })
     })
-    //用户穿梭框
-    $(function() {
-        $('#userListShow').transfer({
-            source:'#source',
-            target:'#target'
-        });
-    });
 </script>
 </html>

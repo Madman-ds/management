@@ -120,12 +120,20 @@
                 buttons: [ {
                     label: '保存',
                     cssClass: 'btn-primary',
-                    action: function(dialogItself){/*
-                        var upduserflag=chenckUpdUserForm();
-                        if(!upduserflag){
-                            return;
+                    action: function(dialogItself){
+                        if (!chenckValue()) {
+                            return ;
                         }
-                        $.ajax({
+                        var arr = $.map($("#jcxzw").bootstrapTable('getSelections'),function(row){
+                            return row.jcx_id;
+                        });
+                        alert(arr);
+                        alert($("#userSelect").val());
+                        var vkorg = $("#source option").map(function(){
+                            return $(this).val();
+                        }).get().join(",")
+                        alert(vkorg)
+                      /*  $.ajax({
                             url:"/updUser",
                             data:$("#updUserForm").serialize(),
                             dataType:"text",
@@ -140,7 +148,6 @@
                                     message: '系统出现BUG！请联系管理员！'
                                 });
                             }
-
                         })*/
                     }
                 }, {

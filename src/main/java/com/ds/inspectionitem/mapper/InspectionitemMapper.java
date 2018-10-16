@@ -14,4 +14,8 @@ public interface InspectionitemMapper {
     List findAllInspectionitemBySbId(Long sb_id);
 
     void insertUserEquipment(UserEquipment userEquipment);
+
+    UserEquipment selectUserequipment(UserEquipment userEquipment);
+
+    void updUserEquipment(UserEquipment userEquipment);
 }

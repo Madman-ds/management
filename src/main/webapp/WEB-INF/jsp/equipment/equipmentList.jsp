@@ -229,7 +229,10 @@
     function delEquipmentAll(){
         var rows=$('#myTable').bootstrapTable('getSelections');
         if(rows.length<=0){
-            // bootbox.alert('请选择删除的数据');
+            BootstrapDialog.show({
+                title:"温馨提示",
+                message: '请选择要删除的数据'
+            });
         }else{
             var ids ="";
             for (var i = 0; i < rows.length; i++) {

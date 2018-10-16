@@ -28,12 +28,8 @@
 <div>
     <div id="userListShow" style="float: right">
         <select id="source" multiple="multiple">
-            <%--<option value="1">第一项</option>--%>
-            <%--<option value="2" selected="selected">第二项</option>--%>
-            <%--<option value="3" selected>第三项</option>--%>
         </select>
         <select id="target" multiple="multiple">
-
         </select>
     </div>
     <div style="float: right">读权限：</div>
@@ -77,5 +73,26 @@
             }
         })
     })
+    //验证
+    function chenckValue(){
+        var ids=$.map($("#jcxzw").bootstrapTable('getSelections'),function(row){
+            return row.jcx_id;
+        });
+        if (ids.length < 1) {
+            BootstrapDialog.show({
+                title:"温馨提示",
+                message: '请选择检查项！'
+            });
+           return false;
+        }
+        if ($("#userSelect").val() == 0) {
+            BootstrapDialog.show({
+                title:"温馨提示",
+                message: '请选择拥有读权限的人！'
+            });
+            return false;
+        }
+        return true;
+    }
 </script>
 </html>

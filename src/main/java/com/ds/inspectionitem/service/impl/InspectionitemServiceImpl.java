@@ -28,4 +28,14 @@ public class InspectionitemServiceImpl implements InspectionitemService {
     public void insertUserEquipment(UserEquipment userEquipment) {
         inspectionitemMapper.insertUserEquipment(userEquipment);
     }
+
+    @Override
+    public UserEquipment selectUserequipment(UserEquipment userEquipment) {
+        return inspectionitemMapper.selectUserequipment(userEquipment);
+    }
+
+    @Override
+    public void updUserEquipment(UserEquipment userEquipment) {
+        inspectionitemMapper.updUserEquipment(userEquipment);
+    }
 }

@@ -14,4 +14,20 @@ public interface InspectionitemService {
     List findAllInspectionitemBySbId(Long sb_id);
 
     void insertUserEquipment(UserEquipment userEquipment);
+    /**
+     * @作者: 段大神经
+     * @功能描述: 根据条件查询某用户具有某个权限
+     * @时间: 2018/10/16 22:32
+     * @参数:  * @param
+     * @返回值: java.lang.Integer
+     **/
+    UserEquipment selectUserequipment(UserEquipment userEquipment);
+    /**
+     * @作者: 段大神经
+     * @功能描述: 根据id修改用户检查项关联权限
+     * @时间: 2018/10/16 22:34
+     * @参数:  * @param userEquipment
+     * @返回值: void
+     **/
+    void updUserEquipment(UserEquipment userEquipment);
 }

@@ -129,10 +129,11 @@
                         });
                         alert(arr);
                         alert($("#userSelect").val());
-                        var vkorg = $("#source option").map(function(){
-                            return $(this).val();
-                        }).get().join(",")
-                        alert(vkorg)
+
+                        var t = $("#source").find('option').each(function(){
+                            return $(this).val().value;}
+                            )
+                        alert(t)
                       /*  $.ajax({
                             url:"/updUser",
                             data:$("#updUserForm").serialize(),

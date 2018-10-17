@@ -188,7 +188,7 @@
                  <div class="transfer-item pull-left">\
                      <div class="transfer-panel  transfer-right-panel">\
                          <p class="transfer-panel-header">{{targetTitle}}</p>\
-                         <div class="transfer-panel-body">\
+                         <div class="transfer-panel-body" id="rightSelect">\
                              <div class="transfer-panel-filter">\
                                  <i class="input-icon {{iconPrefix}} {{iconSearch}}"></i>\
                                  <input autocomplete="off" placeholder="请输入搜索内容" size="small" icon="search" type="text" rows="2" validateevent="true" class="input-inner">\

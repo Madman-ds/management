@@ -129,11 +129,13 @@
                         });
                         alert(arr);
                         alert($("#userSelect").val());
-
-                        var t = $("#source").find('option').each(function(){
-                            return $(this).val().value;}
-                            )
-                        alert(t)
+                        var itemArr = [];
+                        $("#rightSelect input[type='checkbox']").each(function(i,item){
+                            itemArr.push($(item).val())
+                        })
+                        alert(itemArr)
+                       /* $('.checkbox-inline').value()
+                        console.log(values)*/
                       /*  $.ajax({
                             url:"/updUser",
                             data:$("#updUserForm").serialize(),

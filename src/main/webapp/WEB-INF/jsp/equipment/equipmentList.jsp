@@ -76,7 +76,7 @@
                         <form id="equipmentAdd" role="form" class="form-horizontal m-t">
                             <div id="buttonShow">
                                 <button type="button" class="btn btn-primary" onclick="addRow()">新增设备属性</button>
-                                <button type="button" class="btn btn-primary" onclick="delRow3()">删除设备属性</button>
+                                <button type="button" class="btn btn-primary" onclick="delRow3()">删除全部新增属性</button>
                             </div>
                             <table id="">
                                 <tr>

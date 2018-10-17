@@ -9,6 +9,12 @@
     <insert id="insertUserEquipment" parameterType="com.ds.inspectionitem.pojo.UserEquipment">
         insert into t_userequipment(jcx_id,user_id,qx) value(#{jcx_id},#{user_id},#{qx})
     </insert>
+
+    <!-- 新增检查项 -->
+    <insert id="addInspectionitem" parameterType="com.ds.inspectionitem.pojo.Inspectionitem">
+        insert into t_inspectionitem(jcx_name,jcx_v,sb_id) value(#{jcx_name},#{jcx_v},#{sb_id})
+    </insert>
+
     <!-- 根据条件查询某用户具有某个权限 -->
     <select id="selectUserequipment" parameterType="com.ds.inspectionitem.pojo.UserEquipment" resultType="com.ds.inspectionitem.pojo.UserEquipment">
       select * from t_inspectionitem

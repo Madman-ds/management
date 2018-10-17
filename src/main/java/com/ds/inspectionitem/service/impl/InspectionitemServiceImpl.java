@@ -1,6 +1,7 @@
 package com.ds.inspectionitem.service.impl;
 
 import com.ds.inspectionitem.mapper.InspectionitemMapper;
+import com.ds.inspectionitem.pojo.Inspectionitem;
 import com.ds.inspectionitem.pojo.UserEquipment;
 import com.ds.inspectionitem.service.InspectionitemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,10 @@ public class InspectionitemServiceImpl implements InspectionitemService {
     @Override
     public void updUserEquipment(UserEquipment userEquipment) {
         inspectionitemMapper.updUserEquipment(userEquipment);
+    }
+
+    @Override
+    public void addInspectionitem(Inspectionitem inspectionitem) {
+        inspectionitemMapper.addInspectionitem(inspectionitem);
     }
 }

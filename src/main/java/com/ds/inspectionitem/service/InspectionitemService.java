@@ -1,5 +1,6 @@
 package com.ds.inspectionitem.service;
 
+import com.ds.inspectionitem.pojo.Inspectionitem;
 import com.ds.inspectionitem.pojo.UserEquipment;
 
 import java.util.List;
@@ -30,4 +31,13 @@ public interface InspectionitemService {
      * @返回值: void
      **/
     void updUserEquipment(UserEquipment userEquipment);
+
+    /**
+     * @作者: yuboyake
+     * @功能描述: 设备检查项添加
+     * @时间: 2018/10/17 17:04
+     * @参数:  * @param inspectionitem
+     * @返回值: void
+     **/
+    void addInspectionitem(Inspectionitem inspectionitem);
 }

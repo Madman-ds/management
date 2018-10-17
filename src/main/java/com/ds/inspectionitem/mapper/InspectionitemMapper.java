@@ -1,5 +1,6 @@
 package com.ds.inspectionitem.mapper;
 
+import com.ds.inspectionitem.pojo.Inspectionitem;
 import com.ds.inspectionitem.pojo.UserEquipment;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface InspectionitemMapper {
     UserEquipment selectUserequipment(UserEquipment userEquipment);
 
     void updUserEquipment(UserEquipment userEquipment);
+
+    void addInspectionitem(Inspectionitem inspectionitem);
 }

@@ -74,9 +74,11 @@
                             设备数据
                         </div>
                         <form id="equipmentAdd" role="form" class="form-horizontal m-t">
-                            <button type="button" class="btn btn-primary" onclick="addRow()">新增设备属性</button>
-                            <button type="button" class="btn btn-primary" onclick="delRow()">删除设备属性</button>
-                            <table id="" style="border-style: dashed;">
+                            <div id="buttonShow">
+                                <button type="button" class="btn btn-primary" onclick="addRow()">新增设备属性</button>
+                                <button type="button" class="btn btn-primary" onclick="delRow3()">删除设备属性</button>
+                            </div>
+                            <table id="">
                                 <tr>
                                     <td style="width:160px" >设备属性</td>
                                     <td style="width:160px" >属性值</td>
@@ -102,7 +104,7 @@
                                     <td align="center">不可删除</td>
                                 </tr>
                             </table>
-                            <table id="mytableid" style="border-style: dashed;">
+                            <table id="mytableid">
 
                             </table>
                             <input type="hidden" id="delTextId" />
@@ -121,36 +123,102 @@
     </div>
 </div>
 </div>
+
+
+<!-- 模态框（Modal） 检查项管理-->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                    <button type="button" class="btn btn-primary" onclick="addRow2()">新增检查项</button>
+                    <button type="button" class="btn btn-primary" onclick="delRow4()">删除全部</button>
+            </div>
+            <div class="modal-body">
+                <table >
+                    <tr>
+                        <td style="width:160px" >检查项</td>
+                        <td style="width:160px" >要求</td>
+                        <td style="width:160px;" align="center">操作</td>
+                    </tr>
+                </table>
+                <input type="hidden" id="sbid" value=""/>
+                <table id="mytableid2">
+
+                </table>
+                <input type="hidden" id="delTextId2" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button id="saveInspectionitem" type="button" class="btn btn-primary">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 </body>
 <script>
-
+//---------------------------------------设备管理START----------------------------------------------------------------------
     var num = 1;
+    //添加一行
     function addRow() {
         var tb = document.getElementById("mytableid");//获取表格
         var row = tb.insertRow();//添加行
-        var cell = row.insertCell();//添加列
-        //cell.innerText = "第" + num + "行";//标识行
-        //num++;//第几行
-        //cell = row.insertCell();//添加列
-        // cell.innerHTML += "<td><input name='cell1'style='width:160px;margin-top: 5px'   type='text' placeholder='设备名称'></td>";
-        // cell.innerHTML += "<td><input name='cell2' style='width:160px;margin-top: 5px' type='text' placeholder='设备名称'><td>";
-        // cell.innerHTML += "<td style='align:center'><a onclick='delRow()' >删除一行</a></td>";
-        cell.innerHTML += "<td><input class='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
-        cell.innerHTML += "<td><input class='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
-        cell.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
+        // var cell = row.insertCell();//添加列
+        row.innerHTML += "<td><input class='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
+        row.innerHTML += "<td><input class='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
+        row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
 
     }
+    //删除一行
     function delRow() {
         var rowIndex = document.getElementById("delTextId").value;
         var tb = document.getElementById("mytableid");
         tb.deleteRow(rowIndex);
     }
+    //删除全部行
+    function delRow3() {
+        delPublic("mytableid");
+    }
+//---------------------------------------设备管理END----------------------------------------------------------------------
+
+//---------------------------------------管理检查项START--------------------------------------------------------------------
+
+    //添加一行
+    function addRow2() {
+        num++;
+        var tb = document.getElementById("mytableid2");//获取表格
+        var row = tb.insertRow();//添加行
+        // var cell = row.insertCell();//添加列
+        row.innerHTML += "<td><input class='cell3'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备2'></td>" +
+            "<td><input class='cell4' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>" +
+            "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow2()' >删除</a></td>";
+    }
+    //删除一行
+    function delRow2() {
+        var rowIndex = document.getElementById("delTextId2").value;
+        var tb = document.getElementById("mytableid2");
+        tb.deleteRow(rowIndex);
+    }
+    //删除全部行
+    function delRow4() {
+        delPublic("mytableid2");
+    }
+//---------------------------------------管理检查项END--------------------------------------------------------------------
+
+    //删除全部公共方法
+    function delPublic(id) {
+        var id = id;
+        document.getElementById(id).innerHTML='';
+    }
 
 
 
 
 
-
+//---------------------------------------设备表格查询START------------------------------------------------------------------
     //重置
     function resetForm(){
         $("#searchForm")[0].reset();
@@ -210,9 +278,9 @@
             {field:'sb_xh',title:'设备型号',align:'center',width:350},
             {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
-                    str+="<button class='btn btn-info dim' type='button' onclick='XXX(\""+rows.id+"\")' ><i class='fa fa-paste'></i>管理检查项</button>  ";
+                    str+="<button class='btn btn-info dim' type='button' onclick='addInspectionitem(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>管理检查项</button>  ";
                     str+="<button class='btn btn-info dim' type='button' onclick='updateEquipment(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>修改</button>  ";
-                    str+="<button class='btn btn-info dim' type='button' onclick='XXX(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>查看</button>";
+                    str+="<button class='btn btn-info dim' type='button' onclick='queryEquipment(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>查看</button>";
                     return  str;
                 }
             }
@@ -220,11 +288,13 @@
         ]
     });
 
+    //查询重置
     function EquipmentSearch(){
         $('#myTable').bootstrapTable('refresh',{pageNumber:1});
     }
+//---------------------------------------设备表格查询END------------------------------------------------------------------
 
-
+//---------------------------------------设备表格删除START------------------------------------------------------------------
     //批量删除
     function delEquipmentAll(){
         var rows=$('#myTable').bootstrapTable('getSelections');
@@ -255,16 +325,29 @@
             })
         }
     }
+//---------------------------------------设备表格删除END------------------------------------------------------------------
 
-
+//---------------------添加 模态窗口--START----------------------------------------------------------------------------------
     /**
      * 添加 模态窗口
      */
     function addEquipment(){
+        delRow3();
+        $("#buttonShow").show();
         $("#updateshow").hide();
         $('#myModal2').modal('toggle');
     }
+    /**
+     * 管理检查项 模态窗口
+     */
+    function addInspectionitem(id){
+        delRow4();
+        $('#myModal3').modal('toggle');
+        $('#sbid').val(id);
+    }
+//---------------------添加 模态窗口---END---------------------------------------------------------------------------------
 
+//---------------------------------------设备表格添加START------------------------------------------------------------------
     /**
      * 添加方法
      */
@@ -305,7 +388,9 @@
             }
         })
     })
+//---------------------------------------设备表格添加END------------------------------------------------------------------
 
+//---------------------------------------设备表格修改START------------------------------------------------------------------
     /**
      * 修改方法
      */
@@ -329,8 +414,9 @@
      * @param sb_id
      */
     function updateEquipment(sb_id){
-        alert(1);
+        delRow3();
         $("#addshow").hide();
+        $("#updateshow").show();
         $('#myModal2').modal('toggle');
         $.ajax({
             url:'<%=request.getContextPath() %>/equipment/getEquipmentById',
@@ -341,7 +427,10 @@
             async:false,
             dataType:'json',
             success:function(data){
-                console.log(data)
+                $('#sb_name').removeAttr("readonly");
+                $('#sb_number').removeAttr("readonly");
+                $('#sb_xh').removeAttr("readonly");
+
                 $("#sb_id").val(data.sb_id);
                 $("#sb_name").val(data.sb_name);
                 $("#sb_number").val(data.sb_number);
@@ -350,7 +439,72 @@
         });
     }
 
+    /**
+     * 查看
+     * @param sb_id
+     */
+    function queryEquipment(sb_id){
+        delRow3();
+        $("#addshow").hide();
+        $("#updateshow").hide();
+        $("#buttonShow").hide();
+        $('#myModal2').modal('toggle');
+        $.ajax({
+            url:'<%=request.getContextPath() %>/equipment/getEquipmentById',
+            type:'post',
+            data:{
+                id:sb_id
+            },
+            async:false,
+            dataType:'json',
+            success:function(data){
+                $('#sb_name').attr("readonly","readonly");
+                $('#sb_number').attr("readonly","readonly");
+                $('#sb_xh').attr("readonly","readonly");
+                $("#sb_id").val(data.sb_id);
+                $("#sb_name").val(data.sb_name);
+                $("#sb_number").val(data.sb_number);
+                $("#sb_xh").val(data.sb_xh);
+            }
+        });
+    }
+//---------------------------------------设备表格修改END------------------------------------------------------------------
 
+
+/**
+ * 添加方法
+ */
+$("#saveInspectionitem").click(function(){
+    var numArr = []; // 定义一个空数组
+    var numArr2 = [];
+    var txt = $('#mytableid2').find('.cell3'); // 获取所有文本框
+    var txt2 = $('#mytableid2').find('.cell4'); // 获取所有文本框
+    for (var i = 0; i < txt.length; i++) {
+        numArr.push(txt.eq(i).val()); // 将文本框的值添加到数组中
+        numArr2.push(txt2.eq(i).val());
+    }
+    var numArra = JSON.stringify(numArr);
+    var numArr2 = JSON.stringify(numArr2);
+    var sb_id = $('#sbid').val();
+    $('#myModal3').modal('hide');
+    return ;
+    $.ajax({
+        url:'<%=request.getContextPath() %>/inspectionitem/addInspectionitem',
+        type:'post',
+        data:{
+            "sx_name":numArra,
+            "sx_v":numArr2,
+            "sb_id":sb_id
+        },
+        dataType:'json',
+        success:function(){
+            $('#myModal3').modal('hide');
+            $('#sbid').val("");
+            EquipmentSearch();
+        }
+    })
+
+})
 
 </script>
 </html>

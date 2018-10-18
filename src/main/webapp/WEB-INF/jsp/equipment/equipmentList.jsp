@@ -168,8 +168,8 @@
         var row = tb.insertRow();//添加行
         row.setAttribute('id','cel'+num);
         // var cell = row.insertCell();//添加列    id='cel"+num+"'
-        row.innerHTML += "<td><input class='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
-        row.innerHTML += "<td><input class='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
+        row.innerHTML += "<td><input class='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='属性名称'></td>";
+        row.innerHTML += "<td><input class='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='属性值'><td>";
         row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRows(this)' >删除一行</a></td>";
 
     }
@@ -198,8 +198,8 @@
         var tb = document.getElementById("mytableid2");//获取表格
         var row = tb.insertRow();//添加行
         // var cell = row.insertCell();//添加列
-        row.innerHTML += "<td><input class='cell3'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备2'></td>" +
-            "<td><input class='cell4' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>" +
+        row.innerHTML += "<td><input class='cell3'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='检查项名称'></td>" +
+            "<td><input class='cell4' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='要求'><td>" +
             "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRows(this)' >删除</a></td>";
     }
     //删除一行

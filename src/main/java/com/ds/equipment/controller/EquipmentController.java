@@ -105,7 +105,7 @@ public class EquipmentController {
 
     /**
      * @作者: yuboyake
-     * @功能描述: 修改
+     * @功能描述: 添加设备属性
      * @时间: 2018/9/28 6:35
      * @参数:  * @param equipment
      * @返回值: boolean

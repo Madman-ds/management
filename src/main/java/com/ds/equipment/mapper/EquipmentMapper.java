@@ -1,6 +1,7 @@
 package com.ds.equipment.mapper;
 
 import com.ds.equipment.pojo.Equipment;
+import com.ds.inspectionitem.pojo.Inspectionitem;
 
 import java.util.List;
 

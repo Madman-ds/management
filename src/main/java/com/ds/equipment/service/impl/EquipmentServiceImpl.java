@@ -1,5 +1,7 @@
 package com.ds.equipment.service.impl;
 
+import com.ds.attributes.mapper.AttributesMapper;
+import com.ds.attributes.pojo.Attributes;
 import com.ds.equipment.mapper.EquipmentMapper;
 import com.ds.equipment.pojo.Equipment;
 import com.ds.equipment.service.EquipmentService;
@@ -18,6 +20,8 @@ import java.util.List;
 public class EquipmentServiceImpl implements EquipmentService {
     @Autowired
     private EquipmentMapper equipmentMapper;
+    @Autowired
+    private AttributesMapper attributesMapper;
 
     /**
      * @作者: yuboyake
@@ -71,7 +75,10 @@ public class EquipmentServiceImpl implements EquipmentService {
      **/
     @Override
     public Equipment getEquipmentById(Long sb_id) {
-        return equipmentMapper.getEquipmentidById(sb_id);
+        List<Attributes> list = attributesMapper.findAllAttributesSbId(sb_id);
+        Equipment equipment = equipmentMapper.getEquipmentidById(sb_id);
+        equipment.setList(list);
+        return equipment;
     }
 
     /**

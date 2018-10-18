@@ -72,4 +72,32 @@ public class AttributesController {
     public int updateAttributes(Attributes attributes){
         return attributesService.updateAttributes(attributes);
     }
+
+    /**
+     * @作者: yuboyake
+     * @功能描述: 修改设备属性
+     * @时间: 2018/10/18 10:48
+     * @参数:  * @param request
+     * @返回值: void
+     **/
+    @PostMapping("/equipment/updateAttr")
+    public void updateAttr(HttpServletRequest request){
+        String numArr  = request.getParameter("sx_name");
+        String numArr2 = request.getParameter("sx_v");
+        String numArr3 = request.getParameter("sb_id");
+        String[] s = numArr.substring(1).replaceAll("]","").split(",");
+        String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
+        Long sb_id = Long.valueOf(numArr3);
+        attributesService.deleteAttributes(sb_id);
+        Attributes attributes = null;
+        System.out.println(s.equals(""));
+        for (int i = 0; i < s.length; i++) {
+            attributes = new Attributes();
+            attributes.setSx_name(s[i].substring(1, s[i].length()-1));
+            attributes.setSx_v(s2[i].substring(1, s2[i].length()-1));
+            attributes.setSb_id(Long.valueOf(numArr3));
+            System.out.println(attributes);
+            attributesService.insertAttributes(attributes);
+        }
+    }
 }

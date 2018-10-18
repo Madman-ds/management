@@ -21,4 +21,5 @@ public interface InspectionitemMapper {
     void updUserEquipment(UserEquipment userEquipment);
 
     void addInspectionitem(Inspectionitem inspectionitem);
+
 }

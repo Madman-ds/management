@@ -20,4 +20,7 @@ public interface AttributesMapper {
     int updateAttributes(Attributes attributes);
 
     void saveAttributes(Attributes attributes);
+
+    List<Attributes> findAllAttributesSbId(Long sb_id);
+
 }

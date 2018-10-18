@@ -43,4 +43,5 @@ public class AttributesServiceImpl implements AttributesService {
     public void saveAttributes(Attributes attributes) {
         attributesMapper.saveAttributes(attributes);
     }
+
 }

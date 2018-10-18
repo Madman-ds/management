@@ -20,4 +20,5 @@ public interface AttributesService {
     int updateAttributes(Attributes attributes);
 
     void saveAttributes(Attributes attributes);
+
 }

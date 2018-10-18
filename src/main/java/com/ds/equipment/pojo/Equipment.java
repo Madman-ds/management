@@ -35,4 +35,5 @@ public class Equipment extends Page {
      * 设备型号
      */
     private String sb_xh;
+    private List<Attributes> list;
 }

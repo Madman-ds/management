@@ -343,6 +343,7 @@
         $("#sb_number").val("");
         $("#sb_xh").val("");
         delRow3();
+        $("#addshow").show();
         $("#buttonShow").show();
         $("#updateshow").hide();
         $('#myModal2').modal('toggle');
@@ -520,6 +521,19 @@ function addRows(name,val,i) {
             async:false,
             dataType:'json',
             success:function(data){
+                var list = data.list;
+                console.log(list);
+                for(var i=0;i<list.length;i++){
+                    var name = list[i].sx_name;
+                    var val = list[i].sx_v;
+                    // addRows(name,val,i);
+                    var tb = document.getElementById("mytableid");//获取表格
+                    var row = tb.insertRow();//添加行
+                    row.innerHTML += "<td><input readonly=readonly class='cell1'value='"+name+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
+                    row.innerHTML += "<td><input readonly=readonly class='cell2' value='"+val+"' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
+                    row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRowNo()' >删除</a></td>";
+                }
+
                 $('#sb_name').attr("readonly","readonly");
                 $('#sb_number').attr("readonly","readonly");
                 $('#sb_xh').attr("readonly","readonly");
@@ -530,6 +544,21 @@ function addRows(name,val,i) {
             }
         });
     }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+function delRowNo(){
+    confirm({ message: "确认要删除选择的数据吗？" }).on(function (e) {
+
+    })
+}
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
 //---------------------------------------设备表格修改END------------------------------------------------------------------
 
 

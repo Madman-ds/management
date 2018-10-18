@@ -8,13 +8,13 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @类名称: Equipment
- * @作者: yuboyake
- * @创建时间: 2018/9/26 22:44
- * @说明:
+ * @类名称: EquipmentInspectionitem
+ * @作者: 段大神经
+ * @创建时间: 2018/10/18 23:52
+ * @说明: 设备检查项相关类，用于检查项赋权查看设备详细信息
  */
 @Data
-public class Equipment extends Page {
+public class EquipmentInspectionitem {
 
     /**
      * 设备id
@@ -35,4 +35,9 @@ public class Equipment extends Page {
      * 设备型号
      */
     private String sb_xh;
+    /**
+     * 相关检查项集合
+     */
+    private List<Inspectionitem> InspectionitemList;
+
 }

@@ -127,18 +127,19 @@
                         var arr = $.map($("#jcxzw").bootstrapTable('getSelections'),function(row){
                             return row.jcx_id;
                         });
-                        alert(arr);
-                        alert($("#userSelect").val());
                         var itemArr = [];
                         $("#rightSelect input[type='checkbox']").each(function(i,item){
                             itemArr.push($(item).val())
                         })
-                        alert(itemArr)
-                       /* $('.checkbox-inline').value()
-                        console.log(values)*/
-                      /*  $.ajax({
-                            url:"/updUser",
-                            data:$("#updUserForm").serialize(),
+                        var arr =  JSON.stringify(arr);
+                        var itemArr = JSON.stringify(itemArr);
+                        $.ajax({
+                            url:"<%=request.getContextPath() %>/toUserSetJcxQx",
+                            data:{
+                                "jcx":arr,
+                                "xqx":$("#userSelect").val(),
+                                "dqx":itemArr
+                            },
                             dataType:"text",
                             type:"post",
                             success:function(data){
@@ -151,7 +152,7 @@
                                     message: '系统出现BUG！请联系管理员！'
                                 });
                             }
-                        })*/
+                        })
                     }
                 }, {
                     label: '取消',

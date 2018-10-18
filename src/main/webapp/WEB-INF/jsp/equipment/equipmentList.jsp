@@ -166,11 +166,17 @@
     function addRow() {
         var tb = document.getElementById("mytableid");//获取表格
         var row = tb.insertRow();//添加行
-        // var cell = row.insertCell();//添加列
+        row.setAttribute('id','cel'+num);
+        // var cell = row.insertCell();//添加列    id='cel"+num+"'
         row.innerHTML += "<td><input class='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
         row.innerHTML += "<td><input class='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
-        row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
+        row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRows(this)' >删除一行</a></td>";
 
+    }
+    //删除一行
+    function delRows(obj) {
+        var rowIndex = obj.parentElement.parentElement.rowIndex;
+        obj.parentElement.parentElement.parentElement.deleteRow(rowIndex);
     }
     //删除一行
     function delRow() {
@@ -194,7 +200,7 @@
         // var cell = row.insertCell();//添加列
         row.innerHTML += "<td><input class='cell3'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备2'></td>" +
             "<td><input class='cell4' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>" +
-            "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow2()' >删除</a></td>";
+            "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRows(this)' >删除</a></td>";
     }
     //删除一行
     function delRow2() {
@@ -332,6 +338,10 @@
      * 添加 模态窗口
      */
     function addEquipment(){
+        $("#sb_id").val("");
+        $("#sb_name").val("");
+        $("#sb_number").val("");
+        $("#sb_xh").val("");
         delRow3();
         $("#buttonShow").show();
         $("#updateshow").hide();
@@ -369,20 +379,22 @@
                 $("#equipmentAdd").serialize(),
             dataType:'json',
             success:function(data){
-                $.ajax({
-                    url:'<%=request.getContextPath() %>/equipment/test',
-                    type:'post',
-                    data:{
-                        "sx_name":numArra,
-                        "sx_v":numArr2,
-                        "sb_id":data
-                    },
-                    dataType:'json',
-                    success:function(data){
-                        $('#myModal2').modal('hide');
-                        EquipmentSearch();
-                    }
-                })
+                if(numArr2 !=null || numArr !=null){
+                    $.ajax({
+                        url:'<%=request.getContextPath() %>/equipment/test',
+                        type:'post',
+                        data:{
+                            "sx_name":numArra,
+                            "sx_v":numArr2,
+                            "sb_id":data
+                        },
+                        dataType:'json',
+                        success:function(data){
+                            $('#myModal2').modal('hide');
+                            EquipmentSearch();
+                        }
+                    })
+                }
                 $('#myModal2').modal('hide');
                 EquipmentSearch();
             }
@@ -395,6 +407,17 @@
      * 修改方法
      */
     $("#update").click(function(){
+        var numArr = []; // 定义一个空数组
+        var numArr2 = [];
+        var txt = $('#mytableid').find('.cell1'); // 获取所有文本框
+        var txt2 = $('#mytableid').find('.cell2'); // 获取所有文本框
+        for (var i = 0; i < txt.length; i++) {
+            numArr.push(txt.eq(i).val()); // 将文本框的值添加到数组中
+            numArr2.push(txt2.eq(i).val());
+        }
+        var numArra = JSON.stringify(numArr);
+        var numArr2 = JSON.stringify(numArr2);
+        var sb_id = $("#sb_id").val();
         $.ajax({
             url:'<%=request.getContextPath() %>/equipment/updateEquipment',
             type:'post',
@@ -407,6 +430,20 @@
                 // jQuery("#myModal5").trigger("refresh");
             }
         })
+            $.ajax({
+                url:'<%=request.getContextPath() %>/equipment/updateAttr',
+                type:'post',
+                data:{
+                    "sx_name":numArra,
+                    "sx_v":numArr2,
+                    "sb_id":sb_id
+                },
+                dataType:'json',
+                success:function(data){
+                    $('#myModal2').modal('hide');
+                    EquipmentSearch();
+                }
+            })
     })
 
     /**
@@ -427,6 +464,18 @@
             async:false,
             dataType:'json',
             success:function(data){
+                var list = data.list;
+                console.log(list);
+                for(var i=0;i<list.length;i++){
+                    var name = list[i].sx_name;
+                    var val = list[i].sx_v;
+                    // addRows(name,val,i);
+                    var tb = document.getElementById("mytableid");//获取表格
+                    var row = tb.insertRow();//添加行
+                    row.innerHTML += "<td><input class='cell1'value='"+name+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
+                    row.innerHTML += "<td><input class='cell2' value='"+val+"' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
+                    row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
+                }
                 $('#sb_name').removeAttr("readonly");
                 $('#sb_number').removeAttr("readonly");
                 $('#sb_xh').removeAttr("readonly");
@@ -438,6 +487,19 @@
             }
         });
     }
+
+function addRows(name,val,i) {
+    var tb = document.getElementById("mytableid");//获取表格
+    var row = tb.insertRow();//添加行
+    var nam = "cel"+i;
+    var vel = "vel"+i;
+    // var cell = row.insertCell();//添加列
+    row.innerHTML += "<td><input class='"+nam+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
+    row.innerHTML += "<td><input class='"+vel+"' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
+    row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
+    $(".cel0").val(name);
+    $(".cel1").val(name);
+}
 
     /**
      * 查看
@@ -487,7 +549,6 @@ $("#saveInspectionitem").click(function(){
     var numArr2 = JSON.stringify(numArr2);
     var sb_id = $('#sbid').val();
     $('#myModal3').modal('hide');
-    return ;
     $.ajax({
         url:'<%=request.getContextPath() %>/inspectionitem/addInspectionitem',
         type:'post',

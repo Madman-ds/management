@@ -3,6 +3,7 @@ package com.ds.inspectionitem.controller;
 import com.ds.inspectionitem.pojo.Inspectionitem;
 import com.ds.inspectionitem.pojo.UserEquipment;
 import com.ds.inspectionitem.service.InspectionitemService;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +71,48 @@ public class InspectionitemController {
             inspectionitem.setJcx_v(s2[i].substring(1, s2[i].length()-1));
             inspectionitem.setSb_id(Long.valueOf(numArr3));
             inspectionitemService.addInspectionitem(inspectionitem);
+        }
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 用户赋检查项权限
+     * @时间: 2018/10/18 21:07
+     * @参数:  * @param request
+     * @返回值: void
+     **/
+    @PostMapping("toUserSetJcxQx")
+    public void toUserSetJcxQx(HttpServletRequest request){
+        String jcx = request.getParameter("jcx");
+        String xqx = request.getParameter("xqx");
+        String dqx = request.getParameter("dqx");
+        String[] jcxArr = jcx.substring(1).replaceAll("]","").split(",");
+        String[] dqxArr = dqx.substring(1).replaceAll("]","").split(",");
+        UserEquipment userEquipment = null;
+        //写权限
+        for (int i = 0 ; i<jcxArr.length; i++){
+            userEquipment = new UserEquipment();
+            userEquipment.setJcx_id(Long.valueOf(jcxArr[i]));
+            userEquipment.setUser_id(Long.valueOf(xqx));
+            UserEquipment userEquipment1 = inspectionitemService.selectUserequipment(userEquipment);
+            if (userEquipment1 == null || userEquipment1.getQx() == 0){
+                userEquipment.setQx(1);
+                inspectionitemService.insertUserEquipment(userEquipment);
+            }
+        }
+        //读权限
+        if (dqxArr != null && dqxArr.length > 0){
+            for (int i = 0 ; i<jcxArr.length; i++){
+                userEquipment = new UserEquipment();
+                userEquipment.setJcx_id(Long.valueOf(jcxArr[i]));
+                for (int j = 0 ; j<dqxArr.length; j++){
+                    userEquipment.setUser_id(Long.valueOf(dqxArr[j].substring(1,dqxArr[j].length()-1)));
+                    UserEquipment userEquipment1 = inspectionitemService.selectUserequipment(userEquipment);
+                    if (userEquipment1 == null || userEquipment1.getQx() == 1){
+                        userEquipment.setQx(0);
+                        inspectionitemService.insertUserEquipment(userEquipment);
+                    }
+                }
+            }
         }
     }
 }

@@ -17,7 +17,7 @@
 
     <!-- 根据条件查询某用户具有某个权限 -->
     <select id="selectUserequipment" parameterType="com.ds.inspectionitem.pojo.UserEquipment" resultType="com.ds.inspectionitem.pojo.UserEquipment">
-      select * from t_inspectionitem
+      select * from t_userequipment
       <where>
           <if test="jcx_id != null and jcx_id != 0">
               AND jcx_id =#{jcx_id}
@@ -32,6 +32,6 @@
     </select>
     <!-- 根据id修改用户检查项关联权限 -->
     <update id="updUserEquipment" parameterType="com.ds.inspectionitem.pojo.UserEquipment">
-        update t_inspectionitem set jcx_id = #{jcx_id},user_id = #{user_id},qx = #{qx} where ju_id = #{ju_id}
+        update t_userequipment set jcx_id = #{jcx_id},user_id = #{user_id},qx = #{qx} where ju_id = #{ju_id}
     </update>
 </mapper>

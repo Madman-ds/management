@@ -23,7 +23,7 @@
 <div><table id="jcxzw"></table></div>
 <div style="margin-top: 10px">
     <div style="float: left">写权限：</div>
-    <div style="float: left"><select id="userSelect" class="selectpicker show-tick form-control " data-live-search="true"></select><div>
+    <div style="float: left"><select id="userSelect" class="selectpicker show-tick form-control " data-live-search="true"></select></div>
 </div>
 <div>
     <div id="userListShow" style="float: right">

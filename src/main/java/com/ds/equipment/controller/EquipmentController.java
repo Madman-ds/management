@@ -117,7 +117,7 @@ public class EquipmentController {
     }
     /**
      * @作者: 段大神经
-     * @功能描述: 查询设备详细信息  用于检查项赋权
+     * @功能描述: 根据设备id查询设备详细信息  用于检查项赋权
      * @时间: 2018/10/20 13:21
      * @参数:  * @param
      * @返回值: com.ds.equipment.pojo.EquipmentInspectionitem
@@ -129,13 +129,14 @@ public class EquipmentController {
     }
     /**
      * @作者: 段大神经
-     * @功能描述: 查询设备详细信息  用于检查项赋权
+     * @功能描述: 根据用户id查询用户拥有的设备及检查项信息
      * @时间: 2018/10/20 13:21
      * @参数:  * @param
      * @返回值: com.ds.equipment.pojo.EquipmentInspectionitem
      **/
     @GetMapping("findEquipmentInspectionitem")
     public List findEquipmentInspectionitem(HttpServletRequest request){
-        return equipmentService.findEquipmentInspectionitem();
+        Long userId = Long.valueOf(request.getParameter("userId"));
+        return equipmentService.findEquipmentInspectionitem(userId);
     }
 }

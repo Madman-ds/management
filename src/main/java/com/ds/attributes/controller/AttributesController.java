@@ -90,7 +90,6 @@ public class AttributesController {
         Long sb_id = Long.valueOf(numArr3);
         attributesService.deleteAttributes(sb_id);
         Attributes attributes = null;
-        System.out.println(s.equals(""));
         for (int i = 0; i < s.length; i++) {
             attributes = new Attributes();
             attributes.setSx_name(s[i].substring(1, s[i].length()-1));

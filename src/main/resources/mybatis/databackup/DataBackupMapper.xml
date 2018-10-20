@@ -30,6 +30,7 @@
         <include refid="whereSql"></include>
         order by xj_id desc
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+        <if test="offset==null and limit==null">limit 0,10</if>
     </select>
 
     <!-- 条件或全部查询数据备份 -->
@@ -61,7 +62,7 @@
     <!-- 添加巡检记录 -->
     <insert id="insertDataBackup" parameterType="com.ds.databackup.pojo.DataBackup">
         insert into
-          t_inspectionrecord(sb_name,sb_number,sb_xh,jcx_name,jc_yq,jc_jg,user_name,jc_time,qr_time,bz_id)
-        value(#{sb_name},#{sb_number},#{sb_xh},#{jcx_name},#{jc_yq},#{jc_jg},#{user_name},#{jc_time},#{qr_time},#{bz_id})
+          t_inspectionrecord(sb_name,sb_number,sb_xh,jcx_name,jc_yq,jc_jg,user_name,jc_time,qr_time,bz_nr)
+        value(#{sb_name},#{sb_number},#{sb_xh},#{jcx_name},#{jc_yq},#{jc_jg},#{user_name},#{jc_time},NOW(),#{bz_nr})
     </insert>
 </mapper>

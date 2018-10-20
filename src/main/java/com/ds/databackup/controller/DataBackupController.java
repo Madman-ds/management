@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -54,17 +55,49 @@ public class DataBackupController {
      * @返回值: int
      **/
     @PostMapping("insertDataBackup")
-    public int insertDataBackup(DataBackup dataBackup, HttpSession session){
+    public int insertDataBackup(HttpSession session, HttpServletRequest request){
         LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
         String user_name = loginUser.getUser_name();
-        DataBackup dataBackup1 = new DataBackup();
-        dataBackup1.setUser_name(user_name);
-        List<DataBackup> list = dataBackupService.findDataBackup(dataBackup1);
-        dataBackup1 = list.get(0);
-        if (DateUtil.isSameDay(dataBackup1.getQr_time(),new Date())){
-            return 2;
+        DataBackup dataBackup = new DataBackup();
+        dataBackup.setUser_name(user_name);
+        List<DataBackup> list = dataBackupService.findDataBackup(dataBackup);
+        if (list != null && list.size() > 0){
+            dataBackup = list.get(0);
+            if (DateUtil.isSameDay(dataBackup.getQr_time(),new Date())){
+                return 2;
+            }
         }
-        return dataBackupService.insertDataBackup(dataBackup);
+        String numArr1 = request.getParameter("numArr1");
+        String numArr2 = request.getParameter("numArr2");
+        String numArr3 = request.getParameter("numArr3");
+        String numArr4 = request.getParameter("numArr4");
+        String numArr5 = request.getParameter("numArr5");
+        String numArr6 = request.getParameter("numArr6");
+        String numArr7 = request.getParameter("numArr7");
+        String numArr8 = request.getParameter("numArr8");
+        String[] s1 = numArr1.substring(1).replaceAll("]","").split(",");
+        String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
+        String[] s3 = numArr3.substring(1).replaceAll("]","").split(",");
+        String[] s4 = numArr4.substring(1).replaceAll("]","").split(",");
+        String[] s5 = numArr5.substring(1).replaceAll("]","").split(",");
+        String[] s6 = numArr6.substring(1).replaceAll("]","").split(",");
+        String[] s7 = numArr7.substring(1).replaceAll("]","").split(",");
+        String[] s8 = numArr8.substring(1).replaceAll("]","").split(",");
+        DataBackup dataBackup1 = null;
+        for (int i = 0; i < s1.length; i++){
+            dataBackup1 = new DataBackup();
+            dataBackup1.setSb_name(s1[i].substring(1, s1[i].length()-1));
+            dataBackup1.setSb_number(s2[i].substring(1, s2[i].length()-1));
+            dataBackup1.setSb_xh(s3[i].substring(1, s3[i].length()-1));
+            dataBackup1.setJcx_name(s4[i].substring(1, s4[i].length()-1));
+            dataBackup1.setJc_yq(s5[i].substring(1, s5[i].length()-1));
+            System.err.println(s6[i].substring(1, s6[i].length()-1));
+            dataBackup1.setJc_jg(Integer.valueOf(s6[i].substring(1, s6[i].length()-1)));
+            dataBackup1.setUser_name(s7[i].substring(1, s7[i].length()-1));
+            dataBackup1.setBz_nr(s8[i].substring(1, s8[i].length()-1));
+            dataBackupService.insertDataBackup(dataBackup1);
+        }
+        return 1;
     }
 
     /**

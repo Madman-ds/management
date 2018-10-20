@@ -27,6 +27,6 @@ public interface EquipmentMapper {
 
     EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId);
 
-    List findEquipmentInspectionitem();
+    List findEquipmentInspectionitem(Long userId);
 
 }

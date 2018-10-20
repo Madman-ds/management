@@ -7,10 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     LoginUser user = (LoginUser)request.getSession().getAttribute("loginUser");
     String user_name = user.getUser_name();
+    Long userId= user.getUser_id();
 %>
 
 <html>
@@ -104,20 +104,7 @@
 </div>
 <div class="modal-body">
     <center>
-        <%--<table border="1px">
-            <tr style="height: 30px">
-                <td style="width:160px;" align="center">设备名称</td>
-                <td style="width:160px" align="center">设备编号</td>
-                <td style="width:160px" align="center">设备型号</td>
-                <td style="width:160px" align="center">检查项</td>
-                <td style="width:160px" align="center">检查要求</td>
-                <td style="width:160px" align="center">检查结果</td>
-                <td style="width:160px" align="center">确认人</td>
-                <td style="width:160px;" align="center">备注</td>
-            </tr>
-        </table>--%>
         <table id="mytableid" border="1px">
-
         </table>
         <input type="hidden" id="delTextId" />
     </center>
@@ -125,7 +112,25 @@
 <div id="dataBackupShow" style="margin-left: 17%;font-size: x-large">
 
 </div>
+<div class="form-group">
+    <div class="col-sm-5">
+    </div>
+    <div class="col-sm-5">
+        <div class="input-group col-sm-10">
+            <button onclick="formsubmit()" class="btn btn-success" type="button">
+                <i class="glyphicon glyphicon-ok">
+                </i>提交
+            </button>
+            &nbsp;
+            <button onclick="out()" class="btn btn-danger" type="button">
+                <i class="glyphicon glyphicon-off">
+                </i>退出
+            </button>
+        </div>
+    </div>
+</div>
 <input id="user_name" type="hidden" value="<%=user_name%>" />
+<input id="userId" type="hidden" value="<%=userId%>" />
 </body>
 <script type="text/javascript">
     //1分钟内不执行操作倒计时300秒执行退出方法
@@ -166,8 +171,6 @@
                 user_name:user_name,
                 start_time:start_time,
                 end_time:end_time
-                // offset:(this.pageNumber-1)*this.pageSize,
-                // limit:this.pageSize
             },
             dataType:"json",
             success:function(data){
@@ -177,64 +180,92 @@
                     var b = arr[i].user_name;
                     var c = arr[i].sb_name;
                     var d = arr[i].bz_nr;
-                    var e = a+"     "+b+"     :"+c+"     "+d;
-                    $("#dataBackupShow").append(e).append(" \\n");
+                    var e = a+"     "+b+"   检查了"+c+"     "+d;
+                    $("#dataBackupShow").append(e).append("</br>");
                 }
             }
         })
+    }
+    //提交
+    function formsubmit() {
+        var numArr1 = []; // 定义一个空数组
+        var numArr2 = [];
+        var numArr3 = [];
+        var numArr4 = [];
+        var numArr5 = [];
+        var numArr6 = [];
+        var numArr7 = [];
+        var numArr8 = [];
+        var txt1 = $('#mytableid').find('.td1'); // 获取所有文本框
+        var txt2 = $('#mytableid').find('.td2'); // 获取所有文本框
+        var txt3 = $('#mytableid').find('.td3'); // 获取所有文本框
+        var txt4 = $('#mytableid').find('.td4'); // 获取所有文本框
+        var txt5 = $('#mytableid').find('.td5'); // 获取所有文本框
+        var txt6 = $('#mytableid').find('.td6 select option:selected'); // 获取所有文本框
+        var txt7 = $('#mytableid').find('.td7'); // 获取所有文本框
+        var txt8 = $('#mytableid').find('.td8'); // 获取所有文本框
+        for (var i = 0; i < txt1.length; i++) {
+             numArr1.push(txt1.eq(i).val()); // 将文本框的值添加到数组中
+             numArr2.push(txt2.eq(i).val());
+             numArr3.push(txt3.eq(i).val());
+             numArr4.push(txt4.eq(i).val());
+             numArr5.push(txt5.eq(i).val());
+             numArr6.push(txt6.eq(i).val());
+             numArr7.push(txt7.eq(i).val());
+             numArr8.push(txt8.eq(i).val());
+        }
+        if (numArr1 == "") {
+            alert("您没有操作权限，请联系管理员提供权限后提交！")
+            return ;
+        }
+         var numArr1 = JSON.stringify(numArr1);
+         var numArr2 = JSON.stringify(numArr2);
+         var numArr3 = JSON.stringify(numArr3);
+         var numArr4 = JSON.stringify(numArr4);
+         var numArr5 = JSON.stringify(numArr5);
+         var numArr6 = JSON.stringify(numArr6);
+         var numArr7 = JSON.stringify(numArr7);
+         var numArr8 = JSON.stringify(numArr8);
+        $.ajax({
+            url:'<%=request.getContextPath() %>/insertDataBackup',
+            type:'post',
+            data:{
+                "numArr1":numArr1,
+                "numArr2":numArr2,
+                "numArr3":numArr3,
+                "numArr4":numArr4,
+                "numArr5":numArr5,
+                "numArr6":numArr6,
+                "numArr7":numArr7,
+                "numArr8":numArr8
+            },
+            dataType:"text",
+            success:function(data){
+                if (data == 2){
+                    alert("您今天已经完成任务，无需重复提交！");
+                    location.reload();
+                }else{
+                    alert("恭喜提交完成！")
+                }
+            }
+        })
+    }
+    //退出
+    function out() {
+        location.href = "logout"
     }
     //刷新
     function reset_table(){
         $('#dataBackUpForm')[0].reset();
         queryDataBackUp();
-        // var numArr1 = []; // 定义一个空数组
-        // var numArr2 = [];
-        // var numArr3 = [];
-        // var numArr4 = [];
-        // var numArr5 = [];
-        // var numArr6 = [];
-        // var numArr7 = [];
-        // var numArr8 = [];
-        // var txt1 = $('#mytableid').find('.td1'); // 获取所有文本框
-        // var txt2 = $('#mytableid').find('.td2'); // 获取所有文本框
-        // var txt3 = $('#mytableid').find('.td3'); // 获取所有文本框
-        // var txt4 = $('#mytableid').find('.td4'); // 获取所有文本框
-        // var txt5 = $('#mytableid').find('.td5'); // 获取所有文本框
-        // var txt6 = $('#mytableid').find('.td6'); // 获取所有文本框
-        // var txt7 = $('#mytableid').find('.td7'); // 获取所有文本框
-        // var txt8 = $('#mytableid').find('.td8'); // 获取所有文本框
-        // for (var i = 0; i < txt1.length; i++) {
-        //     numArr1.push(txt1.eq(i).val()); // 将文本框的值添加到数组中
-        //     numArr2.push(txt2.eq(i).val());
-        //     numArr3.push(txt3.eq(i).val());
-        //     numArr4.push(txt4.eq(i).val());
-        //     numArr5.push(txt5.eq(i).val());
-        //     numArr6.push(txt6.eq(i).val());
-        //     numArr7.push(txt7.eq(i).val());
-        //     numArr8.push(txt8.eq(i).val());
-        // }
-        // var numArr1 = JSON.stringify(numArr1);
-        // var numArr2 = JSON.stringify(numArr2);
-        // var numArr3 = JSON.stringify(numArr3);
-        // var numArr4 = JSON.stringify(numArr4);
-        // var numArr5 = JSON.stringify(numArr5);
-        // var numArr6 = JSON.stringify(numArr6);
-        // var numArr7 = JSON.stringify(numArr7);
-        // var numArr8 = JSON.stringify(numArr8);
-        // console.log(numArr1);
-        // console.log(numArr2);
-        // console.log(numArr3);
-        // console.log(numArr4);
-        // console.log(numArr5);
-        // console.log(numArr6);
-        // console.log(numArr7);
-        // console.log(numArr8);
     }
-
+    //加载登陆用户所有可编辑的设备检查项信息
     $(function () {
             var user_name =$("#user_name").val();
+            var userId =$("#userId").val();
             $.ajax({
             url:'<%=request.getContextPath() %>/equipment/findEquipmentInspectionitem',
+            data:{"userId":userId},
             type:'get',
             success:function(data){
                 var tbs = document.getElementById("mytableid");//获取表格
@@ -249,21 +280,19 @@
                 rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>备注</td>";
                 var arr = data;
                 for (var i=0;i<arr.length;i++){
-                    console.log(arr[i]);
                     var tb = document.getElementById("mytableid");//获取表格
                     var row = tb.insertRow();//添加行
-                    // row.innerHTML += "<td style='width:160px;height: 30px' class='td1' align='center'><span>"+arr[i].sb_name+"</span></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td1' value='"+arr[i].sb_name+"' style='width:160px;height: 30px' align='center'  type='text'></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td2' value='"+arr[i].sb_number+"' style='width:160px;height: 30px' align='center'  type='text'></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td3' value='"+arr[i].sb_xh+"' style='width:160px;height: 30px' align='center'  type='text'></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td4' value='"+arr[i].jcx_name+"' style='width:160px;height: 30px' align='center'  type='text'></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td5' value='"+arr[i].jcx_v+"' style='width:160px;height: 30px' align='center' type='text'></td>";
+                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td1' value='"+arr[i].sb_name+"' style='width:160px;height: 30px' align='center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td2' value='"+arr[i].sb_number+"' style='width:160px;height: 30px' align='center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td3' value='"+arr[i].sb_xh+"' style='width:160px;height: 30px' align='center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td4' value='"+arr[i].jcx_name+"' style='width:160px;height: 30px' align='center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td5' value='"+arr[i].jcx_v+"' style='width:160px;height: 30px' align='center' type='text' readonly></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px' class='td6' align='center'>" +
                         "<select style='width:160px;height: 30px'>" +
                         "<option value='1'><span class='fonta'>正常</span></option>" +
                         "<option value='2'><span class='fonta'>故障</span></option>" +
                         "</select></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td7' value='"+user_name+"' style='width:160px;height: 30px' align='center' type='text'></td>";
+                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td7' value='"+user_name+"' style='width:160px;height: 30px' align='center' type='text' readonly></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td8' style='width:160px;height: 30px' align='center' type='text'></td>";
                 }
             }
@@ -279,76 +308,17 @@
                     var b = arr[i].user_name;
                     var c = arr[i].sb_name;
                     var d = arr[i].bz_nr;
-                    var e = a+"     "+b+"     :"+c+"     "+d ;
+                    var e = a+"     "+b+"   检查了"+c+"     "+d + "</br>";
                     $("#dataBackupShow").append(e);
                 }
             }
         })
     })
-
-    /*$("#dataBackupShow").bootstrapTable({
-        <%--url:"<%=request.getContextPath()%>/findDataBackup",--%>
-        contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
-        toolbar:'#toolbar',//工具栏   显示在id为toolbar的div中
-        //查询参数：条件查询时使用
-        queryParams:function(params){
-            var sb_name= $('#select_sb_name').val();
-            var sb_number = $('#select_sb_number').val();
-            var sb_xh = $('#select_sb_xh').val();
-            var user_name = $('#select_user_name').val();
-            var start_time = $('#datetimepicker').val();
-            var end_time = $('#datetimeend').val();
-            return{
-                "sb_name":sb_name,
-                "sb_number":sb_number,
-                "sb_xh":sb_xh,
-                "user_name":user_name,
-                "start_time":start_time,
-                "end_time":end_time,
-                "offset":(this.pageNumber-1)*this.pageSize,
-                "limit":this.pageSize,
-// 				"offset":params.offset,
-// 	       		"limit":params.limit
-            }
-        },
-        columns:[
-            {field:'sb_name',align:'center'},
-            {field:'sb_number',align:'center'},
-            {field:'sb_xh',align:'center'},
-            {field:'jcx_name',align:'center'},
-            {field:'jc_yq',align:'center'},
-            {field:'jc_jg',align:'center',
-                formatter:function (value,rows,index){
-                    if (value == 0){
-                        return "正常";
-                    } else{
-                        return "异常"
-                    }
-                }
-            },
-            {field:'user_name',align:'center'},
-            {field:'qr_time',align:'center',
-                //获取日期列的值进行转换
-                formatter: function (value, row, index) {
-                    return changeDateFormat(value);
-                }
-            },
-            {field:'bz_nr',align:'center'}
-        ],
-        pagination:true,
-        pageNumber:1,
-        pageSize:5,
-        pageList:[2,4,6,20],
-        clickToSelect: true,
-        cache搜索: false,
-        sidePagination:"server"
-    })*/
-
     //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
         if (cellval != null){
-            var d = new Date(cellval);;
-            var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' ;
+            var d = new Date(cellval);
+            var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
             return times;
         }
     }

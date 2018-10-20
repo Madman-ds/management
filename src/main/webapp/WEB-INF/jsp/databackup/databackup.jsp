@@ -115,8 +115,6 @@
                 "end_time":end_time,
                 "offset":(this.pageNumber-1)*this.pageSize,
                 "limit":this.pageSize,
-// 				"offset":params.offset,
-// 	       		"limit":params.limit
             }
         },
         columns:[

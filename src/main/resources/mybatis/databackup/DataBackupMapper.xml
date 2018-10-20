@@ -5,7 +5,7 @@
     <sql id="whereSql">
         <where>
             <if test="sb_name !=null and sb_name!=''">
-                AND sb_name = #{sb_name}
+                AND sb_name LIKE CONCAT('%',#{sb_name},'%')
             </if>
             <if test="sb_xh !=null and sb_xh!=''">
                 AND sb_xh = #{sb_xh}

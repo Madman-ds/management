@@ -21,7 +21,7 @@
 <form>
 <!--检查项table占位-->
 <div><table id="jcxzw"></table></div>
-<div style="margin-top: 10px">
+<div style="margin-top: 10px;margin-left: 35px">
     <div style="float: left">写权限：</div>
     <div style="float: left"><select id="userSelect" class="selectpicker show-tick form-control " data-live-search="true"></select></div>
 </div>

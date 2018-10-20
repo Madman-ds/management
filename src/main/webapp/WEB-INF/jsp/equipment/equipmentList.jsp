@@ -376,26 +376,15 @@
         $.ajax({
             url:'<%=request.getContextPath() %>/equipment/addEquipment',
             type:'post',
-            data:
-                $("#equipmentAdd").serialize(),
+            data:{
+                "sb_name":$("#sb_name").val(),
+                "sb_number":$("#sb_number").val(),
+                "sb_xh":$("#sb_xh").val(),
+                "sx_name":numArra,
+                "sx_v":numArr2
+            },
             dataType:'json',
             success:function(data){
-                if(numArr2 !=null || numArr !=null){
-                    $.ajax({
-                        url:'<%=request.getContextPath() %>/equipment/test',
-                        type:'post',
-                        data:{
-                            "sx_name":numArra,
-                            "sx_v":numArr2,
-                            "sb_id":data
-                        },
-                        dataType:'json',
-                        success:function(data){
-                            $('#myModal2').modal('hide');
-                            EquipmentSearch();
-                        }
-                    })
-                }
                 $('#myModal2').modal('hide');
                 EquipmentSearch();
             }

@@ -85,9 +85,21 @@ public class EquipmentController {
      * @返回值: boolean
      **/
     @PostMapping(value="addEquipment")
-    public Long addEquipment(Equipment equipment){
-        Integer s = equipmentService.addEquipment(equipment);
-        return equipment.getSb_id();
+    public String addEquipment(Equipment equipment,HttpServletRequest request){
+        equipmentService.addEquipment(equipment);
+        String numArr  = request.getParameter("sx_name");
+        String numArr2 = request.getParameter("sx_v");
+        String[] s = numArr.substring(1).replaceAll("]","").split(",");
+        String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
+        Attributes attributes = null;
+        for (int i = 0; i < s.length; i++) {
+            attributes = new Attributes();
+            attributes.setSx_name(s[i].substring(1, s[i].length()-1));
+            attributes.setSx_v(s2[i].substring(1, s2[i].length()-1));
+            attributes.setSb_id(Long.valueOf(equipment.getSb_id()));
+            attributesService.saveAttributes(attributes);
+        }
+        return "SUCCESS";
     }
 
     /**
@@ -101,29 +113,5 @@ public class EquipmentController {
     public boolean updateEquipment(Equipment equipment){
         boolean isOK = equipmentService.updateEquipment(equipment);
         return isOK;
-    }
-
-    /**
-     * @作者: yuboyake
-     * @功能描述: 添加设备属性
-     * @时间: 2018/9/28 6:35
-     * @参数:  * @param equipment
-     * @返回值: boolean
-     **/
-    @PostMapping(value="test")
-    public void updateE(HttpServletRequest request){
-        String numArr  = request.getParameter("sx_name");
-        String numArr2 = request.getParameter("sx_v");
-        String numArr3 = request.getParameter("sb_id");
-        String[] s = numArr.substring(1).replaceAll("]","").split(",");
-        String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
-        Attributes attributes = null;
-        for (int i = 0; i < s.length; i++) {
-            attributes = new Attributes();
-            attributes.setSx_name(s[i].substring(1, s[i].length()-1));
-            attributes.setSx_v(s2[i].substring(1, s2[i].length()-1));
-            attributes.setSb_id(Long.valueOf(numArr3));
-            attributesService.saveAttributes(attributes);
-        }
     }
 }

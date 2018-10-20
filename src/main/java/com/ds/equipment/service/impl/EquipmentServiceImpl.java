@@ -122,4 +122,9 @@ public class EquipmentServiceImpl implements EquipmentService {
     public EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId) {
         return equipmentMapper.selectEquipmentInspectionitemBySbId(sbId);
     }
+
+    @Override
+    public List findEquipmentInspectionitem() {
+        return equipmentMapper.findEquipmentInspectionitem();
+    }
 }

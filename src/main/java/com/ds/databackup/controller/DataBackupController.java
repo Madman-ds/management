@@ -2,6 +2,7 @@ package com.ds.databackup.controller;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.service.DataBackupService;
+import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.util.ExcelDataBackup;
 import com.ds.util.DateUtil;
 import com.ds.util.ExportExcelUtil;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +54,16 @@ public class DataBackupController {
      * @返回值: int
      **/
     @PostMapping("insertDataBackup")
-    public int insertDataBackup(DataBackup dataBackup){
+    public int insertDataBackup(DataBackup dataBackup, HttpSession session){
+        LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+        String user_name = loginUser.getUser_name();
+        DataBackup dataBackup1 = new DataBackup();
+        dataBackup1.setUser_name(user_name);
+        List<DataBackup> list = dataBackupService.findDataBackup(dataBackup1);
+        dataBackup1 = list.get(0);
+        if (DateUtil.isSameDay(dataBackup1.getQr_time(),new Date())){
+            return 2;
+        }
         return dataBackupService.insertDataBackup(dataBackup);
     }
 

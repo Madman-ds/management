@@ -26,4 +26,7 @@ public interface EquipmentMapper {
     void updateEquipment(Equipment equipment);
 
     EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId);
+
+    List findEquipmentInspectionitem();
+
 }

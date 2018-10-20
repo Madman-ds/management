@@ -80,4 +80,14 @@
         AND
             t.sb_id = #{sbId}
     </select>
+    <!-- 查询所有设备详细信息 -->
+    <select id="findEquipmentInspectionitem" resultType="map">
+        SELECT
+            *
+        FROM
+            t_equipment t,
+            t_inspectionitem m
+        WHERE
+            t.sb_id = m.sb_id
+    </select>
 </mapper>

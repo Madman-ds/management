@@ -127,4 +127,15 @@ public class EquipmentController {
         Long sbId = Long.valueOf(request.getParameter("sb_id"));
         return equipmentService.selectEquipmentInspectionitemBySbId(sbId);
     }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 查询设备详细信息  用于检查项赋权
+     * @时间: 2018/10/20 13:21
+     * @参数:  * @param
+     * @返回值: com.ds.equipment.pojo.EquipmentInspectionitem
+     **/
+    @GetMapping("findEquipmentInspectionitem")
+    public List findEquipmentInspectionitem(HttpServletRequest request){
+        return equipmentService.findEquipmentInspectionitem();
+    }
 }

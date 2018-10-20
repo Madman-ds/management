@@ -26,4 +26,6 @@ public interface EquipmentService {
     boolean updateEquipment(Equipment equipment);
 
     EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId);
+
+    List findEquipmentInspectionitem();
 }

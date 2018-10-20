@@ -47,7 +47,7 @@
                         <div class="form-group" style="margin-left: 180px">
                             <label for="password" class="col-sm-2 control-label">密码：</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="password" name="password" placeholder="请输入密码">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

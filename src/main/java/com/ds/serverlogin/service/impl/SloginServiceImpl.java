@@ -60,6 +60,7 @@ public class SloginServiceImpl implements SloginService {
                 map.put("useFlag",101);//卡号重复
             }else {
                 session.setAttribute("loginUser",user);
+                session.setAttribute("userName",user.getUser_name());
                 map.put("useFlag",100);
             }
         }else{

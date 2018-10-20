@@ -4,6 +4,7 @@ import com.ds.attributes.mapper.AttributesMapper;
 import com.ds.attributes.pojo.Attributes;
 import com.ds.equipment.mapper.EquipmentMapper;
 import com.ds.equipment.pojo.Equipment;
+import com.ds.equipment.pojo.EquipmentInspectionitem;
 import com.ds.equipment.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -115,5 +116,10 @@ public class EquipmentServiceImpl implements EquipmentService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId) {
+        return equipmentMapper.selectEquipmentInspectionitemBySbId(sbId);
     }
 }

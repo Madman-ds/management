@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ds.equipment.mapper.EquipmentMapper">
-
+    <!-- 用于检查项赋权的设备详情映射 -->
+    <resultMap id="EquipmentInspectionitemMap" type="com.ds.equipment.pojo.EquipmentInspectionitem">
+        <id column="sb_id" property="sb_id"/>
+        <result column="sb_name" property="sb_name"/>
+        <result column="sb_number" property="sb_number"/>
+        <result column="sb_xh" property="sb_xh"/>
+        <collection property="InspectionitemList" ofType="com.ds.inspectionitem.pojo.Inspectionitem">
+            <id column="jcx_id" property="jcx_id"/>
+            <result column="jcx_name" property="jcx_name"/>
+            <result column="jcx_v" property="jcx_v"/>
+        </collection>
+    </resultMap>
     <!--条件查询总条数-->
     <select id="getEquipmentCount" resultType="java.lang.Integer">
         select count(*) from t_equipment
@@ -57,5 +68,16 @@
             and sb_xh = #{sb_xh}
         </if>
     </sql>
-
+    <!-- 查询设备详细信息  用于检查项赋权 -->
+    <select id="selectEquipmentInspectionitemBySbId" parameterType="long" resultMap="EquipmentInspectionitemMap">
+        SELECT
+            *
+        FROM
+            t_equipment t,
+            t_inspectionitem m
+        WHERE
+            t.sb_id = m.sb_id
+        AND
+            t.sb_id = #{sbId}
+    </select>
 </mapper>

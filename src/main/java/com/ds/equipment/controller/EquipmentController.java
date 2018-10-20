@@ -3,6 +3,7 @@ package com.ds.equipment.controller;
 import com.ds.attributes.pojo.Attributes;
 import com.ds.attributes.service.AttributesService;
 import com.ds.equipment.pojo.Equipment;
+import com.ds.equipment.pojo.EquipmentInspectionitem;
 import com.ds.equipment.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -113,5 +114,17 @@ public class EquipmentController {
     public boolean updateEquipment(Equipment equipment){
         boolean isOK = equipmentService.updateEquipment(equipment);
         return isOK;
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 查询设备详细信息  用于检查项赋权
+     * @时间: 2018/10/20 13:21
+     * @参数:  * @param
+     * @返回值: com.ds.equipment.pojo.EquipmentInspectionitem
+     **/
+    @GetMapping("selectEquipmentInspectionitemBySbId")
+    public EquipmentInspectionitem selectEquipmentInspectionitemBySbId(HttpServletRequest request){
+        Long sbId = Long.valueOf(request.getParameter("sb_id"));
+        return equipmentService.selectEquipmentInspectionitemBySbId(sbId);
     }
 }

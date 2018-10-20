@@ -1,6 +1,7 @@
 package com.ds.equipment.service;
 
 import com.ds.equipment.pojo.Equipment;
+import com.ds.equipment.pojo.EquipmentInspectionitem;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface EquipmentService {
     Integer addEquipment(Equipment equipment);
 
     boolean updateEquipment(Equipment equipment);
+
+    EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId);
 }

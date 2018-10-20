@@ -1,6 +1,7 @@
 package com.ds.equipment.mapper;
 
 import com.ds.equipment.pojo.Equipment;
+import com.ds.equipment.pojo.EquipmentInspectionitem;
 import com.ds.inspectionitem.pojo.Inspectionitem;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface EquipmentMapper {
     Integer addEquipment(Equipment equipment);
 
     void updateEquipment(Equipment equipment);
+
+    EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId);
 }

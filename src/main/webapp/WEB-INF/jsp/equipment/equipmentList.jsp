@@ -65,65 +65,62 @@
     <%--展示用户--%>
     <div id="myTable"></div>
 
-    <div class="modal inmodal fade" id="myModal2" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="ibox-content">
-                        <div class="alert alert-info" class="col-sm-2">
-                            设备数据
-                        </div>
-                        <form id="equipmentAdd" role="form" class="form-horizontal m-t">
-                            <div id="buttonShow">
-                                <button type="button" class="btn btn-primary" onclick="addRow()">新增设备属性</button>
-                                <button type="button" class="btn btn-primary" onclick="delRow3()">删除全部新增属性</button>
-                            </div>
-                            <table id="">
-                                <tr>
-                                    <td style="width:160px" >设备属性</td>
-                                    <td style="width:160px" >属性值</td>
-                                    <td style="width:160px;" align="center">操作</td>
-                                </tr>
-                                <tr>
-                                    <td>设备名称</td>
-                                    <td><input type="hidden"  id="sb_id" name="sb_id">
-                                        <input type="text" style="width:160px;margin-top: 5px"  id="sb_name" name="sb_name" placeholder="设备名称">
-                                    </td>
-                                    <td style="width:160px;" align="center">不可删除</td>
-                                </tr>
-                                <tr>
-                                    <td>设备编号</td>
-                                    <td><input type="text" style="width:160px;margin-top: 5px" id="sb_number" name="sb_number" placeholder="设备编号">
-                                    </td>
-                                    <td align="center">不可删除</td>
-                                </tr>
-                                <tr>
-                                    <td>设备型号</td>
-                                    <td><input type="text" style="width:160px;margin-top: 5px"  id="sb_xh"  name="sb_xh" placeholder="设备型号">
-                                    </td>
-                                    <td align="center">不可删除</td>
-                                </tr>
-                            </table>
-                            <table id="mytableid">
 
-                            </table>
-                            <input type="hidden" id="delTextId" />
+</div>
 
-                            <div class="col-sm-6 col-sm-offset-2" id="addshow">
-                                <button class="btn btn-primary" type="submit" id="add">保存内容</button>
-                            </div>
-                            <div class="col-sm-6 col-sm-offset-2" id="updateshow">
-                                <button class="btn btn-primary" type="submit" id="update">修改内容</button>
-                            </div>
-                    </form>
-                    </div>
+
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn btn-primary" onclick="addRow()">新增设备属性</button>
+                <button type="button" class="btn btn-primary" onclick="delRow3()">删除全部新增属性</button>
+            </div>
+            <div class="modal-body">
+                <table >
+                    <tr>
+                        <td style="width:160px" >设备属性</td>
+                        <td style="width:160px" >属性值</td>
+                        <td style="width:160px;" align="center">操作</td>
+                    </tr>
+                    <tr>
+                        <td>设备名称</td>
+                        <td><input type="hidden"  id="sb_id" name="sb_id">
+                            <input type="text" style="width:160px;margin-top: 5px"  id="sb_name" name="sb_name" placeholder="设备名称">
+                        </td>
+                        <td style="width:160px;" align="center">不可删除</td>
+                    </tr>
+                    <tr>
+                        <td>设备编号</td>
+                        <td><input type="text" style="width:160px;margin-top: 5px" id="sb_number" name="sb_number" placeholder="设备编号">
+                        </td>
+                        <td align="center">不可删除</td>
+                    </tr>
+                    <tr>
+                        <td>设备型号</td>
+                        <td><input type="text" style="width:160px;margin-top: 5px"  id="sb_xh"  name="sb_xh" placeholder="设备型号">
+                        </td>
+                        <td align="center">不可删除</td>
+                    </tr>
+                </table>
+                <%--<input type="hidden" id="sb_id" value=""/>--%>
+                <table id="mytableid">
+
+                </table>
+                <input type="hidden" id="delTextId" />
+            </div>
+            <div class="modal-footer">
+                <div class="col-sm-6 col-sm-offset-2" id="addshow">
+                    <button class="btn btn-primary" type="submit" id="add">保存内容</button>
+                </div>
+                <div class="col-sm-6 col-sm-offset-2" id="updateshow">
+                    <button class="btn btn-primary" type="submit" id="update">修改内容</button>
                 </div>
             </div>
-        </div>
-    </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
-</div>
-
 
 <!-- 模态框（Modal） 检查项管理-->
 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -170,7 +167,7 @@
         // var cell = row.insertCell();//添加列    id='cel"+num+"'
         row.innerHTML += "<td><input class='cell1'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='属性名称'></td>";
         row.innerHTML += "<td><input class='cell2' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='属性值'><td>";
-        row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRows(this)' >删除一行</a></td>";
+        row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRows(this)' >删除</a></td>";
 
     }
     //删除一行
@@ -383,8 +380,9 @@
                 "sx_name":numArra,
                 "sx_v":numArr2
             },
-            dataType:'json',
+            // dataType:'text',
             success:function(data){
+                alert(data);
                 $('#myModal2').modal('hide');
                 EquipmentSearch();
             }
@@ -464,7 +462,7 @@
                     var row = tb.insertRow();//添加行
                     row.innerHTML += "<td><input class='cell1'value='"+name+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
                     row.innerHTML += "<td><input class='cell2' value='"+val+"' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
-                    row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
+                    row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除</a></td>";
                 }
                 $('#sb_name').removeAttr("readonly");
                 $('#sb_number').removeAttr("readonly");
@@ -486,7 +484,7 @@ function addRows(name,val,i) {
     // var cell = row.insertCell();//添加列
     row.innerHTML += "<td><input class='"+nam+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
     row.innerHTML += "<td><input class='"+vel+"' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
-    row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除一行</a></td>";
+    row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除</a></td>";
     $(".cel0").val(name);
     $(".cel1").val(name);
 }

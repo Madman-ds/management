@@ -50,23 +50,14 @@
     </p>
 </div>--%>
 <script type="text/javascript">
-/*    function reButton(){
-        BootstrapDialog.show({
-            title:"注册页面",
-            message: $('<div></div>').load('regies.jsp')
-        });
-    }*/
     function userButton(){
-        //$('#YWaitDialog').show();
         $.ajax({
             url:'<%=request.getContextPath() %>/server/queryUser',
             type:'post',
             data:$("#userForm").serialize(),
             dataType:'json',
             success:function(data){
-                // alert(data.useFlag);
                 if(data.useFlag == 100 || data.useFlag == "100"){
-                    //alert("登陆成功");
                     if (data.msg == 1){
                         location.href="toList";
                     } else {
@@ -82,7 +73,6 @@
                 }else if(data.useFlag == 104 || data.useFlag == "104"){
                     alert("密码错误");
                 }
-                //$('#YWaitDialog').hide();
             },error:function(useFlag){
                 alert("请求走丢了，请检查是否已连接网络！");
             }

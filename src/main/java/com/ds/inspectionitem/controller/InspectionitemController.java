@@ -94,9 +94,12 @@ public class InspectionitemController {
             userEquipment.setJcx_id(Long.valueOf(jcxArr[i]));
             userEquipment.setUser_id(Long.valueOf(xqx));
             UserEquipment userEquipment1 = inspectionitemService.selectUserequipment(userEquipment);
-            if (userEquipment1 == null || userEquipment1.getQx() == 0){
+            if (userEquipment1 == null){
                 userEquipment.setQx(1);
                 inspectionitemService.insertUserEquipment(userEquipment);
+            }else if (userEquipment1.getQx() == 0){
+                userEquipment1.setQx(1);
+                inspectionitemService.updUserEquipment(userEquipment1);
             }
         }
         //读权限
@@ -107,9 +110,12 @@ public class InspectionitemController {
                 for (int j = 0 ; j<dqxArr.length; j++){
                     userEquipment.setUser_id(Long.valueOf(dqxArr[j].substring(1,dqxArr[j].length()-1)));
                     UserEquipment userEquipment1 = inspectionitemService.selectUserequipment(userEquipment);
-                    if (userEquipment1 == null || userEquipment1.getQx() == 1){
+                    if (userEquipment1 == null){
                         userEquipment.setQx(0);
                         inspectionitemService.insertUserEquipment(userEquipment);
+                    }else if(userEquipment1.getQx() == 1 && userEquipment1.getUser_id() != Long.parseLong(xqx)){
+                        userEquipment1.setQx(0);
+                        inspectionitemService.updUserEquipment(userEquipment1);
                     }
                 }
             }

@@ -14,8 +14,6 @@
     body{
         padding: 0;
         margin: 0;
-        //background: url("") no-repeat;
-        //background-size: 70% 20%;
         position: absolute;
     }
 </style>

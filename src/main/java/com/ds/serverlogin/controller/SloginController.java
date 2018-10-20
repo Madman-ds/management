@@ -40,7 +40,9 @@ public class SloginController {
     public Map<String, Object> queryUser(LoginUser loginUser, HttpSession session){
         Map<String, Object> map = sloginService.queryUser(loginUser,session);
         LoginUser user = (LoginUser) session.getAttribute("loginUser");
-        map.put("msg",user.getIs_management());
+        if (user!=null){
+            map.put("msg",user.getIs_management());
+        }
         return map;
     }
     /**

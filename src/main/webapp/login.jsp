@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>后台系统登陆页面</title>
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/jquery.min.js"></script>
     <style type="text/css">
         .form-group {
             width: 65%;
@@ -57,7 +57,7 @@
             data:$("#userForm").serialize(),
             dataType:'json',
             success:function(data){
-                if(data.useFlag == 100 || data.useFlag == "100"){
+                if(data. useFlag== 100 || data.useFlag == "100"){
                     if (data.msg == 1){
                         location.href="toList";
                     } else {

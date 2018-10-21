@@ -24,7 +24,7 @@ public class MyInterceptor extends HandlerInterceptorAdapter {
         }*/
         if (loginUser == null){
             //被拦截的路径后要重定向的路径
-           response.sendRedirect("/login");
+           response.sendRedirect("login");
             return false;
         }else {
             return true;

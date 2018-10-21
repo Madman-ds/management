@@ -14,8 +14,8 @@
 
 <!-- 核心样式文件 -->
 <jsp:include page="../../../jscore.jsp"></jsp:include>
-<link href="/static/jquery-transfer/css/transfer.css" rel="stylesheet">
-<link href="/static/jquery-transfer/css/bootstrap.css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/static/jquery-transfer/css/transfer.css" rel="stylesheet">
+<link href="<%=request.getContextPath() %>/static/jquery-transfer/css/bootstrap.css" rel="stylesheet">
 
 <body>
 <form>
@@ -36,7 +36,7 @@
 </div>
 </form>
 </body>
-<script src="/static/jquery-transfer/js/jquery.transfer.js"></script>
+<script src="<%=request.getContextPath() %>/static/jquery-transfer/js/jquery.transfer.js"></script>
 <script type="text/javascript">
     //查询 表格展示
     $('#jcxzw').bootstrapTable({

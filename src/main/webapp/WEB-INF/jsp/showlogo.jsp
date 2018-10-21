@@ -17,7 +17,7 @@
     body{
         padding: 0;
         margin: 0;
-        background: url("/static/images/logo.jpg") no-repeat;
+        background: url("<%=request.getContextPath() %>/static/images/logo.jpg") no-repeat;
         background-size: 100% 100%;
         position: absolute;
     }

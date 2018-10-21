@@ -15,7 +15,7 @@
 
 <html>
 <head>
-    <title>前端展示页面</title>
+    <title>热等静压安全管理系统</title>
     <style>
         html{
             height: 100%;
@@ -148,7 +148,7 @@
     }, 1000)
     function ShowInvalidLoginMessage() {
         alert("您已经长时间没操作了，即将退出系统");
-        location.href = "logout";
+        location.href = "<%=request.getContextPath() %>/logout";
     }
 
 
@@ -252,7 +252,7 @@
     }
     //退出
     function out() {
-        location.href = "logout"
+        location.href = "<%=request.getContextPath() %>/logout"
     }
     //刷新
     function reset_table(){
@@ -322,5 +322,15 @@
             return times;
         }
     }
+    $('#datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+        language:"zh-CN",
+        autoclose:true
+    });
+    $('#datetimeend').datetimepicker({
+        format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+        language:"zh-CN",
+        autoclose:true
+    });
 </script>
 </html>

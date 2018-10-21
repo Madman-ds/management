@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -44,7 +45,7 @@ public class ShowController {
     @GetMapping("logout")
     public String logout(HttpSession session){
         session.removeAttribute("loginUser");
-        return "/";
+        return "viewindex";
     }
 
     /**
@@ -76,7 +77,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("/toInspectionItem")
+    @GetMapping("toInspectionItem")
     public String toInspectionItem(){
         return "WEB-INF/jsp/inspection/inspectionitem";
     }
@@ -87,7 +88,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("/toUserList")
+    @GetMapping("toUserList")
     public String toUserList(){
         return "WEB-INF/jsp/user/userlist";
     }
@@ -98,7 +99,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("/toDatabackUp")
+    @GetMapping("toDatabackUp")
     public String toDatabackUp(){
         return "WEB-INF/jsp/databackup/databackup";
     }
@@ -109,7 +110,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("/toShowLogo")
+    @GetMapping("toShowLogo")
     public String toShowLogo(){
         return "WEB-INF/jsp/showlogo";
     }
@@ -120,7 +121,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping(value = {"/login","/"})
+    @GetMapping(value = "login")
     public String toViewLogin(){
         return "viewindex";
     }

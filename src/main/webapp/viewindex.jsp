@@ -18,7 +18,7 @@
     }
 </style>
 <body >
-<img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
+<img src="static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 <form class="form-horizontal" id="skuserForm">
         <div class="form-group" style="margin-right:600px;margin-left: 500px;margin-top: 180px;">
         <div class="input-group">
@@ -54,8 +54,8 @@
                         <div class="form-group draggable">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-6 col-sm-offset-2" >
-                                <button class="btn btn-primary btn-lg" type="submit" onclick="tologin()">登陆</button>
-                                <button class="btn btn-primary btn-lg" type="submit" onclick="toreload()">返回</button>
+                                <button class="btn btn-primary btn-lg" type="button" onclick="tologin()">登陆</button>
+                                <button class="btn btn-primary btn-lg" type="button" onclick="toreload()">返回</button>
                             </div>
                         </div>
                     </form>
@@ -108,7 +108,7 @@
     }
     <!-- 后台登录 -->
     function toIndex() {
-        location.href = "/toIndex";
+        location.href = "<%=request.getContextPath() %>/toIndex";
     }
     <!-- 账号登录模态框 -->
     function toUserLogin(){
@@ -116,8 +116,7 @@
     }
     <!-- 账号登录模态框点击退出 -->
     function toreload() {
-        $('#myModal2').modal('hide')
-        $("#kw").focus();
+        location.reload();
     }
     <!-- 账号登录方法 -->
     function tologin(){
@@ -133,10 +132,12 @@
             url:'<%=request.getContextPath() %>/server/queryUser',
             type:'post',
             data:$("#viewuserForm").serialize(),
-            dataType:'json',
+            dataType:'text',
+            cache:false,
             success:function(data){
+                var data = eval("("+data+")");
                 if(data.useFlag == 100 || data.useFlag == "100"){
-                    location.href="toViewList";
+                    location.href="<%=request.getContextPath() %>/toViewList";
                 }else if(data.useFlag == 101 || data.useFlag == "101"){
                     alert("用户名错误");
                 }else if(data.useFlag == 102 || data.useFlag == "102"){

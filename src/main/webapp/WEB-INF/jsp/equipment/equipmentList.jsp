@@ -112,10 +112,10 @@
             </div>
             <div class="modal-footer">
                 <div class="col-sm-6 col-sm-offset-2" id="addshow">
-                    <button class="btn btn-primary" type="submit" id="add">保存内容</button>
+                    <button class="btn btn-primary" type="button" id="add">保存内容</button>
                 </div>
                 <div class="col-sm-6 col-sm-offset-2" id="updateshow">
-                    <button class="btn btn-primary" type="submit" id="update">修改内容</button>
+                    <button class="btn btn-primary" type="button" id="update">修改内容</button>
                 </div>
             </div>
         </div><!-- /.modal-content -->
@@ -370,6 +370,41 @@
         }
         var numArra = JSON.stringify(numArr);
         var numArr2 = JSON.stringify(numArr2);
+        if($("#sb_name").val()==""){
+            alert("请填写设备名称");
+            return false;
+        }
+        if($("#sb_number").val()==""){
+            alert("请填写设备编号");
+            return false;
+        }
+        if($("#sb_xh").val()==""){
+            alert("请填写设备型号");
+            return false;
+        }
+        var tbobj=document.getElementById("mytableid");
+        var chenck = true;
+        var chenck1 = true;
+       if (tbobj.rows.length>0) {
+           $("#mytableid tr").each(function() {    // 遍历每一行
+              var tdv =  $(this).children('td:eq(0)').find("input").val();  // td:eq(0)选择器表示第一个单元格
+              var tdv1 =  $(this).children('td:eq(1)').find("input").val();  // td:eq(0)选择器表示第一个单元格
+                if(tdv == ""){
+                    chenck =false;
+                }
+                if(tdv1 == ""){
+                    chenck1 =false;
+                }
+           });
+       }
+       if(!chenck){
+           alert("属性名称必填")
+           return false;
+       }
+       if(!chenck1){
+           alert("属性值必填")
+           return false;
+       }
         $.ajax({
             url:'<%=request.getContextPath() %>/equipment/addEquipment',
             type:'post',
@@ -406,6 +441,41 @@
         var numArra = JSON.stringify(numArr);
         var numArr2 = JSON.stringify(numArr2);
         var sb_id = $("#sb_id").val();
+        if($("#sb_name").val()==""){
+            alert("请填写设备名称");
+            return false;
+        }
+        if($("#sb_number").val()==""){
+            alert("请填写设备编号");
+            return false;
+        }
+        if($("#sb_xh").val()==""){
+            alert("请填写设备型号");
+            return false;
+        }
+        var tbobj=document.getElementById("mytableid");
+        var chenck = true;
+        var chenck1 = true;
+        if (tbobj.rows.length>0) {
+            $("#mytableid tr").each(function() {    // 遍历每一行
+                var tdv =  $(this).children('td:eq(0)').find("input").val();  // td:eq(0)选择器表示第一个单元格
+                var tdv1 =  $(this).children('td:eq(1)').find("input").val();  // td:eq(0)选择器表示第一个单元格
+                if(tdv == ""){
+                    chenck =false;
+                }
+                if(tdv1 == ""){
+                    chenck1 =false;
+                }
+            });
+        }
+        if(!chenck){
+            alert("属性名称必填")
+            return false;
+        }
+        if(!chenck1){
+            alert("属性值必填")
+            return false;
+        }
         $.ajax({
             url:'<%=request.getContextPath() %>/equipment/updateEquipment',
             type:'post',
@@ -460,8 +530,8 @@
                     // addRows(name,val,i);
                     var tb = document.getElementById("mytableid");//获取表格
                     var row = tb.insertRow();//添加行
-                    row.innerHTML += "<td><input class='cell1'value='"+name+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
-                    row.innerHTML += "<td><input class='cell2' value='"+val+"' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
+                    row.innerHTML += "<td><input class='cell1'value='"+name+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='属性名称'></td>";
+                    row.innerHTML += "<td><input class='cell2' value='"+val+"' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='属性值'><td>";
                     row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除</a></td>";
                 }
                 $('#sb_name').removeAttr("readonly");

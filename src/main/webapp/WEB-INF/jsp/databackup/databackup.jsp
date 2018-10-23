@@ -75,6 +75,11 @@
 <script type="text/javascript">
 
     function daochu(){
+        var arr = $("#dataBackupShow").bootstrapTable('getData');
+        if(arr.length == 0){
+            alert("可导出的数据为空")
+            return false;
+        }
         var sb_name= $('#select_sb_name').val();
         var sb_number = $('#select_sb_number').val();
         var sb_xh = $('#select_sb_xh').val();

@@ -88,7 +88,6 @@ public class InspectionitemController {
         String xqx = request.getParameter("xqx");
         String dqx = request.getParameter("dqx");
         String[] jcxArr = jcx.substring(1).replaceAll("]","").split(",");
-        String[] dqxArr = dqx.substring(1).replaceAll("]","").split(",");
         UserEquipment userEquipment = null;
         //写权限
         for (int i = 0 ; i<jcxArr.length; i++){
@@ -104,20 +103,23 @@ public class InspectionitemController {
                 inspectionitemService.updUserEquipment(userEquipment1);
             }
         }
-        //读权限
-        if (dqxArr != null && dqxArr.length > 0){
-            for (int i = 0 ; i<jcxArr.length; i++){
-                userEquipment = new UserEquipment();
-                userEquipment.setJcx_id(Long.valueOf(jcxArr[i]));
-                for (int j = 0 ; j<dqxArr.length; j++){
-                    userEquipment.setUser_id(Long.valueOf(dqxArr[j].substring(1,dqxArr[j].length()-1)));
-                    UserEquipment userEquipment1 = inspectionitemService.selectUserequipment(userEquipment);
-                    if (userEquipment1 == null){
-                        userEquipment.setQx(0);
-                        inspectionitemService.insertUserEquipment(userEquipment);
-                    }else if(userEquipment1.getQx() == 1 && userEquipment1.getUser_id() != Long.parseLong(xqx)){
-                        userEquipment1.setQx(0);
-                        inspectionitemService.updUserEquipment(userEquipment1);
+        if(dqx!=null && !"".equals(dqx)){
+            String[] dqxArr = dqx.substring(1).replaceAll("]","").split(",");
+            //读权限
+            if (dqxArr != null && dqxArr.length > 0){
+                for (int i = 0 ; i<jcxArr.length; i++){
+                    userEquipment = new UserEquipment();
+                    userEquipment.setJcx_id(Long.valueOf(jcxArr[i]));
+                    for (int j = 0 ; j<dqxArr.length; j++){
+                        userEquipment.setUser_id(Long.valueOf(dqxArr[j].substring(1,dqxArr[j].length()-1)));
+                        UserEquipment userEquipment1 = inspectionitemService.selectUserequipment(userEquipment);
+                        if (userEquipment1 == null){
+                            userEquipment.setQx(0);
+                            inspectionitemService.insertUserEquipment(userEquipment);
+                        }else if(userEquipment1.getQx() == 1 && userEquipment1.getUser_id() != Long.parseLong(xqx)){
+                            userEquipment1.setQx(0);
+                            inspectionitemService.updUserEquipment(userEquipment1);
+                        }
                     }
                 }
             }

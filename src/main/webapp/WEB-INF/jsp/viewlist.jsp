@@ -113,19 +113,25 @@
 
 </div>
 <div class="form-group">
-    <div class="col-sm-5">
+    <div class="col-sm-4">
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-5" style="margin-left: 60px">
         <div class="input-group col-sm-10">
             <button onclick="formsubmit()" class="btn btn-success" type="button">
                 <i class="glyphicon glyphicon-ok">
                 </i>提交
             </button>
             &nbsp;
+            <button onclick="toread()" class="btn btn-primary" type="button">
+                <i class="glyphicon glyphicon-share-alt">
+                </i>查看所有
+            </button>
+            &nbsp;
             <button onclick="out()" class="btn btn-danger" type="button">
                 <i class="glyphicon glyphicon-off">
                 </i>退出
             </button>
+
         </div>
     </div>
 </div>
@@ -332,5 +338,10 @@
         language:"zh-CN",
         autoclose:true
     });
+    //去读权限页面
+    function toread() {
+        var userId = $("#userId").val();
+        location.href = "<%=request.getContextPath() %>/toread"
+    }
 </script>
 </html>

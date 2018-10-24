@@ -551,7 +551,6 @@ function addRows(name,val,i) {
     var row = tb.insertRow();//添加行
     var nam = "cel"+i;
     var vel = "vel"+i;
-    // var cell = row.insertCell();//添加列
     row.innerHTML += "<td><input class='"+nam+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";
     row.innerHTML += "<td><input class='"+vel+"' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='设备名称'><td>";
     row.innerHTML += "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRow()' >删除</a></td>";
@@ -579,11 +578,9 @@ function addRows(name,val,i) {
             dataType:'json',
             success:function(data){
                 var list = data.list;
-                console.log(list);
                 for(var i=0;i<list.length;i++){
                     var name = list[i].sx_name;
                     var val = list[i].sx_v;
-                    // addRows(name,val,i);
                     var tb = document.getElementById("mytableid");//获取表格
                     var row = tb.insertRow();//添加行
                     row.innerHTML += "<td><input readonly=readonly class='cell1'value='"+name+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='设备名称'></td>";

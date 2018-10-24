@@ -1,9 +1,11 @@
 package com.ds.serverlogin.controller;
 
+import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.controller.UserController;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -174,5 +176,20 @@ public class ShowController {
     public String toJcxfq(HttpServletRequest request, ModelMap modelMap){
         modelMap.addAttribute("sb_id",Long.valueOf(request.getParameter("sb_id")));
         return "WEB-INF/jsp/inspectionitem/inspectionitem";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去读权限页面
+     * @时间: 2018/10/24 21:26
+     * @参数:  * @param modelMap
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toread")
+    public String toread(ModelMap modelMap,HttpSession Session){
+        LoginUser loginUser = (LoginUser) Session.getAttribute("loginUser");
+        if (loginUser != null){
+            modelMap.addAttribute("userId",loginUser.getUser_id());
+        }
+        return "WEB-INF/jsp/read";
     }
 }

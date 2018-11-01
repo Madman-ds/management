@@ -99,3 +99,4 @@ mvnw
 mvnw.cmd
 src/test/
 /LOG_PATH_IS_UNDEFINED/
+src/main/resources/templates/

@@ -15,7 +15,7 @@
 <!-- 核心样式文件 -->
 <jsp:include page="../../jscore.jsp"></jsp:include>
 <body>
-<img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
+<img src="<%=request.getContextPath() %>/static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 <div class="rows">
     <!-- 搜索 -->
     <div class="panel-body">
@@ -71,6 +71,11 @@
                 <button onclick="reset_table()" class="btn btn-danger" type="button">
                     <i class="glyphicon glyphicon-repeat">
                     </i>重置
+                </button>
+                &nbsp;
+                <button onclick="toviewlist()" class="btn btn-success" type="button">
+                    <i class="glyphicon glyphicon-hand-left">
+                    </i>返回
                 </button>
             </div>
         </div>
@@ -186,6 +191,10 @@
             var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
             return times;
         }
+    }
+    //跳转回前端首页
+    function toviewlist() {
+        location.href="<%=request.getContextPath() %>/toviewlist";
     }
 </script>
 </html>

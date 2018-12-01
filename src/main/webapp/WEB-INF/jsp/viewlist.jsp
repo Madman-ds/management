@@ -41,67 +41,6 @@
 </head>
 <body>
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
-<div class="rows">
-    <!-- 搜索 -->
-    <div class="panel-body">
-        <form class="form-horizontal" id="dataBackUpForm">
-            <div class="form-group">
-                <label for="select_sb_name" class="col-sm-2 control-label">设备名称：</label>
-                <div class="col-sm-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="select_sb_name" placeholder="请输入设备名称">
-                    </div>
-                </div>
-                <label for="select_sb_number" class="col-sm-2 control-label">设备编号：</label>
-                <div class="col-sm-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="select_sb_number" placeholder="请输入设备编号">
-                    </div>
-                </div>
-                <label for="select_sb_xh" class="col-sm-2 control-label">设备型号：</label>
-                <div class="col-sm-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入设备型号">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="select_user_name" class="col-sm-2 control-label">确认人：</label>
-                <div class="col-sm-2">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="select_user_name" placeholder="请输入确认人">
-                    </div>
-                </div>
-                <label  class="col-sm-2 control-label">确认时间：</label>
-                <div class="col-sm-5">
-                    <div class="input-group col-sm-10">
-                        <input  name="startDate" id="datetimepicker" class="form-control" placeholder="开始时间">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input  name="endDate" id="datetimeend" class="form-control" placeholder="结束时间">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                </div>
-                <div class="col-sm-5">
-                    <div class="input-group col-sm-10">
-                        <button onclick="queryDataBackUp()" class="btn btn-primary" type="button">
-                            <i class="glyphicon glyphicon-search">
-                            </i>搜索
-                        </button>
-                        &nbsp;
-                        <button onclick="reset_table()" class="btn btn-danger" type="button">
-                            <i class="glyphicon glyphicon-repeat">
-                            </i>重置
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-
-</div>
 <div class="modal-body">
     <center>
         <table id="mytableid" border="1px">
@@ -109,9 +48,9 @@
         <input type="hidden" id="delTextId" />
     </center>
 </div>
-<div id="dataBackupShow" style="margin-left: 17%;font-size: x-large">
+<%--<div id="dataBackupShow" style="margin-left: 17%;font-size: x-large">
 
-</div>
+</div>--%>
 <div class="form-group">
     <div class="col-sm-4">
     </div>
@@ -159,7 +98,7 @@
 
 
     //条件查询
-    function queryDataBackUp(){
+   /* function queryDataBackUp(){
         $('#dataBackupShow').html("");
         var sb_name= $('#select_sb_name').val();
         var sb_number = $('#select_sb_number').val();
@@ -168,7 +107,7 @@
         var start_time = $('#datetimepicker').val();
         var end_time = $('#datetimeend').val();
         $.ajax({
-            url:'<%=request.getContextPath() %>/findDataBackup',
+            url:'/findDataBackup',
             type:'get',
             data:{
                 sb_name:sb_name,
@@ -191,7 +130,7 @@
                 }
             }
         })
-    }
+    }*/
     //提交
     function formsubmit() {
         var numArr1 = []; // 定义一个空数组
@@ -276,14 +215,14 @@
             success:function(data){
                 var tbs = document.getElementById("mytableid");//获取表格
                 var rows = tbs.insertRow();//添加行
-                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>设备名称</td>";
-                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>设备编号</td>";
-                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>设备型号</td>";
+                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>名称</td>";
+                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>编号</td>";
+                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>属性</td>";
                 rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>检查项</td>";
                 rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>检查要求</td>";
                 rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>检查结果</td>";
                 rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>确认人</td>";
-                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>备注</td>";
+                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>不符合项</td>";
                 var arr = data;
                 for (var i=0;i<arr.length;i++){
                     var tb = document.getElementById("mytableid");//获取表格
@@ -292,11 +231,11 @@
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td2' value='"+arr[i].sb_number+"' style='width:160px;height: 30px' align='center'  type='text' readonly></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td3' value='"+arr[i].sb_xh+"' style='width:160px;height: 30px' align='center'  type='text' readonly></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td4' value='"+arr[i].jcx_name+"' style='width:160px;height: 30px' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td5' value='"+arr[i].jcx_v+"' style='width:160px;height: 30px' align='center' type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><textarea  class='td5' value='' style='width:160px'  readonly>"+arr[i].jcx_v+"</textarea></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px' class='td6' align='center'>" +
                         "<select style='width:160px;height: 30px'>" +
-                        "<option value='1'><span class='fonta'>正常</span></option>" +
-                        "<option value='2'><span class='fonta'>故障</span></option>" +
+                        "<option value='0'><span class='fonta'>正常</span></option>" +
+                        "<option value='1'><span class='fonta'>故障</span></option>" +
                         "</select></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td7' value='"+user_name+"' style='width:160px;height: 30px' align='center' type='text' readonly></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td8' style='width:160px;height: 30px' align='center' type='text'></td>";

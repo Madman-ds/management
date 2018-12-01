@@ -192,15 +192,27 @@ public class ShowController {
         }
         return "WEB-INF/jsp/read";
     }
-    /**
+   /*
      * @作者: 段大神经
      * @功能描述: 去前台首页
      * @时间: 2018/11/1 21:59
      * @参数:  * @param
      * @返回值: java.lang.String
-     **/
+     *
     @GetMapping("toviewlist")
     public String toviewlist(){
         return "WEB-INF/jsp/viewlist";
+    }*/
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去设备检查项页面
+     * @时间: 2018/11/18 14:41
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("tosbjcx")
+    public String tosbjcx(HttpServletRequest request,ModelMap modelMap){
+        modelMap.addAttribute("sb_id",Long.valueOf(request.getParameter("sb_id")));
+        return "WEB-INF/jsp/inspection/sbjcx";
     }
 }

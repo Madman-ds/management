@@ -10,6 +10,9 @@
             <if test="sb_xh !=null and sb_xh!=''">
                 AND sb_xh = #{sb_xh}
             </if>
+            <if test="user_name !=null and user_name!=''">
+                AND user_name = #{user_name}
+            </if>
             <if test="sb_number !=null and sb_number!=''">
                 AND sb_number = #{sb_number}
             </if>

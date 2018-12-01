@@ -18,19 +18,19 @@
         <div class="panel-body">
             <form class="form-horizontal" id="searchForms">
                 <div class="form-group" >
-                    <label for="select_sb_name" class="col-sm-1 control-label">设备名称</label>
+                    <label for="select_sb_name" class="col-sm-1 control-label">名称</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" id="select_sb_name" placeholder="请输入设备名称">
+                        <input type="text" class="form-control" id="select_sb_name" placeholder="请输入名称">
                     </div>
 
-                    <label for="select_sb_number" class="col-sm-1 control-label">设备编号</label>
+                    <label for="select_sb_number" class="col-sm-1 control-label">编号</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" id="select_sb_number" placeholder="请输入设备编号">
+                        <input type="text" class="form-control" id="select_sb_number" placeholder="请输入编号">
                     </div>
 
-                    <label for="select_sb_xh" class="col-sm-1 control-label">设备型号</label>
+                    <label for="select_sb_xh" class="col-sm-1 control-label">属性</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入设备型号">
+                        <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入属性">
                     </div>
 
                     <div class="col-sm-2">
@@ -98,13 +98,13 @@
         },
         columns:[
             {field:'sb_id',title:'ID',align:'center',visible: false},
-            {field:'sb_name',title:'设备名称',align:'center',width:350},
-            {field:'sb_number',title:'设备编号',align:'center',width:450},
-            {field:'sb_xh',title:'设备型号',align:'center',width:350},
+            {field:'sb_name',title:'名称',align:'center',width:350},
+            {field:'sb_number',title:'编号',align:'center',width:450},
+            {field:'sb_xh',title:'属性',align:'center',width:350},
             {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
                     str+="<button class='btn btn-info dim' type='button' onclick='jcxfq(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>检查项赋权</button>"+"  ";
-                    str+="<button class='btn btn-info dim' type='button' onclick='updateEquipment112(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>查看设备详细信息</button>";
+                    str+="<button class='btn btn-info dim' type='button' onclick='sballjcx(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>查看设备检查项信息</button>";
                     return  str;
                 }
             }
@@ -166,6 +166,27 @@
             BootstrapDialog.show({
                 title:"温馨提示",
                 message: '请选择一行进行修改'
+            });
+        }
+    }
+    //查看某设备所有检查项
+    function sballjcx(id){
+        if(id != ""){
+            BootstrapDialog.show({
+                title:"查看设备检查项",
+                message: $('<div></div>').load('<%=request.getContextPath()%>/tosbjcx?sb_id='+id),
+                buttons: [ {
+                    label: '关闭',
+                    cssClass: 'btn-warning ',
+                    action: function(dialogItself){
+                        dialogItself.close();
+                    }
+                }]
+            });
+        }else{
+            BootstrapDialog.show({
+                title:"温馨提示",
+                message: '请选择一行进行查看'
             });
         }
     }

@@ -19,7 +19,7 @@
 </style>
 <body >
 <img src="static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
-<form class="form-horizontal" id="skuserForm">
+<%--<form class="form-horizontal" id="skuserForm">--%>
         <div class="form-group" style="margin-right:600px;margin-left: 500px;margin-top: 180px;">
         <div class="input-group">
             <div class="input-group-addon">
@@ -28,7 +28,7 @@
             <input type="text" class="form-control input-lg"  name="user_kh" placeholder="请刷卡或输入卡号" id="kw">
         </div>
     </div>
-</form>
+<%--</form>--%>
 <div class="modal inmodal fade" id="myModal2" tabindex="-1" role="dialog"  aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -91,7 +91,7 @@
         $.ajax({
             url:'<%=request.getContextPath() %>/server/queryUserKh',
             type:'post',
-            data:$("#skuserForm").serialize(),
+            data:{"user_kh":$("#kw").val()},
             dataType:'json',
             success:function(data){
                 if(data.useFlag == 100 || data.useFlag == "100"){

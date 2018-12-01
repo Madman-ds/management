@@ -106,7 +106,7 @@ public class InspectionitemController {
         if(dqx!=null && !"".equals(dqx)){
             String[] dqxArr = dqx.substring(1).replaceAll("]","").split(",");
             //读权限
-            if (dqxArr != null && dqxArr.length > 0){
+            if (dqxArr != null && dqxArr.length > 0 && !"".equals(dqxArr[0])){
                 for (int i = 0 ; i<jcxArr.length; i++){
                     userEquipment = new UserEquipment();
                     userEquipment.setJcx_id(Long.valueOf(jcxArr[i]));

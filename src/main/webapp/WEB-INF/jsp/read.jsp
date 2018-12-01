@@ -21,22 +21,22 @@
     <div class="panel-body">
         <form class="form-horizontal" id="dataBackUpForm">
             <div class="form-group">
-                <label for="select_sb_name" class="col-sm-2 control-label">设备名称：</label>
+                <label for="select_sb_name" class="col-sm-2 control-label">名称：</label>
                 <div class="col-sm-2">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="select_sb_name" placeholder="请输入设备名称">
+                        <input type="text" class="form-control" id="select_sb_name" placeholder="请输入名称">
                     </div>
                 </div>
-                <label for="select_sb_number" class="col-sm-2 control-label">设备编号：</label>
+                <label for="select_sb_number" class="col-sm-2 control-label">编号：</label>
                 <div class="col-sm-2">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="select_sb_number" placeholder="请输入设备编号">
+                        <input type="text" class="form-control" id="select_sb_number" placeholder="请输入编号">
                     </div>
                 </div>
-                <label for="select_sb_xh" class="col-sm-2 control-label">设备型号：</label>
+                <label for="select_sb_xh" class="col-sm-2 control-label">属性：</label>
                 <div class="col-sm-2">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入设备型号">
+                        <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入属性">
                     </div>
                 </div>
             </div>
@@ -136,11 +136,11 @@
             }
         },
         columns:[
-            {field:'sb_name',title:'设备名称',align:'center'},
-            {field:'sb_number',title:'设备编号',align:'center'},
-            {field:'sb_xh',title:'设备型号',align:'center'},
+            {field:'sb_name',title:'名称',align:'center'},
+            {field:'sb_number',title:'编号',align:'center'},
+            {field:'sb_xh',title:'属性',align:'center'},
             {field:'jcx_name',title:'检查项',align:'center'},
-            {field:'jc_yq',title:'检查要求',align:'center'},
+            {field:'jc_yq',title:'检查要求',align:'center',width:10},
             {field:'jc_jg',title:'确认结果',align:'center',
                 formatter:function (value,rows,index){
                     if (value == 0){
@@ -157,7 +157,7 @@
                     return changeDateFormat(value);
                 }
             },
-            {field:'bz_nr',title:'备注',align:'center'}
+            {field:'bz_nr',title:'不符合项',align:'center'}
         ],
         pagination:true,
         pageNumber:1,
@@ -194,7 +194,7 @@
     }
     //跳转回前端首页
     function toviewlist() {
-        location.href="<%=request.getContextPath() %>/toviewlist";
+        location.href="<%=request.getContextPath() %>/toViewList";
     }
 </script>
 </html>

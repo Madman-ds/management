@@ -74,7 +74,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn btn-primary" onclick="addRow()">新增设备属性</button>
+                <button type="button" class="btn btn-primary" onclick="addRow()">新增属性</button>
                 <button type="button" class="btn btn-primary" onclick="delRow3()">删除全部新增属性</button>
             </div>
             <div class="modal-body">
@@ -87,19 +87,19 @@
                     <tr>
                         <td>设备名称</td>
                         <td><input type="hidden"  id="sb_id" name="sb_id">
-                            <input type="text" style="width:160px;margin-top: 5px"  id="sb_name" name="sb_name" placeholder="设备名称">
+                            <input type="text" style="width:160px;margin-top: 5px"  id="sb_name" name="sb_name" placeholder="名称">
                         </td>
                         <td style="width:160px;" align="center">不可删除</td>
                     </tr>
                     <tr>
                         <td>设备编号</td>
-                        <td><input type="text" style="width:160px;margin-top: 5px" id="sb_number" name="sb_number" placeholder="设备编号">
+                        <td><input type="text" style="width:160px;margin-top: 5px" id="sb_number" name="sb_number" placeholder="编号">
                         </td>
                         <td align="center">不可删除</td>
                     </tr>
                     <tr>
                         <td>设备型号</td>
-                        <td><input type="text" style="width:160px;margin-top: 5px"  id="sb_xh"  name="sb_xh" placeholder="设备型号">
+                        <td><input type="text" style="width:160px;margin-top: 5px"  id="sb_xh"  name="sb_xh" placeholder="属性">
                         </td>
                         <td align="center">不可删除</td>
                     </tr>
@@ -276,9 +276,9 @@
         columns:[
             {checkbox:true},
             {field:'sb_id',title:'ID',align:'center',width:50},
-            {field:'sb_name',title:'设备名称',align:'center',width:350},
-            {field:'sb_number',title:'设备编号',align:'center',width:450},
-            {field:'sb_xh',title:'设备型号',align:'center',width:350},
+            {field:'sb_name',title:'名称',align:'center',width:350},
+            {field:'sb_number',title:'编号',align:'center',width:450},
+            {field:'sb_xh',title:'属性',align:'center',width:350},
             {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
                     str+="<button class='btn btn-info dim' type='button' onclick='addInspectionitem(\""+rows.sb_id+"\")' ><i class='fa fa-paste'></i>管理检查项</button>  ";
@@ -371,15 +371,15 @@
         var numArra = JSON.stringify(numArr);
         var numArr2 = JSON.stringify(numArr2);
         if($("#sb_name").val()==""){
-            alert("请填写设备名称");
+            alert("请填写名称");
             return false;
         }
         if($("#sb_number").val()==""){
-            alert("请填写设备编号");
+            alert("请填写编号");
             return false;
         }
         if($("#sb_xh").val()==""){
-            alert("请填写设备型号");
+            alert("请填写属性");
             return false;
         }
         var tbobj=document.getElementById("mytableid");
@@ -442,15 +442,15 @@
         var numArr2 = JSON.stringify(numArr2);
         var sb_id = $("#sb_id").val();
         if($("#sb_name").val()==""){
-            alert("请填写设备名称");
+            alert("请填写名称");
             return false;
         }
         if($("#sb_number").val()==""){
-            alert("请填写设备编号");
+            alert("请填写编号");
             return false;
         }
         if($("#sb_xh").val()==""){
-            alert("请填写设备型号");
+            alert("请填写属性");
             return false;
         }
         var tbobj=document.getElementById("mytableid");

@@ -62,16 +62,28 @@ public class InspectionitemController {
         String numArr  = request.getParameter("sx_name");
         String numArr2 = request.getParameter("sx_v");
         String numArr3 = request.getParameter("sb_id");
+        String numArr4 = request.getParameter("sx_id");
+//        inspectionitemService.deleteInspectionitem(numArr3);
         if (numArr != ""){
             String[] s = numArr.substring(1).replaceAll("]","").split(",");
             String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
+            String[] s3 = numArr4.substring(1).replaceAll("]","").split(",");
             Inspectionitem inspectionitem = null;
             for (int i = 0; i < s.length; i++) {
                 inspectionitem = new Inspectionitem();
-                inspectionitem.setJcx_name(s[i].substring(1, s[i].length()-1));
-                inspectionitem.setJcx_v(s2[i].substring(1, s2[i].length()-1));
-                inspectionitem.setSb_id(Long.valueOf(numArr3));
-                inspectionitemService.addInspectionitem(inspectionitem);
+                String jcx_id = s3[i].substring(1, s3[i].length() - 1);
+                if(jcx_id!=null &&  !"".equals(jcx_id)){
+                    inspectionitem.setJcx_id(Long.valueOf(jcx_id));//检查项id
+                    inspectionitem.setJcx_name(s[i].substring(1, s[i].length() - 1));//姓名
+                    inspectionitem.setJcx_v(s2[i].substring(1, s2[i].length() - 1));//值
+                    inspectionitem.setSb_id(Long.valueOf(numArr3));//关联设备id
+                    inspectionitemService.updateInspectionitem(inspectionitem);
+                }else {
+                    inspectionitem.setJcx_name(s[i].substring(1, s[i].length() - 1));
+                    inspectionitem.setJcx_v(s2[i].substring(1, s2[i].length() - 1));
+                    inspectionitem.setSb_id(Long.valueOf(numArr3));
+                    inspectionitemService.addInspectionitem(inspectionitem);
+                }
             }
         }
     }
@@ -125,4 +137,18 @@ public class InspectionitemController {
             }
         }
     }
+
+
+    @PostMapping(value="getJianChaXiang")
+    public List<Inspectionitem> getJianChaXiang(String id){
+        Long sb_id = Long.valueOf(id);
+        List<Inspectionitem> list = inspectionitemService.findAllInspectionitemBySbId(sb_id);
+        return list;
+    }
+
+    @PostMapping(value = "delInspectionitem")
+    public int delInspectionitem(String sb_id){
+        return inspectionitemService.delInspectionitem(sb_id);
+    }
+
 }

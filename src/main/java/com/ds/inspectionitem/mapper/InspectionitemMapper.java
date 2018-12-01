@@ -22,4 +22,7 @@ public interface InspectionitemMapper {
 
     void addInspectionitem(Inspectionitem inspectionitem);
 
+    void updateInspectionitem(Inspectionitem inspectionitem);
+
+    int delInspectionitem(String sb_id);
 }

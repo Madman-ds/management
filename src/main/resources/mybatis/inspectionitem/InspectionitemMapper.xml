@@ -34,4 +34,12 @@
     <update id="updUserEquipment" parameterType="com.ds.inspectionitem.pojo.UserEquipment">
         update t_userequipment set jcx_id = #{jcx_id},user_id = #{user_id},qx = #{qx} where ju_id = #{ju_id}
     </update>
+
+    <update id="updateInspectionitem" parameterType="com.ds.inspectionitem.pojo.Inspectionitem">
+        update t_inspectionitem set sb_id = #{sb_id},jcx_name = #{jcx_name},jcx_v = #{jcx_v} where jcx_id = #{jcx_id}
+    </update>
+
+    <delete id="delInspectionitem" parameterType="java.lang.String" >
+        delete from t_inspectionitem where sb_id = #{sb_id}
+    </delete>
 </mapper>

@@ -40,4 +40,8 @@ public interface InspectionitemService {
      * @返回值: void
      **/
     void addInspectionitem(Inspectionitem inspectionitem);
+
+    void updateInspectionitem(Inspectionitem inspectionitem);
+
+    int delInspectionitem(String sb_id);
 }

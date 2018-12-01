@@ -44,4 +44,15 @@ public class InspectionitemServiceImpl implements InspectionitemService {
     public void addInspectionitem(Inspectionitem inspectionitem) {
         inspectionitemMapper.addInspectionitem(inspectionitem);
     }
+
+    @Override
+    public void updateInspectionitem(Inspectionitem inspectionitem) {
+        inspectionitemMapper.updateInspectionitem(inspectionitem);
+    }
+
+    @Override
+    public int delInspectionitem(String sb_id) {
+        return inspectionitemMapper.delInspectionitem(sb_id);
+    }
+
 }

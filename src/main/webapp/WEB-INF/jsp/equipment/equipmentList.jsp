@@ -133,6 +133,7 @@
             <div class="modal-body">
                 <table >
                     <tr>
+                        <%--<td style="width:160px;" >id</td>--%>
                         <td style="width:160px" >检查项</td>
                         <td style="width:160px" >要求</td>
                         <td style="width:160px;" align="center">操作</td>
@@ -161,7 +162,7 @@
     var num = 1;
     //添加一行
     function addRow() {
-        var tb = document.getElementById("mytableid");//获取表格
+        var tb = document.getElementById("mytableid");//获取表格sss
         var row = tb.insertRow();//添加行
         row.setAttribute('id','cel'+num);
         // var cell = row.insertCell();//添加列    id='cel"+num+"'
@@ -195,7 +196,9 @@
         var tb = document.getElementById("mytableid2");//获取表格
         var row = tb.insertRow();//添加行
         // var cell = row.insertCell();//添加列
-        row.innerHTML += "<td><input class='cell3'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='检查项名称'></td>" +
+        row.innerHTML +=
+            "<td><input class='cell5' style='width:160px;margin-top: 5px' align='center' type='hidden' placeholder='id'><td>" +
+            "<td><input class='cell3'style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='检查项名称'></td>" +
             "<td><input class='cell4' style='width:160px;margin-top: 5px' align='center' type='text' placeholder='要求'><td>" +
             "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRows(this)' >删除</a></td>";
     }
@@ -348,10 +351,35 @@
     /**
      * 管理检查项 模态窗口
      */
-    function addInspectionitem(id){
+    function addInspectionitem(sb_id){
         delRow4();
         $('#myModal3').modal('toggle');
-        $('#sbid').val(id);
+        $('#sbid').val(sb_id);
+        $.ajax({
+            url:'<%=request.getContextPath() %>/findAllInspectionitemBySbId',
+            type:'post',
+            data:{
+                sb_id:sb_id
+            },
+            async:false,
+            dataType:'json',
+            success:function(data){
+                var list = data;
+                for(var i=0;i<list.length;i++){
+                    var id = list[i].jcx_id;
+                    var name = list[i].jcx_name;
+                    var val = list[i].jcx_v;
+                    // addRows(name,val,i);
+                    var tb = document.getElementById("mytableid2");//获取表格
+                    var row = tb.insertRow();//添加行
+                    row.innerHTML += "<td><input class='cell5' value='"+id+"'  style='width:160px;margin-top: 5px;' align='center' type='hidden' placeholder='id'><td>" +
+                    "<td><input class='cell3' value='"+name+"' style='width:160px;margin-top: 5px' align='center'  type='text' placeholder='检查项名称'></td>" +
+                    "<td><input class='cell4' value='"+val+"'style='width:160px;margin-top: 5px' align='center' type='text' placeholder='要求'><td>";
+                    // "<td align='center' style='width:160px;margin-top: 5px'><a onclick='delRows(this)' >不可删除</a></td>";
+                }
+            }
+        });
+
     }
 //---------------------添加 模态窗口---END---------------------------------------------------------------------------------
 
@@ -523,7 +551,6 @@
             dataType:'json',
             success:function(data){
                 var list = data.list;
-                console.log(list);
                 for(var i=0;i<list.length;i++){
                     var name = list[i].sx_name;
                     var val = list[i].sx_v;
@@ -579,6 +606,7 @@ function addRows(name,val,i) {
             success:function(data){
                 var list = data.list;
                 for(var i=0;i<list.length;i++){
+                    var id = list[i].jcx_id;
                     var name = list[i].sx_name;
                     var val = list[i].sx_v;
                     var tb = document.getElementById("mytableid");//获取表格
@@ -618,33 +646,78 @@ function delRowNo(){
  * 添加方法
  */
 $("#saveInspectionitem").click(function(){
+    var chenck = true;
+    var chenck1 = true;
     var numArr = []; // 定义一个空数组
     var numArr2 = [];
+    var numArr3 = [];
     var txt = $('#mytableid2').find('.cell3'); // 获取所有文本框
     var txt2 = $('#mytableid2').find('.cell4'); // 获取所有文本框
+    var txt3 = $('#mytableid2').find('.cell5'); // 获取所有文本框
     for (var i = 0; i < txt.length; i++) {
         numArr.push(txt.eq(i).val()); // 将文本框的值添加到数组中
         numArr2.push(txt2.eq(i).val());
+        numArr3.push(txt3.eq(i).val());
     }
     var numArra = JSON.stringify(numArr);
     var numArr2 = JSON.stringify(numArr2);
+    var numArr3 = JSON.stringify(numArr3);
     var sb_id = $('#sbid').val();
-    $('#myModal3').modal('hide');
-    $.ajax({
-        url:'<%=request.getContextPath() %>/inspectionitem/addInspectionitem',
-        type:'post',
-        data:{
-            "sx_name":numArra,
-            "sx_v":numArr2,
-            "sb_id":sb_id
-        },
-        dataType:'json',
-        success:function(){
-            $('#myModal3').modal('hide');
-            $('#sbid').val("");
-            EquipmentSearch();
-        }
-    })
+    var tbobj=document.getElementById("mytableid2");
+    if (tbobj.rows.length>0) {
+        $("#mytableid2 tr").each(function() {    // 遍历每一行
+            var tdv =  $(this).children('td:eq(2)').find("input").val();  // td:eq(0)选择器表示第一个单元格
+            var tdv1 =  $(this).children('td:eq(3)').find("input").val();  // td:eq(0)选择器表示第一个单元格
+            if(tdv == "" ){
+                chenck =false;
+            }
+            if(tdv1 == ""){
+                chenck1 =false;
+            }
+        });
+    }
+    if(!chenck){
+        alert("检查项名称必填");
+        return false;
+    }
+    if(!chenck1){
+        alert("检查项要求必填");
+        return false;
+    }
+    if(numArra.length > 2){
+        $.ajax({
+            url:'<%=request.getContextPath() %>/inspectionitem/addInspectionitem',
+            type:'post',
+            data:{
+                "sx_name":numArra,
+                "sx_v":numArr2,
+                "sx_id":numArr3,
+                "sb_id":sb_id
+            },
+            dataType:'text',
+            success:function(data){
+                $('#myModal3').modal('hide');
+                $('#sbid').val("");
+                EquipmentSearch();
+            }
+        })
+    }else{
+        $.ajax({
+            url:'<%=request.getContextPath() %>/delInspectionitem',
+            type:'post',
+            data:{
+                "sb_id":sb_id
+            },
+            dataType:'text',
+            success:function(data){
+                $('#myModal3').modal('hide');
+                $('#sbid').val("");
+                EquipmentSearch();
+            },error:function (data) {
+                alert("山炮");
+            }
+        })
+    }
 
 })
 

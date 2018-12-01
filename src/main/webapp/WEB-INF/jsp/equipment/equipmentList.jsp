@@ -278,7 +278,7 @@
         },
         columns:[
             {checkbox:true},
-            {field:'sb_id',title:'ID',align:'center',width:50},
+            {field:'sb_id',align:'center',width:50,visible: false},
             {field:'sb_name',title:'名称',align:'center',width:350},
             {field:'sb_number',title:'编号',align:'center',width:450},
             {field:'sb_xh',title:'属性',align:'center',width:350},

@@ -19,19 +19,19 @@
     <div class="panel-body">
         <form class="form-horizontal" id="searchForm">
             <div class="form-group" >
-                <label for="select_sb_name" class="col-sm-1 control-label">设备名称</label>
+                <label for="select_sb_name" class="col-sm-1 control-label">名称</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" id="select_sb_name" placeholder="请输入设备名称">
+                    <input type="text" class="form-control" id="select_sb_name" placeholder="请输入名称">
                 </div>
 
-                <label for="select_sb_number" class="col-sm-1 control-label">设备编号</label>
+                <label for="select_sb_number" class="col-sm-1 control-label">编号</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" id="select_sb_number" placeholder="请输入设备编号">
+                    <input type="text" class="form-control" id="select_sb_number" placeholder="请输入编号">
                 </div>
 
-                <label for="select_sb_xh" class="col-sm-1 control-label">设备型号</label>
+                <label for="select_sb_xh" class="col-sm-1 control-label">属性</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入设备型号">
+                    <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入属性">
                 </div>
 
                 <div class="col-sm-2">

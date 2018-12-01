@@ -62,10 +62,10 @@
             and sb_name like CONCAT('%',#{sb_name},'%')
         </if>
         <if test="sb_number != ''and sb_number != null ">
-            and sb_number = #{sb_number}
+            and sb_number like CONCAT('%',#{sb_number},'%')
         </if>
         <if test="sb_xh !='' and sb_xh != null ">
-            and sb_xh = #{sb_xh}
+            and sb_xh like CONCAT('%',#{sb_xh},'%')
         </if>
     </sql>
     <!-- 查询设备详细信息  用于检查项赋权 -->

@@ -67,7 +67,7 @@
     function enterSearch(){
         var event = arguments.callee.caller.arguments[0]||window.event;//消除浏览器差异
         if (event.keyCode == 13){
-            whereSearch();
+            whereSearchs();
         }
     }
 

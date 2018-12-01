@@ -19,4 +19,6 @@ public interface DataBackupMapper {
     int getDataBackupCount(DataBackup dataBackup);
 
     List<ExcelDataBackup> findDataBackupExcel(DataBackup dataBackup);
+
+    int updateTop(DataBackup dataBackup);
 }

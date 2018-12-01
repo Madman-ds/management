@@ -8,9 +8,7 @@ import com.ds.util.DateUtil;
 import com.ds.util.ExportExcelUtil;
 import com.ds.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +31,17 @@ public class DataBackupController {
     private DataBackupService dataBackupService;
     /**
      * @作者: 段大神经
+     * @功能描述: 提取或取消数据
+     * @时间: 2018/12/1 14:16
+     * @参数:  * @param top
+     * @返回值: int
+     **/
+    @RequestMapping("updateTop")
+    public int updateTop(DataBackup dataBackup){
+        return dataBackupService.updateTop(dataBackup);
+    }
+    /**
+     * @作者: 段大神经
      * @功能描述: 条件查询数据备份
      * @时间: 2018/9/28 21:04
      * @参数:  * @param dataBackup
@@ -40,6 +49,23 @@ public class DataBackupController {
      **/
     @GetMapping("findDataBackup")
     public PageUtil findDataBackup(DataBackup dataBackup){
+        Integer count = dataBackupService.getDataBackupCount(dataBackup);
+        List<DataBackup> list = dataBackupService.findDataBackup(dataBackup);
+        PageUtil page = new PageUtil();
+        page.setRows(list);
+        page.setTotal(count);
+        return page;
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 查询抽取项
+     * @时间: 2018/12/1 14:13
+     * @参数:  * @param dataBackup
+     * @返回值: com.ds.util.PageUtil
+     **/
+    @GetMapping("findDataBackupTop")
+    public PageUtil findDataBackupTop(DataBackup dataBackup){
+        dataBackup.setTop("1");
         Integer count = dataBackupService.getDataBackupCount(dataBackup);
         List<DataBackup> list = dataBackupService.findDataBackup(dataBackup);
         PageUtil page = new PageUtil();
@@ -113,7 +139,7 @@ public class DataBackupController {
         List<ExcelDataBackup> list = dataBackupService.findDataBackupExcel(dataBackup);
         if(list != null){
             ExportExcelUtil<ExcelDataBackup> export = new ExportExcelUtil<ExcelDataBackup>();
-            String[] title = {"设备名称","设备编号","设备型号","检查项","检查要求","确认结果","确认人","确认时间","备注"};
+            String[] title = {"名称","编号","属性","检查项","检查要求","确认结果","确认人","确认时间","备注"};
             String fileName = DateUtil.dateToString(new Date(),"yyyyMMddHHmmss") +"shebei";
             export.exportExcel(fileName,"用户",title,list,response,EXCEl_FILE_2007);
         }

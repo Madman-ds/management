@@ -35,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 //不拦截路径
                 .excludePathPatterns(
-                "/toIndex","/login","/server/queryUser","/server/queryUserKh","/static/**"
+                "/toIndex","/login","/server/queryUser","/server/queryUserKh","/static/**","/topIndex","/findDataBackupTop"
         );
     }
     //注入视图处理器bean

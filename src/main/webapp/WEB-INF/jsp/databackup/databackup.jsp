@@ -123,9 +123,10 @@
             }
         },
         columns:[
-            {field:'sb_name',title:'设备名称',align:'center'},
-            {field:'sb_number',title:'设备编号',align:'center'},
-            {field:'sb_xh',title:'设备型号',align:'center'},
+            {field:'xj_id',visible: false},
+            {field:'sb_name',title:'名称',align:'center'},
+            {field:'sb_number',title:'编号',align:'center'},
+            {field:'sb_xh',title:'属性',align:'center'},
             {field:'jcx_name',title:'检查项',align:'center'},
             {field:'jc_yq',title:'检查要求',align:'center'},
             {field:'jc_jg',title:'确认结果',align:'center',
@@ -144,7 +145,21 @@
                     return changeDateFormat(value);
                 }
             },
-            {field:'bz_nr',title:'备注',align:'center'}
+            {field:'bz_nr',title:'不符合项',align:'center'},
+            {field:'top',title:'是否提取',align:'center',
+                formatter:function (value,rows,index){
+                    if (value == "0"){
+                        return "未提取";
+                    } else{
+                        return "已提取"
+                    }
+                }
+            },
+            {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
+                    var str="<button class='btn btn-info dim' type='button' onclick='updateTop(\""+rows.xj_id+"\",\""+rows.top+"\")' ><i class='fa fa-paste'></i>提取或还原</button>  ";
+                    return  str;
+                }
+            }
         ],
         pagination:true,
         pageNumber:1,
@@ -178,6 +193,33 @@
         var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
         return times;
         }
+    }
+    //提取或还原
+    function updateTop(id,top) {
+        var tops ;
+        if(top == 0){
+            tops = 1;
+        }else{
+            tops = 0;
+        }
+        $.ajax({
+            url:"<%=request.getContextPath() %>/updateTop",
+            data:{
+                "xj_id":id,
+                "top":tops
+            },
+            dataType:"text",
+            type:"post",
+            success:function(data){
+                $('#dataBackupShow').bootstrapTable("refresh");
+            },
+            error:function(){
+                BootstrapDialog.show({
+                    title:"温馨提示",
+                    message: '系统出现BUG！请联系管理员！'
+                });
+            }
+        })
     }
 </script>
 </body>

@@ -47,9 +47,9 @@ public class DataBackup extends PageUtil {
      */
     private String user_name;
     /**
-     * 检查时间
+     * 提取项 默认‘0’
      */
-    private Date jc_time;
+    private String top;
     /**
      * 确认时间
      */

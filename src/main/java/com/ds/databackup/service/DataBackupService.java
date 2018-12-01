@@ -19,4 +19,6 @@ public interface DataBackupService {
     Integer getDataBackupCount(DataBackup dataBackup);
 
     List<ExcelDataBackup> findDataBackupExcel(DataBackup dataBackup);
+
+    int updateTop(DataBackup dataBackup);
 }

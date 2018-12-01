@@ -22,6 +22,9 @@
             <if test="end_time !=null and  end_time != ''">
                 AND qr_time &lt;= #{end_time}
             </if>
+            <if test="top !=null and  top != ''">
+                AND top = #{top}
+            </if>
         </where>
     </sql>
     <!-- 条件或全部查询数据备份 -->
@@ -31,7 +34,7 @@
         from
           t_inspectionrecord
         <include refid="whereSql"></include>
-        order by xj_id desc
+        order by qr_time desc
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
         <if test="offset==null and limit==null">limit 0,10</if>
     </select>
@@ -51,6 +54,7 @@
         from
         t_inspectionrecord
         <include refid="whereSql"></include>
+        order by qr_time desc
     </select>
 
 
@@ -65,7 +69,11 @@
     <!-- 添加巡检记录 -->
     <insert id="insertDataBackup" parameterType="com.ds.databackup.pojo.DataBackup">
         insert into
-          t_inspectionrecord(sb_name,sb_number,sb_xh,jcx_name,jc_yq,jc_jg,user_name,jc_time,qr_time,bz_nr)
-        value(#{sb_name},#{sb_number},#{sb_xh},#{jcx_name},#{jc_yq},#{jc_jg},#{user_name},#{jc_time},NOW(),#{bz_nr})
+          t_inspectionrecord(sb_name,sb_number,sb_xh,jcx_name,jc_yq,jc_jg,user_name,qr_time,bz_nr)
+        value(#{sb_name},#{sb_number},#{sb_xh},#{jcx_name},#{jc_yq},#{jc_jg},#{user_name},NOW(),#{bz_nr})
     </insert>
+    <!-- 提取或取消数据 -->
+    <update id="updateTop" parameterType="com.ds.databackup.pojo.DataBackup">
+        update t_inspectionrecord set top = #{top} where xj_id = #{xj_id}
+    </update>
 </mapper>

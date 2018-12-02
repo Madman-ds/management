@@ -85,20 +85,20 @@
                         <td style="width:160px;" align="center">操作</td>
                     </tr>
                     <tr>
-                        <td>设备名称</td>
+                        <td>名称</td>
                         <td><input type="hidden"  id="sb_id" name="sb_id">
                             <input type="text" style="width:160px;margin-top: 5px"  id="sb_name" name="sb_name" placeholder="名称">
                         </td>
                         <td style="width:160px;" align="center">不可删除</td>
                     </tr>
                     <tr>
-                        <td>设备编号</td>
+                        <td>编号</td>
                         <td><input type="text" style="width:160px;margin-top: 5px" id="sb_number" name="sb_number" placeholder="编号">
                         </td>
                         <td align="center">不可删除</td>
                     </tr>
                     <tr>
-                        <td>设备型号</td>
+                        <td>属性</td>
                         <td><input type="text" style="width:160px;margin-top: 5px"  id="sb_xh"  name="sb_xh" placeholder="属性">
                         </td>
                         <td align="center">不可删除</td>

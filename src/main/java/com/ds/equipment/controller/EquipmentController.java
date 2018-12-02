@@ -113,9 +113,8 @@ public class EquipmentController {
      * @返回值: boolean
      **/
     @PostMapping(value="updateEquipment")
-    public boolean updateEquipment(Equipment equipment){
-        boolean isOK = equipmentService.updateEquipment(equipment);
-        return isOK;
+    public int updateEquipment(Equipment equipment){
+        return equipmentService.updateEquipment(equipment);
     }
     /**
      * @作者: 段大神经

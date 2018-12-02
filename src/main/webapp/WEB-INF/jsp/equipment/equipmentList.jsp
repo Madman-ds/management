@@ -78,6 +78,7 @@
                 <button type="button" class="btn btn-primary" onclick="delRow3()">删除全部新增属性</button>
             </div>
             <div class="modal-body">
+               <form id="">
                 <table >
                     <tr>
                         <td style="width:160px" >设备属性</td>
@@ -104,6 +105,7 @@
                         <td align="center">不可删除</td>
                     </tr>
                 </table>
+            </form>
                 <%--<input type="hidden" id="sb_id" value=""/>--%>
                 <table id="mytableid">
 
@@ -507,8 +509,12 @@
         $.ajax({
             url:'<%=request.getContextPath() %>/equipment/updateEquipment',
             type:'post',
-            data:
-                $("#equipmentAdd").serialize(),
+            data:{
+                "sb_id":sb_id,
+                "sb_name":$("#sb_name").val(),
+                "sb_number":$("#sb_number").val(),
+                "sb_xh":$("#sb_xh").val()
+            },
             dataType:'json',
             success:function(data){
                 $('#myModal2').modal('hide');

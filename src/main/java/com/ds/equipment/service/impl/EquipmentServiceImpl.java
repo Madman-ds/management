@@ -108,14 +108,8 @@ public class EquipmentServiceImpl implements EquipmentService {
      * @返回值: boolean
      **/
     @Override
-    public boolean updateEquipment(Equipment equipment) {
-        try {
-            equipmentMapper.updateEquipment(equipment);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    public int updateEquipment(Equipment equipment) {
+            return equipmentMapper.updateEquipment(equipment);
     }
 
     @Override

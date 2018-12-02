@@ -23,7 +23,7 @@ public interface EquipmentMapper {
 
     Integer addEquipment(Equipment equipment);
 
-    void updateEquipment(Equipment equipment);
+    int updateEquipment(Equipment equipment);
 
     EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId);
 

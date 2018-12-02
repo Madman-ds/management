@@ -51,9 +51,9 @@
     </insert>
 
     <!--修改-->
-    <insert id="updateEquipment" parameterType="com.ds.equipment.pojo.Equipment">
+    <update id="updateEquipment" parameterType="com.ds.equipment.pojo.Equipment">
         update t_equipment set sb_name = #{sb_name},sb_number = #{sb_number},sb_xh = #{sb_xh} where sb_id = #{sb_id}
-    </insert>
+    </update>
 
 
     <!--条件查询-->

@@ -23,7 +23,7 @@ public interface EquipmentService {
 
     Integer addEquipment(Equipment equipment);
 
-    boolean updateEquipment(Equipment equipment);
+    int updateEquipment(Equipment equipment);
 
     EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId);
 

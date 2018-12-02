@@ -74,8 +74,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn btn-primary" onclick="addRow()">新增属性</button>
-                <button type="button" class="btn btn-primary" onclick="delRow3()">删除全部新增属性</button>
+                <button type="button" class="btn btn-primary btnShow" onclick="addRow()">新增属性</button>
+                <button type="button" class="btn btn-primary btnShow" onclick="delRow3()">删除全部新增属性</button>
             </div>
             <div class="modal-body">
                <form id="">
@@ -445,9 +445,8 @@
                 "sx_name":numArra,
                 "sx_v":numArr2
             },
-            // dataType:'text',
+            dataType:'text',
             success:function(data){
-                alert(data);
                 $('#myModal2').modal('hide');
                 EquipmentSearch();
             }
@@ -547,6 +546,7 @@
         $("#addshow").hide();
         $("#updateshow").show();
         $('#myModal2').modal('toggle');
+        $(".btnShow").show();
         $.ajax({
             url:'<%=request.getContextPath() %>/equipment/getEquipmentById',
             type:'post',
@@ -600,6 +600,7 @@ function addRows(name,val,i) {
         $("#addshow").hide();
         $("#updateshow").hide();
         $("#buttonShow").hide();
+        $(".btnShow").hide();
         $('#myModal2').modal('toggle');
         $.ajax({
             url:'<%=request.getContextPath() %>/equipment/getEquipmentById',

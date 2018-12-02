@@ -137,6 +137,13 @@ public class DataBackupController {
     @GetMapping("ExportDataBackup")
     public void ExportDataBackup(DataBackup dataBackup,HttpServletResponse response) throws IOException {
         List<ExcelDataBackup> list = dataBackupService.findDataBackupExcel(dataBackup);
+        for (ExcelDataBackup d : list){
+            if ("1".equals(d.getJc_jg())){
+                d.setJc_jg("异常");
+            }else {
+                d.setJc_jg("正常");
+            }
+        }
         if(list != null){
             ExportExcelUtil<ExcelDataBackup> export = new ExportExcelUtil<ExcelDataBackup>();
             String[] title = {"名称","编号","属性","检查项","检查要求","确认结果","确认人","确认时间","备注"};

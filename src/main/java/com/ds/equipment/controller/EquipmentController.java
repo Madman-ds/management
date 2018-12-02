@@ -90,9 +90,9 @@ public class EquipmentController {
         equipmentService.addEquipment(equipment);
         String numArr  = request.getParameter("sx_name");
         String numArr2 = request.getParameter("sx_v");
-        if (numArr != ""){
-            String[] s = numArr.substring(1).replaceAll("]","").split(",");
-            String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
+        String[] s = numArr.substring(1).replaceAll("]","").split(",");
+        String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
+        if (s.length>0 && !"".equals(s[0])){
             Attributes attributes = null;
             for (int i = 0; i < s.length; i++) {
                 attributes = new Attributes();

@@ -37,7 +37,7 @@ public class ExcelDataBackup {
     /**
      * 检查结果 1异常，0正常
      */
-    private Integer jc_jg;
+    private String jc_jg;
     /**
      * 确认人姓名
      */

@@ -25,7 +25,7 @@
             <div class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
             </div>
-            <input type="text" class="form-control input-lg"  name="user_kh" placeholder="请刷卡或输入卡号" id="kw">
+            <input type="text" class="form-control input-lg"  name="user_kh" placeholder="请刷卡登陆系统" id="kw" oninput="skButton()">
         </div>
     </div>
 <%--</form>--%>
@@ -65,9 +65,9 @@
     </div>
 </div>
 <div style="margin-left: 540px">
-    <button type="button" onclick="skButton()" class="btn btn-success btn-lg">
+    <%--<button type="button" onclick="skButton()" class="btn btn-success btn-lg">
         刷卡登陆
-    </button>
+    </button>--%>
     <button type="button"  class="btn btn-info btn-lg" onclick="toUserLogin()">
         账号登陆
     </button>
@@ -83,7 +83,7 @@
     <!-- 刷卡登录方法 -->
     function skButton(){
         if ($("#kw").val() == "" || $("#kw").val() == null){
-            alert("请刷卡或填入卡号");
+            //alert("请刷卡或填入卡号");
             $("#kw").focus();
             return;
         }

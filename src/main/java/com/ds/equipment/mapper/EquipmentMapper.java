@@ -29,4 +29,5 @@ public interface EquipmentMapper {
 
     List findEquipmentInspectionitem(Long userId);
 
+    List findReadEquipmentInspectionitem(Long userId);
 }

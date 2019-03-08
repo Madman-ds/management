@@ -121,4 +121,10 @@ public class EquipmentServiceImpl implements EquipmentService {
     public List findEquipmentInspectionitem(Long userId) {
         return equipmentMapper.findEquipmentInspectionitem(userId);
     }
+
+    @Override
+    public List findReadEquipmentInspectionitem(Long userId) {
+        return equipmentMapper.findReadEquipmentInspectionitem(userId);
+    }
+
 }

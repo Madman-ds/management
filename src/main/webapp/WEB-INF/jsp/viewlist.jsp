@@ -66,6 +66,11 @@
                 </i>查看所有
             </button>
             &nbsp;
+            <button onclick="zjRead()" class="btn btn-primary" type="button">
+                <i class="glyphicon glyphicon-share-alt">
+                </i>个人查看
+            </button>
+            &nbsp;
             <button onclick="out()" class="btn btn-danger" type="button">
                 <i class="glyphicon glyphicon-off">
                 </i>退出
@@ -94,6 +99,10 @@
     function ShowInvalidLoginMessage() {
         alert("您已经长时间没操作了，即将退出系统");
         location.href = "<%=request.getContextPath() %>/logout";
+    }
+
+    function zjRead(){
+        location.href = "<%=request.getContextPath() %>/zjRead";
     }
 
 

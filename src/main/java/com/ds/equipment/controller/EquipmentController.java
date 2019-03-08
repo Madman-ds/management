@@ -5,10 +5,16 @@ import com.ds.attributes.service.AttributesService;
 import com.ds.equipment.pojo.Equipment;
 import com.ds.equipment.pojo.EquipmentInspectionitem;
 import com.ds.equipment.service.EquipmentService;
+import com.ds.serverlogin.pojo.LoginUser;
+import com.ds.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
@@ -152,4 +158,11 @@ public class EquipmentController {
         Long userId = Long.valueOf(request.getParameter("userId"));
         return equipmentService.findReadEquipmentInspectionitem(userId);
     }*/
+    @GetMapping("findZjRead")
+    public List findZjRead(HttpSession session){
+        LoginUser user = (LoginUser) session.getAttribute("loginUser");
+        List y = equipmentService.findReadEquipmentInspectionitem(user.getUser_id());
+        return y;
+    }
+
 }

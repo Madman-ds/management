@@ -215,4 +215,13 @@ public class ShowController {
     public String topIndex(){
         return "topindex";
     }
+
+    /**
+     * 个人查看 查看权限项
+     * @return
+     */
+    @GetMapping("zjRead")
+    public String zjRead(){
+        return "WEB-INF/jsp/zjRead";
+    }
 }

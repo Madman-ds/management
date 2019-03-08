@@ -13,6 +13,8 @@
             <result column="jcx_v" property="jcx_v"/>
         </collection>
     </resultMap>
+
+
     <!--条件查询总条数-->
     <select id="getEquipmentCount" resultType="java.lang.Integer">
         select count(*) from t_equipment
@@ -92,5 +94,20 @@
             t.sb_id = m.sb_id
         AND m.jcx_id = u.jcx_id
         AND u.user_id = #{userId}
+        AND u.qx = 1
+    </select>
+
+    <select id="findReadEquipmentInspectionitem" parameterType="long" resultType="map">
+        SELECT
+            *
+        FROM
+            t_equipment t,
+            t_inspectionitem m,
+            t_userequipment u
+        WHERE
+            t.sb_id = m.sb_id
+        AND m.jcx_id = u.jcx_id
+        AND u.user_id = #{userId}
+        AND u.qx = 0
     </select>
 </mapper>

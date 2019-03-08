@@ -2,6 +2,7 @@ package com.ds.equipment.pojo;
 
 import com.ds.attributes.pojo.Attributes;
 import com.ds.inspectionitem.pojo.Inspectionitem;
+import com.ds.user.pojo.User;
 import com.ds.util.Page;
 import lombok.Data;
 
@@ -39,5 +40,7 @@ public class EquipmentInspectionitem {
      * 相关检查项集合
      */
     private List<Inspectionitem> InspectionitemList;
+
+    private Integer userId;
 
 }

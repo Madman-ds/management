@@ -28,4 +28,6 @@ public interface EquipmentService {
     EquipmentInspectionitem selectEquipmentInspectionitemBySbId(Long sbId);
 
     List findEquipmentInspectionitem(Long userId);
+
+    List findReadEquipmentInspectionitem(Long userId);
 }

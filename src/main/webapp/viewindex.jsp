@@ -25,7 +25,7 @@
             <div class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
             </div>
-            <input type="text" class="form-control input-lg"  name="user_kh" placeholder="请刷卡登陆系统" id="kw" oninput="skButton()">
+            <input type="password" class="form-control input-lg"  name="user_kh" placeholder="请刷卡登陆系统" id="kw" oninput="skButton()">
         </div>
     </div>
 <%--</form>--%>

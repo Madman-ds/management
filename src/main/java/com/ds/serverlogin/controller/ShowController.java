@@ -224,4 +224,13 @@ public class ShowController {
     public String zjRead(){
         return "WEB-INF/jsp/zjRead";
     }
+
+    /**
+     * 数据提取
+     * @return
+     */
+    @GetMapping("toDataTiqu")
+    public String zjsRead(){
+        return "WEB-INF/jsp/sjtq";
+    }
 }

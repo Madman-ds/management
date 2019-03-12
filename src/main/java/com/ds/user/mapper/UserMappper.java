@@ -1,6 +1,8 @@
 package com.ds.user.mapper;
 
+import com.ds.databackup.pojo.DataBackup;
 import com.ds.user.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +24,10 @@ public interface UserMappper {
     int updUser(User user);
 
     void delAllUser(String ids);
+
+    Integer getDataTiQu(User user);
+
+    List<DataBackup> findDataTiQu(User user);
+
+    int updateT(@Param("id") Integer id, @Param("type") Integer type);
 }

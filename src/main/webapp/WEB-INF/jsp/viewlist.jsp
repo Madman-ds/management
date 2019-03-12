@@ -150,6 +150,7 @@
         var numArr6 = [];
         var numArr7 = [];
         var numArr8 = [];
+        var numArr9 = [];
         var txt1 = $('#mytableid').find('.td1'); // 获取所有文本框
         var txt2 = $('#mytableid').find('.td2'); // 获取所有文本框
         var txt3 = $('#mytableid').find('.td3'); // 获取所有文本框
@@ -158,6 +159,7 @@
         var txt6 = $('#mytableid').find('.td6 select option:selected'); // 获取所有文本框
         var txt7 = $('#mytableid').find('.td7'); // 获取所有文本框
         var txt8 = $('#mytableid').find('.td8'); // 获取所有文本框
+        var txt9 = $('#mytableid').find('.td9'); // 获取所有文本框
         for (var i = 0; i < txt1.length; i++) {
              numArr1.push(txt1.eq(i).val()); // 将文本框的值添加到数组中
              numArr2.push(txt2.eq(i).val());
@@ -167,6 +169,7 @@
              numArr6.push(txt6.eq(i).val());
              numArr7.push(txt7.eq(i).val());
              numArr8.push(txt8.eq(i).val());
+             numArr9.push(txt9.eq(i).val());
         }
         if (numArr1 == "") {
             alert("您没有操作权限，请联系管理员提供权限后提交！")
@@ -180,6 +183,7 @@
          var numArr6 = JSON.stringify(numArr6);
          var numArr7 = JSON.stringify(numArr7);
          var numArr8 = JSON.stringify(numArr8);
+         var numArr9 = JSON.stringify(numArr9);
         $.ajax({
             url:'<%=request.getContextPath() %>/insertDataBackup',
             type:'post',
@@ -191,7 +195,8 @@
                 "numArr5":numArr5,
                 "numArr6":numArr6,
                 "numArr7":numArr7,
-                "numArr8":numArr8
+                "numArr8":numArr8,
+                "numArr9":numArr9
             },
             dataType:"text",
             success:function(data){
@@ -231,7 +236,7 @@
                 rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>检查要求</td>";
                 rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>检查结果</td>";
                 rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>确认人</td>";
-                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>不符合项</td>";
+                rows.innerHTML += "<td style='width:160px;height: 30px' align='center'>备注内容</td>";
                 var arr = data;
                 for (var i=0;i<arr.length;i++){
                     var tb = document.getElementById("mytableid");//获取表格
@@ -245,9 +250,11 @@
                         "<select style='width:160px;height: 30px'>" +
                         "<option value='0'><span class='fonta'>正常</span></option>" +
                         "<option value='1'><span class='fonta'>故障</span></option>" +
+                        "<option value='1'><span class='fonta'>故障</span></option>" +
                         "</select></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td7' value='"+user_name+"' style='width:160px;height: 30px' align='center' type='text' readonly></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td8' style='width:160px;height: 30px' align='center' type='text'></td>";
+                    row.innerHTML += "<td style='width:160px;height: 30px;display: none'  align='center'><input class='td9' value='"+arr[i].jcx_id+"' style='width:160px;height: 30px' align='center' type='text'></td>";
                 }
             }
         })

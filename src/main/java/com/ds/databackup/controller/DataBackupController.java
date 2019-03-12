@@ -3,11 +3,14 @@ package com.ds.databackup.controller;
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.service.DataBackupService;
 import com.ds.serverlogin.pojo.LoginUser;
+import com.ds.user.pojo.User;
+import com.ds.user.servcie.UserService;
 import com.ds.util.ExcelDataBackup;
 import com.ds.util.DateUtil;
 import com.ds.util.ExportExcelUtil;
 import com.ds.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +32,9 @@ import static com.ds.util.ExportExcelUtil.EXCEl_FILE_2007;
 public class DataBackupController {
     @Autowired
     private DataBackupService dataBackupService;
+
+    @Autowired
+    private UserService userService;
     /**
      * @作者: 段大神经
      * @功能描述: 提取或取消数据
@@ -101,6 +107,7 @@ public class DataBackupController {
         String numArr6 = request.getParameter("numArr6");
         String numArr7 = request.getParameter("numArr7");
         String numArr8 = request.getParameter("numArr8");
+        String numArr9 = request.getParameter("numArr9");
         String[] s1 = numArr1.substring(1).replaceAll("]","").split(",");
         String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
         String[] s3 = numArr3.substring(1).replaceAll("]","").split(",");
@@ -109,6 +116,7 @@ public class DataBackupController {
         String[] s6 = numArr6.substring(1).replaceAll("]","").split(",");
         String[] s7 = numArr7.substring(1).replaceAll("]","").split(",");
         String[] s8 = numArr8.substring(1).replaceAll("]","").split(",");
+        String[] s9 = numArr9.substring(1).replaceAll("]","").split(",");
         DataBackup dataBackup1 = null;
         for (int i = 0; i < s1.length; i++){
             dataBackup1 = new DataBackup();
@@ -121,6 +129,7 @@ public class DataBackupController {
             dataBackup1.setJc_jg(Integer.valueOf(s6[i].substring(1, s6[i].length()-1)));
             dataBackup1.setUser_name(s7[i].substring(1, s7[i].length()-1));
             dataBackup1.setBz_nr(s8[i].substring(1, s8[i].length()-1));
+            dataBackup1.setJcx_id(Integer.valueOf(s9[i].substring(1, s9[i].length()-1)));
             dataBackupService.insertDataBackup(dataBackup1);
         }
         return 1;
@@ -149,6 +158,26 @@ public class DataBackupController {
             String[] title = {"名称","编号","属性","检查项","检查要求","确认结果","确认人","确认时间","备注"};
             String fileName = DateUtil.dateToString(new Date(),"yyyyMMddHHmmss") +"shebei";
             export.exportExcel(fileName,"用户",title,list,response,EXCEl_FILE_2007);
+        }
+    }
+
+    @GetMapping("findDataTiQu")
+    public PageUtil findDataTiQu(User user){
+        Integer count = userService.getDataTiQu(user);
+        List<DataBackup> list = userService.findDataTiQu(user);
+        PageUtil page = new PageUtil();
+        page.setRows(list);
+        page.setTotal(count);
+        return page;
+    }
+
+    @GetMapping("updateT")
+    @Transactional
+    public int updateT(@RequestParam("id") Integer id,@RequestParam("type") Integer type){
+        if(type == 1){
+            return userService.updateT(id,type);
+        }else{
+            return userService.updateT(id,type);
         }
     }
 }

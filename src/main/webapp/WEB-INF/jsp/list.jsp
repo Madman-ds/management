@@ -93,6 +93,9 @@
                 <li role="presentation">
                     <a href="<%=request.getContextPath() %>/toDatabackUp" target="mainFrame">数据备份</a>
                 </li>
+                <li role="presentation">
+                    <a href="<%=request.getContextPath() %>/toDataTiqu" target="mainFrame">提取管理</a>
+                </li>
             </ul>
         </div>
         <!-- 左侧导航和正文内容的分隔线 -->

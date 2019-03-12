@@ -1,5 +1,6 @@
 package com.ds.user.servcie.impl;
 
+import com.ds.databackup.pojo.DataBackup;
 import com.ds.user.mapper.UserMappper;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
@@ -47,5 +48,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delAllUser(String ids) {
         userMappper.delAllUser(ids);
+    }
+
+    @Override
+    public Integer getDataTiQu(User user) {
+        return userMappper.getDataTiQu(user);
+    }
+
+    @Override
+    public List<DataBackup> findDataTiQu(User user) {
+        return userMappper.findDataTiQu(user);
+    }
+
+    @Override
+    public int updateT(Integer id, Integer type) {
+        return userMappper.updateT(id,type);
     }
 }

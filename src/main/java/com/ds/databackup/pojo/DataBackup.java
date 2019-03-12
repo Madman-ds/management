@@ -66,4 +66,9 @@ public class DataBackup extends PageUtil {
      * 备注内容
      */
     private String bz_nr;
+
+    /**
+     * 检查项id
+     */
+    private Integer jcx_id;
 }

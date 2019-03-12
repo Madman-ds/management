@@ -129,9 +129,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                    <button type="button" class="btn btn-primary" onclick="addRow2()">新增检查项</button>
-                    <button type="button" class="btn btn-primary" onclick="delRow4()">删除全部</button>
-            </div>
+            <button type="button" class="btn btn-primary" onclick="addRow2()">新增检查项</button>
+            <button type="button" class="btn btn-primary" onclick="delRow4()">删除全部</button>
+        </div>
             <div class="modal-body">
                 <table >
                     <tr>

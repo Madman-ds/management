@@ -1,5 +1,6 @@
 package com.ds.user.servcie;
 
+import com.ds.databackup.pojo.DataBackup;
 import com.ds.user.pojo.User;
 
 import java.util.List;
@@ -22,4 +23,10 @@ public interface UserService {
     int updUser(User user);
 
     void delAllUser(String ids);
+
+    Integer getDataTiQu(User user);
+
+    List<DataBackup> findDataTiQu(User user);
+
+    int updateT(Integer id, Integer type);
 }

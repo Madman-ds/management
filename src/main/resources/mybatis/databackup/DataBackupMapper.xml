@@ -69,8 +69,8 @@
     <!-- 添加巡检记录 -->
     <insert id="insertDataBackup" parameterType="com.ds.databackup.pojo.DataBackup">
         insert into
-          t_inspectionrecord(sb_name,sb_number,sb_xh,jcx_name,jc_yq,jc_jg,user_name,qr_time,bz_nr)
-        value(#{sb_name},#{sb_number},#{sb_xh},#{jcx_name},#{jc_yq},#{jc_jg},#{user_name},NOW(),#{bz_nr})
+          t_inspectionrecord(sb_name,sb_number,sb_xh,jcx_name,jc_yq,jc_jg,user_name,qr_time,bz_nr,jcx_id)
+        value(#{sb_name},#{sb_number},#{sb_xh},#{jcx_name},#{jc_yq},#{jc_jg},#{user_name},NOW(),#{bz_nr},#{jcx_id})
     </insert>
     <!-- 提取或取消数据 -->
     <update id="updateTop" parameterType="com.ds.databackup.pojo.DataBackup">

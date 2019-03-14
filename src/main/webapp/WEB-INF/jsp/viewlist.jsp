@@ -61,11 +61,11 @@
                 </i>提交
             </button>
             &nbsp;
-            <button onclick="toread()" class="btn btn-primary" type="button">
+            <%--<button onclick="toread()" class="btn btn-primary" type="button">
                 <i class="glyphicon glyphicon-share-alt">
                 </i>查看所有
             </button>
-            &nbsp;
+            &nbsp;--%>
             <button onclick="zjRead()" class="btn btn-primary" type="button">
                 <i class="glyphicon glyphicon-share-alt">
                 </i>个人查看
@@ -250,7 +250,7 @@
                         "<select style='width:160px;height: 30px'>" +
                         "<option value='0'><span class='fonta'>正常</span></option>" +
                         "<option value='1'><span class='fonta'>故障</span></option>" +
-                        "<option value='1'><span class='fonta'>故障</span></option>" +
+                        "<option value='2' selected><span class='fonta'>未操作</span></option>" +
                         "</select></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td7' value='"+user_name+"' style='width:160px;height: 30px' align='center' type='text' readonly></td>";
                     row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td8' style='width:160px;height: 30px' align='center' type='text'></td>";

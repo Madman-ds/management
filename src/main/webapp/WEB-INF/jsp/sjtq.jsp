@@ -99,9 +99,9 @@ To change this template use File | Settings | File Templates.
         },{field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                 var str="";
                 if(rows.top == 1){
-                    str+="<button class='btn btn-info dim' type='button' onclick='updateT(\""+rows.ju_id+"\",\""+2+"\")' ><i class='fa fa-paste'></i>提取</button>  ";
+                    str+="<button class='btn btn-info dim' type='button' onclick='updateTs(\""+rows.ju_id+"\",\""+2+"\",\""+rows.jcx_Id+"\")' ><i class='fa fa-paste'></i>提取</button>  ";
                 }else {
-                    str+="<button class='btn btn-info dim' type='button' onclick='updateT(\""+rows.ju_id+"\",\""+1+"\")' ><i class='fa fa-paste'></i>还原</button>";
+                    str+="<button class='btn btn-info dim' type='button' onclick='updateTs(\""+rows.ju_id+"\",\""+1+"\",\""+rows.jcx_Id+"\")' ><i class='fa fa-paste'></i>还原</button>";
                 }
                 return  str;
             }
@@ -122,6 +122,24 @@ To change this template use File | Settings | File Templates.
             data:{
                 id:id,
                 type:type
+            },
+            dataType:'json',
+            success:function(data){
+                if (data>0) {
+                    $("#userList").bootstrapTable('refresh',{pageNumber:1});
+                }
+
+            }
+        })
+    }
+    function updateTs(id,type,jcx_id){
+        $.ajax({
+            url:'<%=request.getContextPath() %>/updateTs',
+            type:'get',
+            data:{
+                id:id,
+                type:type,
+                jcx_id:jcx_id
             },
             dataType:'json',
             success:function(data){

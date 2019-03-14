@@ -26,4 +26,6 @@ public class UserEquipment {
      * 权限：1写；0读
      */
     private Integer qx;
+
+    private Integer top;
 }

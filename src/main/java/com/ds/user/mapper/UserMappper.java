@@ -30,4 +30,6 @@ public interface UserMappper {
     List<DataBackup> findDataTiQu(User user);
 
     int updateT(@Param("id") Integer id, @Param("type") Integer type);
+
+    int updateTs(@Param("type") Integer type, @Param("jcx_id") Integer jcx_id);
 }

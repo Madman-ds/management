@@ -98,4 +98,8 @@
     <update id="updateT" parameterType="integer">
         update t_userequipment set top = #{type} where ju_id = #{id}
     </update>
+
+    <update id="updateTs" parameterType="integer">
+        update t_inspectionrecord set top = #{type} where jcx_id = #{jcx_id}
+    </update>
 </mapper>

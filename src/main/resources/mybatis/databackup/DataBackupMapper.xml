@@ -69,11 +69,15 @@
     <!-- 添加巡检记录 -->
     <insert id="insertDataBackup" parameterType="com.ds.databackup.pojo.DataBackup">
         insert into
-          t_inspectionrecord(sb_name,sb_number,sb_xh,jcx_name,jc_yq,jc_jg,user_name,qr_time,bz_nr,jcx_id)
-        value(#{sb_name},#{sb_number},#{sb_xh},#{jcx_name},#{jc_yq},#{jc_jg},#{user_name},NOW(),#{bz_nr},#{jcx_id})
+          t_inspectionrecord(sb_name,sb_number,sb_xh,jcx_name,jc_yq,jc_jg,user_name,qr_time,bz_nr,jcx_id,top)
+        value(#{sb_name},#{sb_number},#{sb_xh},#{jcx_name},#{jc_yq},#{jc_jg},#{user_name},NOW(),#{bz_nr},#{jcx_id},#{top})
     </insert>
     <!-- 提取或取消数据 -->
     <update id="updateTop" parameterType="com.ds.databackup.pojo.DataBackup">
         update t_inspectionrecord set top = #{top} where xj_id = #{xj_id}
     </update>
+
+    <select id="queryByUserequipment" resultType="com.ds.inspectionitem.pojo.UserEquipment">
+        select * from t_userequipment where jcx_id = #{jcx_id} and user_id = #{user_id}
+    </select>
 </mapper>

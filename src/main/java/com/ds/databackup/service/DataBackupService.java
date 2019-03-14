@@ -1,6 +1,7 @@
 package com.ds.databackup.service;
 
 import com.ds.databackup.pojo.DataBackup;
+import com.ds.inspectionitem.pojo.UserEquipment;
 import com.ds.util.ExcelDataBackup;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface DataBackupService {
     List<ExcelDataBackup> findDataBackupExcel(DataBackup dataBackup);
 
     int updateTop(DataBackup dataBackup);
+
+    UserEquipment queryByUserequipment(Long jcx_id, Long user_id);
 }

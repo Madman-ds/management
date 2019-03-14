@@ -145,8 +145,10 @@
                 formatter:function (value,rows,index){
                     if (value == 0){
                         return "正常";
-                    } else{
+                    } else if(value == 1){
                         return "异常"
+                    }else if(value == 2){
+                        return "未操作"
                     }
                 }
             },

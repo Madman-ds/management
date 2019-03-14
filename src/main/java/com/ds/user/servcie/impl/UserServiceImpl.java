@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
     public int updateT(Integer id, Integer type) {
         return userMappper.updateT(id,type);
     }
+
+    @Override
+    public int updateTs(Integer type, Integer jcx_id) {
+        return userMappper.updateTs(type,jcx_id);
+    }
 }

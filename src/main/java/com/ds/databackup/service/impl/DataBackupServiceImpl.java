@@ -3,6 +3,7 @@ package com.ds.databackup.service.impl;
 import com.ds.databackup.mapper.DataBackupMapper;
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.service.DataBackupService;
+import com.ds.inspectionitem.pojo.UserEquipment;
 import com.ds.util.ExcelDataBackup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,11 @@ public class DataBackupServiceImpl implements DataBackupService {
     public int updateTop(DataBackup dataBackup) {
         return dataBackupMapper.updateTop(dataBackup);
     }
+
+    @Override
+    public UserEquipment queryByUserequipment(Long jcx_id, Long user_id) {
+        return dataBackupMapper.queryByUserequipment(jcx_id,user_id);
+    }
+
+
 }

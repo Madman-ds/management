@@ -29,4 +29,6 @@ public interface UserService {
     List<DataBackup> findDataTiQu(User user);
 
     int updateT(Integer id, Integer type);
+
+    int updateTs(Integer type, Integer jcx_id);
 }

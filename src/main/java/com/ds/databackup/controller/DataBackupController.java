@@ -2,6 +2,7 @@ package com.ds.databackup.controller;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.service.DataBackupService;
+import com.ds.inspectionitem.pojo.UserEquipment;
 import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
@@ -129,7 +130,15 @@ public class DataBackupController {
             dataBackup1.setJc_jg(Integer.valueOf(s6[i].substring(1, s6[i].length()-1)));
             dataBackup1.setUser_name(s7[i].substring(1, s7[i].length()-1));
             dataBackup1.setBz_nr(s8[i].substring(1, s8[i].length()-1));
-            dataBackup1.setJcx_id(Integer.valueOf(s9[i].substring(1, s9[i].length()-1)));
+            Long jcx_id = Long.valueOf(s9[i].substring(1, s9[i].length()-1));
+            dataBackup1.setJcx_id(jcx_id);
+            Long user_id = loginUser.getUser_id();
+            UserEquipment userEquipment = dataBackupService.queryByUserequipment(jcx_id,user_id);
+            if(userEquipment.getQx() == 1 && userEquipment.getTop()==2){
+                dataBackup1.setTop("1");
+            }else{
+                dataBackup1.setTop("0");
+            }
             dataBackupService.insertDataBackup(dataBackup1);
         }
         return 1;
@@ -174,10 +183,19 @@ public class DataBackupController {
     @GetMapping("updateT")
     @Transactional
     public int updateT(@RequestParam("id") Integer id,@RequestParam("type") Integer type){
-        if(type == 1){
-            return userService.updateT(id,type);
-        }else{
-            return userService.updateT(id,type);
+        return userService.updateT(id,type);
+    }
+
+    @GetMapping("updateTs")
+    @Transactional
+    public int updateTs(@RequestParam("id") Integer id,@RequestParam("type") Integer type,@RequestParam("jcx_id") Integer jcx_id){
+        int i = 0;
+        if(type==1){
+            userService.updateT(id,type);
+            i = userService.updateTs(0, jcx_id);
+        }else if (type==2){
+            i = userService.updateT(id, type);
         }
+        return i;
     }
 }

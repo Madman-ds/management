@@ -70,5 +70,5 @@ public class DataBackup extends PageUtil {
     /**
      * 检查项id
      */
-    private Integer jcx_id;
+    private Long jcx_id;
 }

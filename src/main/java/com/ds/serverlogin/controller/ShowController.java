@@ -47,7 +47,7 @@ public class ShowController {
     @GetMapping("logout")
     public String logout(HttpSession session){
         session.removeAttribute("loginUser");
-        return "viewindex";
+        return "redirect:/topIndex";
     }
 
     /**
@@ -211,7 +211,7 @@ public class ShowController {
      * @参数:  * @param
      * @返回值: java.lang.String
      **/
-    @GetMapping("topIndex")
+    @GetMapping(value = {"topIndex","/"})
     public String topIndex(){
         return "topindex";
     }

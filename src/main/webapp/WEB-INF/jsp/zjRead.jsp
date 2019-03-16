@@ -36,7 +36,7 @@
         //     }
         // },
         columns:[{
-            field:"sb_number",
+            field:"sb_name",
             title:"名称",
             align:'center',
         },{

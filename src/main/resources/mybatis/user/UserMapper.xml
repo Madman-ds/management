@@ -92,11 +92,11 @@
             AND b.qx = 1
     </select>
 
-    <update id="updateT" parameterType="integer">
+    <update id="updateT" parameterType="com.ds.databackup.pojo.DataBackupParam">
         update t_userequipment set top = #{type} where ju_id = #{id}
     </update>
 
-    <update id="updateTs" parameterType="integer">
-        update t_inspectionrecord set top = #{type} where jcx_id = #{jcx_id}
+    <update id="updateTs" parameterType="com.ds.databackup.pojo.DataBackupParam">
+        update t_inspectionrecord set top = #{type} where jcx_id = #{jcx_id} and user_name = #{user_name}
     </update>
 </mapper>

@@ -19,11 +19,9 @@ public class MyInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Object loginUser = request.getSession().getAttribute("loginUser");
-        if (request.getRequestURI().equals("/findDataBackupTop")){
-            return true;
-        }else if (loginUser == null){
+        if (loginUser == null){
             //被拦截的路径后要重定向的路径
-           response.sendRedirect("login");
+           response.sendRedirect("topIndex");
             return false;
         }else {
             return true;

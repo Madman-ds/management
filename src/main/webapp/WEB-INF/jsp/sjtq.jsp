@@ -79,7 +79,7 @@ To change this template use File | Settings | File Templates.
             width:200
         },
         {
-            field:"jcx_id",
+            field:"jcx_Id",
             title:"检查项id",
             align:'center',
             visible: false,
@@ -101,7 +101,7 @@ To change this template use File | Settings | File Templates.
                 if(rows.top == 1){
                     str+="<button class='btn btn-info dim' type='button' onclick='updateTs(\""+rows.ju_id+"\",\""+2+"\",\""+rows.jcx_Id+"\")' ><i class='fa fa-paste'></i>提取</button>  ";
                 }else {
-                    str+="<button class='btn btn-info dim' type='button' onclick='updateTs(\""+rows.ju_id+"\",\""+1+"\",\""+rows.jcx_Id+"\")' ><i class='fa fa-paste'></i>还原</button>";
+                    str+="<button class='btn btn-info dim' type='button' onclick='updateTs(\""+rows.ju_id+"\",\""+1+"\",\""+rows.jcx_Id+"\",\""+rows.user_name+"\")' ><i class='fa fa-paste'></i>还原</button>";
                 }
                 return  str;
             }
@@ -132,14 +132,15 @@ To change this template use File | Settings | File Templates.
             }
         })
     }
-    function updateTs(id,type,jcx_id){
+    function updateTs(id,type,jcx_id,user_name){
         $.ajax({
             url:'<%=request.getContextPath() %>/updateTs',
             type:'get',
             data:{
                 id:id,
                 type:type,
-                jcx_id:jcx_id
+                jcx_id:jcx_id,
+                user_name:user_name
             },
             dataType:'json',
             success:function(data){

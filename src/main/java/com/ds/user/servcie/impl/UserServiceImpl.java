@@ -1,6 +1,7 @@
 package com.ds.user.servcie.impl;
 
 import com.ds.databackup.pojo.DataBackup;
+import com.ds.databackup.pojo.DataBackupParam;
 import com.ds.user.mapper.UserMappper;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
@@ -61,12 +62,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateT(Integer id, Integer type) {
-        return userMappper.updateT(id,type);
+    public int updateT(DataBackupParam dataBackupParam) {
+        return userMappper.updateT(dataBackupParam);
     }
 
     @Override
-    public int updateTs(Integer type, Integer jcx_id) {
-        return userMappper.updateTs(type,jcx_id);
+    public int updateTs(DataBackupParam dataBackupParam) {
+        return userMappper.updateTs(dataBackupParam);
     }
 }

@@ -19,30 +19,32 @@
             <form class="form-horizontal" id="searchForms">
                 <div class="form-group" >
                     <label for="select_sb_name" class="col-sm-1 control-label">名称</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" id="select_sb_name" placeholder="请输入名称">
                     </div>
 
                     <label for="select_sb_number" class="col-sm-1 control-label">编号</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" id="select_sb_number" placeholder="请输入编号">
                     </div>
 
                     <label for="select_sb_xh" class="col-sm-1 control-label">属性</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入属性">
                     </div>
+                </div>
+                <div class="form-group col-sm-5" >
 
-                    <div class="col-sm-2">
-                        <button onclick="whereSearchs()" class="btn btn-primary" type="button">
-                            <i class="glyphicon glyphicon-search">
-                            </i>搜索
-                        </button>
-                        <button onclick="resetForms()" class="btn btn-danger" type="button">
-                            <i class="glyphicon glyphicon-repeat">
-                            </i>重置
-                        </button>
-                    </div>
+                </div>
+                <div class="form-group col-sm-6" >
+                    <button onclick="whereSearchs()" class="btn btn-primary" type="button">
+                        <i class="glyphicon glyphicon-search">
+                        </i>搜索
+                    </button>
+                    <button onclick="resetForms()" class="btn btn-danger" type="button">
+                        <i class="glyphicon glyphicon-repeat">
+                        </i>重置
+                    </button>
                 </div>
             </form>
         </div>

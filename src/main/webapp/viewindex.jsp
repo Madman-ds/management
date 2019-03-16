@@ -20,12 +20,12 @@
 <body >
 <img src="static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 <%--<form class="form-horizontal" id="skuserForm">--%>
-        <div class="form-group" style="margin-right:600px;margin-left: 500px;margin-top: 180px;">
+        <div class="form-group" style="margin-right:18%;margin-left: 20%;margin-top: 180px;">
         <div class="input-group">
             <div class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
             </div>
-            <input type="password" class="form-control input-lg"  name="user_kh" placeholder="请刷卡登陆系统" id="kw" oninput="skButton()">
+            <input type="password" class="form-control input-lg"  name="user_kh" placeholder="请刷卡登陆系统" id="kw" onchange="skButton()">
         </div>
     </div>
 <%--</form>--%>
@@ -64,7 +64,7 @@
         </div>
     </div>
 </div>
-<div style="margin-left: 540px">
+<div style="margin-left: 500px">
     <%--<button type="button" onclick="skButton()" class="btn btn-success btn-lg">
         刷卡登陆
     </button>--%>
@@ -98,8 +98,10 @@
                      location.href = "toViewList";
                 }else if (data.useFlag == 101 || data.useFlag == "101"){
                     alert("该卡号不存在");
+                    location.reload();
                 }else if(data.useFlag == 102 || data.useFlag == "102"){
                     alert("卡号重复");
+                    location.reload();
                 }
             },error:function(){
                 alert("哇哦！程序走丢了");

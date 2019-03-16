@@ -14,7 +14,7 @@
                 font-family: "Microsoft YaHei", sans-serif;
             }
             .pageSidebar{
-                width: 240px;
+                width: 140px;
                 height:100%;
                 padding-bottom: 30px;
                 overflow: auto;
@@ -32,7 +32,7 @@
             .pageContent{
                 height: 100%;
                 min-width: 768px;
-                left: 246px;
+                left: 146px;
                 top: 0;
                 right: 0;
                 z-index: 3;

@@ -15,46 +15,49 @@
 <jsp:include page="../../../jscore.jsp"></jsp:include>
 <body>
 <!-- 搜索 -->
-    <div class="panel-body">
-        <form class="form-horizontal" id="searchUserForm">
-            <div class="form-group" >
-                <label for="user_name" class="col-sm-1 control-label">用户名：</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="user_name" placeholder="请输入设备名称">
-                </div>
-
-                <label for="user_kh" class="col-sm-1 control-label">卡号：</label>
-                <div class="col-sm-2">
-                    <input type="text" class="form-control" id="user_kh" placeholder="请输入卡号">
-                </div>
-                <div class="col-sm-2">
-                    <button onclick="uerSearch()" class="btn btn-primary" type="button">
-                        <i class="glyphicon glyphicon-search">
-                        </i>搜索
-                    </button>
-                    <button onclick="resetUserForm()" class="btn btn-danger" type="button">
-                        <i class="glyphicon glyphicon-repeat">
-                        </i>重置
-                    </button>
-                </div>
+<div class="panel-body">
+    <form class="form-horizontal" id="searchUserForm">
+        <div class="form-group" >
+            <label for="user_name" class="col-sm-2 control-label">用户名：</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="user_name" placeholder="请输入设备名称">
             </div>
-        </form>
-    </div>
-    <div id="toolbar">
-        <button class="btn btn-success" type="button" onclick="addUser()">
-            <i class="glyphicon glyphicon-plus">
-            </i>新增
-        </button>
-        <button class="btn btn-danger" type="button" onclick="delALLuUser()">
-            <i class="glyphicon glyphicon-minus">
-            </i>删除
-        </button>
-        <button type="button" class="btn btn-info" onclick="updateUser()">
-            <i class="glyphicon glyphicon-wrench">
-            </i>修改
-        </button>
-    </div>
-    <table id="userList"></table>
+
+            <label for="user_kh" class="col-sm-2 control-label">卡号：</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="user_kh" placeholder="请输入卡号">
+            </div>
+        </div>
+        <div class="form-group col-sm-5" >
+
+        </div>
+        <div class="form-group col-sm-6" >
+            <button onclick="uerSearch()" class="btn btn-primary" type="button">
+                <i class="glyphicon glyphicon-search">
+                </i>搜索
+            </button>
+            <button onclick="resetUserForm()" class="btn btn-danger" type="button">
+                <i class="glyphicon glyphicon-repeat">
+                </i>重置
+            </button>
+        </div>
+    </form>
+</div>
+<div id="toolbar">
+    <button class="btn btn-success" type="button" onclick="addUser()">
+        <i class="glyphicon glyphicon-plus">
+        </i>新增
+    </button>
+    <button class="btn btn-danger" type="button" onclick="delALLuUser()">
+        <i class="glyphicon glyphicon-minus">
+        </i>删除
+    </button>
+    <button type="button" class="btn btn-info" onclick="updateUser()">
+        <i class="glyphicon glyphicon-wrench">
+        </i>修改
+    </button>
+</div>
+<table id="userList"></table>
 </body>
 <script type="text/javascript" >
     //条件查询

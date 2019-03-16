@@ -1,6 +1,7 @@
 package com.ds.user.mapper;
 
 import com.ds.databackup.pojo.DataBackup;
+import com.ds.databackup.pojo.DataBackupParam;
 import com.ds.user.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,7 +30,7 @@ public interface UserMappper {
 
     List<DataBackup> findDataTiQu(User user);
 
-    int updateT(@Param("id") Integer id, @Param("type") Integer type);
+    int updateT(DataBackupParam dataBackupParam);
 
-    int updateTs(@Param("type") Integer type, @Param("jcx_id") Integer jcx_id);
+    int updateTs(DataBackupParam dataBackupParam);
 }

@@ -134,10 +134,12 @@ public class DataBackupController {
             dataBackup1.setJcx_id(jcx_id);
             Long user_id = loginUser.getUser_id();
             UserEquipment userEquipment = dataBackupService.queryByUserequipment(jcx_id,user_id);
-            if(userEquipment.getQx() == 1 && userEquipment.getTop()==2){
-                dataBackup1.setTop("1");
-            }else{
-                dataBackup1.setTop("0");
+            if (userEquipment != null && userEquipment.getQx() != null){
+                if(userEquipment.getQx() == 1 && userEquipment.getTop()==2){
+                    dataBackup1.setTop("1");
+                }else{
+                    dataBackup1.setTop("0");
+                }
             }
             dataBackupService.insertDataBackup(dataBackup1);
         }

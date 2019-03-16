@@ -47,7 +47,10 @@
                 formatter:function (value,rows,index){
                     if (value == 0){
                         return "正常";
-                    } else{
+                    } else if(value == 2){
+                        return "未操作"
+                    }
+                    else {
                         return "异常"
                     }
                 }

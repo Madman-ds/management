@@ -1,6 +1,7 @@
 package com.ds.databackup.controller;
 
 import com.ds.databackup.pojo.DataBackup;
+import com.ds.databackup.pojo.DataBackupParam;
 import com.ds.databackup.service.DataBackupService;
 import com.ds.inspectionitem.pojo.UserEquipment;
 import com.ds.serverlogin.pojo.LoginUser;
@@ -184,19 +185,21 @@ public class DataBackupController {
 
     @GetMapping("updateT")
     @Transactional
-    public int updateT(@RequestParam("id") Integer id,@RequestParam("type") Integer type){
-        return userService.updateT(id,type);
+    public int updateT(DataBackupParam dataBackupParam){
+        return userService.updateT(dataBackupParam);
     }
 
     @GetMapping("updateTs")
     @Transactional
-    public int updateTs(@RequestParam("id") Integer id,@RequestParam("type") Integer type,@RequestParam("jcx_id") Integer jcx_id){
+    public int updateTs(DataBackupParam dataBackupParam){
         int i = 0;
-        if(type==1){
-            userService.updateT(id,type);
-            i = userService.updateTs(0, jcx_id);
-        }else if (type==2){
-            i = userService.updateT(id, type);
+
+        if(dataBackupParam.getType()==1){
+            userService.updateT(dataBackupParam);
+            dataBackupParam.setType(0);
+            i = userService.updateTs(dataBackupParam);
+        }else if (dataBackupParam.getType()==2){
+            i = userService.updateT(dataBackupParam);
         }
         return i;
     }

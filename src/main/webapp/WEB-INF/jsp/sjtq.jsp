@@ -79,7 +79,7 @@ To change this template use File | Settings | File Templates.
             width:200
         },
         {
-            field:"jcx_Id",
+            field:"jcx_id",
             title:"检查项id",
             align:'center',
             visible: false,

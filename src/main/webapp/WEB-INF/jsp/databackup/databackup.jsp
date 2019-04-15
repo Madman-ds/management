@@ -146,7 +146,7 @@
                 }
             },
             {field:'bz_nr',title:'不符合项',align:'center'},
-            {field:'top',title:'是否提取',align:'center',
+            /*{field:'top',title:'是否提取',align:'center',
                 formatter:function (value,rows,index){
                     if (value == "0"){
                         return "未提取";
@@ -154,12 +154,12 @@
                         return "已提取"
                     }
                 }
-            },
-            {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
+            },*/
+            /*{field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="<button class='btn btn-info dim' type='button' onclick='updateTop(\""+rows.xj_id+"\",\""+rows.top+"\")' ><i class='fa fa-paste'></i>提取或还原</button>  ";
                     return  str;
                 }
-            }
+            }*/
         ],
         pagination:true,
         pageNumber:1,

@@ -228,7 +228,10 @@
             var userId =$("#userId").val();
             $.ajax({
             url:'<%=request.getContextPath() %>/equipment/findEquipmentInspectionitem',
-            data:{"userId":userId},
+            data:{
+                "userId":userId,
+                "sb_type":sb_type;
+            },
             type:'get',
             success:function(data){
                 var tbs = document.getElementById("mytableid");//获取表格

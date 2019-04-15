@@ -23,6 +23,12 @@
         <div class="col-sm-5">
             <div class="input-group col-sm-10">
                 <button onclick="tologin()" class="btn btn-success" type="button">
+                    周生产计划
+                    <i class="glyphicon glyphicon-hand-right">
+                    </i>
+                </button>
+
+                <button onclick="tologin()" class="btn btn-success" type="button" style="margin-left: 20px">
                     <i class="glyphicon glyphicon-hand-left">
                     </i>日常打卡
                 </button>

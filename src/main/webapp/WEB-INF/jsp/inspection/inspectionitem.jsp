@@ -41,7 +41,7 @@
                         <i class="glyphicon glyphicon-search">
                         </i>搜索
                     </button>
-                    <button onclick="resetForms()" class="btn btn-danger" type="button">
+                    <button onclick="resetForms1()" class="btn btn-danger" type="button">
                         <i class="glyphicon glyphicon-repeat">
                         </i>重置
                     </button>
@@ -57,7 +57,7 @@
 </body>
 <script type="text/javascript">
     //重置
-    function resetForms(){
+    function resetForms1(){
         $("#searchForms")[0].reset();
         whereSearch();
     }

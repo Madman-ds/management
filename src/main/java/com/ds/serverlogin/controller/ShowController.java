@@ -1,5 +1,7 @@
 package com.ds.serverlogin.controller;
 
+import com.ds.fivesinspect.pojo.FiveSInspect;
+import com.ds.fivesinspect.service.FiveSInspectService;
 import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
@@ -9,6 +11,7 @@ import com.ds.ybtz.pojo.Ybtz;
 import com.ds.ybtz.servcie.YbtzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -28,7 +31,8 @@ public class ShowController {
     private UserService userService;
     @Autowired
     private WeekPlanService weekPlanService;
-
+    @Autowired
+    private FiveSInspectService fiveSInspectService;
     @Autowired
     private YbtzService ybtzService;
     /**
@@ -331,5 +335,75 @@ public class ShowController {
         Ybtz ybtz = ybtzService.toUpdYbtz(week);
         modelMap.addAttribute("ybtz",ybtz);
         return "WEB-INF/jsp/ybtz/updybtz";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到5S点检页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toFiveSInspect")
+    public String toFiveSInspect(){
+        return "WEB-INF/jsp/fivesinspect/fivesinspectlist";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到添加5S页面
+     * @时间: 2019/4/18 20:25
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toAddFiveSInspect")
+    public String toAddFiveSInspect(){
+        return "WEB-INF/jsp/fivesinspect/addfivesinspect";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到修改5S页面
+     * @时间: 2019/4/18 21:42
+     * @参数:  * @param fiveSInspect
+     * @param model
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toUpFiveSInspect")
+    public String toUpFiveSInspect(FiveSInspect fiveSInspect, Model model){
+        FiveSInspect inspect = fiveSInspectService.findFiveSInspectById(fiveSInspect);
+        model.addAttribute("fsi",inspect);
+        return "WEB-INF/jsp/fivesinspect/upfivesinspect";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到5S写权限页面
+     * @时间: 2019/4/21 15:47
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toFiveSWrite")
+    public String toFiveSWrite(){
+        return "WEB-INF/jsp/fivesinspect/fiveswritelist";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到查看5S写权限页面
+     * @时间: 2019/4/21 16:43
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toShowFiveSInspect")
+    public String toShowFiveSInspect(Model model,String userId){
+        model.addAttribute("userId",userId);
+        return "WEB-INF/jsp/fivesinspect/ShowFiveSInspect";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到5S日志记录页面
+     * @时间: 2019/4/22 17:14
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toFiveSLog")
+    public String toFiveSLog(){
+        return "WEB-INF/jsp/fivesinspect/fiveslog";
     }
 }

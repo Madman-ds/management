@@ -105,6 +105,15 @@
                 <li role="presentation">
                     <a href="<%=request.getContextPath() %>/toYbtz" target="mainFrame">仪表台账</a>
                 </li>
+                <li role="presentation">
+                    <a href="<%=request.getContextPath() %>/toFiveSInspect" target="mainFrame">5S点检</a>
+                </li>
+                <li role="presentation">
+                    <a href="<%=request.getContextPath() %>/toFiveSWrite" target="mainFrame">5S写操作管理</a>
+                </li>
+                <li role="presentation">
+                    <a href="<%=request.getContextPath() %>/toFiveSLog" target="mainFrame">5S日志记录</a>
+                </li>
             </ul>
         </div>
         <!-- 左侧导航和正文内容的分隔线 -->

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>添加用户页面</title>
@@ -17,10 +18,10 @@
         <br>
         <div class="form-group">
             <div class="col-sm-6">
-                <input  name="z_startdate" id="z_startdate" value="${weekPlan.z_startdate}" class="form-control time" placeholder="开始时间">
+                <input  name="z_startdate" id="z_startdate" value="<fmt:formatDate value='${weekPlan.z_startdate}' pattern='yyyy-MM-dd'/>"  class="form-control time" placeholder="开始时间">
             </div>
             <div class="col-sm-6">
-                <input  name="z_enddate" id="z_enddate" value="${weekPlan.z_enddate}" class="form-control time" placeholder="结束时间">
+                <input  name="z_enddate" id="z_enddate" value="<fmt:formatDate value='${weekPlan.z_enddate}' pattern='yyyy-MM-dd'/>" pattern='yyyy-MM-dd' class="form-control time" placeholder="结束时间">
             </div>
         </div>
         <br>

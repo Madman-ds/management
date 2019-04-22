@@ -9,7 +9,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>周计划管理页面</title>
+    <title>管理者巡检页面</title>
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../jscore.jsp"></jsp:include>
@@ -44,18 +44,18 @@
     </form>
 </div>--%>
 <div id="toolbar">
-    <button class="btn btn-success" type="button" onclick="addUser()">
+    <%--<button class="btn btn-success" type="button" onclick="addUser()">
         <i class="glyphicon glyphicon-plus">
         </i>新增
-    </button>
+    </button>--%>
     <button class="btn btn-danger" type="button" onclick="delALLuUser()">
         <i class="glyphicon glyphicon-minus">
         </i>删除
     </button>
-    <button type="button" class="btn btn-info" onclick="updateUser()">
-        <i class="glyphicon glyphicon-wrench">
-        </i>修改
-    </button>
+    <%--<button type="button" class="btn btn-info" onclick="updateUser()">--%>
+        <%--<i class="glyphicon glyphicon-wrench">--%>
+        <%--</i>修改--%>
+    <%--</button>--%>
 </div>
 <table id="userList"></table>
 </body>
@@ -78,7 +78,7 @@
         uerSearch();
     }
     $("#userList").bootstrapTable({
-        url:"<%=request.getContextPath()%>/findWeekPlan",
+        url:"<%=request.getContextPath()%>/findGlzxj",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         toolbar:'#toolbar',//工具栏   显示在id为toolbar的div中
         //查询参数：条件查询时使用
@@ -92,81 +92,31 @@
             checkbox:true,
             formatter:stateFormatter
         },{
-            field:"z_id",
-            title:"用户编号",
+            field:"glz_id",
+            title:"主键",
             visible: false,
             align:'center',
         },{
-            field:"z_name",
-            title:"设备名称/编号",
-            align:'center',
-            formatter:function(value,row,index){
-                return row.z_name + "(" +row.z_bh + ")" ;
-            }
+            field:"glz_name",
+            title:"巡检人",
+            align:'center'
         }, {
-            field:"z_one",
-            title:"周一",
+            field:"glz_data",
+            title:"时间",
             align:'center',
-            width:200
-        },{
-            field:"z_two",
-            title:"周二",
-            align:'center',
-            width:200
-        },{
-            field:"z_three",
-            title:"周三",
-            align:'center',
-            width:200
-        },{
-            field:"z_four",
-            title:"周四",
-            align:'center',
-            width:200
-        },{
-            field:"z_five",
-            title:"周五",
-            align:'center',
-            width:200
-        },{
-            field:"z_six",
-            title:"周六",
-            align:'center',
-            width:200
-        },{
-            field:"z_sunday",
-            title:"周日",
-            align:'center',
-            width:200
-        },{
-            field:"z_remarks",
-            title:"备注",
-            align:'center',
-            width:300
-        },{
-            field:"z_startdate",
-            title:"开始时间",
-            align:'center',
-            width:200,
-            //获取日期列的值进行转换
             formatter: function (value, row, index) {
                 return changeDateFormat(value);
             }
         },{
-            field:"z_enddate",
-            title:"结束时间",
+            field:"glz_count",
+            title:"问题数量",
             align:'center',
-            width:200,
-            //获取日期列的值进行转换
-            formatter: function (value, row, index) {
-                return changeDateFormat(value);
-            }
         }
         ],
         pagination:true,
         pageNumber:1,
-        pageSize:2,
-        pageList:[2,4,6,8],
+        pageSize:5,
+        pageList:[5,10,15,20],
         clickToSelect: true,
         cache搜索: false,
         sidePagination:"server"
@@ -192,7 +142,7 @@
     //删除用户数据
     function delALLuUser(){
         var rows=$.map($("#userList").bootstrapTable('getSelections'),function(row){
-            return row.z_id;
+            return row.glz_id;
         });
         var arr = $("#userList").bootstrapTable('getData');
         var ids = rows.join(",");
@@ -205,7 +155,7 @@
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         $.ajax({
-                            url:"<%=request.getContextPath()%>/delAllWeekPlan",
+                            url:"<%=request.getContextPath()%>/delAllGlzxj",
                             data:{"ids":ids},
                             dataType:"text",
                             type:"post",

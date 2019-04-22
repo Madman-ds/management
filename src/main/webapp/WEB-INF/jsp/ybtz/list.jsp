@@ -9,7 +9,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>周计划管理页面</title>
+    <title>仪表台账页面</title>
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../jscore.jsp"></jsp:include>
@@ -78,7 +78,7 @@
         uerSearch();
     }
     $("#userList").bootstrapTable({
-        url:"<%=request.getContextPath()%>/findWeekPlan",
+        url:"<%=request.getContextPath()%>/findYbtz",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         toolbar:'#toolbar',//工具栏   显示在id为toolbar的div中
         //查询参数：条件查询时使用
@@ -92,81 +92,47 @@
             checkbox:true,
             formatter:stateFormatter
         },{
-            field:"z_id",
-            title:"用户编号",
+            field:"ybtz_id",
+            title:"主键",
             visible: false,
             align:'center',
         },{
-            field:"z_name",
-            title:"设备名称/编号",
-            align:'center',
-            formatter:function(value,row,index){
-                return row.z_name + "(" +row.z_bh + ")" ;
-            }
+            field:"ybtz_name",
+            title:"名称",
+            align:'center'
+        },{
+            field:"ybtz_bh",
+            title:"编号",
+            align:'center'
+        },{
+            field:"ybtz_mpa",
+            title:"压力/mpa",
+            align:'center'
+        },{
+            field:"ybtz_type",
+            title:"类别",
+            align:'center'
+        },{
+            field:"ybtz_wz",
+            title:"位置",
+            align:'center'
         }, {
-            field:"z_one",
-            title:"周一",
+            field:"ybtz_date",
+            title:"时间",
             align:'center',
-            width:200
+            formatter: function (value, row, index) {
+                return changeDateFormat(value);
+            }
         },{
-            field:"z_two",
-            title:"周二",
-            align:'center',
-            width:200
-        },{
-            field:"z_three",
-            title:"周三",
-            align:'center',
-            width:200
-        },{
-            field:"z_four",
-            title:"周四",
-            align:'center',
-            width:200
-        },{
-            field:"z_five",
-            title:"周五",
-            align:'center',
-            width:200
-        },{
-            field:"z_six",
-            title:"周六",
-            align:'center',
-            width:200
-        },{
-            field:"z_sunday",
-            title:"周日",
-            align:'center',
-            width:200
-        },{
-            field:"z_remarks",
+            field:"ybtz_remarks",
             title:"备注",
             align:'center',
-            width:300
-        },{
-            field:"z_startdate",
-            title:"开始时间",
-            align:'center',
-            width:200,
-            //获取日期列的值进行转换
-            formatter: function (value, row, index) {
-                return changeDateFormat(value);
-            }
-        },{
-            field:"z_enddate",
-            title:"结束时间",
-            align:'center',
-            width:200,
-            //获取日期列的值进行转换
-            formatter: function (value, row, index) {
-                return changeDateFormat(value);
-            }
         }
         ],
         pagination:true,
         pageNumber:1,
-        pageSize:2,
-        pageList:[2,4,6,8],
+        pageSize:5,
+        pageList:[5,10,15,20],
         clickToSelect: true,
         cache搜索: false,
         sidePagination:"server"
@@ -192,7 +158,7 @@
     //删除用户数据
     function delALLuUser(){
         var rows=$.map($("#userList").bootstrapTable('getSelections'),function(row){
-            return row.z_id;
+            return row.ybtz_id;
         });
         var arr = $("#userList").bootstrapTable('getData');
         var ids = rows.join(",");
@@ -205,7 +171,7 @@
                     cssClass: 'btn-primary',
                     action: function(dialogItself){
                         $.ajax({
-                            url:"<%=request.getContextPath()%>/delAllWeekPlan",
+                            url:"<%=request.getContextPath()%>/delAllYbtz",
                             data:{"ids":ids},
                             dataType:"text",
                             type:"post",
@@ -242,13 +208,13 @@
     //用户修改方法
     function updateUser(){
         var ids=$.map($("#userList").bootstrapTable('getSelections'),function(row){
-            return row.z_id;
+            return row.ybtz_id;
         });
         if(ids.length==1){
             var id = ids[0];
             BootstrapDialog.show({
                 title:"修改页面",
-                message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdWeekPlan?z_id='+id),
+                message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdYbtz?ybtz_id='+id),
                 buttons: [ {
                     label: '保存',
                     cssClass: 'btn-primary',
@@ -258,8 +224,8 @@
                             return;
                         }
                         $.ajax({
-                            url:"<%=request.getContextPath()%>/updWeekPlan",
-                            data:$("#updWeekPlan").serialize(),
+                            url:"<%=request.getContextPath()%>/updYbtz",
+                            data:$("#addUserForm").serialize(),
                             dataType:"text",
                             type:"post",
                             success:function(data){
@@ -295,7 +261,7 @@
         BootstrapDialog.show({
             title:"添加商品信息",
             closable: false,
-            message:$('<div><div>').load('<%=request.getContextPath()%>/addZhuJiHua'),
+            message:$('<div><div>').load('<%=request.getContextPath()%>/addybtz'),
             buttons:[{
                 label:"提交",
                 cssClass:'btn-primary',
@@ -305,7 +271,7 @@
                         return;
                     }
                     $.ajax({
-                        url:"<%=request.getContextPath()%>/insertZhouJiHua",
+                        url:"<%=request.getContextPath()%>/insertYbtz",
                         data:$("#addUserForm").serialize(),
                         dataType:"text",
                         type:"post",

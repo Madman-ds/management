@@ -5,6 +5,8 @@ import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
 import com.ds.weekPlan.pojo.WeekPlan;
 import com.ds.weekPlan.servcie.WeekPlanService;
+import com.ds.ybtz.pojo.Ybtz;
+import com.ds.ybtz.servcie.YbtzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +28,9 @@ public class ShowController {
     private UserService userService;
     @Autowired
     private WeekPlanService weekPlanService;
+
+    @Autowired
+    private YbtzService ybtzService;
     /**
      * @作者: 段大神经
      * @功能描述: 登陆成功去展示页面
@@ -266,10 +271,65 @@ public class ShowController {
         return "WEB-INF/jsp/zouJiHua/updateZhuJiHua";
     }
 
+    /**
+     * 周计划首页页面
+     * @return
+     */
     @GetMapping("topZhouJiHua")
     public String topZhouJiHua(){
 
         return "topZhouJiHua";
     }
 
+    /**
+     * 管理者巡检页面
+     * @return
+     */
+    @GetMapping("toGlzxj")
+    public String toGlzxj(){
+        return "WEB-INF/jsp/glzxj/list";
+    }
+
+    /**
+     * 管理者巡检页面
+     * @return
+     */
+    @GetMapping("toTopGlzxj")
+    public String toTopGlzxj(){
+        return "toTopGlzxj";
+    }
+
+    /**
+     * 管理者巡检页面
+     * @return
+     */
+    @GetMapping("toYbtz")
+    public String toYbtz(){
+        return "WEB-INF/jsp/ybtz/list";
+    }
+
+    /**
+     * 添加仪表台账
+     * @return
+     */
+    @GetMapping("addybtz")
+    public String addybtz(){
+        return "WEB-INF/jsp/ybtz/addybtz";
+    }
+
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去周计划修改页面
+     * @时间: 2018/10/7 22:20
+     * @参数:  * @param request
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toUpdYbtz")
+    public String toUpdYbtz(HttpServletRequest request, ModelMap modelMap){
+        Ybtz week = new Ybtz();
+        week.setYbtz_id(Long.valueOf(request.getParameter("ybtz_id")));
+        Ybtz ybtz = ybtzService.toUpdYbtz(week);
+        modelMap.addAttribute("ybtz",ybtz);
+        return "WEB-INF/jsp/ybtz/updybtz";
+    }
 }

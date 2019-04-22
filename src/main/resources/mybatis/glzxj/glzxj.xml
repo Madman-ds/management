@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ds.weekPlan.mapper.WeekPlanMappper">
-    <select id="getWeekPlanCount" resultType="integer">
-        select count(*) from t_weekplan
+<mapper namespace="com.ds.glzxj.mapper.GlzxjMappper">
+    <select id="getGlzxjCount" resultType="integer">
+        select count(*) from t_glzxj
     </select>
 
-    <select id="findAllWeekPlan" resultType="com.ds.weekPlan.pojo.WeekPlan">
-        select * from t_weekplan order by z_id desc
+    <select id="findAllGlzxj" resultType="com.ds.glzxj.pojo.Glzxj">
+        select * from t_glzxj order by glz_id desc
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
     </select>
+
+    <delete id="delAllGlzxj">
+        delete from t_glzxj where glz_id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
     <insert id="insertZhouJiHua" parameterType="com.ds.weekPlan.pojo.WeekPlan">
         INSERT INTO t_weekplan ( z_name, z_bh, z_one, z_two, z_three, z_four, z_five, z_six, z_sunday, z_remarks, z_startdate, z_enddate )
         VALUE (#{z_name},#{z_bh},#{z_one},#{z_two},#{z_three},#{z_four},#{z_five},#{z_six},#{z_sunday},#{z_remarks},#{z_startdate},#{z_enddate})
     </insert>
 
-    <delete id="delAllWeekPlan">
-        delete from t_weekplan where z_id in
-        <foreach collection="array" item="id" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
+
 
     <select id="toUpdWeekPlan" resultType="com.ds.weekPlan.pojo.WeekPlan" parameterType="com.ds.weekPlan.pojo.WeekPlan">
         select * from t_weekplan where z_id = #{z_id}
@@ -39,5 +41,4 @@
       WHERE
         z_id = #{z_id}
     </update>
-
 </mapper>

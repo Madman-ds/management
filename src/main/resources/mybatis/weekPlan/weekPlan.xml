@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.weekPlan.mapper.WeekPlanMappper">
+    <select id="getWeekPlanCount" resultType="integer">
+        select count(*) from t_weekplan
+    </select>
+
+    <select id="findAllWeekPlan" resultType="com.ds.weekPlan.pojo.WeekPlan">
+        select * from t_weekplan order by z_id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+
+    <insert id="insertZhouJiHua" parameterType="com.ds.weekPlan.pojo.WeekPlan">
+        INSERT INTO t_weekplan ( z_name, z_bh, z_one, z_two, z_three, z_four, z_five, z_six, z_sunday, z_remarks, z_startdate, z_enddate )
+        VALUE (#{z_name},#{z_bh},#{z_one},#{z_two},#{z_three},#{z_four},#{z_five},#{z_six},#{z_sunday},#{z_remarks},#{z_startdate},#{z_enddate})
+    </insert>
+
+    <delete id="delAllWeekPlan">
+        delete from t_weekplan where z_id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="toUpdWeekPlan" resultType="com.ds.weekPlan.pojo.WeekPlan" parameterType="com.ds.weekPlan.pojo.WeekPlan">
+        select * from t_weekplan where z_id = #{z_id}
+    </select>
+
+    <update id="updWeekPlan">
+      UPDATE
+        t_weekplan
+      SET
+        z_name = #{z_name},z_bh = #{z_bh},
+        z_one = #{z_one},z_two = #{z_two},
+        z_three=#{z_three},z_four=#{z_four},
+        z_five=#{z_five},z_six=#{z_six},
+        z_sunday=#{z_sunday},z_remarks=#{z_remarks},
+        z_startdate=#{z_startdate},z_enddate=#{z_enddate}
+      WHERE
+        z_id = #{z_id}
+    </update>
+
+</mapper>

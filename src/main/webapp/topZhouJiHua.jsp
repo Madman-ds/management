@@ -27,11 +27,6 @@
         </div>
         <div class="col-sm-5">
             <div class="input-group col-sm-10">
-                <button onclick="tozhou()" class="btn btn-success" type="button">
-                    周生产计划
-                    <i class="glyphicon glyphicon-hand-right">
-                    </i>
-                </button>
 
                 <button onclick="tologin()" class="btn btn-success" type="button" style="margin-left: 20px">
                     <i class="glyphicon glyphicon-hand-left">
@@ -50,45 +45,103 @@
 <script type="text/javascript">
 
     $("#dataBackupShows").bootstrapTable({
-        url:"<%=request.getContextPath()%>/findDataBackupTop",
+        url:"<%=request.getContextPath()%>/findWeekPlan2",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
-        columns:[
-            {field:'sb_name',title:'名称',align:'center'},
-            {field:'sb_number',title:'编号',align:'center'},
-            {field:'sb_xh',title:'属性',align:'center'},
-            {field:'jcx_name',title:'检查项',align:'center'},
-            {field:'jc_yq',title:'检查要求',align:'center',width:10},
-            {field:'jc_jg',title:'确认结果',align:'center',
-                formatter:function (value,rows,index){
-                    if (value == 0){
-                        return "正常";
-                    } else if(value == 2){
-                        return "未操作"
-                    }
-                    else {
-                        return "异常"
-                    }
-                }
-            },
-            {field:'user_name',title:'确认人',align:'center'},
-            {field:'qr_time',title:'确认时间',align:'center',
-                //获取日期列的值进行转换
-                formatter: function (value, row, index) {
-                    return changeDateFormat(value);
-                }
-            },
-            {field:'bz_nr',title:'不符合项',align:'center'}
+        toolbar:'#toolbar',//工具栏   显示在id为toolbar的div中
+        //查询参数：条件查询时使用
+        queryParams:function(params){
+            return{
+                "offset":(this.pageNumber-1)*this.pageSize,
+                "limit":this.pageSize,
+            }
+        },
+        columns:[{
+            title: '序号',
+            field: '',
+            formatter: function (value, row, index) {
+                return index+1;
+            }
+        }
+        ,{
+            field:"z_id",
+            title:"用户编号",
+            visible: false,
+            align:'center',
+        },{
+            field:"z_name",
+            title:"设备名称/编号",
+            align:'center',
+            formatter:function(value,row,index){
+                return row.z_name + "(" +row.z_bh + ")" ;
+            }
+        }, {
+            field:"z_one",
+            title:"周一",
+            align:'center',
+            width:200
+        },{
+            field:"z_two",
+            title:"周二",
+            align:'center',
+            width:200
+        },{
+            field:"z_three",
+            title:"周三",
+            align:'center',
+            width:200
+        },{
+            field:"z_four",
+            title:"周四",
+            align:'center',
+            width:200
+        },{
+            field:"z_five",
+            title:"周五",
+            align:'center',
+            width:200
+        },{
+            field:"z_six",
+            title:"周六",
+            align:'center',
+            width:200
+        },{
+            field:"z_sunday",
+            title:"周日",
+            align:'center',
+            width:200
+        },{
+            field:"z_remarks",
+            title:"备注",
+            align:'center',
+            width:300
+        },{
+            field:"z_startdate",
+            title:"开始时间",
+            align:'center',
+            width:200,
+            //获取日期列的值进行转换
+            formatter: function (value, row, index) {
+                return changeDateFormat(value);
+            }
+        },{
+            field:"z_enddate",
+            title:"结束时间",
+            align:'center',
+            width:200,
+            //获取日期列的值进行转换
+            formatter: function (value, row, index) {
+                return changeDateFormat(value);
+            }
+        }
         ],
         pagination:true,
         pageNumber:1,
-        pageSize:5,
+        pageSize:2,
         pageList:[2,4,6,20],
         clickToSelect: true,
         cache搜索: false,
         sidePagination:"server"
     })
-
-
     //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
         if (cellval != null){
@@ -100,9 +153,6 @@
     //跳转回前端登陆页面
     function tologin() {
         location.href="<%=request.getContextPath() %>/login";
-    }
-    function tozhou(){
-        location.href="<%=request.getContextPath() %>/topZhouJiHua";
     }
 
     function stateFormatter(value, row, index) {

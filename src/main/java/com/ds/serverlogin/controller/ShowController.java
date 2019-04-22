@@ -1,15 +1,14 @@
 package com.ds.serverlogin.controller;
 
 import com.ds.serverlogin.pojo.LoginUser;
-import com.ds.user.controller.UserController;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
+import com.ds.weekPlan.pojo.WeekPlan;
+import com.ds.weekPlan.servcie.WeekPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,6 +24,8 @@ import javax.servlet.http.HttpSession;
 public class ShowController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private WeekPlanService weekPlanService;
     /**
      * @作者: 段大神经
      * @功能描述: 登陆成功去展示页面
@@ -233,4 +234,42 @@ public class ShowController {
     public String zjsRead(){
         return "WEB-INF/jsp/sjtq";
     }
+    /**
+     * 周计划
+     * @return
+     */
+    @GetMapping("toZouJiHua")
+    public String toZouJiHua(){
+        return "WEB-INF/jsp/zouJiHua/list";
+    }
+    /**
+     * 添加周计划
+     * @return
+     */
+    @GetMapping("addZhuJiHua")
+    public String addZhuJiHua(){
+        return "WEB-INF/jsp/zouJiHua/addZhuJiHua";
+    }
+    /**
+     * @作者: 段大神经
+     * @功能描述: 去周计划修改页面
+     * @时间: 2018/10/7 22:20
+     * @参数:  * @param request
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toUpdWeekPlan")
+    public String toUpdWeekPlan(HttpServletRequest request, ModelMap modelMap){
+        WeekPlan week = new WeekPlan();
+        week.setZ_id(Long.valueOf(request.getParameter("z_id")));
+        WeekPlan weekPlan = weekPlanService.toUpdWeekPlan(week);
+        modelMap.addAttribute("weekPlan",weekPlan);
+        return "WEB-INF/jsp/zouJiHua/updateZhuJiHua";
+    }
+
+    @GetMapping("topZhouJiHua")
+    public String topZhouJiHua(){
+
+        return "topZhouJiHua";
+    }
+
 }

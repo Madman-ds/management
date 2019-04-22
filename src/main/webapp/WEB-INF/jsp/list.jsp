@@ -96,6 +96,9 @@
                 <li role="presentation">
                     <a href="<%=request.getContextPath() %>/toDataTiqu" target="mainFrame">提取管理</a>
                 </li>
+                <li role="presentation">
+                    <a href="<%=request.getContextPath() %>/toZouJiHua" target="mainFrame">周计划</a>
+                </li>
             </ul>
         </div>
         <!-- 左侧导航和正文内容的分隔线 -->

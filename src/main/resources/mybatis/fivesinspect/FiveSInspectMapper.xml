@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.fivesinspect.mapper.FiveSInspectMapper">
+    <resultMap id="t_fivesinspect" type="com.ds.fivesinspect.pojo.FiveSInspect">
+        <id property="f_id" column="f_id"/>
+        <result property="f_fives" column="f_fives"/>
+        <result property="f_clazzify" column="f_clazzify"/>
+        <result property="f_content" column="f_content"/>
+        <result property="f_inspectuser" column="f_inspectuser"/>
+        <result property="f_inspectdate" column="f_inspectdate"/>
+        <result property="f_ifmeet" column="f_ifmeet"/>
+    </resultMap>
+    <select id="findFiveSInspectCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM t_fivesinspect
+        WHERE 1 = 1
+        AND f_inspectuser IS NULL AND f_inspectdate IS NULL f_ifmeet IS NULL ORDER BY f_id DESC
+    </select>
+    <select id="findFiveSInspect" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
+        SELECT * FROM t_fivesinspect
+        WHERE 1 = 1
+        AND f_inspectuser IS NULL AND f_inspectdate IS NULL f_ifmeet IS NULL ORDER BY f_id DESC
+    </select>
+    <select id="findFiveSInspectById" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
+        SELECT * FROM t_fivesinspect
+        WHERE 1 = 1
+        AND f_id = #{f_id} AND f_inspectuser IS NULL AND f_inspectdate IS NULL ORDER BY f_id DESC
+    </select>
+    <insert id="addFiveSInspect" parameterType="com.ds.fivesinspect.pojo.FiveSInspect">
+        INSERT INTO t_fivesinspect (f_fives , f_clazzify , f_content) VALUES (#{f_fives},#{f_clazzify},#{f_content} )
+    </insert>
+    <delete id="delFiveSInspectAll" parameterType="com.ds.fivesinspect.pojo.FiveSInspect">
+        delete FROM  t_fivesinspect  where f_id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+          #{id}
+        </foreach>
+    </delete>
+    <update id="upFiveSInspect" parameterType="com.ds.fivesinspect.pojo.FiveSInspect">
+        UPDATE t_fivesinspect SET
+        <if test="f_fives != null and f_fives != ''">f_fives = #{f_fives},</if>
+        <if test="f_clazzify != null and f_clazzify != ''">f_clazzify = #{f_clazzify},</if>
+        <if test="f_content != null and f_content != ''">f_content = #{f_content}</if>
+        WHERE f_id = #{f_id}
+    </update>
+    <insert id="addUserFiveSInspect" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect">
+        INSERT INTO t_userfivesinspect (f_id,user_id,ifextract,f_fives)VALUES (#{f_id},#{user_id},#{ifextract},#{f_fives})
+    </insert>
+    <select id="showUserFiveSInspect" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect" resultType="com.ds.fivesinspect.pojo.UserFiveSInspect">
+        SELECT * FROM t_userfivesinspect
+        WHERE 1 = 1 AND
+        user_id = #{userId}
+         ORDER BY f_id DESC
+    </select>
+    <update id="upIfextract" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect">
+        UPDATE t_userfivesinspect SET
+        <if test="ifextract != '' and ifextract != null">ifextract = #{ifextract}</if>
+        where u_f_id = #{u_f_id}
+    </update>
+    <delete id="delUserFiveSInspect" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect">
+        DELETE FROM t_userfivesinspect where u_f_id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="findFiveSInspectLogCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM t_fivesinspect
+        WHERE 1 = 1
+        AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL f_ifmeet IS NOT NULL ORDER BY f_id DESC
+    </select>
+    <select id="findFiveSInspectLog" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
+        SELECT * FROM t_fivesinspect
+        WHERE 1 = 1
+        AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL f_ifmeet IS NOT NULL ORDER BY f_id DESC
+    </select>
+    <select id="showFiveSLogByUser" parameterType="java.lang.String" resultType="map">
+        select tf.f_id,tf.f_fives,tf.f_clazzify,tu.user_name,tuf.ifextract from
+        t_userfivesinspect tuf
+        left join t_fivesinspect tf on tf.f_id = tuf.f_id
+        left join t_user tu on tuf.user_id = tu.user_id
+        where tuf.user_id = #{userId} and tuf.ifextract = 1
+    </select>
+</mapper>

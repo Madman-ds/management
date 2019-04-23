@@ -112,6 +112,7 @@
                     <a href="<%=request.getContextPath() %>/toFiveSWrite" target="mainFrame">5S写操作管理</a>
                 </li>
                 <li role="presentation">
+
                     <a href="<%=request.getContextPath() %>/toFiveSLog" target="mainFrame">5S日志记录</a>
                 </li>
             </ul>

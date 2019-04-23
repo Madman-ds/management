@@ -37,4 +37,10 @@ public interface FiveSInspectService {
     Integer findFiveSInspectLogCount();
 
     List<FiveSInspect> findFiveSInspectLog(FiveSInspect fiveSInspect);
+
+    void upFiveSInspectLog(FiveSInspect fiveSInspect);
+
+    List showfiveslog();
+
+    List<FiveSInspect> findFiveSLogByUserName(FiveSInspect fiveSInspect);
 }

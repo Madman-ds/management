@@ -3,6 +3,8 @@ package com.ds.fivesinspect.pojo;
 import com.ds.util.Page;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @类名称：FiveSInspect
  * @作者: 老西儿
@@ -34,7 +36,7 @@ public class FiveSInspect extends Page {
     /**
      * 检查时间
      */
-    private String f_inspectdate;
+    private Date f_inspectdate;
     /**
      *  是否满意 0:不满意 1:满意
      */

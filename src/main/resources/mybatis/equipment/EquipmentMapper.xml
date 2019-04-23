@@ -93,7 +93,6 @@
         WHERE
             t.sb_id = m.sb_id
         AND m.jcx_id = u.jcx_id
-        AND u.user_id = #{userId}
         AND u.qx = 1
     </select>
 

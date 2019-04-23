@@ -406,4 +406,8 @@ public class ShowController {
     public String toFiveSLog(){
         return "WEB-INF/jsp/fivesinspect/fiveslog";
     }
+    @GetMapping("toshowfiveslog")
+    public String toShowFivesLog(){
+        return "WEB-INF/jsp/fivesinspect/showfiveslog";
+    }
 }

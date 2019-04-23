@@ -3,11 +3,16 @@ package com.ds.fivesinspect.controller;
 import com.ds.fivesinspect.pojo.FiveSInspect;
 import com.ds.fivesinspect.pojo.UserFiveSInspect;
 import com.ds.fivesinspect.service.FiveSInspectService;
+import com.ds.serverlogin.pojo.LoginUser;
+import com.ds.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +42,18 @@ public class FiveSInspectController {
         map.put("total",count);
         map.put("rows",fiveSInspects);
         return map;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 打卡页面查询5S点检数据
+     * @时间: 2019/4/23 17:47
+     * @参数:  * @param
+     * @返回值: java.util.List
+     **/
+    @GetMapping("showfiveslogs")
+    public List showfiveslog(){
+        List fiveslist = fiveSInspectService.showfiveslog();
+        return fiveslist;
     }
     /**
      * @作者: 老西儿
@@ -168,5 +185,45 @@ public class FiveSInspectController {
     public List showFiveSLogByUser(String userId){
         List FiveSLoglist = fiveSInspectService.showFiveSLogByUser(userId);
         return FiveSLoglist;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 5S日志修改
+     * @时间: 2019/4/23 21:29
+     * @参数:  * @param session
+     * @param request
+     * @返回值: int
+     **/
+    @PostMapping("upFiveSLog")
+    public int upFiveSLog(HttpSession session, HttpServletRequest request){
+        LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+        String user_name = loginUser.getUser_name();
+        FiveSInspect fiveSInspect = new FiveSInspect();
+        fiveSInspect.setF_inspectuser(user_name);
+        List<FiveSInspect> fiveSInspects = fiveSInspectService.findFiveSLogByUserName(fiveSInspect);
+        if (fiveSInspects != null && fiveSInspects.size() > 0){
+            fiveSInspect = fiveSInspects.get(0);
+            if (DateUtil.isSameDay(fiveSInspect.getF_inspectdate(),new Date())){
+                return 2;
+            }
+        }
+        String numArr10 = request.getParameter("numArr1");
+        String numArr11 = request.getParameter("numArr2");
+        String numArr12 = request.getParameter("numArr3");
+        String numArr13 = request.getParameter("numArr4");
+        String[] s10 = numArr10.substring(1).replaceAll("]","").split(",");
+        String[] s11 = numArr11.substring(1).replaceAll("]","").split(",");
+        String[] s12 = numArr12.substring(1).replaceAll("]","").split(",");
+        String[] s13 = numArr13.substring(1).replaceAll("]","").split(",");
+        for (int i = 0; i < s10.length; i++){
+            FiveSInspect fiveSInspect1 = new FiveSInspect();
+            fiveSInspect1.setF_fives(s10[i].substring(1,s10[i].length()-1));
+            fiveSInspect1.setF_clazzify(s11[i].substring(1,s11[i].length()-1));
+            fiveSInspect1.setF_content(s12[i].substring(1,s12[i].length()-1));
+            fiveSInspect1.setF_inspectuser(user_name);
+            fiveSInspect1.setF_ifmeet(s13[i].substring(1, s13[i].length()-1));
+            fiveSInspectService.upFiveSInspectLog(fiveSInspect1);
+        }
+        return 1;
     }
 }

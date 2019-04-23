@@ -175,4 +175,31 @@ public class FiveSInspectServiceImpl implements FiveSInspectService{
     public List<FiveSInspect> findFiveSInspectLog(FiveSInspect fiveSInspect) {
         return fiveSInspectMapper.findFiveSInspectLog(fiveSInspect);
     }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 修改5S日志信息
+     * @时间: 2019/4/23 14:58
+     * @参数:  * @param fiveSInspect
+     * @返回值: void
+     **/
+    @Override
+    public void upFiveSInspectLog(FiveSInspect fiveSInspect) {
+        fiveSInspectMapper.upFiveSInspectLog(fiveSInspect);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 打卡页面查询5S点检数据
+     * @时间: 2019/4/23 17:48
+     * @参数:  * @param
+     * @返回值: java.util.List
+     **/
+    @Override
+    public List showfiveslog() {
+        return fiveSInspectMapper.showfiveslog();
+    }
+
+    @Override
+    public List<FiveSInspect> findFiveSLogByUserName(FiveSInspect fiveSInspect) {
+        return fiveSInspectMapper.findFiveSLogByUserName(fiveSInspect);
+    }
 }

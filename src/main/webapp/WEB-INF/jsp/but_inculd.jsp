@@ -20,7 +20,7 @@
     &nbsp;
     <button type="button" class="btn btn-primary">650-TPM点检</button>
     &nbsp;
-    <button type="button" class="btn btn-primary">5S点检</button>
+    <button type="button" class="btn btn-primary" onclick="showfives()">5S点检</button>
 </div>
 
 <script>

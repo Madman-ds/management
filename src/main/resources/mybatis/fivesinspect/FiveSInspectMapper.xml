@@ -13,12 +13,18 @@
     <select id="findFiveSInspectCount" resultType="java.lang.Integer">
         SELECT count(*) FROM t_fivesinspect
         WHERE 1 = 1
-        AND f_inspectuser IS NULL AND f_inspectdate IS NULL f_ifmeet IS NULL ORDER BY f_id DESC
+        AND f_inspectuser IS NULL AND f_inspectdate IS NULL ORDER BY f_id DESC
     </select>
     <select id="findFiveSInspect" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
         SELECT * FROM t_fivesinspect
         WHERE 1 = 1
-        AND f_inspectuser IS NULL AND f_inspectdate IS NULL f_ifmeet IS NULL ORDER BY f_id DESC
+        AND f_inspectuser IS NULL AND f_inspectdate IS NULL ORDER BY f_id DESC
+    </select>
+    <select id="showfiveslog" resultMap="t_fivesinspect">
+        SELECT * FROM t_fivesinspect
+    </select>
+    <select id="findFiveSLogByUserName" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
+        SELECT * FROM t_fivesinspect WHERE f_inspectuser LIKE #{f_inspectuser}
     </select>
     <select id="findFiveSInspectById" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
         SELECT * FROM t_fivesinspect
@@ -64,12 +70,12 @@
     <select id="findFiveSInspectLogCount" resultType="java.lang.Integer">
         SELECT count(*) FROM t_fivesinspect
         WHERE 1 = 1
-        AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL f_ifmeet IS NOT NULL ORDER BY f_id DESC
+        AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL AND f_ifmeet IS NOT NULL ORDER BY f_id DESC
     </select>
     <select id="findFiveSInspectLog" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
         SELECT * FROM t_fivesinspect
         WHERE 1 = 1
-        AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL f_ifmeet IS NOT NULL ORDER BY f_id DESC
+        AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL AND f_ifmeet IS NOT NULL ORDER BY f_id DESC
     </select>
     <select id="showFiveSLogByUser" parameterType="java.lang.String" resultType="map">
         select tf.f_id,tf.f_fives,tf.f_clazzify,tu.user_name,tuf.ifextract from
@@ -78,4 +84,14 @@
         left join t_user tu on tuf.user_id = tu.user_id
         where tuf.user_id = #{userId} and tuf.ifextract = 1
     </select>
+    <update id="upFiveSInspectLog" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect">
+        UPDATE t_fivesinspect SET
+        <if test="f_fives != null and f_fives != ''">f_fives = #{f_fives},</if>
+        <if test="f_clazzify != null and f_clazzify != ''">f_clazzify = #{f_clazzify},</if>
+        <if test="f_content != null and f_content != ''">f_content = #{f_content},</if>
+        <if test="f_ifmeet != null and f_ifmeet != ''">f_ifmeet = #{f_ifmeet},</if>
+        <if test="f_inspectuser != null and f_inspectuser != ''">f_inspectuser = #{f_inspectuser},</if>
+        f_inspectdate = NOW()
+        WHERE f_fives LIKE #{f_fives}
+    </update>
 </mapper>

@@ -36,6 +36,9 @@
         option{
             text-align:center;
         }
+        .row {
+            margin-bottom: 100px;
+        }
     </style>
     <jsp:include page="../../jscore.jsp"></jsp:include>
 </head>
@@ -46,15 +49,15 @@
     <center>
         <jsp:include page="but_inculd.jsp"  />
         <div style="margin-top: 20px">
-            <table id="mytableid" border="1px" style="text-align: center;font-size: 16px">
-            </table>
+            <label>问题数:</label>
+            <textarea class="form-control" id="glz_count" name="glz_count" rows="1" style="width: 180px"></textarea>
         </div>
+        <input type="hidden" name="glz_name" value="${loginUser.user_name}" class="form-control" id="glz_name">
         <input type="hidden" id="delTextId" />
     </center>
 </div>
-<%--<div id="dataBackupShow" style="margin-left: 17%;font-size: x-large">
 
-</div>--%>
+
 <div class="form-group">
     <%--<div class="col-sm-4">
     </div>--%>
@@ -109,107 +112,19 @@
         location.href = "<%=request.getContextPath() %>/zjRead";
     }
 
-
-    //条件查询
-   /* function queryDataBackUp(){
-        $('#dataBackupShow').html("");
-        var sb_name= $('#select_sb_name').val();
-        var sb_number = $('#select_sb_number').val();
-        var sb_xh = $('#select_sb_xh').val();
-        var user_name = $('#select_user_name').val();
-        var start_time = $('#datetimepicker').val();
-        var end_time = $('#datetimeend').val();
-        $.ajax({
-            url:'/findDataBackup',
-            type:'get',
-            data:{
-                sb_name:sb_name,
-                sb_number:sb_number,
-                sb_xh:sb_xh,
-                user_name:user_name,
-                start_time:start_time,
-                end_time:end_time
-            },
-            dataType:"json",
-            success:function(data){
-                var arr = data.rows;
-                for (var i=0;i<arr.length;i++){
-                    var a = changeDateFormat(arr[i].qr_time);
-                    var b = arr[i].user_name;
-                    var c = arr[i].sb_name;
-                    var d = arr[i].bz_nr;
-                    var e = a+"     "+b+"   检查了"+c+"     "+d;
-                    $("#dataBackupShow").append(e).append("</br>");
-                }
-            }
-        })
-    }*/
     //提交
     function formsubmit() {
-        var numArr1 = []; // 定义一个空数组
-        var numArr2 = [];
-        var numArr3 = [];
-        var numArr4 = [];
-        var numArr5 = [];
-        var numArr6 = [];
-        var numArr7 = [];
-        var numArr8 = [];
-        var numArr9 = [];
-        var txt1 = $('#mytableid').find('.td1'); // 获取所有文本框
-        var txt2 = $('#mytableid').find('.td2'); // 获取所有文本框
-        var txt3 = $('#mytableid').find('.td3'); // 获取所有文本框
-        var txt4 = $('#mytableid').find('.td4'); // 获取所有文本框
-        var txt5 = $('#mytableid').find('.td5'); // 获取所有文本框
-        var txt6 = $('#mytableid').find('.td6 select option:selected'); // 获取所有文本框
-        var txt7 = $('#mytableid').find('.td7'); // 获取所有文本框
-        var txt8 = $('#mytableid').find('.td8'); // 获取所有文本框
-        var txt9 = $('#mytableid').find('.td9'); // 获取所有文本框
-        for (var i = 0; i < txt1.length; i++) {
-             numArr1.push(txt1.eq(i).val()); // 将文本框的值添加到数组中
-             numArr2.push(txt2.eq(i).val());
-             numArr3.push(txt3.eq(i).val());
-             numArr4.push(txt4.eq(i).val());
-             numArr5.push(txt5.eq(i).val());
-             numArr6.push(txt6.eq(i).val());
-             numArr7.push(txt7.eq(i).val());
-             numArr8.push(txt8.eq(i).val());
-             numArr9.push(txt9.eq(i).val());
-        }
-        if (numArr1 == "") {
-            alert("您没有操作权限，请联系管理员提供权限后提交！")
-            return ;
-        }
-         var numArr1 = JSON.stringify(numArr1);
-         var numArr2 = JSON.stringify(numArr2);
-         var numArr3 = JSON.stringify(numArr3);
-         var numArr4 = JSON.stringify(numArr4);
-         var numArr5 = JSON.stringify(numArr5);
-         var numArr6 = JSON.stringify(numArr6);
-         var numArr7 = JSON.stringify(numArr7);
-         var numArr8 = JSON.stringify(numArr8);
-         var numArr9 = JSON.stringify(numArr9);
         $.ajax({
-            url:'<%=request.getContextPath() %>/insertDataBackup',
+            url:'<%=request.getContextPath() %>/insertGlzxj',
             type:'post',
             data:{
-                "numArr1":numArr1,
-                "numArr2":numArr2,
-                "numArr3":numArr3,
-                "numArr4":numArr4,
-                "numArr5":numArr5,
-                "numArr6":numArr6,
-                "numArr7":numArr7,
-                "numArr8":numArr8,
-                "numArr9":numArr9
+                "glz_name":$("#glz_name").val(),
+                "glz_count":$("#glz_count").val()
             },
             dataType:"text",
             success:function(data){
-                if (data == 2){
-                    alert("您今天已经完成任务，无需重复提交！");
-                    location.reload();
-                }else{
-                    alert("恭喜提交完成！")
-                }
+                alert("提交成功");
+                 location.reload();
             }
         })
     }
@@ -222,7 +137,7 @@
         $('#dataBackUpForm')[0].reset();
         queryDataBackUp();
     }
-    //加载登陆用户所有可编辑的设备检查项信息
+   /* //加载登陆用户所有可编辑的设备检查项信息
     $(function () {
             var user_name =$("#user_name").val();
             var userId =$("#userId").val();
@@ -260,9 +175,9 @@
                     row.innerHTML += "<td style='width:160px;height: 30px;display: none'  align='center'><input class='td9' value='"+arr[i].jcx_id+"' style='width:160px;height: 45px;text-align: center' type='text'></td>";
                 }
             }
-        })
+        })*/
 
-        $.ajax({
+        /*$.ajax({
             url:'<%=request.getContextPath() %>/findDataBackup',
             type:'get',
             success:function(data){
@@ -276,8 +191,8 @@
                     $("#dataBackupShow").append(e);
                 }
             }
-        })
-    })
+        })*/
+    // })
     //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
         if (cellval != null){

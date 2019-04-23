@@ -300,7 +300,7 @@ public class ShowController {
      */
     @GetMapping("toTopGlzxj")
     public String toTopGlzxj(){
-        return "toTopGlzxj";
+        return "WEB-INF/jsp/viewlist_TopGlzxj";
     }
 
     /**

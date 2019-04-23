@@ -37,17 +37,22 @@ public class GlzxjController {
         page.setRows(list);
         return page;
     }
-//    /**
-//     * @作者: 段聪祺
-//     * @功能描述: 添加用户
-//     * @时间: 2018/9/29 15:58
-//     * @参数:  * @param user
-//     * @返回值: int
-//     **/
-//    @PostMapping("insertZhouJiHua")
-//    public int insertZhouJiHua(WeekPlan weekPlan){
-//        return weekPlanService.insertZhouJiHua(weekPlan);
-//    }
+    /**
+     * @作者: 段聪祺
+     * @功能描述: 添加用户
+     * @时间: 2018/9/29 15:58
+     * @参数:  * @param user
+     * @返回值: int
+     **/
+    @PostMapping("insertGlzxj")
+    public int insertGlzxj(HttpServletRequest request){
+        String glz_name = request.getParameter("glz_name");
+        String glz_count = request.getParameter("glz_count");
+        Glzxj glzxj = new Glzxj();
+        glzxj.setGlz_count(glz_count);
+        glzxj.setGlz_name(glz_name);
+        return glzxjService.insertGlzxj(glzxj);
+    }
     /**
      * @作者: 段聪祺
      * @功能描述: 删除用户

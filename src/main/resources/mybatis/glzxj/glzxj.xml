@@ -17,9 +17,9 @@
         </foreach>
     </delete>
 
-    <insert id="insertZhouJiHua" parameterType="com.ds.weekPlan.pojo.WeekPlan">
-        INSERT INTO t_weekplan ( z_name, z_bh, z_one, z_two, z_three, z_four, z_five, z_six, z_sunday, z_remarks, z_startdate, z_enddate )
-        VALUE (#{z_name},#{z_bh},#{z_one},#{z_two},#{z_three},#{z_four},#{z_five},#{z_six},#{z_sunday},#{z_remarks},#{z_startdate},#{z_enddate})
+    <insert id="insertGlzxj" parameterType="com.ds.glzxj.pojo.Glzxj">
+        INSERT INTO t_glzxj ( glz_name,glz_data,glz_count )
+        VALUE (#{glz_name},now(),#{glz_count})
     </insert>
 
 

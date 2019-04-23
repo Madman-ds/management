@@ -35,9 +35,9 @@ public class GlzxjServiceImpl implements GlzxjService {
         glzxjMappper.delAllGlzxj(id);
     }
 
-//    @Override
-//    public int insertZhouJiHua(WeekPlan weekPlan) {
-//        return weekPlanMappper.insertZhouJiHua(weekPlan);
-//    }
+    @Override
+    public int insertGlzxj(Glzxj glzxj) {
+        return glzxjMappper.insertGlzxj(glzxj);
+    }
 
 }

@@ -296,7 +296,7 @@ public class ShowController {
      */
     @GetMapping("toTopGlzxj")
     public String toTopGlzxj(){
-        return "toTopGlzxj";
+        return "WEB-INF/jsp/viewlist_TopGlzxj";
     }
 
     /**
@@ -332,4 +332,5 @@ public class ShowController {
         modelMap.addAttribute("ybtz",ybtz);
         return "WEB-INF/jsp/ybtz/updybtz";
     }
+
 }

@@ -17,5 +17,6 @@ public interface GlzxjMappper {
 
     void delAllGlzxj(String[] id);
 
-//    int insertZhouJiHua(WeekPlan weekPlan);
+    int insertGlzxj(Glzxj glzxj);
+
 }

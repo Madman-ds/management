@@ -12,7 +12,7 @@
 </head>
 <body>
 <div>
-    <button type="button" class="btn btn-primary">管理者巡检</button>
+    <button type="button" onclick="glzxjClick()" class="btn btn-primary">管理者巡检</button>
     &nbsp;
     <button type="button" class="btn btn-primary">仪表台账</button>
     &nbsp;
@@ -22,5 +22,11 @@
     &nbsp;
     <button type="button" class="btn btn-primary">5S点检</button>
 </div>
+
+<script>
+    function glzxjClick() {
+        location.href = "<%=request.getContextPath() %>/toTopGlzxj"
+    }
+</script>
 </body>
 </html>

@@ -17,4 +17,6 @@ public interface GlzxjService {
     List<Glzxj> findAllGlzxj(Glzxj glzxj);
 
     void delAllGlzxj(String ids);
+
+    int insertGlzxj(Glzxj glzxj);
 }

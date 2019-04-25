@@ -70,4 +70,16 @@ public class UserServiceImpl implements UserService {
     public int updateTs(DataBackupParam dataBackupParam) {
         return userMappper.updateTs(dataBackupParam);
     }
+
+    @Override
+    public List<User> findAll() {
+        return userMappper.findAll();
+    }
+
+    @Override
+    public List<User> findAllbyids(String ids) {
+        String[] split = ids.split(",");
+        return userMappper.findAllbyids(split);
+    }
+
 }

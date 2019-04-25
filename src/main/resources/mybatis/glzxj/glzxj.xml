@@ -18,8 +18,8 @@
     </delete>
 
     <insert id="insertGlzxj" parameterType="com.ds.glzxj.pojo.Glzxj">
-        INSERT INTO t_glzxj ( glz_name,glz_data,glz_count )
-        VALUE (#{glz_name},now(),#{glz_count})
+        INSERT INTO t_glzxj ( glz_name,glz_data,glz_count ,glz_tq)
+        VALUE (#{glz_name},now(),#{glz_count},2)
     </insert>
 
 
@@ -41,4 +41,34 @@
       WHERE
         z_id = #{z_id}
     </update>
+
+    <!--还原-->
+    <update id="huanyuanGLZ" parameterType="string">
+      UPDATE
+        t_glzxj
+      SET
+        glz_tq = 2
+      WHERE
+        glz_id = #{ids}
+    </update>
+
+    <!--提取-->
+    <update id="tiquGLZ" parameterType="string">
+      UPDATE
+        t_glzxj
+      SET
+        glz_tq = 1
+      WHERE
+        glz_id = #{ids}
+    </update>
+
+    <update id="updateFQ" parameterType="com.ds.glzxj.pojo.Glzxj">
+      UPDATE
+        t_glzxj
+      SET
+        glz_user = #{glz_user}
+      WHERE
+        glz_id = #{glz_id}
+    </update>
+
 </mapper>

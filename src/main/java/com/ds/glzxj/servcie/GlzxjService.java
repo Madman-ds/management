@@ -19,4 +19,10 @@ public interface GlzxjService {
     void delAllGlzxj(String ids);
 
     int insertGlzxj(Glzxj glzxj);
+
+    void huanyuanGLZ(String ids);
+
+    void tiquGLZ(String ids);
+
+    void updateFQ(Glzxj glzxj);
 }

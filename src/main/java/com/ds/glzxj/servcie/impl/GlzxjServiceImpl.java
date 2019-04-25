@@ -40,4 +40,19 @@ public class GlzxjServiceImpl implements GlzxjService {
         return glzxjMappper.insertGlzxj(glzxj);
     }
 
+    @Override
+    public void huanyuanGLZ(String ids) {
+        glzxjMappper.huanyuanGLZ(ids);
+    }
+
+    @Override
+    public void tiquGLZ(String ids) {
+        glzxjMappper.tiquGLZ(ids);
+    }
+
+    @Override
+    public void updateFQ(Glzxj glzxj) {
+        glzxjMappper.updateFQ(glzxj);
+    }
+
 }

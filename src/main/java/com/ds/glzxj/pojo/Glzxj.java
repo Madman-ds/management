@@ -34,4 +34,13 @@ public class Glzxj extends PageUtil {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date glz_data;
 
+    /**
+     * 提取项 1提取 2还原
+     */
+    private String glz_tq;
+
+    /**
+     * 赋权给用户
+     */
+    private String glz_user;
 }

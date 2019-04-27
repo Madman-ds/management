@@ -2,12 +2,14 @@ package com.ds.user.servcie.impl;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.pojo.DataBackupParam;
+import com.ds.glzxj.mapper.GlzxjMappper;
 import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.mapper.UserMappper;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +23,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMappper userMappper;
+    @Autowired
+    private GlzxjMappper glzxjMappper;
 
     @Override
     public Integer getUserCount(User user) {
@@ -81,12 +85,6 @@ public class UserServiceImpl implements UserService {
     public List<User> findAllbyids(String ids) {
         String[] split = ids.split(",");
         return userMappper.findAllbyids(split);
-    }
-
-
-    @Override
-    public List getNotCurrentUserList(LoginUser loginUser) {
-        return userMappper.getNotCurrentUserList(loginUser);
     }
 
 }

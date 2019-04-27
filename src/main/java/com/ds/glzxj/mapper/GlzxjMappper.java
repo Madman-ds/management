@@ -24,4 +24,10 @@ public interface GlzxjMappper {
     void tiquGLZ(String ids);
 
     void updateFQ(Glzxj glzxj);
+
+    Integer getGlzxjTiCount(Glzxj glzxj);
+
+    List<Glzxj> findAllTiGlzxj(Glzxj glzxj);
+
+    void huanyuanGLZById(String ids);
 }

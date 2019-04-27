@@ -1,22 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: 段大神经
-  Date: 2018/10/24
-  Time: 21:18
+  Date: 2018/9/27
+  Time: 21:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>热等静压安全管理系统</title>
+    <title>仪表台账页面</title>
 </head>
-<style>
-    .hide{
-        display: none;
-    }
-</style>
-<body>
 <!-- 核心样式文件 -->
 <jsp:include page="jscore.jsp"></jsp:include>
 <body>
@@ -39,12 +33,27 @@
 <div id="dataShow" >
     <table id="dataBackupShows" class="table table-bordered"></table>
 </div>
-
 </body>
-<script type="text/javascript">
-
+<script type="text/javascript" >
+    //条件查询
+    function uerSearch(){
+        //点击查询，只是让表格刷新到第一页，具体查询参数，按照组装表格时候拿到的查询条件来用
+        $("#dataBackupShows").bootstrapTable('refresh',{pageNumber:1});
+    }
+    <%-- 回车搜索 --%>
+    function enterSearch(){
+        var event = arguments.callee.caller.arguments[0]||window.event;//消除浏览器差异
+        if (event.keyCode == 13){
+            queryDataBackUp();
+        }
+    }
+    //重置
+    function resetUserForm(){
+        $('#searchUserForm')[0].reset();
+        uerSearch();
+    }
     $("#dataBackupShows").bootstrapTable({
-        url:"<%=request.getContextPath()%>/findWeekPlan2",
+        url:"<%=request.getContextPath()%>/findYbtz",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         toolbar:'#toolbar',//工具栏   显示在id为toolbar的div中
         //查询参数：条件查询时使用
@@ -55,105 +64,54 @@
             }
         },
         columns:[{
-            title: '序号',
-            field: '',
-            formatter: function (value, row, index) {
-                return index+1;
-            }
-        }
-        ,{
-            field:"z_id",
-            title:"用户编号",
+            checkbox:true,
+            formatter:stateFormatter
+        },{
+            field:"ybtz_id",
+            title:"主键",
             visible: false,
             align:'center',
         },{
-            field:"z_name",
-            title:"设备名称/编号",
-            align:'center',
-            formatter:function(value,row,index){
-                return row.z_name + "(" +row.z_bh + ")" ;
-            }
+            field:"ybtz_name",
+            title:"名称",
+            align:'center'
+        },{
+            field:"ybtz_bh",
+            title:"编号",
+            align:'center'
+        },{
+            field:"ybtz_mpa",
+            title:"压力/mpa",
+            align:'center'
+        },{
+            field:"ybtz_type",
+            title:"类别",
+            align:'center'
+        },{
+            field:"ybtz_wz",
+            title:"位置",
+            align:'center'
         }, {
-            field:"z_one",
-            title:"周一",
+            field:"ybtz_date",
+            title:"时间",
             align:'center',
-            width:200
+            formatter: function (value, row, index) {
+                return changeDateFormat(value);
+            }
         },{
-            field:"z_two",
-            title:"周二",
-            align:'center',
-            width:200
-        },{
-            field:"z_three",
-            title:"周三",
-            align:'center',
-            width:200
-        },{
-            field:"z_four",
-            title:"周四",
-            align:'center',
-            width:200
-        },{
-            field:"z_five",
-            title:"周五",
-            align:'center',
-            width:200
-        },{
-            field:"z_six",
-            title:"周六",
-            align:'center',
-            width:200
-        },{
-            field:"z_sunday",
-            title:"周日",
-            align:'center',
-            width:200
-        },{
-            field:"z_remarks",
+            field:"ybtz_remarks",
             title:"备注",
             align:'center',
-            width:300
-        },{
-            field:"z_startdate",
-            title:"开始时间",
-            align:'center',
-            width:200,
-            //获取日期列的值进行转换
-            formatter: function (value, row, index) {
-                return changeDateFormat(value);
-            }
-        },{
-            field:"z_enddate",
-            title:"结束时间",
-            align:'center',
-            width:200,
-            //获取日期列的值进行转换
-            formatter: function (value, row, index) {
-                return changeDateFormat(value);
-            }
         }
         ],
         pagination:true,
         pageNumber:1,
-        pageSize:2,
-        pageList:[2,4,6,20],
+        pageSize:5,
+        pageList:[5,10,15,20],
         clickToSelect: true,
         cache搜索: false,
         sidePagination:"server"
     })
-    //转换日期格式(时间戳转换为datetime格式)
-    function changeDateFormat(cellval) {
-        if (cellval != null){
-            var d = new Date(cellval);
-            var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-            return times;
-        }
-    }
-    //跳转回前端登陆页面
-    function tologin() {
-        location.href="<%=request.getContextPath() %>/login";
-    }
-
     function stateFormatter(value, row, index) {
         if (row.user_name == "admin")
             return {
@@ -172,10 +130,11 @@
             return times;
         }
     }
-    
-    
     function fanhui() {
         location.href="topIndex";
     }
+
+
+
 </script>
 </html>

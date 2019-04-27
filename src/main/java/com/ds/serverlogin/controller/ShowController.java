@@ -298,9 +298,9 @@ public class ShowController {
      * 管理者巡检页面
      * @return
      */
-    @GetMapping("toTopGlzxj")
+    @GetMapping("toGlzxjAdd")
     public String toTopGlzxj(){
-        return "WEB-INF/jsp/viewlist_TopGlzxj";
+        return "WEB-INF/jsp/viewlist_Glzxj";
     }
 
     /**
@@ -406,26 +406,8 @@ public class ShowController {
     public String toFiveSLog(){
         return "WEB-INF/jsp/fivesinspect/fiveslog";
     }
-    /**
-     * @作者: 老西儿
-     * @功能描述: 跳转到打卡页5S点检页
-     * @时间: 2019/4/24 16:58
-     * @参数:  * @param
-     * @返回值: java.lang.String
-     **/
     @GetMapping("toshowfiveslog")
     public String toShowFivesLog(){
         return "WEB-INF/jsp/fivesinspect/showfiveslog";
-    }
-    /**
-     * @作者: 老西儿
-     * @功能描述: 跳转到5S读权限
-     * @时间: 2019/4/24 17:09
-     * @参数:  * @param
-     * @返回值: java.lang.String
-     **/
-    @GetMapping("toFiveSReadList")
-    public String toFiveSReadList(){
-        return "WEB-INF/jsp/fivesinspect/fivesreadlist";
     }
 }

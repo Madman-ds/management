@@ -2,7 +2,6 @@ package com.ds.user.servcie;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.pojo.DataBackupParam;
-import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 
 import java.util.List;
@@ -37,6 +36,4 @@ public interface UserService {
     List<User> findAll();
 
     List<User> findAllbyids(String ids);
-
-    List getNotCurrentUserList(LoginUser loginUser);
 }

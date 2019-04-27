@@ -19,6 +19,7 @@
 <link href="<%=request.getContextPath() %>/static/js/bootstrap-dialog/dist/css/bootstrap-dialog.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/static/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/static/js/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
+
 <!-- 核心js文件 -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/bootstrap/js/bootstrap.min.js"></script>

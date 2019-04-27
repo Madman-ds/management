@@ -3,10 +3,17 @@
 <mapper namespace="com.ds.glzxj.mapper.GlzxjMappper">
     <select id="getGlzxjCount" resultType="integer">
         select count(*) from t_glzxj
+        <where>
+            <if test="glz_name!=null and glz_name!=''">glz_name = #{glz_name}</if>
+        </where>
     </select>
 
     <select id="findAllGlzxj" resultType="com.ds.glzxj.pojo.Glzxj">
-        select * from t_glzxj order by glz_id desc
+        select * from t_glzxj
+        <where>
+            <if test="glz_name!=null and glz_name!=''">glz_name = #{glz_name}</if>
+        </where>
+        order by glz_id desc
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
     </select>
 
@@ -19,7 +26,7 @@
 
     <insert id="insertGlzxj" parameterType="com.ds.glzxj.pojo.Glzxj">
         INSERT INTO t_glzxj ( glz_name,glz_data,glz_count ,glz_tq)
-        VALUE (#{glz_name},now(),#{glz_count},2)
+        VALUE (#{glz_name},now(),#{glz_count},#{glz_tq})
     </insert>
 
 
@@ -71,4 +78,21 @@
         glz_id = #{glz_id}
     </update>
 
+    <select id="getGlzxjTiCount" resultType="integer">
+        select count(*) from t_glzxj where glz_tq = 1
+    </select>
+
+    <select id="findAllTiGlzxj" resultType="com.ds.glzxj.pojo.Glzxj">
+        select * from t_glzxj where glz_tq = 1 order by glz_id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+
+    <update id="huanyuanGLZById" parameterType="string">
+      UPDATE
+        t_glzxj
+      SET
+        glz_tq = 2
+      WHERE
+        glz_name = (select user_name  from t_user where user_id = #{ids})
+    </update>
 </mapper>

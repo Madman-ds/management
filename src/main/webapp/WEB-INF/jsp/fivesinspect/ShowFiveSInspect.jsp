@@ -18,7 +18,7 @@
 <script type="text/javascript">
     //查询 表格展示
     $('#myTable3').bootstrapTable({
-        url:'<%=request.getContextPath() %>/showUserFiveSInspect?userId=${userId}',//获取数据地址
+        url:'<%=request.getContextPath() %>/showUserFiveSInspect?user_id=${userId}',//获取数据地址
         method:'GET',//发送请求的方式
         contentType:"application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         clickToSelect: true, //是否启用点击选中行

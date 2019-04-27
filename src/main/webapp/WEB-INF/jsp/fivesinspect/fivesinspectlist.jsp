@@ -60,6 +60,7 @@
             {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
                     var str="";
                         str += "<button class='btn btn-info dim' type='button' onclick='delFiveSInspect(\""+rows.f_id+"\")' ><i class='fa fa-paste'></i>删除</button>";
+                        str += "<button class='btn btn-info dim' type='button' onclick='updateFiveSInspect(\""+rows.f_id+"\")' ><i class='fa fa-paste'></i>修改</button>";
                         return str;
                 }
             }

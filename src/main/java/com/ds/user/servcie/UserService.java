@@ -2,6 +2,7 @@ package com.ds.user.servcie;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.pojo.DataBackupParam;
+import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 
 import java.util.List;
@@ -32,4 +33,6 @@ public interface UserService {
     int updateT(DataBackupParam dataBackupParam);
 
     int updateTs(DataBackupParam dataBackupParam);
+
+    List getNotCurrentUserList(LoginUser loginUser);
 }

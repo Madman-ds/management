@@ -20,11 +20,8 @@
         WHERE 1 = 1
         AND f_inspectuser IS NULL AND f_inspectdate IS NULL ORDER BY f_id DESC
     </select>
-    <select id="showfiveslog" resultMap="t_fivesinspect">
-        SELECT * FROM t_fivesinspect
-    </select>
     <select id="findFiveSLogByUserName" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
-        SELECT * FROM t_fivesinspect WHERE f_inspectuser LIKE #{f_inspectuser}
+        SELECT * FROM t_fivesinspect WHERE f_inspectuser LIKE #{f_inspectuser} order by f_id desc limit 1
     </select>
     <select id="findFiveSInspectById" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
         SELECT * FROM t_fivesinspect
@@ -50,10 +47,11 @@
     <insert id="addUserFiveSInspect" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect">
         INSERT INTO t_userfivesinspect (f_id,user_id,ifextract,f_fives)VALUES (#{f_id},#{user_id},#{ifextract},#{f_fives})
     </insert>
-    <select id="showUserFiveSInspect" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect" resultType="com.ds.fivesinspect.pojo.UserFiveSInspect">
+    <select id="findUserFiveSInspect" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect" resultType="com.ds.fivesinspect.pojo.UserFiveSInspect">
         SELECT * FROM t_userfivesinspect
-        WHERE 1 = 1 AND
-        user_id = #{userId}
+        WHERE 1 = 1
+        <if test="user_id != 0 and user_id != null">AND user_id = #{user_id}</if>
+        <if test="f_id != 0 and f_id != null">AND f_id = #{f_id}</if>
          ORDER BY f_id DESC
     </select>
     <update id="upIfextract" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect">
@@ -78,20 +76,43 @@
         AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL AND f_ifmeet IS NOT NULL ORDER BY f_id DESC
     </select>
     <select id="showFiveSLogByUser" parameterType="java.lang.String" resultType="map">
-        select tf.f_id,tf.f_fives,tf.f_clazzify,tu.user_name,tuf.ifextract from
+        select tf.f_id,tf.f_fives,tf.f_clazzify,tf.f_content,tu.user_name,tuf.ifextract from
         t_userfivesinspect tuf
         left join t_fivesinspect tf on tf.f_id = tuf.f_id
         left join t_user tu on tuf.user_id = tu.user_id
-        where tuf.user_id = #{userId} and tuf.ifextract = 1
+        where tuf.user_id = #{userId}
     </select>
-    <update id="upFiveSInspectLog" parameterType="com.ds.fivesinspect.pojo.UserFiveSInspect">
-        UPDATE t_fivesinspect SET
-        <if test="f_fives != null and f_fives != ''">f_fives = #{f_fives},</if>
-        <if test="f_clazzify != null and f_clazzify != ''">f_clazzify = #{f_clazzify},</if>
-        <if test="f_content != null and f_content != ''">f_content = #{f_content},</if>
-        <if test="f_ifmeet != null and f_ifmeet != ''">f_ifmeet = #{f_ifmeet},</if>
-        <if test="f_inspectuser != null and f_inspectuser != ''">f_inspectuser = #{f_inspectuser},</if>
-        f_inspectdate = NOW()
-        WHERE f_fives LIKE #{f_fives}
+    <update id="addFiveSInspectLog" parameterType="com.ds.fivesinspect.pojo.FiveSInspect">
+        INSERT INTO t_fivesinspect (
+        f_fives,f_clazzify,f_content,f_userid,f_inspectdate,f_inspectuser,f_ifmeet
+        )VALUES (
+        #{f_fives},#{f_clazzify},#{f_content},#{f_userid},NOW(),#{f_inspectuser},#{f_ifmeet}
+        )
     </update>
+    <select id="showFiveSReadList" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultType="map">
+        SELECT tf.f_id,tf.f_fives,tf.f_clazzify,tf.f_content,tu.user_name,tuf.u_f_id FROM
+        t_userfivesinspect tuf ,
+        t_fivesinspect tf,
+        t_user tu
+        WHERE
+        tuf.f_id = tf.f_id AND
+        tuf.f_fives = tf.f_fives AND
+        tuf.user_id = tu.user_id AND
+        tf.f_inspectuser IS NULL AND
+        tf.f_inspectdate IS NULL ORDER BY tf.f_id DESC
+    </select>
+    <select id="findReadFive" resultType="com.ds.fivesinspect.pojo.ReadFives" parameterType="com.ds.fivesinspect.pojo.ReadFives">
+        SELECT * FROM t_readfive
+        WHERE 1 = 1
+        <if test="user_id != 0 and user_id != null">AND user_id = #{user_id}</if>
+        <if test="f_id != 0 and f_id != null">AND f_id = #{f_id}</if>
+        ORDER BY f_id DESC
+    </select>
+    <insert id="insertReadFive" parameterType="com.ds.fivesinspect.pojo.ReadFives">
+        INSERT INTO t_readfive (
+        user_id,f_id,u_f_id
+        )VALUES (
+        #{user_id},#{f_id},#{u_f_id}
+        )
+    </insert>
 </mapper>

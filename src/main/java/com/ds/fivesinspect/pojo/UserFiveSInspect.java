@@ -13,15 +13,15 @@ public class UserFiveSInspect {
     /**
      * 主键id
      */
-    private Integer u_f_id;
+    private Long u_f_id;
     /**
      * 5Sid
      */
-    private Integer f_id;
+    private Long f_id;
     /**
      * 用户id
      */
-    private Integer user_id;
+    private Long user_id;
     /**
      * 是否提取 0:未提 1:已提
      */

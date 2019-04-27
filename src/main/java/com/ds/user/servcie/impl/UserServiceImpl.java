@@ -2,6 +2,7 @@ package com.ds.user.servcie.impl;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.pojo.DataBackupParam;
+import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.mapper.UserMappper;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
@@ -70,4 +71,10 @@ public class UserServiceImpl implements UserService {
     public int updateTs(DataBackupParam dataBackupParam) {
         return userMappper.updateTs(dataBackupParam);
     }
+
+    @Override
+    public List getNotCurrentUserList(LoginUser loginUser) {
+        return userMappper.getNotCurrentUserList(loginUser);
+    }
+
 }

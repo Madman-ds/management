@@ -20,8 +20,8 @@
             <i class="glyphicon glyphicon-plus"></i>
             写操作授权
         </button>
-        <button onclick="showUserFiveSInspect()" class="btn btn-success"  type="button">
-            <i class="btn btn-info"></i>
+        <button onclick="showUserFiveSInspect()" class="btn btn-info"  type="button">
+            <i class="glyphicon glyphicon-pushpin"></i>
             查看写操作权限
         </button>
     </div>
@@ -31,32 +31,10 @@
 <script type="text/javascript">
     //查询 表格展示
     $('#myTable').bootstrapTable({
-        toolbar:'#toolbar',
-        url:'<%=request.getContextPath() %>/findFiveSInspect',//获取数据地址
-        pagination:false, //是否展示分页
-        pageList:[5, 10, 20, 50],//分页组件
-        pageNumber:1,
-        pageSize:5,//默认每页条数
-        //search:true,//是否显示搜索框
-        //searchText:'试试',//初始化搜索文字
+        url:'<%=request.getContextPath() %>/showfiveslogs',//获取数据地址
         method:'GET',//发送请求的方式
         contentType:"application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
-        // showColumns:false,//是否显示 内容列下拉框
-        // showToggle:false,//是否显示 切换试图（table/card）按钮
-        // showPaginationSwitch:false,//是否显示 数据条数选择框
-        // showRefresh:false,//是否显示刷新按钮
-        // detailView:false,//设置为 true 可以显示详细页面模式。
-        // showFooter:false,//是否显示列脚
         clickToSelect: true, //是否启用点击选中行
-        sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
-        striped:true,
-        queryParams:function(){
-//	 		return 的数据 是传递到  action类中的参数
-            return {
-                page:this.pageNumber,//当前页
-                rows:this.pageSize //每页条数
-            }
-        },
         columns:[
             {checkbox:true},
             {field:'f_id',align:'center',width:50,visible: false},
@@ -67,9 +45,9 @@
     });
     $(function (){
         $.ajax({
-            url:'<%=request.getContextPath() %>/getUserList',
+            url:'<%=request.getContextPath() %>/getNotCurrentUserList',
             async:'false',
-            type:'post',
+            type:'get',
             dataType:'json',
             success:function(data){
                 for (var i = 0;i < data.length;i++){

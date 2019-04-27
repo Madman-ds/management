@@ -1,5 +1,6 @@
 package com.ds.user.controller;
 
+import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
 import com.ds.util.PageUtil;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -47,6 +49,19 @@ public class UserController {
     @PostMapping("getUserList")
     public List getUserList(){
         return userService.findAllUser(null);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询除当前登录用户外所有用户信息
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
+    @GetMapping("getNotCurrentUserList")
+    public List getNotCurrentUserList(HttpSession httpSession){
+        LoginUser loginUser = (LoginUser)httpSession.getAttribute("loginUser");
+        List userlist = userService.getNotCurrentUserList(loginUser);
+        return userlist;
     }
     /**
      * @作者: 段聪祺

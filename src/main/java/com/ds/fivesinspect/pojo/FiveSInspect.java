@@ -2,6 +2,7 @@ package com.ds.fivesinspect.pojo;
 
 import com.ds.util.Page;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -30,12 +31,17 @@ public class FiveSInspect extends Page {
      */
     private String f_content;
     /**
+     *
+     */
+    private Long f_userid;
+    /**
      * 检查人
      */
     private String f_inspectuser;
     /**
      * 检查时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date f_inspectdate;
     /**
      *  是否满意 0:不满意 1:满意

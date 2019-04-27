@@ -74,8 +74,8 @@
                 </i>个人查看
             </button>
             &nbsp;
-            <button onclick="toviewlist()" class="btn btn-success" type="button">
-                <i class="glyphicon glyphicon-hand-left">
+            <button onclick="toviewlist()" class="btn btn-warning" type="button">
+                <i class="glyphicon glyphicon-share-alt">
                 </i>返回
             </button>
             &nbsp;
@@ -150,7 +150,7 @@
         var numArr3 = JSON.stringify(numArr3);
         var numArr4 = JSON.stringify(numArr4);
         $.ajax({
-            url:'<%=request.getContextPath() %>/upFiveSLog',
+            url:'<%=request.getContextPath() %>/addFiveSInspectLog',
             type:'post',
             data:{
                 "numArr1":numArr1,
@@ -174,7 +174,7 @@
         var user_name =$("#user_name").val();
         var userId =$("#userId").val();
         $.ajax({
-            url:'<%=request.getContextPath() %>/showfiveslogs',
+            url:'<%=request.getContextPath() %>/showFiveSLogByUser',
             // data:{"userId":userId,"userName":user_name},
             type:'get',
             success:function(data){
@@ -200,21 +200,21 @@
             }
         })
 
-        $.ajax({
-            url:'<%=request.getContextPath() %>/findDataBackup',
-            type:'get',
-            success:function(data){
-                var arr = data.rows;
-                for (var i=0;i<arr.length;i++){
-                    var a = changeDateFormat(arr[i].qr_time);
-                    var b = arr[i].user_name;
-                    var c = arr[i].sb_name;
-                    var d = arr[i].bz_nr;
-                    var e = a+"     "+b+"   检查了"+c+"     "+d + "</br>";
-                    $("#dataBackupShow").append(e);
-                }
-            }
-        })
+        <%--$.ajax({--%>
+            <%--url:'<%=request.getContextPath() %>/findDataBackup',--%>
+            <%--type:'get',--%>
+            <%--success:function(data){--%>
+                <%--var arr = data.rows;--%>
+                <%--for (var i=0;i<arr.length;i++){--%>
+                    <%--var a = changeDateFormat(arr[i].qr_time);--%>
+                    <%--var b = arr[i].user_name;--%>
+                    <%--var c = arr[i].sb_name;--%>
+                    <%--var d = arr[i].bz_nr;--%>
+                    <%--var e = a+"     "+b+"   检查了"+c+"     "+d + "</br>";--%>
+                    <%--$("#dataBackupShow").append(e);--%>
+                <%--}--%>
+            <%--}--%>
+        <%--})--%>
     })
 
     //转换日期格式(时间戳转换为datetime格式)

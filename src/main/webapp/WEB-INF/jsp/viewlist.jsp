@@ -108,7 +108,9 @@
     function zjRead(){
         location.href = "<%=request.getContextPath() %>/zjRead";
     }
-
+    function showfives(){
+        location.href = "<%=request.getContextPath() %>/toshowfiveslog";
+    }
 
     //条件查询
    /* function queryDataBackUp(){
@@ -200,7 +202,7 @@
                 "numArr6":numArr6,
                 "numArr7":numArr7,
                 "numArr8":numArr8,
-                "numArr9":numArr9
+                "numArr9":numArr9,
             },
             dataType:"text",
             success:function(data){
@@ -233,31 +235,31 @@
             success:function(data){
                 var tbs = document.getElementById("mytableid");//获取表格
                 var rows = tbs.insertRow();//添加行
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>名称</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>编号</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>属性</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>检查项</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>检查要求</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>检查结果</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>确认人</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>备注内容</label></td>";
+                rows.innerHTML += "<td style='width:120px;height: 45px' align='center'><label>名称</label></td>";
+                rows.innerHTML += "<td style='width:120px;height: 45px' align='center'><label>编号</label></td>";
+                rows.innerHTML += "<td style='width:120px;height: 45px' align='center'><label>属性</label></td>";
+                rows.innerHTML += "<td style='width:120px;height: 45px' align='center'><label>检查项</label></td>";
+                rows.innerHTML += "<td style='width:120px;height: 45px' align='center'><label>检查要求</label></td>";
+                rows.innerHTML += "<td style='width:120px;height: 45px' align='center'><label>检查结果</label></td>";
+                rows.innerHTML += "<td style='width:120px;height: 45px' align='center'><label>确认人</label></td>";
+                rows.innerHTML += "<td style='width:120px;height: 45px' align='center'><label>备注内容</label></td>";
                 var arr = data;
                 for (var i=0;i<arr.length;i++){
                     var tb = document.getElementById("mytableid");//获取表格
                     var row = tb.insertRow();//添加行
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td1' value='"+arr[i].sb_name+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td2' value='"+arr[i].sb_number+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td3' value='"+arr[i].sb_xh+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td4' value='"+arr[i].jcx_name+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><textarea  class='td5' value='' style='width:160px;height: 45px;text-align: center'  readonly>"+arr[i].jcx_v+"</textarea></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px' class='td6' align='center'>" +
-                        "<select style='width:160px;height: 45px;text-align: center'>" +
+                    row.innerHTML += "<td style='width:120px;height: 30px'  align='center'><input class='td1' value='"+arr[i].sb_name+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:120px;height: 30px'  align='center'><input class='td2' value='"+arr[i].sb_number+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:120px;height: 30px'  align='center'><input class='td3' value='"+arr[i].sb_xh+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:120px;height: 30px'  align='center'><input class='td4' value='"+arr[i].jcx_name+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:120px;height: 30px'  align='center'><textarea  class='td5' value='' style='width:160px;height: 45px;text-align: center'  readonly>"+arr[i].jcx_v+"</textarea></td>";
+                    row.innerHTML += "<td style='width:120px;height: 30px' class='td6' align='center'>" +
+                        "<select style='width:120px;height: 45px;text-align: center'>" +
                         "<option value='0'><span class='fonta'>正常</span></option>" +
                         "<option value='1'><span class='fonta'>故障</span></option>" +
                         "</select></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td7' value='"+user_name+"' style='width:160px;height: 45px;text-align: center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td8' style='width:160px;height: 45px;text-align: center ' type='text'></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px;display: none'  align='center'><input class='td9' value='"+arr[i].jcx_id+"' style='width:160px;height: 45px;text-align: center' type='text'></td>";
+                    row.innerHTML += "<td style='width:120px;height: 30px'  align='center'><input class='td7' value='"+user_name+"' style='width:160px;height: 45px;text-align: center'  type='text' readonly></td>";
+                    row.innerHTML += "<td style='width:120px;height: 30px'  align='center'><input class='td8' style='width:160px;height: 45px;text-align: center ' type='text'></td>";
+                    row.innerHTML += "<td style='width:120px;height: 30px;display: none'  align='center'><input class='td9' value='"+arr[i].jcx_id+"' style='width:160px;height: 45px;text-align: center' type='text'></td>";
                 }
             }
         })

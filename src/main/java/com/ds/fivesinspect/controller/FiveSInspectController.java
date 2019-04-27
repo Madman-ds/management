@@ -1,6 +1,7 @@
 package com.ds.fivesinspect.controller;
 
 import com.ds.fivesinspect.pojo.FiveSInspect;
+import com.ds.fivesinspect.pojo.ReadFives;
 import com.ds.fivesinspect.pojo.UserFiveSInspect;
 import com.ds.fivesinspect.service.FiveSInspectService;
 import com.ds.serverlogin.pojo.LoginUser;
@@ -51,8 +52,8 @@ public class FiveSInspectController {
      * @返回值: java.util.List
      **/
     @GetMapping("showfiveslogs")
-    public List showfiveslog(){
-        List fiveslist = fiveSInspectService.showfiveslog();
+    public List showfiveslogs(FiveSInspect fiveSInspect){
+        List fiveslist = fiveSInspectService.findFiveSInspect(fiveSInspect);
         return fiveslist;
     }
     /**
@@ -114,14 +115,17 @@ public class FiveSInspectController {
     public void insertUserFiveSInspect(String ids, String userId, String fivess){
         String[] idss = ids.split(",");
         String[] fivesss = fivess.split(",");
-        for (int i = 0;i < idss.length;i++){
-            UserFiveSInspect userFiveSInspect = new UserFiveSInspect();
-            userFiveSInspect.setF_id(Integer.valueOf(idss[i]));
-            userFiveSInspect.setUser_id(Integer.valueOf(userId));
-            userFiveSInspect.setIfextract("0");
-            userFiveSInspect.setF_fives(fivesss[i]);
-            fiveSInspectService.addUserFiveSInspect(userFiveSInspect);
-        }
+            for (int i = 0;i < idss.length;i++){
+                UserFiveSInspect userFiveSInspect = new UserFiveSInspect();
+                userFiveSInspect.setF_id(Long.valueOf(idss[i]));
+                userFiveSInspect.setUser_id(Long.valueOf(userId));
+                userFiveSInspect.setIfextract("0");
+                userFiveSInspect.setF_fives(fivesss[i]);
+                List<UserFiveSInspect> userFiveSInspects = fiveSInspectService.findUserFiveSInspect(userFiveSInspect);
+                if(userFiveSInspects.size() <= 0){
+                    fiveSInspectService.addUserFiveSInspect(userFiveSInspect);
+                }
+            }
     }
     /**
      * @作者: 老西儿
@@ -131,8 +135,8 @@ public class FiveSInspectController {
      * @返回值: java.util.Map<java.lang.String,java.lang.Object>
      **/
     @GetMapping("showUserFiveSInspect")
-    public List<UserFiveSInspect> showUserFiveSInspect(String userId){
-        List<UserFiveSInspect> fiveSInspects = fiveSInspectService.showUserFiveSInspect(userId);
+    public List<UserFiveSInspect> showUserFiveSInspect(UserFiveSInspect userFiveSInspect){
+        List<UserFiveSInspect> fiveSInspects = fiveSInspectService.findUserFiveSInspect(userFiveSInspect);
         return fiveSInspects;
     }
     /**
@@ -182,9 +186,47 @@ public class FiveSInspectController {
      * @返回值: java.util.List
      **/
     @GetMapping("showFiveSLogByUser")
-    public List showFiveSLogByUser(String userId){
-        List FiveSLoglist = fiveSInspectService.showFiveSLogByUser(userId);
+    public List showFiveSLogByUser(HttpSession httpSession){
+        LoginUser loginUser = (LoginUser) httpSession.getAttribute("loginUser");
+        List FiveSLoglist = fiveSInspectService.showFiveSLogByUser(loginUser.getUser_id().toString());
         return FiveSLoglist;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询读权限授权数据
+     * @时间: 2019/4/27 16:29
+     * @参数:  * @param fiveSInspect
+     * @返回值: java.util.List
+     **/
+    @GetMapping("showFiveSReadList")
+    public List showFiveSReadList(FiveSInspect fiveSInspect){
+        List fiveSReadList = fiveSInspectService.showFiveSReadList(fiveSInspect);
+        return fiveSReadList;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 添加读权限
+     * @时间: 2019/4/27 18:29
+     * @参数:  * @param ids
+     * @param userId
+     * @param fivess
+     * @param ufid
+     * @返回值: void
+     **/
+    @PostMapping("insertReadFive")
+    public void insertReadFive(String ids, String userId,String ufid){
+        String[] id = ids.split(",");
+        String[] ufids = ufid.split(",");
+        for (int i = 0;i < id.length;i++){
+            ReadFives readFives = new ReadFives();
+            readFives.setF_id(Long.valueOf(id[i]));
+            readFives.setUser_id(Long.valueOf(userId));
+            readFives.setU_f_id(Long.valueOf(ufids[i]));
+            List<ReadFives> readFivess = fiveSInspectService.findReadFive(readFives);
+            if(readFivess.size() <= 0){
+                fiveSInspectService.insertReadFive(readFives);
+            }
+        }
     }
     /**
      * @作者: 老西儿
@@ -194,9 +236,10 @@ public class FiveSInspectController {
      * @param request
      * @返回值: int
      **/
-    @PostMapping("upFiveSLog")
-    public int upFiveSLog(HttpSession session, HttpServletRequest request){
+    @PostMapping("addFiveSInspectLog")
+    public int addFiveSInspectLog(HttpSession session, HttpServletRequest request){
         LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+        Long user_id = loginUser.getUser_id();
         String user_name = loginUser.getUser_name();
         FiveSInspect fiveSInspect = new FiveSInspect();
         fiveSInspect.setF_inspectuser(user_name);
@@ -220,9 +263,10 @@ public class FiveSInspectController {
             fiveSInspect1.setF_fives(s10[i].substring(1,s10[i].length()-1));
             fiveSInspect1.setF_clazzify(s11[i].substring(1,s11[i].length()-1));
             fiveSInspect1.setF_content(s12[i].substring(1,s12[i].length()-1));
+            fiveSInspect1.setF_userid(user_id);
             fiveSInspect1.setF_inspectuser(user_name);
             fiveSInspect1.setF_ifmeet(s13[i].substring(1, s13[i].length()-1));
-            fiveSInspectService.upFiveSInspectLog(fiveSInspect1);
+            fiveSInspectService.addFiveSInspectLog(fiveSInspect1);
         }
         return 1;
     }

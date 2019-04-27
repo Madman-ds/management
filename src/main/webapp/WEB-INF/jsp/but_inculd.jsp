@@ -27,6 +27,9 @@
     function glzxjClick() {
         location.href = "<%=request.getContextPath() %>/toTopGlzxj"
     }
+    function showfives(){
+        location.href = "<%=request.getContextPath() %>/toshowfiveslog"
+    }
 </script>
 </body>
 </html>

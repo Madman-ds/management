@@ -2,6 +2,7 @@ package com.ds.fivesinspect.service.impl;
 
 import com.ds.fivesinspect.mapper.FiveSInspectMapper;
 import com.ds.fivesinspect.pojo.FiveSInspect;
+import com.ds.fivesinspect.pojo.ReadFives;
 import com.ds.fivesinspect.pojo.UserFiveSInspect;
 import com.ds.fivesinspect.service.FiveSInspectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,10 +110,56 @@ public class FiveSInspectServiceImpl implements FiveSInspectService{
      * @参数:  * @param userId
      * @返回值: java.util.List<com.ds.fivesinspect.pojo.FiveSInspect>
      **/
+
     @Override
-    public List<UserFiveSInspect> showUserFiveSInspect(String userId) {
-        return fiveSInspectMapper.showUserFiveSInspect(userId);
+    public List<UserFiveSInspect> findUserFiveSInspect(UserFiveSInspect userFiveSInspect) {
+        return fiveSInspectMapper.findUserFiveSInspect(userFiveSInspect);
     }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 添加5S日志信息
+     * @时间: 2019/4/23 14:58
+     * @参数:  * @param fiveSInspect
+     * @返回值: void
+     **/
+    @Override
+    public void addFiveSInspectLog(FiveSInspect fiveSInspect1) {
+        fiveSInspectMapper.addFiveSInspectLog(fiveSInspect1);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询读权限授权数据
+     * @时间: 2019/4/27 16:31
+     * @参数:  * @param fiveSInspect
+     * @返回值: java.util.List
+     **/
+    @Override
+    public List showFiveSReadList(FiveSInspect fiveSInspect) {
+        return fiveSInspectMapper.showFiveSReadList(fiveSInspect);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询读权限授权信息是否存在
+     * @时间: 2019/4/27 18:48
+     * @参数:  * @param readFives
+     * @返回值: java.util.List<com.ds.fivesinspect.pojo.ReadFives>
+     **/
+    @Override
+    public List<ReadFives> findReadFive(ReadFives readFives) {
+        return fiveSInspectMapper.findReadFive(readFives);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 添加读权限
+     * @时间: 2019/4/27 18:49
+     * @参数:  * @param null
+     * @返回值:
+     **/
+    @Override
+    public void insertReadFive(ReadFives readFives) {
+        fiveSInspectMapper.insertReadFive(readFives);
+    }
+
     /**
      * @作者: 老西儿
      * @功能描述: 修改5S是否提取
@@ -177,29 +224,14 @@ public class FiveSInspectServiceImpl implements FiveSInspectService{
     }
     /**
      * @作者: 老西儿
-     * @功能描述: 修改5S日志信息
-     * @时间: 2019/4/23 14:58
+     * @功能描述:5S日志修改,根据用户名查询
+     * @时间: 2019/4/23 23:57
      * @参数:  * @param fiveSInspect
-     * @返回值: void
+     * @返回值: java.util.List<com.ds.fivesinspect.pojo.FiveSInspect>
      **/
-    @Override
-    public void upFiveSInspectLog(FiveSInspect fiveSInspect) {
-        fiveSInspectMapper.upFiveSInspectLog(fiveSInspect);
-    }
-    /**
-     * @作者: 老西儿
-     * @功能描述: 打卡页面查询5S点检数据
-     * @时间: 2019/4/23 17:48
-     * @参数:  * @param
-     * @返回值: java.util.List
-     **/
-    @Override
-    public List showfiveslog() {
-        return fiveSInspectMapper.showfiveslog();
-    }
-
     @Override
     public List<FiveSInspect> findFiveSLogByUserName(FiveSInspect fiveSInspect) {
         return fiveSInspectMapper.findFiveSLogByUserName(fiveSInspect);
     }
+
 }

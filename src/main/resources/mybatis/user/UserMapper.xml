@@ -99,4 +99,7 @@
     <update id="updateTs" parameterType="com.ds.databackup.pojo.DataBackupParam">
         update t_inspectionrecord set top = #{type} where jcx_id = #{jcx_id} and user_name = #{user_name}
     </update>
+    <select id="getNotCurrentUserList" parameterType="com.ds.user.pojo.User" resultType="com.ds.user.pojo.User">
+        select * from t_user where user_id != #{user_id}
+    </select>
 </mapper>

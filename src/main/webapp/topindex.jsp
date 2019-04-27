@@ -118,7 +118,7 @@
     //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
         if (cellval != null){
-            var d = new Date(cellval);;
+            var d = new Date(cellval);
             var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ';
             return times;
         }

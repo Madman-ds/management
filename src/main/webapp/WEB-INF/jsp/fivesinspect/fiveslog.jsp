@@ -45,19 +45,22 @@
             }
         },
         columns:[
-            {checkbox:true},
             {field:'f_id',align:'center',width:50,visible: false},
             {field:'f_fives',title:'5S',align:'center',width:450},
             {field:'f_clazzify',title:'分类',align:'center',width:450},
             {field:'f_content',title:'内容',align:'center',width:450},
             {field:'f_inspectuser',title:'检查人',align:'center',width:450},
-            {field:'f_inspectdate',title:'检查时间',align:'center',width:450},
+            {field:'f_inspectdate',title:'检查时间',align:'center',width:450,
+                //获取日期列的值进行转换
+                formatter: function (value, row, index) {
+                    return changeDateFormat(value);
+                }},
             {field:'f_ifmeet',title:'是否满意',align:'center',width:450,formatter:function(value,rows,index){
                     var str="";
-                    if(rows.ifextract == "0"){
+                    if(value == 0){
                         str += "不满意";
                         return str;
-                    }else if(rows.ifextract == "1"){
+                    }else if(value == 1){
                         str += "满意";
                         return str;
                     }else{
@@ -67,5 +70,23 @@
                 }}
         ]
     });
+    $('#datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+        language:"zh-CN",
+        autoclose:true
+    });
+    $('#datetimeend').datetimepicker({
+        format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+        language:"zh-CN",
+        autoclose:true
+    });
+    //转换日期格式(时间戳转换为datetime格式)
+    function changeDateFormat(cellval) {
+        if (cellval != null){
+            var d = new Date(cellval);;
+            var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+            return times;
+        }
+    }
 </script>
 </html>

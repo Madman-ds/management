@@ -1,6 +1,7 @@
 package com.ds.fivesinspect.service;
 
 import com.ds.fivesinspect.pojo.FiveSInspect;
+import com.ds.fivesinspect.pojo.ReadFives;
 import com.ds.fivesinspect.pojo.UserFiveSInspect;
 
 import java.util.List;
@@ -26,8 +27,6 @@ public interface FiveSInspectService {
 
     void addUserFiveSInspect(UserFiveSInspect userFiveSInspect);
 
-    List<UserFiveSInspect> showUserFiveSInspect(String userId);
-
     void upIfextract(UserFiveSInspect userFiveSInspect);
 
     Boolean delUserFiveSInspect(String ufid);
@@ -38,9 +37,15 @@ public interface FiveSInspectService {
 
     List<FiveSInspect> findFiveSInspectLog(FiveSInspect fiveSInspect);
 
-    void upFiveSInspectLog(FiveSInspect fiveSInspect);
-
-    List showfiveslog();
-
     List<FiveSInspect> findFiveSLogByUserName(FiveSInspect fiveSInspect);
+
+    List<UserFiveSInspect> findUserFiveSInspect(UserFiveSInspect userFiveSInspect);
+
+    void addFiveSInspectLog(FiveSInspect fiveSInspect1);
+
+    List showFiveSReadList(FiveSInspect fiveSInspect);
+
+    List<ReadFives> findReadFive(ReadFives readFives);
+
+    void insertReadFive(ReadFives readFives);
 }

@@ -13,6 +13,16 @@
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../jscore.jsp"></jsp:include>
+<style>
+
+    /*多选下拉框样式（根据自己的样式调整）*/
+    .dropdown_item{width: 100%}
+    .dropdown_item>li:HOVER{background-color: #eee;cursor: pointer;}
+    .dropdown_item>li {display: block;padding: 3px 10px;clear: both;font-weight: normal;line-height: 1.428571429;color: #333;white-space: nowrap;}
+    .dropdown_item>li>.check_box{width: 18px;height: 18px;vertical-align: middle;margin: 0px;}
+    .dropdown_item>li>span{vertical-align: middle;}
+    .select_multiple .caret{border-top: 4px solid!important;border-bottom: 0;}
+</style>
 <body>
 <!-- 搜索 -->
 <%--<div class="panel-body">
@@ -59,7 +69,68 @@
 </div>
 <table id="userList"></table>
 </body>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="">
+                    <div class="dropup" style="position: relative;">
+                        <button class="btn btn-default dropdown-toggle form-control select_multiple" style="width: 100%;margin-left: 0px;" type="button" id="dropdownMenu21" data-toggle="dropdown">
+                            <span class="select_text" id="userselect" data-is-select="false">请选择用户</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown_item" style="bottom: auto;" id="deptMenu">
+                            <%--<li><input type="checkbox" class="check_box" value="aa" /> <span>Action</span></li>--%>
+                        </ul><!-- 为了方便演示，type设置text了，实际中可以设置成hidden -->
+                        <input type="hidden" id="glz_user" name="glz_user" class="select_val"/>
+                        <input type="hidden" id="id" name="id"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="col-sm-6 col-sm-offset-2" id="updateshow">
+                    <button class="btn btn-primary" type="button" id="update">赋权</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <script type="text/javascript" >
+    function initselect(){
+        $.ajax({
+            type: "get",
+            url: "/findAll",
+            // data: {
+            //     // 'id' : null,
+            // },
+            dataType: "json",
+            success: function(result){
+                var data = result;
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    html +='<li><input type="checkbox" class="check_box" value="'+data[i].user_id+'" /> <span>'+data[i].user_name+'</span></li>';
+                }
+                $("#deptMenu").append(html);
+            }
+        })
+        // $("#userselect").html("1,22,33");
+    }
+    function inituser(glz_user) {
+        $.ajax({
+            type: "get",
+            url: "/findAllbyids",
+            data: {
+                'ids' : glz_user,
+            },
+            dataType: "text",
+            success: function(result){
+                debugger
+                $("#userselect").html(result);
+            }
+        })
+    }
+    
     //条件查询
     function uerSearch(){
         //点击查询，只是让表格刷新到第一页，具体查询参数，按照组装表格时候拿到的查询条件来用
@@ -111,6 +182,29 @@
             field:"glz_count",
             title:"问题数量",
             align:'center',
+        },{
+            field:"glz_user",
+            title:"赋权给用户",
+            visible: false,
+            align:'center',
+        }, {
+            field:"glz_tq",
+            title:"提取项",
+            align:'center',
+            formatter: function (value, rows, index) {
+                var str ="";
+                if(rows.glz_tq =="1"){
+                    str = "<button class='btn btn-info dim' type='button' onclick='huanyuan(\""+rows.glz_id+"\")' ><i class='fa fa-paste'></i>还原</button>"+"  ";
+                }else{
+                    str = "<button class='btn btn-info dim' type='button' onclick='tiqu(\""+rows.glz_id+"\")' ><i class='fa fa-paste'></i>提取</button>"+"  ";
+                }
+                return str;
+            }
+        },{field:'cc',title:'操作',align:'center',formatter:function(value,rows,index){
+                var str="";
+                str+="<button class='btn btn-info dim' type='button' onclick='fuquan(\""+rows.glz_id+"\",\""+rows.glz_user+"\")' ><i class='fa fa-paste'></i>赋权</button>";
+                return  str;
+            }
         }
         ],
         pagination:true,
@@ -281,7 +375,135 @@
         })
     }
 
+    function huanyuan(id){
+        $.ajax({
+            url:"<%=request.getContextPath()%>/huanyuanGLZ",
+            data:{
+                'id':id
+            },
+            dataType:"text",
+            type:"post",
+            success:function(){
+                $("#userList").bootstrapTable('refresh',{pageNumber:1});
+            },
+            error:function(){
+                BootstrapDialog.show({
+                    title:"fuck！！",
+                    message:'哇哦！系统走丢了！！'
+                })
+            }
+        })
+    }
+
+    function tiqu(id){
+        $.ajax({
+            url:"<%=request.getContextPath()%>/tiquGLZ",
+            data:{
+                'id':id
+            },
+            dataType:"text",
+            type:"post",
+            success:function(){
+                $("#userList").bootstrapTable('refresh',{pageNumber:1});
+            },
+            error:function(){
+                BootstrapDialog.show({
+                    title:"fuck！！",
+                    message:'哇哦！系统走丢了！！'
+                })
+            }
+        })
+    }
+
+    //赋权
+    function fuquan(id,glz_user) {
+        initselect();
+        $("#id").val(id);
+        inituser(glz_user);
+        $("#glz_user").html(glz_user);
+        // $("#userselect").html(glz_user);
+        $('#myModal2').modal('toggle');
+    }
+    //赋权
+    $("#update").click(function(){
+        $.ajax({
+            url:"<%=request.getContextPath()%>/updateFQ",
+            data:{
+                'glz_id':$("#id").val(),
+                'glz_user':$("#glz_user").val()
+            },
+            dataType:"text",
+            type:"post",
+            success:function(){
+                $("#id").val("");
+                $('#myModal2').modal('hide');
+                $("#userList").bootstrapTable('refresh',{pageNumber:1});
+            },
+            error:function(){
+                BootstrapDialog.show({
+                    title:"fuck！！",
+                    message:'哇哦！系统走丢了！！'
+                })
+            }
+        })
+    })
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    //多选下拉框实现
+    $(document).on("click",".check_box",function(event){
+        event.stopPropagation();//阻止事件冒泡，防止触发li的点击事件
+        //勾选的项
+        var $selectTextDom=$(this).parent().parent("ul").siblings("button").children(".select_text");
+        //勾选项的值
+        var $selectValDom=$(this).parent().parent("ul").siblings(".select_val");
+        //是否有选择项了
+        var isSelected=$selectTextDom[0].getAttribute("data-is-select");
+        var selectText="";//文本值，用于显示
+        var selectVal=$selectValDom.val();//实际值，会提交到后台的
+        var selected_text=$(this).siblings("span").text();//当次勾选的文本值
+        var selected_val=$(this).val();//当次勾选的实际值
+        //判断是否选择过
+        if(isSelected=="true"){
+            selectText=$selectTextDom.text();
+        }
+        if(selectText!=""){
+            if(selectText.indexOf(selected_text)>=0){//判断是否已经勾选过
+                selectText=selectText.replace(selected_text,"").replace(",,",",");//替换掉
+                selectVal=selectVal.replace(selected_val,"").replace(",,",",");//替换掉
+                //判断最后一个字符是否是逗号
+                if(selectText.charAt(selectText.length - 1)==","){
+                    //去除末尾逗号
+                    selectText=selectText.substring(0,selectText.length - 1);
+                    selectVal=selectVal.substring(0,selectVal.length - 1);
+                }
+            }else{
+                selectText+=","+selected_text;
+                selectVal+=","+selected_val;
+            }
+        }else{
+            selectText=selected_text;
+            selectVal=selected_val;
+        }
+        $selectTextDom.text(selectText);
+        $selectValDom.val(selectVal);
+        if(selectText==""){
+            $selectTextDom.text("请选择");
+            $selectTextDom[0].setAttribute("data-is-select","false");
+        }else{
+            $selectTextDom[0].setAttribute("data-is-select","true");
+        }
+    })
 </script>
 </html>

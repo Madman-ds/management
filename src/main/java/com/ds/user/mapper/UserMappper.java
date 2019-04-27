@@ -2,7 +2,6 @@ package com.ds.user.mapper;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.pojo.DataBackupParam;
-import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,4 +35,8 @@ public interface UserMappper {
     int updateTs(DataBackupParam dataBackupParam);
 
     List getNotCurrentUserList(LoginUser loginUser);
+
+    List<User> findAll();
+
+    List<User> findAllbyids(String[] ids);
 }

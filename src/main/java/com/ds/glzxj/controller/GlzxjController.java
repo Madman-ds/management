@@ -15,7 +15,7 @@ import java.util.List;
  * @类名称: Controller
  * @作者: 段聪祺
  * @创建时间: 2018/9/29 14:36
- * @说明: 用户相关控制器
+ * @说明: 管理者巡检相关控制器
  */
 @RestController
 public class GlzxjController {
@@ -23,7 +23,7 @@ public class GlzxjController {
     private GlzxjService glzxjService;
   /**
    * @作者: 段大神经
-   * @功能描述: 查询本周周计划
+   * @功能描述: 查询管理者巡检
    * @时间: 2018/9/29 14:44
    * @参数:  * @param user
    * @返回值: com.ds.util.PageUtil
@@ -39,7 +39,7 @@ public class GlzxjController {
     }
     /**
      * @作者: 段聪祺
-     * @功能描述: 添加用户
+     * @功能描述: 添加管理者巡检
      * @时间: 2018/9/29 15:58
      * @参数:  * @param user
      * @返回值: int
@@ -55,7 +55,7 @@ public class GlzxjController {
     }
     /**
      * @作者: 段聪祺
-     * @功能描述: 删除用户
+     * @功能描述: 删除管理者巡检
      * @时间: 2018/9/29 16:02
      * @参数:  * @param request
      * @返回值: void
@@ -64,5 +64,30 @@ public class GlzxjController {
     public void delAllGlzxj(HttpServletRequest request){
         String ids = request.getParameter("ids");
         glzxjService.delAllGlzxj(ids);
+    }
+
+    /**
+     * 提取
+     * @param request
+     */
+    @PostMapping("huanyuanGLZ")
+    public void huanyuanGLZ(HttpServletRequest request){
+        String ids = request.getParameter("id");
+        glzxjService.huanyuanGLZ(ids);
+    }
+
+    /**
+     * 还原
+     * @param request
+     */
+    @PostMapping("tiquGLZ")
+    public void tiquGLZ(HttpServletRequest request){
+        String ids = request.getParameter("id");
+        glzxjService.tiquGLZ(ids);
+    }
+
+    @PostMapping("updateFQ")
+    public void updateFQ(Glzxj glzxj){
+        glzxjService.updateFQ(glzxj);
     }
 }

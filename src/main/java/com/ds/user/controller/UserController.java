@@ -7,6 +7,7 @@ import com.ds.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,4 +109,26 @@ public class UserController {
         String ids = request.getParameter("ids");
         userService.delAllUser(ids);
     }
+
+    @GetMapping("findAll")
+    @ResponseBody
+    public List<User> queryuser(){
+        List<User> list =  userService.findAll();
+        return list;
+    }
+
+
+    @GetMapping("findAllbyids")
+    public String findAllbyids(HttpServletRequest request){
+        String ids = request.getParameter("ids");
+        List<User> list =  userService.findAllbyids(ids);
+        StringBuilder ss = new StringBuilder();
+        if(!list.isEmpty()){
+            list.forEach(x -> ss.append(","+ x.getUser_name()));
+            String s = ss.toString().substring(1);
+            return s;
+        }
+        return ss.toString();
+    }
+
 }

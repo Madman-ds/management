@@ -19,4 +19,9 @@ public interface GlzxjMappper {
 
     int insertGlzxj(Glzxj glzxj);
 
+    void huanyuanGLZ(String ids);
+
+    void tiquGLZ(String ids);
+
+    void updateFQ(Glzxj glzxj);
 }

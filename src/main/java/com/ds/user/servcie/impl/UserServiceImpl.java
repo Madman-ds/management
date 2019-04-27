@@ -73,6 +73,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findAll() {
+        return userMappper.findAll();
+    }
+
+    @Override
+    public List<User> findAllbyids(String ids) {
+        String[] split = ids.split(",");
+        return userMappper.findAllbyids(split);
+    }
+
+
+    @Override
     public List getNotCurrentUserList(LoginUser loginUser) {
         return userMappper.getNotCurrentUserList(loginUser);
     }

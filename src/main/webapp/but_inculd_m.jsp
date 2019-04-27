@@ -11,25 +11,30 @@
     <title>Title</title>
 </head>
 <body>
-<div>
-    <button type="button" onclick="weixian()" class="btn btn-primary">危险点点检</button>
+    <button type="button" onclick="topIndex()" class="btn btn-primary">危险点点检</button>
     &nbsp;
     <button type="button" onclick="glzxjClick()" class="btn btn-primary">管理者巡检</button>
+    &nbsp;
+    <button type="button" onclick="yibiaoTaiZheng()" class="btn btn-primary">仪表台账</button>
     &nbsp;
     <button type="button" class="btn btn-primary">1200-TPM点检</button>
     &nbsp;
     <button type="button" class="btn btn-primary">650-TPM点检</button>
     &nbsp;
     <button type="button" class="btn btn-primary" onclick="showfives()">5S点检</button>
-</div>
 
 <script>
+    //管理者巡检
     function glzxjClick() {
-        location.href = "<%=request.getContextPath() %>/toGlzxjAdd"
+        location.href = "<%=request.getContextPath() %>/toTopGlzxjm"
     }
-    
-    function weixian() {
-        location.href = "<%=request.getContextPath() %>/toViewList"
+    //危险点点检
+    function topIndex() {
+        location.href = "<%=request.getContextPath() %>/topIndex"
+    }
+
+    function yibiaoTaiZheng() {
+        location.href = "<%=request.getContextPath() %>/topyibiaoTaiZheng"
     }
 </script>
 </body>

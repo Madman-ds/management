@@ -24,7 +24,7 @@
     </select>
     <!-- 查询用户总条数 -->
     <select id="getUserCount" resultType="integer">
-      select count(*)from t_user
+      select count(*) from t_user
         <include refid="whereSql"></include>
     </select>
     <!-- 条件查询用户是否存在 -->
@@ -110,5 +110,29 @@
         <foreach collection="array" item="id" open="(" separator="," close=")">
         #{id}
         </foreach>
+    </select>
+
+    <!--提取-->
+    <update id="tiquUser" parameterType="string">
+      UPDATE
+        t_user
+      SET
+        top = 1
+      WHERE
+        user_id = #{ids}
+    </update>
+
+    <update id="huanyuanUser" parameterType="com.ds.glzxj.pojo.Glzxj">
+      UPDATE
+        t_user
+      SET
+        top = 2
+      WHERE
+        user_id = #{ids}
+    </update>
+
+
+    <select id="queryTopByUserName" parameterType="string" resultType="com.ds.user.pojo.User">
+        select * from t_user where user_name = #{glz_name}
     </select>
 </mapper>

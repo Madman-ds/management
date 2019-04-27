@@ -109,11 +109,31 @@ public class UserController {
         List<User> list =  userService.findAllbyids(ids);
         StringBuilder ss = new StringBuilder();
         if(!list.isEmpty()){
-            list.forEach(x -> ss.append(","+ x.getUser_name()));
+            list.forEach(x -> ss.append(","+ x.getUser_id()));
             String s = ss.toString().substring(1);
             return s;
         }
         return ss.toString();
+    }
+
+    /**
+     * 提取
+     * @param request
+     */
+    @PostMapping("huanyuanUser")
+    public void huanyuanUser(HttpServletRequest request){
+        String ids = request.getParameter("id");
+        userService.huanyuanUser(ids);
+    }
+
+    /**
+     * 还原
+     * @param request
+     */
+    @PostMapping("tiquUser")
+    public void tiquUser(HttpServletRequest request){
+        String ids = request.getParameter("id");
+        userService.tiquUser(ids);
     }
 
 }

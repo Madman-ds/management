@@ -123,8 +123,13 @@
             },
             dataType:"text",
             success:function(data){
-                alert("提交成功");
-                 location.reload();
+                if (data == 2){
+                    alert("您今天已经完成任务，无需重复提交！");
+                    location.reload();
+                }else{
+                    alert("恭喜提交完成！")
+                    location.reload();
+                }
             }
         })
     }

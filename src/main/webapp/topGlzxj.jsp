@@ -44,7 +44,7 @@
 <script type="text/javascript">
 
     $("#dataBackupShows").bootstrapTable({
-        url:"<%=request.getContextPath()%>/findWeekPlan2",
+        url:"<%=request.getContextPath()%>/findGlzxj2",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         toolbar:'#toolbar',//工具栏   显示在id为toolbar的div中
         //查询参数：条件查询时使用
@@ -55,88 +55,39 @@
             }
         },
         columns:[{
-            title: '序号',
-            field: '',
-            formatter: function (value, row, index) {
-                return index+1;
-            }
-        }
-        ,{
-            field:"z_id",
-            title:"用户编号",
+            checkbox:true,
+            formatter:stateFormatter
+        },{
+            field:"glz_id",
+            title:"主键",
             visible: false,
             align:'center',
         },{
-            field:"z_name",
-            title:"设备名称/编号",
-            align:'center',
-            formatter:function(value,row,index){
-                return row.z_name + "(" +row.z_bh + ")" ;
-            }
+            field:"glz_name",
+            title:"巡检人",
+            align:'center'
         }, {
-            field:"z_one",
-            title:"周一",
+            field:"glz_data",
+            title:"时间",
             align:'center',
-            width:200
-        },{
-            field:"z_two",
-            title:"周二",
-            align:'center',
-            width:200
-        },{
-            field:"z_three",
-            title:"周三",
-            align:'center',
-            width:200
-        },{
-            field:"z_four",
-            title:"周四",
-            align:'center',
-            width:200
-        },{
-            field:"z_five",
-            title:"周五",
-            align:'center',
-            width:200
-        },{
-            field:"z_six",
-            title:"周六",
-            align:'center',
-            width:200
-        },{
-            field:"z_sunday",
-            title:"周日",
-            align:'center',
-            width:200
-        },{
-            field:"z_remarks",
-            title:"备注",
-            align:'center',
-            width:300
-        },{
-            field:"z_startdate",
-            title:"开始时间",
-            align:'center',
-            width:200,
-            //获取日期列的值进行转换
             formatter: function (value, row, index) {
                 return changeDateFormat(value);
             }
         },{
-            field:"z_enddate",
-            title:"结束时间",
+            field:"glz_count",
+            title:"问题数量",
             align:'center',
-            width:200,
-            //获取日期列的值进行转换
-            formatter: function (value, row, index) {
-                return changeDateFormat(value);
-            }
+        },{
+            field:"glz_user",
+            title:"赋权给用户",
+            visible: false,
+            align:'center',
         }
         ],
         pagination:true,
         pageNumber:1,
-        pageSize:2,
-        pageList:[2,4,6,20],
+        pageSize:5,
+        pageList:[5,10,15,20],
         clickToSelect: true,
         cache搜索: false,
         sidePagination:"server"

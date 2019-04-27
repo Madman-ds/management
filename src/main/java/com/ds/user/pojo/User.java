@@ -18,4 +18,6 @@ public class User extends LoginUser {
      * 创建时间
      */
     private Date create_time;
+
+    private  String top;
 }

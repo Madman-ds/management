@@ -298,9 +298,9 @@ public class ShowController {
      * 管理者巡检页面
      * @return
      */
-    @GetMapping("toTopGlzxj")
+    @GetMapping("toGlzxjAdd")
     public String toTopGlzxj(){
-        return "WEB-INF/jsp/viewlist_TopGlzxj";
+        return "WEB-INF/jsp/viewlist_Glzxj";
     }
 
     /**
@@ -409,5 +409,20 @@ public class ShowController {
     @GetMapping("toshowfiveslog")
     public String toShowFivesLog(){
         return "WEB-INF/jsp/fivesinspect/showfiveslog";
+    }
+
+
+    @GetMapping("toTopGlzxjm")
+    public String toTopGlzxjm(){
+        return "topGlzxj";
+    }
+    @GetMapping("topyibiaoTaiZheng")
+    public String topyibiaoTaiZheng(){
+        return "topyibiaoTaiZheng";
+    }
+
+    @GetMapping("toUserTiQu")
+    public String toUserTiQu(){
+        return "WEB-INF/jsp/glzxj/userTiQu";
     }
 }

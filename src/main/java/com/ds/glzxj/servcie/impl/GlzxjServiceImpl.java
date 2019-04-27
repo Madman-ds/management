@@ -55,4 +55,14 @@ public class GlzxjServiceImpl implements GlzxjService {
         glzxjMappper.updateFQ(glzxj);
     }
 
+    @Override
+    public Integer getGlzxjTiCount(Glzxj glzxj) {
+        return  glzxjMappper.getGlzxjTiCount(glzxj);
+    }
+
+    @Override
+    public List<Glzxj> findAllTiGlzxj(Glzxj glzxj) {
+        return  glzxjMappper.findAllTiGlzxj(glzxj);
+    }
+
 }

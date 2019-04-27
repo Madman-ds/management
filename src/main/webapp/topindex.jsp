@@ -21,30 +21,19 @@
 <jsp:include page="jscore.jsp"></jsp:include>
 <body>
 <img src="<%=request.getContextPath() %>/static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
-<div class="rows">
-    <div class="form-group">
-        <div class="col-sm-5">
-        </div>
-        <div class="col-sm-5">
-            <div class="input-group col-sm-10">
-                <button onclick="tozhou()" class="btn btn-success" type="button">
-                    周生产计划
-                    <i class="glyphicon glyphicon-hand-right">
-                    </i>
-                </button>
-
-                <button onclick="tologin()" class="btn btn-success" type="button" style="margin-left: 20px">
-                    <i class="glyphicon glyphicon-hand-left">
-                    </i>日常打卡
-                </button>
-            </div>
-        </div>
+<center>
+    <jsp:include page="but_inculd_m.jsp"  />
+    <button type="button" onclick="tozhou()" class="btn btn-primary">周生产计划</button>
+    &nbsp;
+    <button type="button" onclick="tologin()" class="btn btn-primary">日常打卡</button>
+    &nbsp;
+    <div style="margin-top: 20px">
+        <table id="dataBackupShows" class="table table-bordered"></table>
     </div>
-</div>
-
-<div id="dataShow" >
-    <table id="dataBackupShows" class="table table-bordered"></table>
-</div>
+</center>
+<%--<div id="dataShow" >--%>
+    <%--<table id="dataBackupShows" class="table table-bordered"></table>--%>
+<%--</div>--%>
 
 </body>
 <script type="text/javascript">

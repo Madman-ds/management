@@ -36,4 +36,10 @@ public interface UserService {
     List<User> findAll();
 
     List<User> findAllbyids(String ids);
+
+    void huanyuanUser(String ids);
+
+    void tiquUser(String ids);
+
+    User queryTopByUserName(String glz_name);
 }

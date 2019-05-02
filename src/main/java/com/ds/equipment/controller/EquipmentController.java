@@ -4,9 +4,9 @@ import com.ds.attributes.pojo.Attributes;
 import com.ds.attributes.service.AttributesService;
 import com.ds.equipment.pojo.Equipment;
 import com.ds.equipment.pojo.EquipmentInspectionitem;
+import com.ds.equipment.pojo.EquipmentRead;
 import com.ds.equipment.service.EquipmentService;
 import com.ds.serverlogin.pojo.LoginUser;
-import com.ds.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -158,11 +158,90 @@ public class EquipmentController {
         Long userId = Long.valueOf(request.getParameter("userId"));
         return equipmentService.findReadEquipmentInspectionitem(userId);
     }*/
+//    @GetMapping("findZjRead")
+//    public List findZjRead(HttpSession session){
+//        LoginUser user = (LoginUser) session.getAttribute("loginUser");
+//        List y = equipmentService.findReadEquipmentInspectionitem(user.getUser_id());
+//        return y;
+//    }
+
     @GetMapping("findZjRead")
     public List findZjRead(HttpSession session){
         LoginUser user = (LoginUser) session.getAttribute("loginUser");
-        List y = equipmentService.findReadEquipmentInspectionitem(user.getUser_id());
-        return y;
+        EquipmentRead equipmentRead = new EquipmentRead();
+        equipmentRead.setUser_id(user.getUser_id());
+        List equipmentReadList = equipmentService.findEquipmentReadRepeat(equipmentRead);
+        return equipmentReadList;
     }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询危险点点检授权数据
+     * @时间: 2019/5/1 1:11
+     * @参数:  * @param equipmentRead
+     * @返回值: java.util.List
+     **/
+    @GetMapping("showEquipmentReadList")
+    public HashMap<String, Object> showEquipmentReadList(EquipmentRead equipmentRead){
+        equipmentRead.calculate();
+        //获取总数据
+        int count=equipmentService.showEquipmentReadCount(equipmentRead);
+        List list = equipmentService.showEquipmentReadList(equipmentRead);
+        HashMap<String, Object> result=new HashMap<String, Object>();
+        result.put("total", count);
+        result.put("rows", list);
+        return result;
+    }
+    @PostMapping("delEquipmentRead")
+    public Boolean delEquipmentRead(String erid){
+        Boolean flag = equipmentService.delEquipmentRead(erid);
+        return flag;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 危险点点检读权限授权
+     * @时间: 2019/5/1 16:31
+     * @参数:  * @param juid
+     * @param jcxid
+     * @param sbid
+     * @param sbname
+     * @param sbnumber
+     * @param jcxname
+     * @param userid
+     * @param username
+     * @返回值: void
+     **/
+    @PostMapping("insertEquipmentRead")
+    public void insertEquipmentRead(String juid,String jcxid,String sbid,String sbname,String sbnumber,String jcxname,String userid,String username){
+        String[] juids = juid.split(",");
+        String[] jcxids = jcxid.split(",");
+        String[] sbids = sbid.split(",");
+        String[] sbnames = sbname.split(",");
+        String[] sbnumbers = sbnumber.split(",");
+        String[] jcxnames = jcxname.split(",");
+        String[] usernames = username.split(",");
+        for (int i = 0; i < juids.length; i++){
+            EquipmentRead equipmentRead = new EquipmentRead();
+            equipmentRead.setJu_id(Long.valueOf(juids[i]));
+            equipmentRead.setJcx_id(Long.valueOf(jcxids[i]));
+            equipmentRead.setSb_id(Long.valueOf(sbids[i]));
+            equipmentRead.setSb_name(sbnames[i]);
+            equipmentRead.setSb_number(sbnumbers[i]);
+            equipmentRead.setJcx_name(jcxnames[i]);
+            equipmentRead.setUser_id(Long.valueOf(userid));
+            equipmentRead.setUser_name(usernames[i]);
+            List equipmentReadList = equipmentService.findEquipmentReadRepeat(equipmentRead);
+            if(equipmentReadList.size()<= 0){
+                equipmentService.insertEquipmentRead(equipmentRead);
+            }
+        }
+    }
+    @GetMapping("showHaveEquipmentReadList")
+    public List showHaveEquipmentReadList(String user_id){
+        EquipmentRead equipmentRead = new EquipmentRead();
+        equipmentRead.setUser_id(Long.valueOf(user_id));
+        List equipmentReadList = equipmentService.findEquipmentReadRepeat(equipmentRead);
+        return equipmentReadList;
+    }
+
 
 }

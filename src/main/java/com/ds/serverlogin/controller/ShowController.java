@@ -2,6 +2,7 @@ package com.ds.serverlogin.controller;
 
 import com.ds.fivesinspect.pojo.FiveSInspect;
 import com.ds.fivesinspect.service.FiveSInspectService;
+import com.ds.glzxj.servcie.GlzxjService;
 import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
@@ -35,6 +36,9 @@ public class ShowController {
     private FiveSInspectService fiveSInspectService;
     @Autowired
     private YbtzService ybtzService;
+
+    @Autowired
+    private GlzxjService glzxjService;
     /**
      * @作者: 段大神经
      * @功能描述: 登陆成功去展示页面
@@ -234,6 +238,24 @@ public class ShowController {
     public String zjRead(){
         return "WEB-INF/jsp/zjRead";
     }
+//    /**
+//     * 管理者巡检——>个人查看
+//     * @return
+//     */
+//    @GetMapping("GlzxjzjRead")
+//    public String GlzxjzjRead(){
+//        return "WEB-INF/jsp/GlzxjzjRead";
+//    }
+    /**
+     * 管理者巡检——>个人查看
+     * @return
+     */
+    @GetMapping("GlzxjzjReadnew")
+    public String GlzxjzjReadnew(){
+        return "WEB-INF/jsp/GlzxjzjRead";
+    }
+
+
 
     /**
      * 数据提取
@@ -336,6 +358,35 @@ public class ShowController {
         modelMap.addAttribute("ybtz",ybtz);
         return "WEB-INF/jsp/ybtz/updybtz";
     }
+
+    /**
+     * 管理者巡检 top
+     * @return
+     */
+    @GetMapping("toTopGlzxjm")
+    public String toTopGlzxjm(){
+        return "topGlzxj";
+    }
+
+    /**
+     * 仪表台账
+     * @return
+     */
+    @GetMapping("topyibiaoTaiZheng")
+    public String topyibiaoTaiZheng(){
+        return "topyibiaoTaiZheng";
+    }
+
+    /**
+     * 赋权页面
+     * @return
+     */
+    @GetMapping("toShowGlzxjUser")
+    public String toShowGlzxjUser(){
+        return "WEB-INF/jsp/glzxj/userTiQu";
+    }
+
+
     /**
      * @作者: 老西儿
      * @功能描述: 跳转到5S点检页面
@@ -410,4 +461,75 @@ public class ShowController {
     public String toShowFivesLog(){
         return "WEB-INF/jsp/fivesinspect/showfiveslog";
     }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到5S读权限
+     * @时间: 2019/4/24 17:09
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toFiveSReadList")
+    public String toFiveSReadList(){
+        return "WEB-INF/jsp/fivesinspect/fivesreadlist";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到查询5S读取权限页面
+     * @时间: 2019/4/27 20:44
+     * @参数:  * @param model
+     * @param userId
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toShowHaveFiveSRead")
+    public String toShowHaveFiveSRead(Model model,String userId){
+        model.addAttribute("userId",userId);
+        return "WEB-INF/jsp/fivesinspect/showhavefivesread";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到5S个人查看页面
+     * @时间: 2019/4/28 18:15
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("tockFivesRead")
+    public String tockFivesRead(){
+        return "WEB-INF/jsp/fivesinspect/ckfivesread";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到topindex5S点检页面
+     * @时间: 2019/4/28 18:31
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTopFiveBytq")
+    public String toTopFiveBytq(){
+        return "topfivebytq";
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到危险点点检读权限管理页面
+     * @时间: 2019/5/1 16:05
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toDanger")
+    public String toDanger(){
+        return "WEB-INF/jsp/equipment/dangerList";
+    }
+    @GetMapping("toShowHaveEquipmentRead")
+    /**
+     * @作者: 老西儿
+     * @功能描述: 跳转到5S读权限查询页面
+     * @时间: 2019/5/2 5:00
+     * @参数:  * @param userId
+     * @param model
+     * @返回值: java.lang.String
+     **/
+    public String toShowHaveEquipmentRead(String userId,Model model){
+        model.addAttribute("userId",userId);
+        return "WEB-INF/jsp/equipment/showHaveEquipmentRead";
+    }
+
 }

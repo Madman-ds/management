@@ -2,6 +2,8 @@ package com.ds.user.servcie;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.pojo.DataBackupParam;
+import com.ds.glzxj.pojo.Glzxj;
+import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 
 import java.util.List;
@@ -36,4 +38,32 @@ public interface UserService {
     List<User> findAll();
 
     List<User> findAllbyids(String ids);
+
+    void huanyuanUser(String ids);
+
+    void tiquUser(String ids);
+
+    User queryTopByUserName(String glz_name);
+
+    List<User> fuXieQuanXian(String[] ids);
+
+    User queryById(String userId);
+
+    void insertUserGlzxjUser(User user);
+
+    List<String> queryYFQX();
+
+    Integer findAllUserGlzxjCount();
+
+    List<User> findAllUserGlzxj();
+
+    void delUserGlzxj(String id);
+
+    User queryByuserId(String user_id);
+
+    void updateFQuserGlzxj(Glzxj glzxj);
+
+    List<User> queryByids(String[] split);
+
+    List getNotCurrentUserList(LoginUser loginUser);
 }

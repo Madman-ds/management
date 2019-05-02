@@ -2,6 +2,7 @@ package com.ds.equipment.mapper;
 
 import com.ds.equipment.pojo.Equipment;
 import com.ds.equipment.pojo.EquipmentInspectionitem;
+import com.ds.equipment.pojo.EquipmentRead;
 import com.ds.inspectionitem.pojo.Inspectionitem;
 
 import java.util.List;
@@ -30,4 +31,14 @@ public interface EquipmentMapper {
     List findEquipmentInspectionitem(Long userId);
 
     List findReadEquipmentInspectionitem(Long userId);
+
+    List showEquipmentReadList(EquipmentRead equipmentRead);
+
+    List findEquipmentReadRepeat(EquipmentRead equipmentRead);
+
+    void insertEquipmentRead(EquipmentRead equipmentRead);
+
+    Boolean delEquipmentRead(String erid);
+
+    int showEquipmentReadCount(EquipmentRead equipmentRead);
 }

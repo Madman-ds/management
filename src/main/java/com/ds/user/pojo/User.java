@@ -20,4 +20,8 @@ public class User extends LoginUser {
     private Date create_time;
 
     private  String top;
+
+    private String qx;
+
+    private String[] ids;
 }

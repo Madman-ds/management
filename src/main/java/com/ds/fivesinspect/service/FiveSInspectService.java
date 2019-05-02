@@ -3,6 +3,7 @@ package com.ds.fivesinspect.service;
 import com.ds.fivesinspect.pojo.FiveSInspect;
 import com.ds.fivesinspect.pojo.ReadFives;
 import com.ds.fivesinspect.pojo.UserFiveSInspect;
+import com.ds.serverlogin.pojo.LoginUser;
 
 import java.util.List;
 
@@ -48,4 +49,16 @@ public interface FiveSInspectService {
     List<ReadFives> findReadFive(ReadFives readFives);
 
     void insertReadFive(ReadFives readFives);
+
+    List showHaveFiveSReadList(String userId);
+
+    Boolean delFiveSRead(String rid);
+
+    List ckFivesReadList(LoginUser loginUser);
+
+    Integer findFiveSInspectLogqtCount();
+
+    List<FiveSInspect> findFiveSInspectLogqt(FiveSInspect fiveSInspect);
+
+    Integer showFiveSReadListCount(FiveSInspect fiveSInspect);
 }

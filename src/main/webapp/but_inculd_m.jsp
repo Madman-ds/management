@@ -36,6 +36,11 @@
     function yibiaoTaiZheng() {
         location.href = "<%=request.getContextPath() %>/topyibiaoTaiZheng"
     }
+
+    function showfives(){
+        location.href = "<%=request.getContextPath() %>/toTopFiveBytq"
+    }
+
 </script>
 </body>
 </html>

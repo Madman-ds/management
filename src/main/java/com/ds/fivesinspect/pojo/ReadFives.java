@@ -23,7 +23,15 @@ public class ReadFives {
      */
     private Long f_id;
     /**
+     * 5S
+     */
+    private String f_fives;
+    /**
      * 5S写权限关联表id
      */
     private Long u_f_id;
+    /**
+     * 检查人
+     */
+    private String user_name;
 }

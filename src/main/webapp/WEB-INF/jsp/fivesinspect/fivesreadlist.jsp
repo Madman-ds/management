@@ -20,7 +20,7 @@
         <i class="glyphicon glyphicon-plus"></i>
         读操作授权
     </button>
-    <button onclick="showUserFiveSInspect()" class="btn btn-info"  type="button">
+    <button onclick="showHaveFiveSRead()" class="btn btn-info"  type="button">
         <i class="glyphicon glyphicon-pushpin"></i>
         查看读操作权限
     </button>
@@ -32,16 +32,40 @@
     //查询 表格展示
     $('#myTable').bootstrapTable({
         url:'<%=request.getContextPath() %>/showFiveSReadList',//获取数据地址
+        pagination:true, //是否展示分页
+        pageList:[5, 10, 20, 50],//分页组件
+        pageNumber:1,
+        pageSize:5,//默认每页条数
+        //search:true,//是否显示搜索框
+        //searchText:'试试',//初始化搜索文字
         method:'GET',//发送请求的方式
         contentType:"application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
+        // showColumns:false,//是否显示 内容列下拉框
+        // showToggle:false,//是否显示 切换试图（table/card）按钮
+        // showPaginationSwitch:false,//是否显示 数据条数选择框
+        // showRefresh:false,//是否显示刷新按钮
+        // detailView:false,//设置为 true 可以显示详细页面模式。
+        // showFooter:false,//是否显示列脚
         clickToSelect: true, //是否启用点击选中行
+        sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+        striped:true,
+        queryParams:function(){
+//	 		return 的数据 是传递到  action类中的参数
+            return {
+                page:this.pageNumber,//当前页
+                rows:this.pageSize //每页条数
+            }
+        },
         columns:[
             {checkbox:true},
+            {field:'r_id',align:'center',width:50,visible: false},
             {field:'f_id',align:'center',width:50,visible: false},
             {field:'u_f_id',align:'center',width:50,visible: false},
+            {field:'user_id',align:'center',width:50,visible: false},
             {field:'f_fives',title:'5S',align:'center',width:450},
             {field:'f_clazzify',title:'分类',align:'center',width:450},
-            {field:'f_content',title:'内容',align:'center',width:450}
+            {field:'f_content',title:'内容',align:'center',width:450},
+            {field:'user_name',title:'检查人',align:'center',width:450}
         ]
     });
     $(function (){
@@ -66,7 +90,6 @@
     function addUserFiveSInspect(){
         var rows = $('#myTable').bootstrapTable('getSelections');
         var userId = $("#user_id").val();
-        console.log(userId)
         if(rows.length <= 0){
             BootstrapDialog.show({
                 title:"提示！",
@@ -81,16 +104,18 @@
             var ids = "";
             var fivess = "";
             var ufid = "";
+            var userName = "";
             for (var i = 0;i < rows.length;i++){
                 ids += ids == ""?rows[i].f_id:","+rows[i].f_id;
                 fivess += fivess == ""?rows[i].f_fives:","+rows[i].f_fives;
                 ufid += ufid == ""?rows[i].u_f_id:","+rows[i].u_f_id
+                userName += userName == ""?rows[i].user_name:","+rows[i].user_name;
             }
             $.ajax({
                 url:'<%=request.getContextPath() %>/insertReadFive',
                 type:'post',
                 data:{
-                    "ids":ids,"userId":userId,"ufid":ufid
+                "ids":ids,"userid":userId,"fivess":fivess,"ufid":ufid,"user_name":userName
                 },
                 dateType:'json',
                 success:function(data){
@@ -100,6 +125,28 @@
                     })
                     $("#myTable").bootstrapTable("refresh")
                 }
+            })
+        }
+    }
+    function showHaveFiveSRead(){
+        var userId = $("#user_id").val();
+        if(userId == "0"&&userId==0){
+            BootstrapDialog.show({
+                title:"提示！",
+                message:'请选择人员!'
+            })
+        }else{
+            BootstrapDialog.show({
+                title:"查询5S读权限",
+                closable: false,
+                message:$('<div><div>').load('<%=request.getContextPath()%>/toShowHaveFiveSRead?userId='+userId),
+                buttons:[{
+                    label:"关闭",
+                    cssClass:'btn-warning',
+                    action:function(data){
+                        data.close();
+                    }
+                }]
             })
         }
     }

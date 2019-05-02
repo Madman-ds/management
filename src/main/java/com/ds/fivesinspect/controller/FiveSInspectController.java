@@ -37,6 +37,7 @@ public class FiveSInspectController {
      **/
     @GetMapping("findFiveSInspect")
     public Map<String,Object> findFiveSInspect(FiveSInspect fiveSInspect){
+        fiveSInspect.calculate();
         Integer count = fiveSInspectService.findFiveSInspectCount();
         List<FiveSInspect> fiveSInspects = fiveSInspectService.findFiveSInspect(fiveSInspect);
         Map<String,Object> map = new HashMap<>();
@@ -171,6 +172,7 @@ public class FiveSInspectController {
      **/
     @GetMapping("findFiveSInspectLog")
     public Map<String,Object> findFiveSInspectLog(FiveSInspect fiveSInspect){
+        fiveSInspect.calculate();
         Integer count = fiveSInspectService.findFiveSInspectLogCount();
         List<FiveSInspect> fiveSInspects = fiveSInspectService.findFiveSInspectLog(fiveSInspect);
         Map<String,Object> map = new HashMap<>();
@@ -199,29 +201,37 @@ public class FiveSInspectController {
      * @返回值: java.util.List
      **/
     @GetMapping("showFiveSReadList")
-    public List showFiveSReadList(FiveSInspect fiveSInspect){
-        List fiveSReadList = fiveSInspectService.showFiveSReadList(fiveSInspect);
-        return fiveSReadList;
+    public Map<String,Object> showFiveSReadList(FiveSInspect fiveSInspect){
+        fiveSInspect.calculate();
+        Integer count = fiveSInspectService.showFiveSReadListCount(fiveSInspect);
+        List<FiveSInspect> fiveSReadList = fiveSInspectService.showFiveSReadList(fiveSInspect);
+        Map<String,Object> map = new HashMap<>();
+        map.put("total",count);
+        map.put("rows",fiveSReadList);
+        return map;
     }
     /**
      * @作者: 老西儿
      * @功能描述: 添加读权限
-     * @时间: 2019/4/27 18:29
+     * @时间: 2019/4/27 19:09
      * @参数:  * @param ids
-     * @param userId
-     * @param fivess
+     * @param userid
      * @param ufid
      * @返回值: void
      **/
     @PostMapping("insertReadFive")
-    public void insertReadFive(String ids, String userId,String ufid){
+    public void insertReadFive(String ids, String userid,String fivess,String ufid,String user_name){
         String[] id = ids.split(",");
         String[] ufids = ufid.split(",");
+        String[] fives = fivess.split(",");
+        String[] username = user_name.split(",");
         for (int i = 0;i < id.length;i++){
             ReadFives readFives = new ReadFives();
             readFives.setF_id(Long.valueOf(id[i]));
-            readFives.setUser_id(Long.valueOf(userId));
+            readFives.setUser_id(Long.valueOf(userid));
             readFives.setU_f_id(Long.valueOf(ufids[i]));
+            readFives.setF_fives(fives[i]);
+            readFives.setUser_name(username[i]);
             List<ReadFives> readFivess = fiveSInspectService.findReadFive(readFives);
             if(readFivess.size() <= 0){
                 fiveSInspectService.insertReadFive(readFives);
@@ -230,7 +240,60 @@ public class FiveSInspectController {
     }
     /**
      * @作者: 老西儿
-     * @功能描述: 5S日志修改
+     * @功能描述: 根据用户查询的5S读权限
+     * @时间: 2019/4/27 20:48
+     * @参数:  * @param userId
+     * @返回值: java.util.List
+     **/
+    @GetMapping("showHaveFiveSReadList")
+    public List showHaveFiveSReadList(String user_id){
+        List fiveSReadList = fiveSInspectService.showHaveFiveSReadList(user_id);
+        return fiveSReadList;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 删除读取权限
+     * @时间: 2019/4/27 22:05
+     * @参数:  * @param rid
+     * @返回值: java.lang.Boolean
+     **/
+    @PostMapping("delFiveSRead")
+    public Boolean delFiveSRead(String rid){
+        Boolean flag = fiveSInspectService.delFiveSRead(rid);
+        return flag;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 个人查看5S读权限信息
+     * @时间: 2019/4/28 23:19
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
+    @GetMapping("ckFivesReadList")
+    public List ckFivesReadList(HttpSession httpSession){
+        LoginUser loginUser = (LoginUser)httpSession.getAttribute("loginUser");
+        List fivesReadList = fiveSInspectService.ckFivesReadList(loginUser);
+        return fivesReadList;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查看所有提取的5S数据
+     * @时间: 2019/4/28 23:22
+     * @参数:  * @param fiveSInspect
+     * @返回值: java.util.Map<java.lang.String,java.lang.Object>
+     **/
+    @GetMapping("findFiveSInspectLogqt")
+    public Map<String,Object> findFiveSInspectLogqt(FiveSInspect fiveSInspect){
+        Integer count = fiveSInspectService.findFiveSInspectLogqtCount();
+        List<FiveSInspect> fiveSInspects = fiveSInspectService.findFiveSInspectLogqt(fiveSInspect);
+        Map<String,Object> map = new HashMap<>();
+        map.put("total",count);
+        map.put("rows",fiveSInspects);
+        return map;
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 5S日志添加
      * @时间: 2019/4/23 21:29
      * @参数:  * @param session
      * @param request

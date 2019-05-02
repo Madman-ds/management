@@ -15,21 +15,12 @@
 <jsp:include page="../../jscore.jsp"></jsp:include>
 <body>
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
-<div class="modal-body">
-    <center>
-        <jsp:include page="but_inculd_i.jsp"  />
-        <button onclick="returnTo()" class="btn btn-danger" type="button">
-            <i class="glyphicon glyphicon-hand-left">
-            </i>返回
-        </button>
-        <div style="margin-top: 20px">
-            <table id="zjRead" border="1px" style="text-align: center;font-size: 16px">
-            </table>
-        </div>
-        <input type="hidden" id="delTextId" />
-    </center>
-</div>
-
+<button onclick="returnTo()" class="btn btn-danger" type="button">
+    <i class="glyphicon glyphicon-hand-left">
+    </i>返回
+</button>
+<table id="zjRead"></table>
+</body>
 <script type="text/javascript" >
 
     $("#zjRead").bootstrapTable({
@@ -56,6 +47,10 @@
             field:"jcx_name",
             title:"检查项",
             align:'center',
+        },{
+            field:"user_name",
+            title:"确认人姓名",
+            align:'center',
         }],
         pagination:true,
         pageNumber:1,
@@ -66,6 +61,24 @@
 
     function returnTo() {
         location.href="<%=request.getContextPath()%>/toViewList";
+    }
+    $('#datetimepicker').datetimepicker({
+        format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+        language:"zh-CN",
+        autoclose:true
+    });
+    $('#datetimeend').datetimepicker({
+        format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
+        language:"zh-CN",
+        autoclose:true
+    });
+    //转换日期格式(时间戳转换为datetime格式)
+    function changeDateFormat(cellval) {
+        if (cellval != null){
+            var d = new Date(cellval);;
+            var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+            return times;
+        }
     }
 </script>
 </html>

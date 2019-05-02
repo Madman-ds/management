@@ -40,8 +40,10 @@ public class WebConfig implements WebMvcConfigurer {
                         "/topIndex","/findDataBackupTop",
                         "/topZhouJiHua","/findWeekPlan2",
                         "/toTopGlzxjm","/findGlzxj2",
-                        "/topyibiaoTaiZheng","/findYbtz"
-        );
+                        "/topyibiaoTaiZheng","/findYbtz",
+                        "/toTopFiveBytq","/findFiveSInspectLogqt"
+
+                );
     }
     //注入视图处理器bean
    /* @Bean

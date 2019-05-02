@@ -2,6 +2,7 @@ package com.ds.equipment.service;
 
 import com.ds.equipment.pojo.Equipment;
 import com.ds.equipment.pojo.EquipmentInspectionitem;
+import com.ds.equipment.pojo.EquipmentRead;
 
 import java.util.List;
 
@@ -30,4 +31,14 @@ public interface EquipmentService {
     List findEquipmentInspectionitem(Long userId);
 
     List findReadEquipmentInspectionitem(Long userId);
+
+    List findEquipmentReadRepeat(EquipmentRead equipmentRead);
+
+    void insertEquipmentRead(EquipmentRead equipmentRead);
+
+    Boolean delEquipmentRead(String erid);
+
+    int showEquipmentReadCount(EquipmentRead equipmentRead);
+
+    List showEquipmentReadList(EquipmentRead equipmentRead);
 }

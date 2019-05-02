@@ -95,4 +95,37 @@
       WHERE
         glz_name = (select user_name  from t_user where user_id = #{ids})
     </update>
+
+    <select id="queryQxByUserId" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.user.pojo.User">
+        select a.qx AS qx from  glzxj_user  a where user_id = #{user_id}
+    </select>
+
+
+
+    <select id="queryZjReadCount"  resultType="integer" >
+        select count(DISTINCT s.glz_id) from (
+            select * from t_glzxj where glz_name = #{user_name}
+        union all
+           select * from t_glzxj where glz_name in (
+              select user_name from t_user where user_id in (
+                select user_id from glzxj_user where qx like CONCAT('%',#{user_id},'%')
+              )
+            )
+        ) s
+    </select>
+
+    <select id="queryZjRead"  resultType="com.ds.glzxj.pojo.Glzxj">
+        select s.glz_id,s.glz_name,s.glz_data,s.glz_count from (
+            select * from t_glzxj where glz_name = #{user_name}
+        union all
+            select * from t_glzxj where glz_name in (
+              select user_name from t_user where user_id in (
+                select user_id from glzxj_user where qx like CONCAT('%',#{user_id},'%')
+              )
+            )
+        ) s
+        group by s.glz_id,s.glz_name,s.glz_data,s.glz_count
+        order by s.glz_id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
 </mapper>

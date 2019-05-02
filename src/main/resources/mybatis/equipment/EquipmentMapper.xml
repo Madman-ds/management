@@ -108,4 +108,40 @@
         AND m.jcx_id = u.jcx_id
         AND u.user_id = #{userId}
     </select>
+
+
+    <select id="showEquipmentReadCount" parameterType="com.ds.equipment.pojo.EquipmentRead" resultType="java.lang.Integer">
+        SELECT count(*) FROM
+         t_userequipment ue ,
+         t_inspectionitem i,
+         t_equipment e ,
+         t_user u
+         where ue.jcx_id = i.jcx_id and
+          i.sb_id = e.sb_id and
+          ue.user_id = u.user_id
+    </select>
+    <select id="showEquipmentReadList" parameterType="com.ds.equipment.pojo.EquipmentRead" resultType="map">
+        SELECT ue.ju_id,i.jcx_id,e.sb_id,i.jcx_name,e.sb_name,e.sb_number ,u.user_name FROM
+         t_userequipment ue ,
+         t_inspectionitem i,
+         t_equipment e ,
+         t_user u
+         where ue.jcx_id = i.jcx_id and
+          i.sb_id = e.sb_id and
+          ue.user_id = u.user_id LIMIT #{startIndex},#{rows}
+    </select>
+    <select id="findEquipmentReadRepeat" parameterType="com.ds.equipment.pojo.EquipmentRead" resultType="com.ds.equipment.pojo.EquipmentRead">
+        select * from t_readequipment re, t_inspectionrecord i where re.jcx_id = i.jcx_id and re.user_id = #{user_id} order by i.qr_time
+    </select>
+    <insert id="insertEquipmentRead" parameterType="com.ds.equipment.pojo.EquipmentRead">
+        insert into t_readequipment(
+        ju_id,jcx_id,sb_id,sb_name,sb_number,jcx_name,user_id,user_name
+        )values(
+        #{ju_id},#{jcx_id},#{sb_id},#{sb_name},#{sb_number},#{jcx_name},#{user_id},#{user_name}
+        )
+    </insert>
+    <delete id="delEquipmentRead" parameterType="String">
+        delete from t_readequipment where e_r_id = #{erid}
+    </delete>
+
 </mapper>

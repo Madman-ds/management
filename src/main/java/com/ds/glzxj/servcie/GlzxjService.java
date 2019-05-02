@@ -1,6 +1,8 @@
 package com.ds.glzxj.servcie;
 
 import com.ds.glzxj.pojo.Glzxj;
+import com.ds.serverlogin.pojo.LoginUser;
+import com.ds.user.pojo.User;
 
 import java.util.List;
 
@@ -29,4 +31,10 @@ public interface GlzxjService {
     Integer getGlzxjTiCount(Glzxj glzxj);
 
     List<Glzxj> findAllTiGlzxj(Glzxj glzxj);
+
+    Integer queryZjReadCount(LoginUser user,String[] name);
+
+    List<Glzxj> queryZjRead(LoginUser user,String[] name);
+
+    User queryQxByUserId(LoginUser user);
 }

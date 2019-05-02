@@ -88,6 +88,9 @@
                     <a href="<%=request.getContextPath() %>/toInspectionItem" target="mainFrame">检查项赋权</a>
                 </li>
                 <li role="presentation">
+                    <a href="<%=request.getContextPath() %>/toDanger" target="mainFrame">危险点读权限管理</a>
+                </li>
+                <li role="presentation">
                     <a href="<%=request.getContextPath() %>/toUserList" target="mainFrame">用户管理</a>
                 </li>
                 <li role="presentation">
@@ -117,6 +120,7 @@
                 <li role="presentation">
                     <a href="<%=request.getContextPath() %>/toFiveSLog" target="mainFrame">5S日志记录</a>
                 </li>
+
             </ul>
         </div>
         <!-- 左侧导航和正文内容的分隔线 -->

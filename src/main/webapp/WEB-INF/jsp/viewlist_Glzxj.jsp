@@ -53,6 +53,7 @@
             <textarea class="form-control" id="glz_count" name="glz_count" rows="1" style="width: 180px"></textarea>
         </div>
         <input type="hidden" name="glz_name" value="${loginUser.user_name}" class="form-control" id="glz_name">
+        <input type="hidden" name="user_id" value="${loginUser.user_id}" class="form-control" id="user_id">
         <input type="hidden" id="delTextId" />
     </center>
 </div>
@@ -68,12 +69,12 @@
                 </i>提交
             </button>
             &nbsp;
-            <%--<button onclick="toread()" class="btn btn-primary" type="button">
+            <%--<button onclick="zjRead()" class="btn btn-primary" type="button">
                 <i class="glyphicon glyphicon-share-alt">
-                </i>查看所有
+                </i>个人查看
             </button>
             &nbsp;--%>
-            <button onclick="zjRead()" class="btn btn-primary" type="button">
+            <button onclick="zjReadNew()" class="btn btn-primary" type="button">
                 <i class="glyphicon glyphicon-share-alt">
                 </i>个人查看
             </button>
@@ -108,8 +109,11 @@
         location.href = "<%=request.getContextPath() %>/logout";
     }
 
-    function zjRead(){
-        location.href = "<%=request.getContextPath() %>/zjRead";
+    /*function zjRead(){
+        location.href = "<%=request.getContextPath() %>/GlzxjzjRead";
+    }*/
+    function zjReadNew(){
+        location.href = "<%=request.getContextPath() %>/GlzxjzjReadnew";
     }
 
     //提交
@@ -119,6 +123,7 @@
             type:'post',
             data:{
                 "glz_name":$("#glz_name").val(),
+                "user_id":$("#user_id").val(),
                 "glz_count":$("#glz_count").val()
             },
             dataType:"text",
@@ -126,10 +131,12 @@
                 if (data == 2){
                     alert("您今天已经完成任务，无需重复提交！");
                     location.reload();
+                }else if(data == 0){
+                    alert("你还未获取写权限，请联系管理员！");
                 }else{
                     alert("恭喜提交完成！")
-                    location.reload();
                 }
+                    location.reload();
             }
         })
     }

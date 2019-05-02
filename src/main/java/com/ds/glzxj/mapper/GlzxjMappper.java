@@ -1,6 +1,9 @@
 package com.ds.glzxj.mapper;
 
 import com.ds.glzxj.pojo.Glzxj;
+import com.ds.serverlogin.pojo.LoginUser;
+import com.ds.user.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -30,4 +33,12 @@ public interface GlzxjMappper {
     List<Glzxj> findAllTiGlzxj(Glzxj glzxj);
 
     void huanyuanGLZById(String ids);
+
+    List<Glzxj> queryZjRead(@Param("user_name") String user_name,@Param("name") String name,@Param("user_id") String user_id,
+                            @Param("offset") Integer offset,@Param("limit") Integer limit);
+
+    Integer queryZjReadCount(@Param("user_name") String user_name,@Param("name") String name,@Param("user_id") String user_id,
+                             @Param("offset") Integer offset,@Param("limit") Integer limit);
+
+    User queryQxByUserId(LoginUser user);
 }

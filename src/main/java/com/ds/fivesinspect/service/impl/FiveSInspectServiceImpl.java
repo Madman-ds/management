@@ -5,6 +5,7 @@ import com.ds.fivesinspect.pojo.FiveSInspect;
 import com.ds.fivesinspect.pojo.ReadFives;
 import com.ds.fivesinspect.pojo.UserFiveSInspect;
 import com.ds.fivesinspect.service.FiveSInspectService;
+import com.ds.serverlogin.pojo.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -158,6 +159,72 @@ public class FiveSInspectServiceImpl implements FiveSInspectService{
     @Override
     public void insertReadFive(ReadFives readFives) {
         fiveSInspectMapper.insertReadFive(readFives);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 根据用户id查询5S读权限
+     * @时间: 2019/4/27 20:49
+     * @参数:  * @param userId
+     * @返回值: java.util.List
+     **/
+    @Override
+    public List showHaveFiveSReadList(String userId) {
+        return fiveSInspectMapper.showHaveFiveSReadList(userId);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 删除5S读权限
+     * @时间: 2019/4/28 18:20
+     * @参数:  * @param rid
+     * @返回值: java.lang.Boolean
+     **/
+    @Override
+    public Boolean delFiveSRead(String rid) {
+        try {
+            String[] id = rid.split(",");
+            fiveSInspectMapper.delFiveSRead(id);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 个人展示页面查看5S数据
+     * @时间: 2019/4/28 18:21
+     * @参数:  * @param loginUser
+     * @返回值: java.util.List
+     **/
+    @Override
+    public List ckFivesReadList(LoginUser loginUser) {
+        return fiveSInspectMapper.ckFivesReadList(loginUser);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询所有5S提取数据的总条数
+     * @时间: 2019/4/28 23:24
+     * @参数:  * @param
+     * @返回值: java.lang.Integer
+     **/
+    @Override
+    public Integer findFiveSInspectLogqtCount() {
+        return fiveSInspectMapper.findFiveSInspectLogqtCount();
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询所有5S提取数据
+     * @时间: 2019/4/28 23:25
+     * @参数:  * @param fiveSInspect
+     * @返回值: java.util.List<com.ds.fivesinspect.pojo.FiveSInspect>
+     **/
+    @Override
+    public List<FiveSInspect> findFiveSInspectLogqt(FiveSInspect fiveSInspect) {
+        return fiveSInspectMapper.findFiveSInspectLogqt(fiveSInspect);
+    }
+
+    @Override
+    public Integer showFiveSReadListCount(FiveSInspect fiveSInspect) {
+        return fiveSInspectMapper.showFiveSReadListCount(fiveSInspect);
     }
 
     /**

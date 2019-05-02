@@ -2,6 +2,7 @@ package com.ds.glzxj.controller;
 
 import com.ds.glzxj.pojo.Glzxj;
 import com.ds.glzxj.servcie.GlzxjService;
+import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
 import com.ds.util.DateUtil;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,21 +57,27 @@ public class GlzxjController {
     public int insertGlzxj(HttpServletRequest request){
         String glz_name = request.getParameter("glz_name");
         String glz_count = request.getParameter("glz_count");
-        Glzxj glzxj = new Glzxj();
-        glzxj.setGlz_count(glz_count);
-        glzxj.setGlz_name(glz_name);
-        glzxj.setOffset(null);
-        glzxj.setLimit(null);
-        List<Glzxj> list = glzxjService.findAllGlzxj(glzxj);
-        if (list != null && list.size() > 0){
-            Glzxj glzxj1 = list.get(0);
-            if (DateUtil.isSameDay(glzxj1.getGlz_data(),new Date())){
-                return 2;
+        String user_id = request.getParameter("user_id");
+        User users = userService.queryByuserId(user_id);
+        if(users!=null && users.getUser_id()!=null){
+            Glzxj glzxj = new Glzxj();
+            glzxj.setGlz_count(glz_count);
+            glzxj.setGlz_name(glz_name);
+            glzxj.setOffset(null);
+            glzxj.setLimit(null);
+            List<Glzxj> list = glzxjService.findAllGlzxj(glzxj);
+            if (list != null && list.size() > 0){
+                Glzxj glzxj1 = list.get(0);
+                if (DateUtil.isSameDay(glzxj1.getGlz_data(),new Date())){
+                    return 2;
+                }
             }
+//            User user = userService.queryTopByUserName(glz_name);
+            glzxj.setGlz_tq(users.getTop());
+            return glzxjService.insertGlzxj(glzxj);
+        }else{
+            return 0;
         }
-        User user = userService.queryTopByUserName(glz_name);
-        glzxj.setGlz_tq(user.getTop());
-        return glzxjService.insertGlzxj(glzxj);
     }
     /**
      * @作者: 段聪祺
@@ -114,6 +123,39 @@ public class GlzxjController {
         Integer count = glzxjService.getGlzxjTiCount(glzxj);
         List<Glzxj> list = glzxjService.findAllTiGlzxj(glzxj);
         PageUtil page = new PageUtil();
+        page.setTotal(count);
+        page.setRows(list);
+        return page;
+    }
+
+    /**
+     * 管理者查看
+     * @param session
+     * @return
+     */
+    @GetMapping("queryZjRead")
+    public PageUtil queryZjRead(HttpSession session){
+        PageUtil page = new PageUtil();
+        LoginUser users = (LoginUser)session.getAttribute("loginUser");
+        User user = glzxjService.queryQxByUserId(users);//查询权限
+        List<User> userList = new ArrayList<>();
+        if(user!=null && !user.getQx().isEmpty()){
+            String[] split = user.getQx().split(",");
+            userList = userService.queryByids(split);
+        }
+        StringBuilder names = new StringBuilder();
+        String[] name = {};
+        if(userList!=null && !userList.isEmpty()){
+            userList.forEach(x->{
+                names.append(","+x.getUser_name());
+            });
+            name = names.substring(1).split(",");
+        }
+        user.setUser_name(users.getUser_name());
+        user.setUser_kh(users.getUser_id()+"_");//只做形参
+        Integer count = glzxjService.queryZjReadCount(user,name);
+        List<Glzxj> list = glzxjService.queryZjRead(user,name);
+
         page.setTotal(count);
         page.setRows(list);
         return page;

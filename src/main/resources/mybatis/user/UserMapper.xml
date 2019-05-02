@@ -115,24 +115,92 @@
     <!--提取-->
     <update id="tiquUser" parameterType="string">
       UPDATE
-        t_user
+        glzxj_user
       SET
-        top = 1
+        tq = 1
       WHERE
-        user_id = #{ids}
+        id = #{ids}
     </update>
 
     <update id="huanyuanUser" parameterType="com.ds.glzxj.pojo.Glzxj">
       UPDATE
-        t_user
+        glzxj_user
       SET
-        top = 2
+        tq = 2
       WHERE
-        user_id = #{ids}
+         id = #{ids}
     </update>
 
 
     <select id="queryTopByUserName" parameterType="string" resultType="com.ds.user.pojo.User">
         select * from t_user where user_name = #{glz_name}
     </select>
+
+
+    <select id="fuXieQuanXian" parameterType="string" resultType="com.ds.user.pojo.User">
+        select * from t_user
+        <where>
+                user_id not in
+                <foreach item="item" collection="array" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+        </where>
+    </select>
+
+    <select id="queryById" parameterType="string" resultType="com.ds.user.pojo.User">
+        select * from t_user where user_id = #{userId}
+    </select>
+
+    <select id="queryYFQX" resultType="string">
+        select user_id from glzxj_user
+    </select>
+
+    <insert id="insertUserGlzxjUser" parameterType="com.ds.user.pojo.User">
+      insert into
+        glzxj_user(user_id,tq)
+      value(#{user_id},2)
+    </insert>
+
+    <select id="findAllUserGlzxj" parameterType="map" resultType="com.ds.user.pojo.User">
+        select b.id AS user_id,a.user_name,b.tq AS top ,b.qx AS qx from t_user a,glzxj_user b
+        where a.user_id = b.user_id
+        order by user_id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+    <select id="findAllUserGlzxjCount" resultType="integer">
+        select count(*) from t_user
+    </select>
+
+    <delete id="delUserGlzxj" parameterType="string">
+        delete from glzxj_user WHERE  id = #{id}
+    </delete>
+
+    <select id="queryByuserId" resultType="com.ds.user.pojo.User">
+      select a.user_id,a.tq AS top from glzxj_user a where a.user_id = #{user_id}
+    </select>
+
+    <update id="updateFQuserGlzxj" parameterType="com.ds.user.pojo.User">
+      UPDATE
+        glzxj_user
+      SET
+        qx = #{glz_user}
+      WHERE
+        id = #{glz_id}
+    </update>
+
+    <select id="queryByids" parameterType="string" resultType="com.ds.user.pojo.User">
+        select * from t_user
+        <where>
+            user_id  in
+            <foreach item="item" collection="array" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+
+    <select id="getNotCurrentUserList" parameterType="com.ds.user.pojo.User" resultType="com.ds.user.pojo.User">
+        select * from t_user where user_id != #{user_id}
+    </select>
+
 </mapper>

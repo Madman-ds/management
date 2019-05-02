@@ -1,5 +1,6 @@
 package com.ds.user.controller;
 
+import com.ds.glzxj.pojo.Glzxj;
 import com.ds.serverlogin.pojo.LoginUser;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
@@ -51,19 +52,19 @@ public class UserController {
     public List getUserList(){
         return userService.findAllUser(null);
     }
-    /**
-     * @作者: 老西儿
-     * @功能描述: 查询除当前登录用户外所有用户信息
-     * @时间: 2019/4/25 22:00
-     * @参数:  * @param httpSession
-     * @返回值: java.util.List
-     **/
-    @GetMapping("getNotCurrentUserList")
-    public List getNotCurrentUserList(HttpSession httpSession){
-        LoginUser loginUser = (LoginUser)httpSession.getAttribute("loginUser");
-        List userlist = userService.getNotCurrentUserList(loginUser);
-        return userlist;
-    }
+//    /**
+//     * @作者: 老西儿
+//     * @功能描述: 查询除当前登录用户外所有用户信息
+//     * @时间: 2019/4/25 22:00
+//     * @参数:  * @param httpSession
+//     * @返回值: java.util.List
+//     **/
+//    @GetMapping("getNotCurrentUserList")
+//    public List getNotCurrentUserList(HttpSession httpSession){
+//        LoginUser loginUser = (LoginUser)httpSession.getAttribute("loginUser");
+//        List userlist = userService.getNotCurrentUserList(loginUser);
+//        return userlist;
+//    }
     /**
      * @作者: 段聪祺
      * @功能描述: 条件查询用户，用于新增，修改回显
@@ -132,7 +133,7 @@ public class UserController {
     }
 
     /**
-     * 提取
+     * 还原
      * @param request
      */
     @PostMapping("huanyuanUser")
@@ -142,13 +143,103 @@ public class UserController {
     }
 
     /**
-     * 还原
+     * 提取
      * @param request
      */
     @PostMapping("tiquUser")
     public void tiquUser(HttpServletRequest request){
         String ids = request.getParameter("id");
         userService.tiquUser(ids);
+    }
+
+    /**
+     * 查询用户
+     * @return
+     */
+    @GetMapping("/fuXieQuanXian")
+    public List<User> fuXieQuanXian(){
+        List<String> user = userService.queryYFQX();
+        StringBuilder id = new StringBuilder();
+        String substring = "";
+        if(user!=null && !user.isEmpty()){
+            user.forEach(x->{
+                id.append(","+x);
+            });
+            substring = id.substring(1);
+        }
+        String[] ids = substring.split(",");
+        List<User> list = userService.fuXieQuanXian(ids);
+        return list;
+    }
+
+    /**
+     * 用户《——》管理者巡检 写权限添加
+     * @param request
+     */
+    @PostMapping("insertUserGlzxjUser")
+    public void insertUserGlzxjUser(HttpServletRequest request){
+//        String ids = request.getParameter("ids");
+        String userId = request.getParameter("userId");
+        User user = userService.queryById(userId);
+        userService.insertUserGlzxjUser(user);
+    }
+
+    /**
+     * 查询用户
+     * @return
+     */
+    @GetMapping("/findAllUserGlzxj")
+    public PageUtil findAllUserGlzxj(){
+        Integer count = userService.findAllUserGlzxjCount();
+        List<User> list = userService.findAllUserGlzxj();
+        PageUtil page = new PageUtil();
+        page.setTotal(count);
+        page.setRows(list);
+        return page;
+    }
+
+    /**
+     * 删除管理者巡检 用户打卡权限
+     * @param
+     * @return
+     */
+    @PostMapping("delUserGlzxj")
+    public void delUserGlzxj(HttpServletRequest request){
+        String id = request.getParameter("id");
+        userService.delUserGlzxj(id);
+    }
+
+    /**
+     * 用户 福泉县查看 给用户
+     * @param glzxj
+     */
+    @PostMapping("updateFQuserGlzxj")
+    public void updateFQuserGlzxj(Glzxj glzxj){
+        if(glzxj.getGlz_user()!=null && !"".equals(glzxj.getGlz_user())){
+            String[] split = glzxj.getGlz_user().split(",");
+            String ids = "";
+            for (int i = 0; i < split.length; i++) {
+                ids += ","+split[i]+"_";
+            }
+            glzxj.setGlz_user(ids.substring(1));
+            userService.updateFQuserGlzxj(glzxj);
+        }else{
+            userService.updateFQuserGlzxj(glzxj);
+        }
+    }
+
+    /**
+     * @作者: 老西儿
+     * @功能描述: 查询除当前登录用户外所有用户信息
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
+    @GetMapping("getNotCurrentUserList")
+    public List getNotCurrentUserList(HttpSession httpSession){
+        LoginUser loginUser = (LoginUser)httpSession.getAttribute("loginUser");
+        List userlist = userService.getNotCurrentUserList(loginUser);
+        return userlist;
     }
 
 }

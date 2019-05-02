@@ -1,26 +1,53 @@
 <%--
   Created by IntelliJ IDEA.
   User: qinmengchao
-  Date: 2019/4/22
-  Time: 17:12
+  Date: 2019/4/28
+  Time: 18:32
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../../../jscore.jsp"></jsp:include>
 <html>
 <head>
-    <title>5S日志记录</title>
+    <title>5S点检</title>
 </head>
+<!-- 核心样式文件 -->
+<jsp:include page="jscore.jsp"></jsp:include>
 <body>
-    <%--展示5S--%>
-    <div id="myTable"></div>
+    <img src="<%=request.getContextPath() %>/static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
+    <div class="rows">
+        <div class="form-group">
+            <div class="col-sm-5">
+            </div>
+            <div class="col-sm-5">
+                <div class="input-group col-sm-10">
+                    <button onclick="fanhui()" class="btn btn-success" type="button" style="margin-left: 20px">
+                        <i class="glyphicon glyphicon-hand-left">
+                        </i>返回
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--<div class="modal-body">
+        <center>
+            <jsp:include page="but_inculd_m.jsp"  />
+            <button type="button" onclick="tozhou()" class="btn btn-primary">周生产计划</button>
+            &nbsp;
+            <button type="button" onclick="tologin()" class="btn btn-primary">日常打卡</button>
+            &nbsp;
+        </center>
+    </div>--%>
+
+    <div style="margin-top: 20px">
+        <table id="dataBackupShows" class="table table-bordered"></table>
+    </div>
 </body>
 <script type="text/javascript">
     //查询 表格展示
-    $('#myTable').bootstrapTable({
+    $('#dataBackupShows').bootstrapTable({
         toolbar:'#toolbar',
-        url:'<%=request.getContextPath() %>/findFiveSInspectLog',//获取数据地址
-        pagination:true, //是否展示分页
+        url:'<%=request.getContextPath() %>/findFiveSInspectLogqt',//获取数据地址
+        pagination:false, //是否展示分页
         pageList:[5, 10, 20, 50],//分页组件
         pageNumber:1,
         pageSize:5,//默认每页条数
@@ -70,23 +97,40 @@
                 }}
         ]
     });
-    $('#datetimepicker').datetimepicker({
-        format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
-        language:"zh-CN",
-        autoclose:true
-    });
-    $('#datetimeend').datetimepicker({
-        format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
-        language:"zh-CN",
-        autoclose:true
-    });
     //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
         if (cellval != null){
-            var d = new Date(cellval);;
+            var d = new Date(cellval);
             var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
             return times;
         }
     }
+    //跳转回前端登陆页面
+    function tologin() {
+        location.href="<%=request.getContextPath() %>/login";
+    }
+    function stateFormatter(value, row, index) {
+        if (row.user_name == "admin")
+            return {
+                disabled : true
+                //设置是否可用
+                // checked : true
+                //设置选中
+            };
+        return value;
+    }
+    //转换日期格式(时间戳转换为datetime格式)
+    function changeDateFormat(cellval) {
+        if (cellval != null){
+            var d = new Date(cellval);
+            var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ';
+            return times;
+        }
+    }
+
+    function fanhui() {
+        location.href="topIndex";
+    }
+
 </script>
 </html>

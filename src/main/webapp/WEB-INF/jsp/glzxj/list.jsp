@@ -42,15 +42,24 @@
     }
 </style>
 <body>
+<select  class="form-control" id="user_id" name="user_id">
+    <option value = "0">--请选择--</option>
+</select>
 <div id="toolbar">
     <button class="btn btn-danger" type="button" onclick="delALLuUser()">
         <i class="glyphicon glyphicon-minus">
         </i>删除
     </button>
-    <button class="btn btn-warning" type="button" onclick="tiquGunli()">
+    <button class="btn btn-danger" type="button" onclick="addXieQX()">
+        添加写权限
+    </button>
+    <button class="btn btn-danger" type="button" onclick="queryXieQX()">
+        查看写权限
+    </button>
+    <%--<button class="btn btn-warning" type="button" onclick="tiquGunli()">
         <i class="glyphicon glyphicon-arrow-up">
         </i>提取管理
-    </button>
+    </button>--%>
 </div>
 <table id="userList"></table>
 </body>
@@ -78,9 +87,25 @@
 </div>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/bootStrap-select/multiple-select.js"></script>
 <script type="text/javascript" >
-    $(function() {
-
-    });
+    $(function (){
+        $.ajax({
+            url:'<%=request.getContextPath() %>/fuXieQuanXian',
+            async:'false',
+            type:'get',
+            dataType:'json',
+            success:function(data){
+                for (var i = 0;i < data.length;i++){
+                    $("#user_id").append("<option value = '"+data[i].user_id+"'>"+data[i].user_name+"</option>")
+                }
+            },
+            error:function(){
+                BootstrapDialog.show({
+                    title:"fuck！！",
+                    message:'哇哦！系统走丢了！！'
+                })
+            }
+        })
+    })
     function initselect(glz_user,id){
         $("#id").val(id);
         $("#ms").find("option").remove();
@@ -188,18 +213,20 @@
             formatter: function (value, rows, index) {
                 var str ="";
                 if(rows.glz_tq =="1"){
-                    str = "<button class='btn btn-info dim' type='button' onclick='huanyuan(\""+rows.glz_id+"\")' ><i class='fa fa-paste'></i>还原</button>"+"  ";
+                    str = "已提取";
+                    // str = "<button class='btn btn-info dim' type='button' onclick='huanyuan(\""+rows.glz_id+"\")' ><i class='fa fa-paste'></i>还原</button>"+"  ";
                 }else{
-                    str = "<button class='btn btn-info dim' type='button' onclick='tiqu(\""+rows.glz_id+"\")' ><i class='fa fa-paste'></i>提取</button>"+"  ";
+                    // str = "<button class='btn btn-info dim' type='button' onclick='tiqu(\""+rows.glz_id+"\")' ><i class='fa fa-paste'></i>提取</button>"+"  ";
+                    str = "已还原";
                 }
                 return str;
             }
-        },{field:'cc',title:'操作',align:'center',formatter:function(value,rows,index){
+        }/*,{field:'cc',title:'操作',align:'center',formatter:function(value,rows,index){
                 var str="";
                 str+="<button class='btn btn-info dim' type='button' onclick='fuquan(\""+rows.glz_id+"\",\""+rows.glz_user+"\")' ><i class='fa fa-paste'></i>赋权</button>";
                 return  str;
             }
-        }
+        }*/
         ],
         pagination:true,
         pageNumber:1,
@@ -319,7 +346,7 @@
         })
     }
 
-    //赋权
+   /* //赋权
     function fuquan(id,glz_user) {
         $('#myModal2').modal('toggle');
         initselect(glz_user,id);
@@ -348,7 +375,7 @@
                 })
             }
         })
-    })
+    })*/
 
 
 function tiquGunli() {
@@ -422,5 +449,58 @@ function tiquGunli() {
     //         $selectTextDom[0].setAttribute("data-is-select","true");
     //     }
     // })
+    
+    
+    function addXieQX() {
+        // var rows = $('#userList').bootstrapTable('getSelections');
+        var userId = $("#user_id").val();
+        /*if(rows.length <= 0){
+            BootstrapDialog.show({
+                title:"提示！",
+                message:'请至少选择一条数据'
+            })
+        }else */if(userId == "0"&&userId==0){
+            BootstrapDialog.show({
+                title:"提示！",
+                message:'请选择人员!'
+            })
+        }else{
+            // var ids = "";
+            // var fivess = "";
+            // for (var i = 0;i < rows.length;i++){
+            //     ids += ids == ""?rows[i].glz_id:","+rows[i].glz_id;
+            // }
+            $.ajax({
+                url:'<%=request.getContextPath() %>/insertUserGlzxjUser',
+                type:'post',
+                data:{
+                    "userId":userId,
+                },
+                dateType:'json',
+                success:function(data){
+                    BootstrapDialog.show({
+                        title:"提示！",
+                        message:'添加成功!'
+                    })
+                    location.reload()
+                }
+            })
+        }
+    }
+
+    function queryXieQX() {
+        BootstrapDialog.show({
+            title:"查询管理者巡检写权限",
+            closable: false,
+            message:$('<div><div>').load('<%=request.getContextPath()%>/toShowGlzxjUser'),
+            buttons:[{
+                label:"关闭",
+                cssClass:'btn-warning',
+                action:function(data){
+                    data.close();
+                }
+            }]
+        })
+    }
 </script>
 </html>

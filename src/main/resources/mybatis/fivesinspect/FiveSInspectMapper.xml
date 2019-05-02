@@ -18,7 +18,7 @@
     <select id="findFiveSInspect" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
         SELECT * FROM t_fivesinspect
         WHERE 1 = 1
-        AND f_inspectuser IS NULL AND f_inspectdate IS NULL ORDER BY f_id DESC
+        AND f_inspectuser IS NULL AND f_inspectdate IS NULL ORDER BY f_id DESC LIMIT #{startIndex},#{rows}
     </select>
     <select id="findFiveSLogByUserName" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
         SELECT * FROM t_fivesinspect WHERE f_inspectuser LIKE #{f_inspectuser} order by f_id desc limit 1
@@ -73,7 +73,7 @@
     <select id="findFiveSInspectLog" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
         SELECT * FROM t_fivesinspect
         WHERE 1 = 1
-        AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL AND f_ifmeet IS NOT NULL ORDER BY f_id DESC
+        AND f_inspectuser IS NOT NULL AND f_inspectdate IS NOT NULL AND f_ifmeet IS NOT NULL ORDER BY f_id DESC LIMIT #{startIndex},#{rows}
     </select>
     <select id="showFiveSLogByUser" parameterType="java.lang.String" resultType="map">
         select tf.f_id,tf.f_fives,tf.f_clazzify,tf.f_content,tu.user_name,tuf.ifextract from
@@ -89,8 +89,8 @@
         #{f_fives},#{f_clazzify},#{f_content},#{f_userid},NOW(),#{f_inspectuser},#{f_ifmeet}
         )
     </update>
-    <select id="showFiveSReadList" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultType="map">
-        SELECT tf.f_id,tf.f_fives,tf.f_clazzify,tf.f_content,tu.user_name,tuf.u_f_id FROM
+    <select id="showFiveSReadListCount" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultType="java.lang.Integer">
+        SELECT count(*) FROM
         t_userfivesinspect tuf ,
         t_fivesinspect tf,
         t_user tu
@@ -101,18 +101,81 @@
         tf.f_inspectuser IS NULL AND
         tf.f_inspectdate IS NULL ORDER BY tf.f_id DESC
     </select>
+    <select id="showFiveSReadList" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultType="map">
+        SELECT tf.f_id,tf.f_fives,tf.f_clazzify,tf.f_content,tu.user_name,tuf.u_f_id,tuf.user_id FROM
+        t_userfivesinspect tuf ,
+        t_fivesinspect tf,
+        t_user tu
+        WHERE
+        tuf.f_id = tf.f_id AND
+        tuf.f_fives = tf.f_fives AND
+        tuf.user_id = tu.user_id AND
+        tf.f_inspectuser IS NULL AND
+        tf.f_inspectdate IS NULL ORDER BY tf.f_id DESC LIMIT #{startIndex},#{rows}
+    </select>
     <select id="findReadFive" resultType="com.ds.fivesinspect.pojo.ReadFives" parameterType="com.ds.fivesinspect.pojo.ReadFives">
         SELECT * FROM t_readfive
         WHERE 1 = 1
+        <if test="user_name != '' and user_name != null">AND user_name = #{user_name}</if>
         <if test="user_id != 0 and user_id != null">AND user_id = #{user_id}</if>
         <if test="f_id != 0 and f_id != null">AND f_id = #{f_id}</if>
         ORDER BY f_id DESC
     </select>
     <insert id="insertReadFive" parameterType="com.ds.fivesinspect.pojo.ReadFives">
         INSERT INTO t_readfive (
-        user_id,f_id,u_f_id
+        user_id,f_id,u_f_id,f_fives,user_name
         )VALUES (
-        #{user_id},#{f_id},#{u_f_id}
+        #{user_id},#{f_id},#{u_f_id},#{f_fives},#{user_name}
         )
     </insert>
+    <select id="showHaveFiveSReadList" parameterType="java.lang.String" resultType="map">
+        select tr.u_f_id,tr.f_id,tr.r_id,tf.f_fives,tr.user_name from t_readfive tr ,t_fivesinspect tf
+        where tr.f_fives = tf.f_fives and
+				tf.f_inspectdate is null and
+				tf.f_inspectuser is null and
+				tf.f_ifmeet is null
+                and tr.user_id = #{userId}
+    </select>
+    <delete id="delFiveSRead" parameterType="com.ds.fivesinspect.pojo.ReadFives">
+        delete from t_readfive where r_id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="ckFivesReadList" parameterType="com.ds.user.pojo.User" resultType="map">
+        select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate from
+         t_readfive rf,
+         t_userfivesinspect uf,
+         t_fivesinspect f,
+         t_user u where
+         rf.u_f_id = uf.u_f_id and
+         uf.f_fives = f.f_fives and
+         uf.user_id = u.user_id and
+         f.f_inspectdate is not null and
+         f.f_inspectuser is not null and
+         f.f_ifmeet is not null and
+         rf.user_id = #{user_id} order by f.f_inspectdate desc
+    </select>
+    <select id="findFiveSInspectLogqtCount" resultType="java.lang.Integer">
+        select count(*) from
+         t_fivesinspect f,
+         t_userfivesinspect uf
+         where f.f_id = uf.f_id and
+          f_userid is not null and
+          f_inspectuser is not null and
+          f_inspectdate is not null and
+          f_ifmeet is not null and
+          uf.ifextract = 1 ORDER BY f.f_inspectdate DESC
+    </select>
+    <select id="findFiveSInspectLogqt" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
+         select f.f_fives,f.f_clazzify,f.f_content,f.f_inspectdate,f.f_inspectuser,f.f_ifmeet from
+         t_fivesinspect f,
+         t_userfivesinspect uf
+         where f.f_fives = uf.f_fives and
+          f_userid is not null and
+          f_inspectuser is not null and
+          f_inspectdate is not null and
+          f_ifmeet is not null and
+          uf.ifextract = 1 ORDER BY f.f_inspectdate DESC LIMIT #{startIndex},#{rows}
+    </select>
 </mapper>

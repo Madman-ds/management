@@ -5,6 +5,7 @@ import com.ds.attributes.pojo.Attributes;
 import com.ds.equipment.mapper.EquipmentMapper;
 import com.ds.equipment.pojo.Equipment;
 import com.ds.equipment.pojo.EquipmentInspectionitem;
+import com.ds.equipment.pojo.EquipmentRead;
 import com.ds.equipment.service.EquipmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -126,5 +127,50 @@ public class EquipmentServiceImpl implements EquipmentService {
     public List findReadEquipmentInspectionitem(Long userId) {
         return equipmentMapper.findReadEquipmentInspectionitem(userId);
     }
+
+    /**
+     * @作者: 老西儿
+     * @功能描述: 危险点点检授权数据
+     * @时间: 2019/5/1 1:15
+     * @参数:  * @param equipmentRead
+     * @返回值: java.util.List
+     **/
+    @Override
+    public List showEquipmentReadList(EquipmentRead equipmentRead) {
+        return equipmentMapper.showEquipmentReadList(equipmentRead);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 添加危险点读权限时查询是否有记录
+     * @时间: 2019/5/1 15:26
+     * @参数:  * @param equipmentRead
+     * @返回值: java.util.List
+     **/
+    @Override
+    public List findEquipmentReadRepeat(EquipmentRead equipmentRead) {
+        return equipmentMapper.findEquipmentReadRepeat(equipmentRead);
+    }
+    /**
+     * @作者: 老西儿
+     * @功能描述: 危险点点检读权限赋权
+     * @时间: 2019/5/1 15:42
+     * @参数:  * @param equipmentRead
+     * @返回值: void
+     **/
+    @Override
+    public void insertEquipmentRead(EquipmentRead equipmentRead) {
+        equipmentMapper.insertEquipmentRead(equipmentRead);
+    }
+
+    @Override
+    public Boolean delEquipmentRead(String erid) {
+        return equipmentMapper.delEquipmentRead(erid);
+    }
+
+    @Override
+    public int showEquipmentReadCount(EquipmentRead equipmentRead) {
+        return equipmentMapper.showEquipmentReadCount(equipmentRead);
+    }
+
 
 }

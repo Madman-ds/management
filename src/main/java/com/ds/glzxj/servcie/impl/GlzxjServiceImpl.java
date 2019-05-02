@@ -3,6 +3,8 @@ package com.ds.glzxj.servcie.impl;
 import com.ds.glzxj.mapper.GlzxjMappper;
 import com.ds.glzxj.pojo.Glzxj;
 import com.ds.glzxj.servcie.GlzxjService;
+import com.ds.serverlogin.pojo.LoginUser;
+import com.ds.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +65,29 @@ public class GlzxjServiceImpl implements GlzxjService {
     @Override
     public List<Glzxj> findAllTiGlzxj(Glzxj glzxj) {
         return  glzxjMappper.findAllTiGlzxj(glzxj);
+    }
+
+    @Override
+    public Integer queryZjReadCount(LoginUser user,String[] name) {
+        String user_nane = user.getUser_name();
+        String user_id = user.getUser_kh();
+        Integer offset = user.getOffset();
+        Integer limit = user.getLimit();
+        return  glzxjMappper.queryZjReadCount(user_nane,name.toString(),user_id,offset,limit);
+    }
+
+    @Override
+    public List<Glzxj> queryZjRead(LoginUser user,String[] name) {
+        String user_nane = user.getUser_name();
+        String user_id = user.getUser_kh();
+        Integer offset = user.getOffset();
+        Integer limit = user.getLimit();
+        return  glzxjMappper.queryZjRead(user_nane,name.toString(),user_id,offset,limit);
+    }
+
+    @Override
+    public User queryQxByUserId(LoginUser user) {
+        return glzxjMappper.queryQxByUserId(user);
     }
 
 }

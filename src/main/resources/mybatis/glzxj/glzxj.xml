@@ -108,7 +108,17 @@
         union all
            select * from t_glzxj where glz_name in (
               select user_name from t_user where user_id in (
-                select user_id from glzxj_user where qx like CONCAT('%',#{user_id},'%')
+                select user_id from glzxj_user
+                <where>
+                    <choose>
+                        <when test="user_id !=null and user_id !=''">
+                             qx like CONCAT('%',#{user_id},'%')
+                        </when>
+                        <otherwise>
+                            and 1=2
+                        </otherwise>
+                    </choose>
+                </where>
               )
             )
         ) s
@@ -120,7 +130,17 @@
         union all
             select * from t_glzxj where glz_name in (
               select user_name from t_user where user_id in (
-                select user_id from glzxj_user where qx like CONCAT('%',#{user_id},'%')
+                    select user_id from glzxj_user
+                    <where>
+                        <choose>
+                            <when test="user_id !=null and user_id !=''">
+                                qx like CONCAT('%',#{user_id},'%')
+                            </when>
+                            <otherwise>
+                                and 1=2
+                            </otherwise>
+                        </choose>
+                    </where>
               )
             )
         ) s

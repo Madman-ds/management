@@ -72,7 +72,7 @@
         language:"zh-CN",
         autoclose:true
     });
-    //转换日期格式(时间戳转换为datetime格式)
+    //转换日期格式(时间戳转换为datetime格式1)
     function changeDateFormat(cellval) {
         if (cellval != null){
             var d = new Date(cellval);;

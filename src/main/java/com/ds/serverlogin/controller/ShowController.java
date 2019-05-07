@@ -260,7 +260,7 @@ public class ShowController {
      **/
     @GetMapping("GlzxjzjReadnew")
     public String GlzxjzjReadnew(){
-        return "WEB-INF/jsp/GlzxjzjRead";
+        return "WEB-INF/jsp/reception/GlzxjzjRead";
     }
     /**
      * @作者: YuBoYaKe
@@ -333,7 +333,7 @@ public class ShowController {
      **/
     @GetMapping("toGlzxjAdd")
     public String toTopGlzxj(){
-        return "WEB-INF/jsp/viewlist_Glzxj";
+        return "WEB-INF/jsp/reception/viewlist_Glzxj";
     }
 
     /**

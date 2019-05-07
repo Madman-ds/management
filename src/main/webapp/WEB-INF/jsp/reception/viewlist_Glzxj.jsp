@@ -40,14 +40,14 @@
             margin-bottom: 100px;
         }
     </style>
-    <jsp:include page="../../jscore.jsp"></jsp:include>
+    <jsp:include page="../../../jscore.jsp"></jsp:include>
 </head>
 <body>
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 
 <div class="modal-body">
     <center>
-        <jsp:include page="but_inculd.jsp"  />
+        <jsp:include page="../but_inculd.jsp"  />
         <div style="margin-top: 20px">
             <label>问题数:</label>
             <textarea class="form-control" id="glz_count" name="glz_count" rows="1" style="width: 180px"></textarea>

@@ -37,14 +37,14 @@
             text-align:center;
         }
     </style>
-    <jsp:include page="../../jscore.jsp"></jsp:include>
+    <jsp:include page="../../../jscore.jsp"></jsp:include>
 </head>
 <body>
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 
 <div class="modal-body">
     <center>
-        <jsp:include page="but_inculd.jsp"  />
+        <jsp:include page="../but_inculd.jsp"  />
         <div style="margin-top: 20px">
             <table id="mytableid" border="1px" style="text-align: center;font-size: 16px">
             </table>

@@ -43,6 +43,9 @@
 </body>
 <script type="text/javascript">
 
+    <%--
+        查询管理者巡检提取项数据
+    --%>
     $("#dataBackupShows").bootstrapTable({
         url:"<%=request.getContextPath()%>/findGlzxj2",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码

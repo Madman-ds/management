@@ -12,7 +12,7 @@
     <title>仪表台账页面</title>
 </head>
 <!-- 核心样式文件 -->
-<jsp:include page="jscore.jsp"></jsp:include>
+<jsp:include page="../public/jscore.jsp"></jsp:include>
 <body>
 <img src="<%=request.getContextPath() %>/static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 <div class="rows">

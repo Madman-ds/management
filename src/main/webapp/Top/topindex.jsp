@@ -18,83 +18,66 @@
 </style>
 <body>
 <!-- 核心样式文件 -->
-<jsp:include page="jscore.jsp"></jsp:include>
+<jsp:include page="../public/jscore.jsp"></jsp:include>
 <body>
 <img src="<%=request.getContextPath() %>/static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
-<div class="rows">
-    <div class="form-group">
-        <div class="col-sm-5">
-        </div>
-        <div class="col-sm-5">
-            <div class="input-group col-sm-10">
-                <button onclick="fanhui()" class="btn btn-success" type="button" style="margin-left: 20px">
-                    <i class="glyphicon glyphicon-hand-left">
-                    </i>返回
-                </button>
-            </div>
-        </div>
+<center>
+    <jsp:include page="../public/but_inculd_m.jsp"  />
+    <button type="button" onclick="tozhou()" class="btn btn-primary">周生产计划</button>
+    &nbsp;
+    <button type="button" onclick="tologin()" class="btn btn-primary">日常打卡</button>
+    &nbsp;
+    <div style="margin-top: 20px">
+        <table id="dataBackupShows" class="table table-bordered"></table>
     </div>
-</div>
-
-<div id="dataShow" >
-    <table id="dataBackupShows" class="table table-bordered"></table>
-</div>
+</center>
+<%--<div id="dataShow" >--%>
+    <%--<table id="dataBackupShows" class="table table-bordered"></table>--%>
+<%--</div>--%>
 
 </body>
 <script type="text/javascript">
 
-    <%--
-        查询管理者巡检提取项数据
-    --%>
     $("#dataBackupShows").bootstrapTable({
-        url:"<%=request.getContextPath()%>/findGlzxj2",
+        url:"<%=request.getContextPath()%>/findDataBackupTop",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
-        toolbar:'#toolbar',//工具栏   显示在id为toolbar的div中
-        //查询参数：条件查询时使用
-        queryParams:function(params){
-            return{
-                "offset":(this.pageNumber-1)*this.pageSize,
-                "limit":this.pageSize,
-            }
-        },
-        columns:[{
-            checkbox:true,
-            formatter:stateFormatter
-        },{
-            field:"glz_id",
-            title:"主键",
-            visible: false,
-            align:'center',
-        },{
-            field:"glz_name",
-            title:"巡检人",
-            align:'center'
-        }, {
-            field:"glz_data",
-            title:"时间",
-            align:'center',
-            formatter: function (value, row, index) {
-                return changeDateFormat(value);
-            }
-        },{
-            field:"glz_count",
-            title:"问题数量",
-            align:'center',
-        },{
-            field:"glz_user",
-            title:"赋权给用户",
-            visible: false,
-            align:'center',
-        }
+        columns:[
+            {field:'sb_name',title:'名称',align:'center'},
+            {field:'sb_number',title:'编号',align:'center'},
+            {field:'sb_xh',title:'属性',align:'center'},
+            {field:'jcx_name',title:'检查项',align:'center'},
+            {field:'jc_yq',title:'检查要求',align:'center',width:10},
+            {field:'jc_jg',title:'确认结果',align:'center',
+                formatter:function (value,rows,index){
+                    if (value == 0){
+                        return "正常";
+                    } else if(value == 2){
+                        return "未操作"
+                    }
+                    else {
+                        return "异常"
+                    }
+                }
+            },
+            {field:'user_name',title:'确认人',align:'center'},
+            {field:'qr_time',title:'确认时间',align:'center',
+                //获取日期列的值进行转换
+                formatter: function (value, row, index) {
+                    return changeDateFormat(value);
+                }
+            },
+            {field:'bz_nr',title:'不符合项',align:'center'}
         ],
         pagination:true,
         pageNumber:1,
         pageSize:5,
-        pageList:[5,10,15,20],
+        pageList:[2,4,6,20],
         clickToSelect: true,
         cache搜索: false,
         sidePagination:"server"
     })
+
+
     //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
         if (cellval != null){
@@ -106,6 +89,9 @@
     //跳转回前端登陆页面
     function tologin() {
         location.href="<%=request.getContextPath() %>/login";
+    }
+    function tozhou(){
+        location.href="<%=request.getContextPath() %>/topZhouJiHua";
     }
 
     function stateFormatter(value, row, index) {
@@ -121,15 +107,10 @@
     //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
         if (cellval != null){
-            var d = new Date(cellval);;
+            var d = new Date(cellval);
             var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ';
             return times;
         }
-    }
-    
-    
-    function fanhui() {
-        location.href="topIndex";
     }
 </script>
 </html>

@@ -12,7 +12,7 @@
     <title>个人查看页面</title>
 </head>
 <!-- 核心样式文件 -->
-<jsp:include page="../../jscore.jsp"></jsp:include>
+<jsp:include page="../../public/jscore.jsp"></jsp:include>
 <body>
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
 <button onclick="returnTo()" class="btn btn-danger" type="button">

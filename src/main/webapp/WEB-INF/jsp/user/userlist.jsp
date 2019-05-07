@@ -12,7 +12,7 @@
     <title>用户管理页面</title>
 </head>
 <!-- 核心样式文件 -->
-<jsp:include page="../../../jscore.jsp"></jsp:include>
+<jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
 <!-- 搜索 -->
 <div class="panel-body">

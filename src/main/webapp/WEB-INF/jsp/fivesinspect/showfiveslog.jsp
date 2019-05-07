@@ -36,7 +36,7 @@
             text-align:center;
         }
     </style>
-    <jsp:include page="../../../jscore.jsp"></jsp:include>
+    <jsp:include page="../../../public/jscore.jsp"></jsp:include>
 </head>
 <body>
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >

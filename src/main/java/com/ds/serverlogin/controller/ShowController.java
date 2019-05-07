@@ -141,7 +141,7 @@ public class ShowController {
      **/
     @GetMapping(value = "login")
     public String toViewLogin(){
-        return "viewindex";
+        return "Top/viewindex";
     }
     /**
      * @作者: 段聪祺
@@ -229,7 +229,7 @@ public class ShowController {
      **/
     @GetMapping(value = {"topIndex","/"})
     public String topIndex(){
-        return "topindex";
+        return "Top/topindex";
     }
 
     /**
@@ -309,7 +309,7 @@ public class ShowController {
      **/
     @GetMapping("topZhouJiHua")
     public String topZhouJiHua(){
-        return "topZhouJiHua";
+        return "Top/topZhouJiHua";
     }
 
     /**
@@ -385,7 +385,7 @@ public class ShowController {
      **/
     @GetMapping("toTopGlzxjm")
     public String toTopGlzxjm(){
-        return "topGlzxj";
+        return "Top/topGlzxj";
     }
 
     /**
@@ -397,7 +397,7 @@ public class ShowController {
      **/
     @GetMapping("topyibiaoTaiZheng")
     public String topyibiaoTaiZheng(){
-        return "topyibiaoTaiZheng";
+        return "Top/topyibiaoTaiZheng";
     }
 
     /**
@@ -531,7 +531,7 @@ public class ShowController {
      **/
     @GetMapping("toTopFiveBytq")
     public String toTopFiveBytq(){
-        return "topfivebytq";
+        return "Top/topfivebytq";
     }
     /**
      * @作者: 老西儿

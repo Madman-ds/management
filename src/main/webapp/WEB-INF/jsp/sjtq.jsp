@@ -13,7 +13,7 @@ To change this template use File | Settings | File Templates.
     <title>Title</title>
 </head>
 <!-- 引入js核心文件 -->
-<jsp:include page="../../jscore.jsp"></jsp:include>
+<jsp:include page="../../public/jscore.jsp"></jsp:include>
 <body>
 <table id="userList"></table>
 </body>

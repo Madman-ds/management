@@ -10,7 +10,7 @@
 <head>
     <title>5S点检</title>
 </head>
-<jsp:include page="../../../jscore.jsp"></jsp:include>
+<jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
 <div class="rows">
     <div id="toolBar">

@@ -10,7 +10,7 @@
 <head>
     <title>5S写操作管理</title>
 </head>
-<jsp:include page="../../../jscore.jsp"></jsp:include>
+<jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
     人员: <select  class="form-control" id="user_id" name="user_id">
         <option value = "0">--请选择--</option>

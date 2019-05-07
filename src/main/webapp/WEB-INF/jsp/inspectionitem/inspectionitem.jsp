@@ -13,7 +13,7 @@
 </head>
 
 <!-- 核心样式文件 -->
-<jsp:include page="../../../jscore.jsp"></jsp:include>
+<jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <link href="<%=request.getContextPath() %>/static/jquery-transfer/css/transfer.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/static/jquery-transfer/css/bootstrap.css" rel="stylesheet">
 

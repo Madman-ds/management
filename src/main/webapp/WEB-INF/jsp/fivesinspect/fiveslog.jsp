@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../../../jscore.jsp"></jsp:include>
+<jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <html>
 <head>
     <title>5S日志记录</title>

@@ -11,7 +11,7 @@
     <title>设备管理页面</title>
 </head>
 <!-- 核心样式文件 -->
-<jsp:include page="../../../jscore.jsp"></jsp:include>
+<jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
 
 <div class="rows">

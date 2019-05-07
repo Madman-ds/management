@@ -24,7 +24,9 @@ import javax.servlet.http.HttpSession;
  * @作者: 段大神经
  * @创建时间: 2018/9/25 23:57
  * @说明:页跳转控制器
- *
+ * 注：i      代表 前台打卡页
+ *     M      代表 后台管理页
+ *     TOP    代表 访客页
  */
 @Controller
 public class ShowController {
@@ -238,24 +240,6 @@ public class ShowController {
     public String zjRead(){
         return "WEB-INF/jsp/zjRead";
     }
-//    /**
-//     * 管理者巡检——>个人查看
-//     * @return
-//     */
-//    @GetMapping("GlzxjzjRead")
-//    public String GlzxjzjRead(){
-//        return "WEB-INF/jsp/GlzxjzjRead";
-//    }
-    /**
-     * 管理者巡检——>个人查看
-     * @return
-     */
-    @GetMapping("GlzxjzjReadnew")
-    public String GlzxjzjReadnew(){
-        return "WEB-INF/jsp/GlzxjzjRead";
-    }
-
-
 
     /**
      * 数据提取
@@ -265,27 +249,46 @@ public class ShowController {
     public String zjsRead(){
         return "WEB-INF/jsp/sjtq";
     }
+
+
     /**
-     * 周计划
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: i——管理者巡检——>个人查看
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("GlzxjzjReadnew")
+    public String GlzxjzjReadnew(){
+        return "WEB-INF/jsp/GlzxjzjRead";
+    }
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: M——周计划管理页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("toZouJiHua")
     public String toZouJiHua(){
         return "WEB-INF/jsp/zouJiHua/list";
     }
     /**
-     * 添加周计划
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: M——添加周计划
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("addZhuJiHua")
     public String addZhuJiHua(){
         return "WEB-INF/jsp/zouJiHua/addZhuJiHua";
     }
     /**
-     * @作者: 段大神经
-     * @功能描述: 去周计划修改页面
-     * @时间: 2018/10/7 22:20
-     * @参数:  * @param request
+     * @作者: YuBoYaKe
+     * @功能描述: M——去周计划修改页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
      * @返回值: java.lang.String
      **/
     @GetMapping("toUpdWeekPlan")
@@ -298,56 +301,70 @@ public class ShowController {
     }
 
     /**
-     * 周计划首页页面
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: TOP——周计划首页页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("topZhouJiHua")
     public String topZhouJiHua(){
-
         return "topZhouJiHua";
     }
 
     /**
-     * 管理者巡检页面
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: M——管理者巡检页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("toGlzxj")
     public String toGlzxj(){
         return "WEB-INF/jsp/glzxj/list";
     }
 
     /**
-     * 管理者巡检页面
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: i——管理者巡检页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("toGlzxjAdd")
     public String toTopGlzxj(){
         return "WEB-INF/jsp/viewlist_Glzxj";
     }
 
     /**
-     * 管理者巡检页面
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: M——仪表台账页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("toYbtz")
     public String toYbtz(){
         return "WEB-INF/jsp/ybtz/list";
     }
 
     /**
-     * 添加仪表台账
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: M——添加仪表台账
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("addybtz")
     public String addybtz(){
         return "WEB-INF/jsp/ybtz/addybtz";
     }
 
     /**
-     * @作者: 段大神经
-     * @功能描述: 去周计划修改页面
-     * @时间: 2018/10/7 22:20
-     * @参数:  * @param request
+     * @作者: YuBoYaKe
+     * @功能描述: M——去周计划修改页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
      * @返回值: java.lang.String
      **/
     @GetMapping("toUpdYbtz")
@@ -360,27 +377,36 @@ public class ShowController {
     }
 
     /**
-     * 管理者巡检 top
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: TOP——管理者巡检
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("toTopGlzxjm")
     public String toTopGlzxjm(){
         return "topGlzxj";
     }
 
     /**
-     * 仪表台账
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: TOP——仪表台账
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("topyibiaoTaiZheng")
     public String topyibiaoTaiZheng(){
         return "topyibiaoTaiZheng";
     }
 
     /**
-     * 赋权页面
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: M——为用户赋管理者巡检写权限页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
     @GetMapping("toShowGlzxjUser")
     public String toShowGlzxjUser(){
         return "WEB-INF/jsp/glzxj/userTiQu";

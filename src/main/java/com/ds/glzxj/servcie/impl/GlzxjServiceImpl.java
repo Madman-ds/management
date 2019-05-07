@@ -68,21 +68,21 @@ public class GlzxjServiceImpl implements GlzxjService {
     }
 
     @Override
-    public Integer queryZjReadCount(LoginUser user,String[] name) {
+    public Integer queryZjReadCount(LoginUser user) {
         String user_nane = user.getUser_name();
         String user_id = user.getUser_kh();
         Integer offset = user.getOffset();
         Integer limit = user.getLimit();
-        return  glzxjMappper.queryZjReadCount(user_nane,name.toString(),user_id,offset,limit);
+        return  glzxjMappper.queryZjReadCount(user_nane,user_id,offset,limit);
     }
 
     @Override
-    public List<Glzxj> queryZjRead(LoginUser user,String[] name) {
+    public List<Glzxj> queryZjRead(LoginUser user) {
         String user_nane = user.getUser_name();
         String user_id = user.getUser_kh();
         Integer offset = user.getOffset();
         Integer limit = user.getLimit();
-        return  glzxjMappper.queryZjRead(user_nane,name.toString(),user_id,offset,limit);
+        return  glzxjMappper.queryZjRead(user_nane,user_id,offset,limit);
     }
 
     @Override

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ds.glzxj.mapper.GlzxjMappper">
+    <!--根据巡检人查询总条数-->
     <select id="getGlzxjCount" resultType="integer">
         select count(*) from t_glzxj
         <where>
             <if test="glz_name!=null and glz_name!=''">glz_name = #{glz_name}</if>
         </where>
     </select>
-
+    <!--根据巡检人查询-->
     <select id="findAllGlzxj" resultType="com.ds.glzxj.pojo.Glzxj">
         select * from t_glzxj
         <where>
@@ -17,6 +18,7 @@
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
     </select>
 
+    <!--批量删除-->
     <delete id="delAllGlzxj">
         delete from t_glzxj where glz_id in
         <foreach collection="array" item="id" open="(" separator="," close=")">
@@ -24,30 +26,11 @@
         </foreach>
     </delete>
 
+    <!--添加管理者巡检-->
     <insert id="insertGlzxj" parameterType="com.ds.glzxj.pojo.Glzxj">
         INSERT INTO t_glzxj ( glz_name,glz_data,glz_count ,glz_tq)
         VALUE (#{glz_name},now(),#{glz_count},#{glz_tq})
     </insert>
-
-
-
-    <select id="toUpdWeekPlan" resultType="com.ds.weekPlan.pojo.WeekPlan" parameterType="com.ds.weekPlan.pojo.WeekPlan">
-        select * from t_weekplan where z_id = #{z_id}
-    </select>
-
-    <update id="updWeekPlan">
-      UPDATE
-        t_weekplan
-      SET
-        z_name = #{z_name},z_bh = #{z_bh},
-        z_one = #{z_one},z_two = #{z_two},
-        z_three=#{z_three},z_four=#{z_four},
-        z_five=#{z_five},z_six=#{z_six},
-        z_sunday=#{z_sunday},z_remarks=#{z_remarks},
-        z_startdate=#{z_startdate},z_enddate=#{z_enddate}
-      WHERE
-        z_id = #{z_id}
-    </update>
 
     <!--还原-->
     <update id="huanyuanGLZ" parameterType="string">
@@ -78,15 +61,21 @@
         glz_id = #{glz_id}
     </update>
 
+    <!--top 查询提取项-->
     <select id="getGlzxjTiCount" resultType="integer">
         select count(*) from t_glzxj where glz_tq = 1
     </select>
-
+    <!--top 查询提取项-->
     <select id="findAllTiGlzxj" resultType="com.ds.glzxj.pojo.Glzxj">
         select * from t_glzxj where glz_tq = 1 order by glz_id desc
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
     </select>
 
+    <!--
+        根据用户id 查询出用户名
+        作为子查询
+        修改管理者巡检中所有提取项（条件巡检人=子查询查出的巡检人）
+     -->
     <update id="huanyuanGLZById" parameterType="string">
       UPDATE
         t_glzxj
@@ -96,12 +85,17 @@
         glz_name = (select user_name  from t_user where user_id = #{ids})
     </update>
 
+    <!--
+        查询赋予用户的权限
+    -->
     <select id="queryQxByUserId" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.user.pojo.User">
         select a.qx AS qx from  glzxj_user  a where user_id = #{user_id}
     </select>
 
 
-
+    <!--
+         个人查看：自己的数据 + 别人赋予自己的查看权限
+     -->
     <select id="queryZjReadCount"  resultType="integer" >
         select count(DISTINCT s.glz_id) from (
             select * from t_glzxj where glz_name = #{user_name}
@@ -124,6 +118,9 @@
         ) s
     </select>
 
+    <!--
+         个人查看：自己的数据 + 别人赋予自己的查看权限
+     -->
     <select id="queryZjRead"  resultType="com.ds.glzxj.pojo.Glzxj">
         select s.glz_id,s.glz_name,s.glz_data,s.glz_count from (
             select * from t_glzxj where glz_name = #{user_name}

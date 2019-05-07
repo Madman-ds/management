@@ -35,7 +35,7 @@ public interface UserService {
 
     int updateTs(DataBackupParam dataBackupParam);
 
-    List<User> findAll();
+    List<User> findAll(User user);
 
     List<User> findAllbyids(String ids);
 

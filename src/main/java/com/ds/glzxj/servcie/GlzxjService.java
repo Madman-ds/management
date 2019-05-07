@@ -32,9 +32,9 @@ public interface GlzxjService {
 
     List<Glzxj> findAllTiGlzxj(Glzxj glzxj);
 
-    Integer queryZjReadCount(LoginUser user,String[] name);
+    Integer queryZjReadCount(LoginUser user);
 
-    List<Glzxj> queryZjRead(LoginUser user,String[] name);
+    List<Glzxj> queryZjRead(LoginUser user);
 
     User queryQxByUserId(LoginUser user);
 }

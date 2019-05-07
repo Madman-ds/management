@@ -16,14 +16,15 @@ import java.util.List;
  * @作者: 段聪祺
  * @创建时间: 2018/9/29 14:36
  * @说明: 用户相关控制器
+ * 注：周计划注：后台添加 前台展示（2条，一周的两条信息）
  */
 @RestController
 public class WeekPlanController {
     @Autowired
     private WeekPlanService weekPlanService;
   /**
-   * @作者: 段大神经
-   * @功能描述: 查询本周周计划
+   * @作者: YuBoYaKe
+   * @功能描述: M——查询本周周计划
    * @时间: 2018/9/29 14:44
    * @参数:  * @param user
    * @返回值: com.ds.util.PageUtil
@@ -39,8 +40,8 @@ public class WeekPlanController {
     }
 
     /**
-     * @作者: 段大神经
-     * @功能描述: 查询本周周计划
+     * @作者: YuBoYaKe
+     * @功能描述: TOP——查询本周周计划
      * @时间: 2018/9/29 14:44
      * @参数:  * @param user
      * @返回值: com.ds.util.PageUtil
@@ -56,28 +57,6 @@ public class WeekPlanController {
         page.setRows(list);
         return page;
     }
-//    /**
-//     * @作者: 段大神经
-//     * @功能描述: 获取所有用户集合
-//     * @时间: 2018/10/11 22:31
-//     * @参数:  * @param
-//     * @返回值: java.util.List
-//     **/
-//    @PostMapping("getUserList")
-//    public List getUserList(){
-//        return userService.findAllUser(null);
-//    }
-//    /**
-//     * @作者: 段聪祺
-//     * @功能描述: 条件查询用户，用于新增，修改回显
-//     * @时间: 2018/9/29 15:56
-//     * @参数:  * @param user
-//     * @返回值: com.ds.user.pojo.User
-//     **/
-//    @PostMapping("selectUserByWhere")
-//    public User selectUserByWhere(User user){
-//        return userService.selectUserByWhere(user);
-//    }
     /**
      * @作者: 段聪祺
      * @功能描述: 添加用户

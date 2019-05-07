@@ -154,7 +154,7 @@
             var user_name =$("#user_name").val();
             var userId =$("#userId").val();
             $.ajax({
-            url:'<%=request.getContextPath() %>/equipment/findEquipmentInspectionitem',
+            <%--url:'<%=request.getContextPath() %>/equipment/findEquipmentInspectionitem',--%>
             data:{"userId":userId},
             type:'get',
             success:function(data){
@@ -190,7 +190,7 @@
         })*/
 
         /*$.ajax({
-            url:'<%=request.getContextPath() %>/findDataBackup',
+            <%--url:'<%=request.getContextPath() %>/findDataBackup',--%>
             type:'get',
             success:function(data){
                 var arr = data.rows;

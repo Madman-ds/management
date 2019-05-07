@@ -32,7 +32,7 @@ public class GlzxjController {
     private UserService userService;
   /**
    * @作者: 段大神经
-   * @功能描述: 查询管理者巡检
+   * @功能描述: M——查询管理者巡检
    * @时间: 2018/9/29 14:44
    * @参数:  * @param user
    * @返回值: com.ds.util.PageUtil
@@ -93,7 +93,7 @@ public class GlzxjController {
     }
 
     /**
-     * 提取
+     * 还原(此版本不用)
      * @param request
      */
     @PostMapping("huanyuanGLZ")
@@ -103,7 +103,7 @@ public class GlzxjController {
     }
 
     /**
-     * 还原
+     * 提取(此版本不用)
      * @param request
      */
     @PostMapping("tiquGLZ")
@@ -117,6 +117,11 @@ public class GlzxjController {
         glzxjService.updateFQ(glzxj);
     }
 
+    /**
+     * Top——管理者巡检——查询提取项
+     * @param glzxj
+     * @return
+     */
     @GetMapping("findGlzxj2")
     public PageUtil findGlzxj2(Glzxj glzxj){
         glzxj.setGlz_tq("1");
@@ -129,7 +134,7 @@ public class GlzxjController {
     }
 
     /**
-     * 管理者查看
+     * i——管理者巡检——个人查看（查看自己的以及别人赋予自己的）
      * @param session
      * @return
      */
@@ -137,25 +142,11 @@ public class GlzxjController {
     public PageUtil queryZjRead(HttpSession session){
         PageUtil page = new PageUtil();
         LoginUser users = (LoginUser)session.getAttribute("loginUser");
-        User user = glzxjService.queryQxByUserId(users);//查询权限
-        List<User> userList = new ArrayList<>();
-        if(user!=null && !user.getQx().isEmpty()){
-            String[] split = user.getQx().split(",");
-            userList = userService.queryByids(split);
-        }
-        StringBuilder names = new StringBuilder();
-        String[] name = {};
-        if(userList!=null && !userList.isEmpty()){
-            userList.forEach(x->{
-                names.append(","+x.getUser_name());
-            });
-            name = names.substring(1).split(",");
-        }
-        user.setUser_name(users.getUser_name());
-        user.setUser_kh(users.getUser_id()+"_");//只做形参
-        Integer count = glzxjService.queryZjReadCount(user,name);
-        List<Glzxj> list = glzxjService.queryZjRead(user,name);
-
+        users.setUser_name(users.getUser_name());
+        // 注:user_id 为long类型 无法实现后续逻辑
+        users.setUser_kh(users.getUser_id()+"_");//只做形参
+        Integer count = glzxjService.queryZjReadCount(users);
+        List<Glzxj> list = glzxjService.queryZjRead(users);
         page.setTotal(count);
         page.setRows(list);
         return page;

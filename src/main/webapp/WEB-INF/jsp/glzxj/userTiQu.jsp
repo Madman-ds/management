@@ -9,7 +9,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>写权限查看</title>
+    <title>管理者巡检写权限管理</title>
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../jscore.jsp"></jsp:include>
@@ -69,15 +69,16 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/bootStrap-select/multiple-select.js"></script>
 <script type="text/javascript" >
 
-    function initselect(glz_user,id){
+    //初始化下拉多选数据
+    function initselect(id,qx){
         $("#ids").val(id);
         $("#mss").find("option").remove();
         $.ajax({
             type: "get",
             url: "/findAll",
-            // data: {
-            //     // 'id' : null,
-            // },
+            data: {
+                'user_id' : id,
+            },
             dataType: "json",
             success: function(result){
                 var data = result;
@@ -86,7 +87,7 @@
                     type: "get",
                     url: "/findAllbyids",
                     data: {
-                        'ids' : glz_user,
+                        'ids' : qx,
                     },
                     dataType: "text",
                     success: function(a){
@@ -113,18 +114,13 @@
             }
         })
     }
+    //
     $("#userListTiQu").bootstrapTable({
         url:"<%=request.getContextPath()%>/findAllUserGlzxj",
         contentType : "application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         //查询参数：条件查询时使用
         queryParams:function(params){
-
-            var user_name = $("#user_name").val();
-            var user_kh = $("#user_kh").val();
-
             return{
-                "user_name":user_name,
-                "user_kh":user_kh,
                 "offset":(this.pageNumber-1)*this.pageSize,
                 "limit":this.pageSize,
             }
@@ -172,7 +168,7 @@
         sidePagination:"server"
     })
 
-
+    //还原
     function huanyuan(id){
         $.ajax({
             url:"<%=request.getContextPath()%>/huanyuanUser",
@@ -193,6 +189,7 @@
         })
     }
 
+    //提取
     function tiqu(id){
         $.ajax({
             url:"<%=request.getContextPath()%>/tiquUser",
@@ -212,6 +209,8 @@
             }
         })
     }
+
+    //删除
     function shanchu(id){
         $.ajax({
             url:"<%=request.getContextPath()%>/delUserGlzxj",
@@ -234,12 +233,12 @@
         })
     }
 
-    //赋权
-    function fuquans(id,glz_user) {
+    //赋权模态窗口
+    function fuquans(id,qx) {
         $('#myModal3').modal('toggle');
-        initselect(glz_user,id);
+        initselect(id,qx);
     }
-    //赋权
+    //赋权按钮事件
     $("#updateQX").click(function(){
         $.ajax({
             url:"<%=request.getContextPath()%>/updateFQuserGlzxj",

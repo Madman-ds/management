@@ -17,14 +17,15 @@ import java.util.List;
  * @作者: 段聪祺
  * @创建时间: 2018/9/29 14:36
  * @说明: 用户相关控制器
+ * 注：后台添加 前台展示
  */
 @RestController
 public class YbtzController {
     @Autowired
     private YbtzService ybtzService;
   /**
-   * @作者: 段大神经
-   * @功能描述: 查询本周周计划
+   * @作者: YuBoYaKe
+   * @功能描述: 查询仪表台账
    * @时间: 2018/9/29 14:44
    * @参数:  * @param user
    * @返回值: com.ds.util.PageUtil
@@ -40,7 +41,7 @@ public class YbtzController {
     }
     /**
      * @作者: 段聪祺
-     * @功能描述: 添加用户
+     * @功能描述: 添加仪表台账
      * @时间: 2018/9/29 15:58
      * @参数:  * @param user
      * @返回值: int
@@ -51,7 +52,7 @@ public class YbtzController {
     }
     /**
      * @作者: 段聪祺
-     * @功能描述: 删除用户
+     * @功能描述: 删除仪表台账
      * @时间: 2018/9/29 16:02
      * @参数:  * @param request
      * @返回值: void
@@ -64,7 +65,7 @@ public class YbtzController {
 
     /**
      * @作者: 段聪祺
-     * @功能描述: 修改用户信息
+     * @功能描述: 修改仪表台账
      * @时间: 2018/9/29 16:00
      * @参数:  * @param user
      * @返回值: int

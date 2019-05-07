@@ -100,11 +100,16 @@
         update t_inspectionrecord set top = #{type} where jcx_id = #{jcx_id} and user_name = #{user_name}
     </update>
 
-    <select id="findAll" resultType="com.ds.user.pojo.User">
-        select * from t_user
+    <!--
+        查询除了当前用户外的所有用户
+    -->
+    <select id="findAll" parameterType="com.ds.user.pojo.User" resultType="com.ds.user.pojo.User">
+        select * from t_user where user_id <![CDATA[ <> ]]> #{user_id}
     </select>
 
-
+    <!--
+        根据用户id循环查询出用户
+    -->
     <select id="findAllbyids" resultType="com.ds.user.pojo.User">
         select * from t_user where user_id in
         <foreach collection="array" item="id" open="(" separator="," close=")">
@@ -122,6 +127,7 @@
         id = #{ids}
     </update>
 
+    <!--还原-->
     <update id="huanyuanUser" parameterType="com.ds.glzxj.pojo.Glzxj">
       UPDATE
         glzxj_user
@@ -132,11 +138,12 @@
     </update>
 
 
+    <!--根据巡检人 查询出 用户信息-->
     <select id="queryTopByUserName" parameterType="string" resultType="com.ds.user.pojo.User">
         select * from t_user where user_name = #{glz_name}
     </select>
 
-
+    <!--查询出还没有 管理者巡检写权限的用户-->
     <select id="fuXieQuanXian" parameterType="string" resultType="com.ds.user.pojo.User">
         select * from t_user
         <where>
@@ -147,6 +154,9 @@
         </where>
     </select>
 
+    <!--
+        根据用户id查询出用户信息
+    -->
     <select id="queryById" parameterType="string" resultType="com.ds.user.pojo.User">
         select * from t_user where user_id = #{userId}
     </select>
@@ -155,30 +165,52 @@
         select user_id from glzxj_user
     </select>
 
+    <!--
+        添加管理者巡检写权限
+    -->
     <insert id="insertUserGlzxjUser" parameterType="com.ds.user.pojo.User">
       insert into
         glzxj_user(user_id,tq)
       value(#{user_id},2)
     </insert>
 
+    <!--
+        查询管理者巡检写权限
+        注：没有创建user_glzxj实体
+            故使用User作为形参使用
+    -->
     <select id="findAllUserGlzxj" parameterType="map" resultType="com.ds.user.pojo.User">
         select b.id AS user_id,a.user_name,b.tq AS top ,b.qx AS qx from t_user a,glzxj_user b
         where a.user_id = b.user_id
         order by user_id desc
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
     </select>
+    <!--
+        查询管理者巡检写权限总条数
+    -->
     <select id="findAllUserGlzxjCount" resultType="integer">
         select count(*) from t_user
     </select>
 
+    <!--
+        根据id删除管理者巡检写权限
+    -->
     <delete id="delUserGlzxj" parameterType="string">
         delete from glzxj_user WHERE  id = #{id}
     </delete>
 
+    <!--
+        根据用户id查询出 管理者巡检写权限
+        注：没有创建user_glzxj实体
+            故使用User作为形参使用
+    -->
     <select id="queryByuserId" resultType="com.ds.user.pojo.User">
       select a.user_id,a.tq AS top from glzxj_user a where a.user_id = #{user_id}
     </select>
 
+    <!--
+        修改管理者巡检写权限 ——》用户赋权给用户
+    -->
     <update id="updateFQuserGlzxj" parameterType="com.ds.user.pojo.User">
       UPDATE
         glzxj_user
@@ -188,6 +220,9 @@
         id = #{glz_id}
     </update>
 
+    <!--
+        根据ids[]查询 用户信息
+    -->
     <select id="queryByids" parameterType="string" resultType="com.ds.user.pojo.User">
         select * from t_user
         <where>
@@ -199,6 +234,9 @@
     </select>
 
 
+    <!--
+        查询除当前登录用户外所有用户信息
+    -->
     <select id="getNotCurrentUserList" parameterType="com.ds.user.pojo.User" resultType="com.ds.user.pojo.User">
         select * from t_user where user_id != #{user_id}
     </select>

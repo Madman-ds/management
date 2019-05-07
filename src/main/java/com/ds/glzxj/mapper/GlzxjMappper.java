@@ -14,6 +14,7 @@ import java.util.List;
  * @说明:
  */
 public interface GlzxjMappper {
+
     Integer getGlzxjCount(Glzxj glzxj);
 
     List<Glzxj> findAllGlzxj(Glzxj glzxj);
@@ -34,10 +35,10 @@ public interface GlzxjMappper {
 
     void huanyuanGLZById(String ids);
 
-    List<Glzxj> queryZjRead(@Param("user_name") String user_name,@Param("name") String name,@Param("user_id") String user_id,
+    List<Glzxj> queryZjRead(@Param("user_name") String user_name,@Param("user_id") String user_id,
                             @Param("offset") Integer offset,@Param("limit") Integer limit);
 
-    Integer queryZjReadCount(@Param("user_name") String user_name,@Param("name") String name,@Param("user_id") String user_id,
+    Integer queryZjReadCount(@Param("user_name") String user_name,@Param("user_id") String user_id,
                              @Param("offset") Integer offset,@Param("limit") Integer limit);
 
     User queryQxByUserId(LoginUser user);

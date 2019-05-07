@@ -52,19 +52,6 @@ public class UserController {
     public List getUserList(){
         return userService.findAllUser(null);
     }
-//    /**
-//     * @作者: 老西儿
-//     * @功能描述: 查询除当前登录用户外所有用户信息
-//     * @时间: 2019/4/25 22:00
-//     * @参数:  * @param httpSession
-//     * @返回值: java.util.List
-//     **/
-//    @GetMapping("getNotCurrentUserList")
-//    public List getNotCurrentUserList(HttpSession httpSession){
-//        LoginUser loginUser = (LoginUser)httpSession.getAttribute("loginUser");
-//        List userlist = userService.getNotCurrentUserList(loginUser);
-//        return userlist;
-//    }
     /**
      * @作者: 段聪祺
      * @功能描述: 条件查询用户，用于新增，修改回显
@@ -111,14 +98,28 @@ public class UserController {
         userService.delAllUser(ids);
     }
 
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: 写权限通用方法 查询所有用户
+     * @时间: 2018/9/29 16:02
+     * @参数:  * @param request
+     * @返回值: List
+     **/
     @GetMapping("findAll")
     @ResponseBody
-    public List<User> queryuser(){
-        List<User> list =  userService.findAll();
+    public List<User> queryuser(User user){
+        List<User> list =  userService.findAll(user);
         return list;
     }
 
 
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: 根据ids[]查询用户数据
+     * @时间: 2018/9/29 16:02
+     * @参数:  * @param request
+     * @返回值: List
+     **/
     @GetMapping("findAllbyids")
     public String findAllbyids(HttpServletRequest request){
         String ids = request.getParameter("ids");
@@ -133,9 +134,12 @@ public class UserController {
     }
 
     /**
-     * 还原
-     * @param request
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: 管理者巡检——还原
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
     @PostMapping("huanyuanUser")
     public void huanyuanUser(HttpServletRequest request){
         String ids = request.getParameter("id");
@@ -143,9 +147,12 @@ public class UserController {
     }
 
     /**
-     * 提取
-     * @param request
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: 管理者巡检——提取
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
     @PostMapping("tiquUser")
     public void tiquUser(HttpServletRequest request){
         String ids = request.getParameter("id");
@@ -153,9 +160,12 @@ public class UserController {
     }
 
     /**
-     * 查询用户
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: 管理者巡检——添加写权限 》 查询用户
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
     @GetMapping("/fuXieQuanXian")
     public List<User> fuXieQuanXian(){
         List<String> user = userService.queryYFQX();
@@ -173,21 +183,26 @@ public class UserController {
     }
 
     /**
-     * 用户《——》管理者巡检 写权限添加
-     * @param request
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: 给用户添加管理者巡检写权限
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
     @PostMapping("insertUserGlzxjUser")
     public void insertUserGlzxjUser(HttpServletRequest request){
-//        String ids = request.getParameter("ids");
         String userId = request.getParameter("userId");
         User user = userService.queryById(userId);
         userService.insertUserGlzxjUser(user);
     }
 
     /**
-     * 查询用户
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: 查询管理者巡检写权限用户
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
     @GetMapping("/findAllUserGlzxj")
     public PageUtil findAllUserGlzxj(){
         Integer count = userService.findAllUserGlzxjCount();
@@ -199,10 +214,12 @@ public class UserController {
     }
 
     /**
-     * 删除管理者巡检 用户打卡权限
-     * @param
-     * @return
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: 删除管理者巡检 用户打卡权限
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
     @PostMapping("delUserGlzxj")
     public void delUserGlzxj(HttpServletRequest request){
         String id = request.getParameter("id");
@@ -210,9 +227,12 @@ public class UserController {
     }
 
     /**
-     * 用户 福泉县查看 给用户
-     * @param glzxj
-     */
+     * @作者: YuBoYaKe
+     * @功能描述: 用户赋查看权限给用户
+     * @时间: 2019/4/25 22:00
+     * @参数:  * @param httpSession
+     * @返回值: java.util.List
+     **/
     @PostMapping("updateFQuserGlzxj")
     public void updateFQuserGlzxj(Glzxj glzxj){
         if(glzxj.getGlz_user()!=null && !"".equals(glzxj.getGlz_user())){

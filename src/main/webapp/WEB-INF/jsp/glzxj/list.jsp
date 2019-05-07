@@ -56,10 +56,6 @@
     <button class="btn btn-danger" type="button" onclick="queryXieQX()">
         查看写权限
     </button>
-    <%--<button class="btn btn-warning" type="button" onclick="tiquGunli()">
-        <i class="glyphicon glyphicon-arrow-up">
-        </i>提取管理
-    </button>--%>
 </div>
 <table id="userList"></table>
 </body>
@@ -78,9 +74,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <%--<div class="col-sm-6 col-sm-offset-2" id="updateshow">--%>
                     <button class="btn btn-primary" type="button" id="update">赋权</button>
-                <%--</div>--%>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -106,50 +100,6 @@
             }
         })
     })
-    function initselect(glz_user,id){
-        $("#id").val(id);
-        $("#ms").find("option").remove();
-        $.ajax({
-            type: "get",
-            url: "/findAll",
-            // data: {
-            //     // 'id' : null,
-            // },
-            dataType: "json",
-            success: function(result){
-                var data = result;
-                var html = "";
-                $.ajax({
-                    type: "get",
-                    url: "/findAllbyids",
-                    data: {
-                        'ids' : glz_user,
-                    },
-                    dataType: "text",
-                    success: function(a){
-                        // $("#userselect").html(result);
-                        for (var i = 0; i < data.length; i++) {
-                            var ar = data[i].user_id;
-                            if(a.indexOf(ar) !=-1){
-                                html +='<option selected value="'+data[i].user_id+'">'+data[i].user_name+'</option>';
-                            }else{
-                                html +='<option value="'+data[i].user_id+'">'+data[i].user_name+'</option>';
-                            }
-                        }
-                        console.log(html);
-                        $("#ms").append(html);
-                        $('#ms').change(function() {
-                            $("#glz_user").val($(this).val());
-                        }).multipleSelect({
-                            width: '100%'
-                        });
-                        return ;
-                    }
-                })
-
-            }
-        })
-    }
     //条件查询
     function uerSearch(){
         //点击查询，只是让表格刷新到第一页，具体查询参数，按照组装表格时候拿到的查询条件来用
@@ -346,54 +296,7 @@
         })
     }
 
-   /* //赋权
-    function fuquan(id,glz_user) {
-        $('#myModal2').modal('toggle');
-        initselect(glz_user,id);
-    }
-    //赋权
-    $("#update").click(function(){
-        $.ajax({
-            url:"<%=request.getContextPath()%>/updateFQ",
-            data:{
-                'glz_id':$("#id").val(),
-                'glz_user':$("#glz_user").val()
-            },
-            dataType:"text",
-            type:"post",
-            success:function(){
-                $("#id").val("");
-                $("#glz_user").val("");
-                $('#myModal2').modal('hide');
-                $("#userList").bootstrapTable('refresh',{pageNumber:1});
-                alert("操作成功!");
-            },
-            error:function(){
-                BootstrapDialog.show({
-                    title:"fuck！！",
-                    message:'哇哦！系统走丢了！！'
-                })
-            }
-        })
-    })*/
 
-
-function tiquGunli() {
-    BootstrapDialog.show({
-        title:"提取管理",
-        closable: false,
-        message:$('<div><div>').load('<%=request.getContextPath()%>/toUserTiQu'),
-        buttons:[{
-            label:"关闭",
-            cssClass:'btn-warning',
-            action:function(data){
-                data.close();
-                location.reload();
-            }
-        }]
-    })
-
-}
 
 
 

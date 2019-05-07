@@ -47,7 +47,7 @@
 
 <div class="modal-body">
     <center>
-        <jsp:include page="../but_inculd.jsp"  />
+        <jsp:include page="../../../public/but_inculd.jsp"  />
         <div style="margin-top: 20px">
             <label>问题数:</label>
             <textarea class="form-control" id="glz_count" name="glz_count" rows="1" style="width: 180px"></textarea>

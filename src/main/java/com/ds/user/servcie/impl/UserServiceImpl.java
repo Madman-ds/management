@@ -155,6 +155,7 @@ public class UserServiceImpl implements UserService {
         return userMappper.queryByids(split);
     }
 
+    @Override
     public List getNotCurrentUserList(LoginUser loginUser) {
         return userMappper.getNotCurrentUserList(loginUser);
     }

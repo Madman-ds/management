@@ -46,16 +46,16 @@ public class DateUtil {
     /**
      * 放置一批常用时间格式SimpleDateFormat
      */
-    public static final Map<String, SimpleDateFormat> dateFormatMap;
+    public static final Map<String, SimpleDateFormat> DATE_FORMAT_MAP;
 
     static {
-        dateFormatMap = new HashMap<String, SimpleDateFormat>();
-        dateFormatMap.put(DATE, new SimpleDateFormat(DATE));
-        dateFormatMap.put("yyyy-MM-dd hh:mm:ss", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"));
-        dateFormatMap.put("yyyy/MM/dd", new SimpleDateFormat("yyyy/MM/dd"));
-        dateFormatMap.put("yyyy/MM/dd hh:mm:ss", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss"));
-        dateFormatMap.put("yyyyMMdd", new SimpleDateFormat("yyyyMMdd"));
-        dateFormatMap.put("yyyyMMddhhmmss", new SimpleDateFormat("yyyyMMddhhmmss"));
+        DATE_FORMAT_MAP = new HashMap<String, SimpleDateFormat>();
+        DATE_FORMAT_MAP.put(DATE, new SimpleDateFormat(DATE));
+        DATE_FORMAT_MAP.put("yyyy-MM-dd hh:mm:ss", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"));
+        DATE_FORMAT_MAP.put("yyyy/MM/dd", new SimpleDateFormat("yyyy/MM/dd"));
+        DATE_FORMAT_MAP.put("yyyy/MM/dd hh:mm:ss", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss"));
+        DATE_FORMAT_MAP.put("yyyyMMdd", new SimpleDateFormat("yyyyMMdd"));
+        DATE_FORMAT_MAP.put("yyyyMMddhhmmss", new SimpleDateFormat("yyyyMMddhhmmss"));
     }
 
     // 私有构造
@@ -149,13 +149,13 @@ public class DateUtil {
         SimpleDateFormat dateFormat = null;
         // 获取时间格式对应的转换器
         if (dateFormatStr == null || "".equals(dateFormatStr)) {
-            dateFormat = dateFormatMap.get(DATE);
+            dateFormat = DATE_FORMAT_MAP.get(DATE);
         } else {
-            dateFormat = dateFormatMap.get(dateFormatStr);
+            dateFormat = DATE_FORMAT_MAP.get(dateFormatStr);
             // 当前时间格式内存中没有存在的时候实例化并存储起来为下次使用服务
             if (dateFormat == null) {
                 dateFormat = new SimpleDateFormat(dateFormatStr);
-                dateFormatMap.put(dateFormatStr, dateFormat);
+                DATE_FORMAT_MAP.put(dateFormatStr, dateFormat);
             }
         }
         return dateFormat.format(date);
@@ -180,13 +180,13 @@ public class DateUtil {
         SimpleDateFormat dateFormat = null;
         // 获取时间格式对应的转换器
         if (dateFormatStr == null || "".equals(dateFormatStr)) {
-            dateFormat = dateFormatMap.get(DATE);
+            dateFormat = DATE_FORMAT_MAP.get(DATE);
         } else {
-            dateFormat = dateFormatMap.get(dateFormatStr);
+            dateFormat = DATE_FORMAT_MAP.get(dateFormatStr);
             // 当当前时间格式内存中没有存在的时候实例化并存储起来为下次使用服务
             if (dateFormat == null) {
                 dateFormat = new SimpleDateFormat(dateFormatStr);
-                dateFormatMap.put(dateFormatStr, dateFormat);
+                DATE_FORMAT_MAP.put(dateFormatStr, dateFormat);
             }
         }
         try {

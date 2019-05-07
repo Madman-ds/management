@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import static com.ds.util.ExportExcelUtil.EXCEl_FILE_2007;
+import static com.ds.util.ExportExcelUtil.EXCEL_FILE_2007;
 
 /**
  * @类名称：DataBackup
@@ -172,7 +172,7 @@ public class DataBackupController {
             ExportExcelUtil<ExcelDataBackup> export = new ExportExcelUtil<ExcelDataBackup>();
             String[] title = {"名称","编号","属性","检查项","检查要求","确认结果","确认人","确认时间","备注"};
             String fileName = DateUtil.dateToString(new Date(),"yyyyMMddHHmmss") +"shebei";
-            export.exportExcel(fileName,"用户",title,list,response,EXCEl_FILE_2007);
+            export.exportExcel(fileName,"用户",title,list,response,EXCEL_FILE_2007);
         }
     }
 

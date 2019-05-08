@@ -52,7 +52,7 @@ public class ShowController {
     @GetMapping("toList")
     public String toList(ModelMap modelMap, HttpSession session){
         modelMap.addAttribute("user",session.getAttribute("loginUser"));
-        return "WEB-INF/jsp/list";
+        return "WEB-INF/jsp/tree_menu";
     }
     /**
      * @作者: 段大神经

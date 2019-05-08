@@ -11,8 +11,11 @@
     <title>核心js引入文件</title>
 </head>
 <body>
-<!-- 核心样式文件 -->
-<link href="<%=request.getContextPath() %>/static/js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!--图标样式-->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/jquerytree/css/bootstrap.min.css" />
+
+<!--主要样式-->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/jquerytree/css/style.css" />
 <link href="<%=request.getContextPath() %>/static/js/bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/static/js/bootStrap-addTabs/bootstrap.addtabs.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/static/js/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
@@ -20,9 +23,7 @@
 <link href="<%=request.getContextPath() %>/static/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/static/js/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
 
-<%--主要样式--%>
-<link href="<%=request.getContextPath() %>/static/treeMenu/css/index.css" rel="stylesheet">
-<!-- 核心js文件 -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/static/jquerytree/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>

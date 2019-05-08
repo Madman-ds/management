@@ -34,7 +34,7 @@
                     <input type="text" class="form-control" id="select_sb_xh" placeholder="请输入属性">
                 </div>
 
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <button onclick="whereSearch()" class="btn btn-primary" type="button">
                         <i class="glyphicon glyphicon-search">
                         </i>搜索

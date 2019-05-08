@@ -13,7 +13,7 @@ import java.util.List;
  * @创建时间: 2018/9/29 14:38
  * @说明:
  */
-public interface GlzxjMappper {
+public interface GlzxjMapper {
 
     Integer getGlzxjCount(Glzxj glzxj);
 

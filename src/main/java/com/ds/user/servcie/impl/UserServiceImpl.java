@@ -2,10 +2,10 @@ package com.ds.user.servcie.impl;
 
 import com.ds.databackup.pojo.DataBackup;
 import com.ds.databackup.pojo.DataBackupParam;
-import com.ds.glzxj.mapper.GlzxjMappper;
+import com.ds.glzxj.mapper.GlzxjMapper;
 import com.ds.glzxj.pojo.Glzxj;
 import com.ds.serverlogin.pojo.LoginUser;
-import com.ds.user.mapper.UserMappper;
+import com.ds.user.mapper.UserMapper;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,141 +23,141 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserMappper userMappper;
+    private UserMapper userMapper;
     @Autowired
-    private GlzxjMappper glzxjMappper;
+    private GlzxjMapper glzxjMapper;
 
     @Override
     public Integer getUserCount(User user) {
-        return userMappper.getUserCount(user);
+        return userMapper.getUserCount(user);
     }
 
     @Override
     public List<User> findAllUser(User user) {
-        return userMappper.findAllUser(user);
+        return userMapper.findAllUser(user);
     }
 
     @Override
     public User selectUserByWhere(User user) {
-        return userMappper.selectUserByWhere(user);
+        return userMapper.selectUserByWhere(user);
     }
 
     @Override
     public int insertUser(User user) {
-        return userMappper.insertUser(user);
+        return userMapper.insertUser(user);
     }
 
     @Override
     public int updUser(User user) {
-        return userMappper.updUser(user);
+        return userMapper.updUser(user);
     }
 
     @Override
     public void delAllUser(String ids) {
-        userMappper.delAllUser(ids);
+        userMapper.delAllUser(ids);
     }
 
     @Override
     public Integer getDataTiQu(User user) {
-        return userMappper.getDataTiQu(user);
+        return userMapper.getDataTiQu(user);
     }
 
     @Override
     public List<DataBackup> findDataTiQu(User user) {
-        return userMappper.findDataTiQu(user);
+        return userMapper.findDataTiQu(user);
     }
 
     @Override
     public int updateT(DataBackupParam dataBackupParam) {
-        return userMappper.updateT(dataBackupParam);
+        return userMapper.updateT(dataBackupParam);
     }
 
     @Override
     public int updateTs(DataBackupParam dataBackupParam) {
-        return userMappper.updateTs(dataBackupParam);
+        return userMapper.updateTs(dataBackupParam);
     }
 
     @Override
     public List<User> findAll(User user) {
-        return userMappper.findAll(user);
+        return userMapper.findAll(user);
     }
 
     @Override
     public List<User> findAllbyids(String ids) {
         String[] split = ids.split(",");
-        return userMappper.findAllbyids(split);
+        return userMapper.findAllbyids(split);
     }
 
     @Override
     @Transactional
     public void huanyuanUser(String ids) {
-        userMappper.huanyuanUser(ids);
-        glzxjMappper.huanyuanGLZById(ids);
+        userMapper.huanyuanUser(ids);
+        glzxjMapper.huanyuanGLZById(ids);
     }
 
     @Override
     public void tiquUser(String ids) {
-        userMappper.tiquUser(ids);
+        userMapper.tiquUser(ids);
     }
 
     @Override
     public User queryTopByUserName(String glz_name) {
-        return userMappper.queryTopByUserName(glz_name);
+        return userMapper.queryTopByUserName(glz_name);
     }
 
     @Override
     public List<User> fuXieQuanXian(String[] ids) {
-        return userMappper.fuXieQuanXian(ids);
+        return userMapper.fuXieQuanXian(ids);
     }
 
     @Override
     public User queryById(String userId) {
-        return userMappper.queryById(userId);
+        return userMapper.queryById(userId);
     }
 
     @Override
     public void insertUserGlzxjUser(User user) {
-        userMappper.insertUserGlzxjUser(user);
+        userMapper.insertUserGlzxjUser(user);
     }
 
     @Override
     public List<String> queryYFQX() {
-        return userMappper.queryYFQX();
+        return userMapper.queryYFQX();
     }
 
     @Override
     public Integer findAllUserGlzxjCount() {
-        return userMappper.findAllUserGlzxjCount();
+        return userMapper.findAllUserGlzxjCount();
     }
 
     @Override
     public List<User> findAllUserGlzxj() {
-        return userMappper.findAllUserGlzxj();
+        return userMapper.findAllUserGlzxj();
     }
 
     @Override
     public void delUserGlzxj(String id) {
-        userMappper.delUserGlzxj(id);
+        userMapper.delUserGlzxj(id);
     }
 
     @Override
     public User queryByuserId(String user_id) {
-        return userMappper.queryByuserId(user_id);
+        return userMapper.queryByuserId(user_id);
     }
 
     @Override
     public void updateFQuserGlzxj(Glzxj glzxj) {
-        userMappper.updateFQuserGlzxj(glzxj);
+        userMapper.updateFQuserGlzxj(glzxj);
     }
 
     @Override
     public List<User> queryByids(String[] split) {
-        return userMappper.queryByids(split);
+        return userMapper.queryByids(split);
     }
 
     @Override
     public List getNotCurrentUserList(LoginUser loginUser) {
-        return userMappper.getNotCurrentUserList(loginUser);
+        return userMapper.getNotCurrentUserList(loginUser);
     }
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ds.glzxj.mapper.GlzxjMappper">
+<mapper namespace="com.ds.glzxj.mapper.GlzxjMapper">
     <!--根据巡检人查询总条数-->
     <select id="getGlzxjCount" resultType="integer">
         select count(*) from t_glzxj

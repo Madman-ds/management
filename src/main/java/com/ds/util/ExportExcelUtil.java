@@ -418,4 +418,149 @@ public class ExportExcelUtil<T>{
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args) {
+        String json = "[\n" +
+                "  {\n" +
+                "    \"applyBy\": \"sunyw\",\n" +
+                "    \"applyOrg\": \"\",\n" +
+                "    \"applyTime\": 1529564742000,\n" +
+                "    \"approveTime\": 1530009127000,\n" +
+                "    \"contractType\": \"\",\n" +
+                "    \"contributionRate\": \"16.67\",\n" +
+                "    \"createBy\": {\n" +
+                "      \"admin\": true,\n" +
+                "      \"id\": \"1\"\n" +
+                "    },\n" +
+                "    \"createDate\": 1540277281000,\n" +
+                "    \"currentUser\": {\n" +
+                "      \"admin\": true,\n" +
+                "      \"deptId\": \"1\",\n" +
+                "      \"email\": \"17600925307@163.com\",\n" +
+                "      \"id\": \"6252b00c-0c28-438d-b9ec-e5d3e3a84913\",\n" +
+                "      \"mobile\": \"17699999999\",\n" +
+                "      \"name\": \"超级管理员\",\n" +
+                "      \"password\": \"d0af8fa1272ef5a152d9e27763eea293\",\n" +
+                "      \"status\": 1,\n" +
+                "      \"username\": \"admin\"\n" +
+                "    },\n" +
+                "    \"cusCustomerName\": \"江苏人保\",\n" +
+                "    \"customerIndustry\": \"2\",\n" +
+                "    \"dbName\": \"\",\n" +
+                "    \"delFlag\": \"0\",\n" +
+                "    \"estimatedAmount\": \"80000.00\",\n" +
+                "    \"export\": \"\",\n" +
+                "    \"global\": {\n" +
+                "      \n" +
+                "    },\n" +
+                "    \"id\": \"1007971312227720424\",\n" +
+                "    \"idType\": \"UUID\",\n" +
+                "    \"invoiceStatus\": \"0\",\n" +
+                "    \"isArchive\": \"0\",\n" +
+                "    \"isNewRecord\": false,\n" +
+                "    \"isPage\": 1,\n" +
+                "    \"limit\": 10,\n" +
+                "    \"offset\": 0,\n" +
+                "    \"page\": 1,\n" +
+                "    \"pmsProjectNo\": \"PN0020180621413\",\n" +
+                "    \"proArea\": \"4936465436700533607\",\n" +
+                "    \"projectAttribute\": \"N\",\n" +
+                "    \"projectName\": \"江苏人保桌面工程师外包服务HRO新签-2018\",\n" +
+                "    \"projectNo\": \"CIQ20180619\",\n" +
+                "    \"projectOwner\": \"sunyw\",\n" +
+                "    \"projectOwnerContact\": \"\",\n" +
+                "    \"projectSales\": \"sunyw\",\n" +
+                "    \"projectShortName\": \"江苏人保桌面工程师外包服务HRO新签-2018\",\n" +
+                "    \"projectType\": \"\",\n" +
+                "    \"remarks\": \"\\n产品信息：企业客户->IT服务产品->桌面服务->桌面工程师外包服务HRO\",\n" +
+                "    \"salesOrg\": \"6160388806798242897\",\n" +
+                "    \"serviceContent\": \"\",\n" +
+                "    \"serviceEndDate\": 1590854400000,\n" +
+                "    \"serviceStartDate\": 1527782400000,\n" +
+                "    \"serviceType\": \"商用业务\",\n" +
+                "    \"serviceType2\": \"SMB区域\",\n" +
+                "    \"status\": \"2\",\n" +
+                "    \"taxRate\": \"\",\n" +
+                "    \"updateBy\": {\n" +
+                "      \"admin\": true,\n" +
+                "      \"id\": \"1\"\n" +
+                "    },\n" +
+                "    \"updateDate\": 1540363674000\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"afterTaxAmount\": \"11623.58\",\n" +
+                "    \"applyBy\": \"zhangbao\",\n" +
+                "    \"applyOrg\": \"1\",\n" +
+                "    \"applyTime\": 1536633903000,\n" +
+                "    \"approveTime\": 1536768000000,\n" +
+                "    \"bizTypeCode\": \"09\",\n" +
+                "    \"contractAmount\": \"12321.00\",\n" +
+                "    \"contractType\": \"\",\n" +
+                "    \"contractWay\": \"1\",\n" +
+                "    \"contributionRate\": \"-146.5556\",\n" +
+                "    \"costTotal\": \"1715124.04\",\n" +
+                "    \"createBy\": {\n" +
+                "      \"admin\": true,\n" +
+                "      \"id\": \"zhangbao\"\n" +
+                "    },\n" +
+                "    \"createDate\": 1536633903000,\n" +
+                "    \"currentUser\": {\n" +
+                "      \"$ref\": \"$[0].currentUser\"\n" +
+                "    },\n" +
+                "    \"cusCustomerName\": \"tqw\",\n" +
+                "    \"customerIndustry\": \"3\",\n" +
+                "    \"dbName\": \"\",\n" +
+                "    \"delFlag\": \"0\",\n" +
+                "    \"estimatedAmount\": \"12321.00\",\n" +
+                "    \"export\": \"\",\n" +
+                "    \"global\": {\n" +
+                "      \"$ref\": \"$[0].global\"\n" +
+                "    },\n" +
+                "    \"id\": \"1010233669495965659\",\n" +
+                "    \"idType\": \"UUID\",\n" +
+                "    \"invoiceStatus\": \"0\",\n" +
+                "    \"isArchive\": \"0\",\n" +
+                "    \"isNewRecord\": false,\n" +
+                "    \"isPage\": 1,\n" +
+                "    \"limit\": 10,\n" +
+                "    \"offset\": 0,\n" +
+                "    \"operatingCosts\": \"1665168.97\",\n" +
+                "    \"page\": 1,\n" +
+                "    \"plannedMaori\": \"-1703500.46\",\n" +
+                "    \"pmsProjectNo\": \"PN0920180911874\",\n" +
+                "    \"prevProjectNo\": \"\",\n" +
+                "    \"proArea\": \"7605241079911884741\",\n" +
+                "    \"projectAttribute\": \"N\",\n" +
+                "    \"projectName\": \"tqw\",\n" +
+                "    \"projectNo\": \"tqw\",\n" +
+                "    \"projectOwner\": \"zhangbao\",\n" +
+                "    \"projectOwnerContact\": \"\",\n" +
+                "    \"projectSales\": \"zhangbao\",\n" +
+                "    \"projectShortName\": \"tqw\",\n" +
+                "    \"projectType\": \"P\",\n" +
+                "    \"remarks\": \"tqw\",\n" +
+                "    \"riskService\": \"49954.76\",\n" +
+                "    \"riskServiceRate\": \"0.03\",\n" +
+                "    \"riskSoft\": \"0.31\",\n" +
+                "    \"riskSoftRate\": \"0.03\",\n" +
+                "    \"riskTotal\": \"49955.07\",\n" +
+                "    \"salesOrg\": \"5193875179805828525\",\n" +
+                "    \"serviceContent\": \"\",\n" +
+                "    \"serviceEndDate\": 1599667200000,\n" +
+                "    \"serviceStartDate\": 1536595200000,\n" +
+                "    \"serviceType\": \"商用业务\",\n" +
+                "    \"serviceType2\": \"SMB中央\",\n" +
+                "    \"status\": \"1\",\n" +
+                "    \"sysSignSubject\": \"7714448979376152466\",\n" +
+                "    \"taxRate\": \"0.06\",\n" +
+                "    \"tenantId\": \"1\",\n" +
+                "    \"untaxedIncome\": \"11623.58\",\n" +
+                "    \"updateBy\": {\n" +
+                "      \"admin\": true,\n" +
+                "      \"id\": \"zhangbao\"\n" +
+                "    },\n" +
+                "    \"updateDate\": 1536633903000\n" +
+                "  }\n" +
+                "]";
+    }
 }

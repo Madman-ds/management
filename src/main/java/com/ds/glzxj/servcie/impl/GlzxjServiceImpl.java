@@ -1,6 +1,6 @@
 package com.ds.glzxj.servcie.impl;
 
-import com.ds.glzxj.mapper.GlzxjMappper;
+import com.ds.glzxj.mapper.GlzxjMapper;
 import com.ds.glzxj.pojo.Glzxj;
 import com.ds.glzxj.servcie.GlzxjService;
 import com.ds.serverlogin.pojo.LoginUser;
@@ -19,52 +19,52 @@ import java.util.List;
 @Service
 public class GlzxjServiceImpl implements GlzxjService {
     @Autowired
-    private GlzxjMappper glzxjMappper;
+    private GlzxjMapper glzxjMapper;
 
     @Override
     public Integer getGlzxjCount(Glzxj glzxj) {
-        return glzxjMappper.getGlzxjCount(glzxj);
+        return glzxjMapper.getGlzxjCount(glzxj);
     }
 
     @Override
     public List<Glzxj> findAllGlzxj(Glzxj glzxj) {
-        return glzxjMappper.findAllGlzxj(glzxj);
+        return glzxjMapper.findAllGlzxj(glzxj);
     }
 
     @Override
     public void delAllGlzxj(String ids) {
         String[] id = ids.split(",");
-        glzxjMappper.delAllGlzxj(id);
+        glzxjMapper.delAllGlzxj(id);
     }
 
     @Override
     public int insertGlzxj(Glzxj glzxj) {
-        return glzxjMappper.insertGlzxj(glzxj);
+        return glzxjMapper.insertGlzxj(glzxj);
     }
 
     @Override
     public void huanyuanGLZ(String ids) {
-        glzxjMappper.huanyuanGLZ(ids);
+        glzxjMapper.huanyuanGLZ(ids);
     }
 
     @Override
     public void tiquGLZ(String ids) {
-        glzxjMappper.tiquGLZ(ids);
+        glzxjMapper.tiquGLZ(ids);
     }
 
     @Override
     public void updateFQ(Glzxj glzxj) {
-        glzxjMappper.updateFQ(glzxj);
+        glzxjMapper.updateFQ(glzxj);
     }
 
     @Override
     public Integer getGlzxjTiCount(Glzxj glzxj) {
-        return  glzxjMappper.getGlzxjTiCount(glzxj);
+        return  glzxjMapper.getGlzxjTiCount(glzxj);
     }
 
     @Override
     public List<Glzxj> findAllTiGlzxj(Glzxj glzxj) {
-        return  glzxjMappper.findAllTiGlzxj(glzxj);
+        return  glzxjMapper.findAllTiGlzxj(glzxj);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class GlzxjServiceImpl implements GlzxjService {
         String user_id = user.getUser_kh();
         Integer offset = user.getOffset();
         Integer limit = user.getLimit();
-        return  glzxjMappper.queryZjReadCount(user_nane,user_id,offset,limit);
+        return  glzxjMapper.queryZjReadCount(user_nane,user_id,offset,limit);
     }
 
     @Override
@@ -82,12 +82,12 @@ public class GlzxjServiceImpl implements GlzxjService {
         String user_id = user.getUser_kh();
         Integer offset = user.getOffset();
         Integer limit = user.getLimit();
-        return  glzxjMappper.queryZjRead(user_nane,user_id,offset,limit);
+        return  glzxjMapper.queryZjRead(user_nane,user_id,offset,limit);
     }
 
     @Override
     public User queryQxByUserId(LoginUser user) {
-        return glzxjMappper.queryQxByUserId(user);
+        return glzxjMapper.queryQxByUserId(user);
     }
 
 }

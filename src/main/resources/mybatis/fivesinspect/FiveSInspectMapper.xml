@@ -142,8 +142,33 @@
             #{id}
         </foreach>
     </delete>
-    <select id="ckFivesReadList" parameterType="com.ds.user.pojo.User" resultType="map">
+    <select id="ckFivesReadListCount" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultType="Integer">
+        select count(*) from
+        (select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate from
+        t_readfive rf,
+        t_userfivesinspect uf,
+        t_fivesinspect f,
+        t_user u where
+        rf.u_f_id = uf.u_f_id and
+        uf.f_fives = f.f_fives and
+        uf.user_id = u.user_id and
+        f.f_inspectdate is not null and
+        f.f_inspectuser is not null and
+        f.f_ifmeet is not null and
+        rf.user_id = #{f_userid}
+        union
         select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate from
+        t_userfivesinspect uf ,
+        t_fivesinspect f,
+        t_user u where
+        uf.f_fives = f.f_fives and
+        uf.user_id = u.user_id and
+        uf.user_id = #{f_userid}
+        )
+        as total
+    </select>
+    <select id="ckFivesReadList" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultType="map">
+         select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate from
          t_readfive rf,
          t_userfivesinspect uf,
          t_fivesinspect f,
@@ -154,7 +179,14 @@
          f.f_inspectdate is not null and
          f.f_inspectuser is not null and
          f.f_ifmeet is not null and
-         rf.user_id = #{user_id} order by f.f_inspectdate desc
+         rf.user_id = #{f_userid}
+         union
+         select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate
+         from t_userfivesinspect uf ,t_fivesinspect f, t_user u
+         where
+         uf.f_fives = f.f_fives and
+         uf.user_id = u.user_id and
+         uf.user_id = #{f_userid} LIMIT #{startIndex},#{rows}
     </select>
     <select id="findFiveSInspectLogqtCount" resultType="java.lang.Integer">
         select count(*) from

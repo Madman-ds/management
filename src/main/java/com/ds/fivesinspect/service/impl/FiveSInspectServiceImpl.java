@@ -66,6 +66,8 @@ public class FiveSInspectServiceImpl implements FiveSInspectService{
         try {
             String[] id = ids.split(",");
             fiveSInspectMapper.delFiveSInspectAll(id);
+            fiveSInspectMapper.delUserFiveSInspect(id);
+            fiveSInspectMapper.delFiveSRead(id);
             return true;
         }catch (Exception e){
             return false;
@@ -190,14 +192,25 @@ public class FiveSInspectServiceImpl implements FiveSInspectService{
     }
     /**
      * @作者: 老西儿
+     * @功能描述: 个人查看5S点检总条数
+     * @时间: 2019/5/5 16:08
+     * @参数:  * @param loginUser
+     * @返回值: java.lang.Integer
+     **/
+    @Override
+    public Integer ckFivesReadListCount(FiveSInspect fiveSInspect) {
+        return fiveSInspectMapper.ckFivesReadListCount(fiveSInspect);
+    }
+    /**
+     * @作者: 老西儿
      * @功能描述: 个人展示页面查看5S数据
      * @时间: 2019/4/28 18:21
      * @参数:  * @param loginUser
      * @返回值: java.util.List
      **/
     @Override
-    public List ckFivesReadList(LoginUser loginUser) {
-        return fiveSInspectMapper.ckFivesReadList(loginUser);
+    public List ckFivesReadList(FiveSInspect fiveSInspect) {
+        return fiveSInspectMapper.ckFivesReadList(fiveSInspect);
     }
     /**
      * @作者: 老西儿
@@ -250,6 +263,7 @@ public class FiveSInspectServiceImpl implements FiveSInspectService{
         try {
             String[] id = ufid.split(",");
             fiveSInspectMapper.delUserFiveSInspect(id);
+            fiveSInspectMapper.delFiveSRead(id);
             return true;
         }catch (Exception e){
             System.err.println(e);

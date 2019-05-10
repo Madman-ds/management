@@ -270,10 +270,16 @@ public class FiveSInspectController {
      * @返回值: java.util.List
      **/
     @GetMapping("ckFivesReadList")
-    public List ckFivesReadList(HttpSession httpSession){
+    public Map<String,Object> ckFivesReadList(HttpSession httpSession,FiveSInspect fiveSInspect){
+        fiveSInspect.calculate();
         LoginUser loginUser = (LoginUser)httpSession.getAttribute("loginUser");
-        List fivesReadList = fiveSInspectService.ckFivesReadList(loginUser);
-        return fivesReadList;
+        fiveSInspect.setF_userid(loginUser.getUser_id());
+        Integer count = fiveSInspectService.ckFivesReadListCount(fiveSInspect);
+        List fivesReadList = fiveSInspectService.ckFivesReadList(fiveSInspect);
+        Map<String,Object> result = new HashMap<>();
+        result.put("total",count);
+        result.put("rows",fivesReadList);
+        return result;
     }
     /**
      * @作者: 老西儿

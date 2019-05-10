@@ -41,4 +41,6 @@ public interface EquipmentMapper {
     Boolean delEquipmentRead(String erid);
 
     int showEquipmentReadCount(EquipmentRead equipmentRead);
+
+    List showHaveEquipmentReadList(EquipmentRead equipmentRead);
 }

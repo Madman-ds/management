@@ -139,6 +139,12 @@ public class EquipmentServiceImpl implements EquipmentService {
     public List showEquipmentReadList(EquipmentRead equipmentRead) {
         return equipmentMapper.showEquipmentReadList(equipmentRead);
     }
+
+    @Override
+    public List showHaveEquipmentReadList(EquipmentRead equipmentRead) {
+        return equipmentMapper.showHaveEquipmentReadList(equipmentRead);
+    }
+
     /**
      * @作者: 老西儿
      * @功能描述: 添加危险点读权限时查询是否有记录

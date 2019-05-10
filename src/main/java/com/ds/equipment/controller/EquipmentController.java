@@ -239,7 +239,7 @@ public class EquipmentController {
     public List showHaveEquipmentReadList(String user_id){
         EquipmentRead equipmentRead = new EquipmentRead();
         equipmentRead.setUser_id(Long.valueOf(user_id));
-        List equipmentReadList = equipmentService.findEquipmentReadRepeat(equipmentRead);
+        List equipmentReadList = equipmentService.showHaveEquipmentReadList(equipmentRead);
         return equipmentReadList;
     }
 

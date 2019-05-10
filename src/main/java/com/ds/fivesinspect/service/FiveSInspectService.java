@@ -54,7 +54,9 @@ public interface FiveSInspectService {
 
     Boolean delFiveSRead(String rid);
 
-    List ckFivesReadList(LoginUser loginUser);
+    Integer ckFivesReadListCount(FiveSInspect fiveSInspect);
+
+    List ckFivesReadList(FiveSInspect fiveSInspect);
 
     Integer findFiveSInspectLogqtCount();
 

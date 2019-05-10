@@ -131,7 +131,24 @@
           ue.user_id = u.user_id LIMIT #{startIndex},#{rows}
     </select>
     <select id="findEquipmentReadRepeat" parameterType="com.ds.equipment.pojo.EquipmentRead" resultType="com.ds.equipment.pojo.EquipmentRead">
-        select * from t_readequipment re, t_inspectionrecord i where re.jcx_id = i.jcx_id and re.user_id = #{user_id} order by i.qr_time
+        SELECT
+            t.sb_name,t.sb_number,m.jcx_name,us.user_name
+        FROM
+            t_equipment t,
+            t_inspectionitem m,
+            t_userequipment u,
+            t_user us
+        WHERE
+            t.sb_id = m.sb_id
+        AND m.jcx_id = u.jcx_id
+        AND u.qx = 1
+        AND u.user_id = us.user_id
+        AND u.user_id = #{user_id}
+        UNION
+        SELECT re.sb_name,re.sb_number,i.jcx_name,re.user_name
+        FROM t_readequipment re, t_inspectionrecord i
+        WHERE re.jcx_id = i.jcx_id
+        AND re.user_id = #{user_id}
     </select>
     <insert id="insertEquipmentRead" parameterType="com.ds.equipment.pojo.EquipmentRead">
         insert into t_readequipment(
@@ -143,5 +160,7 @@
     <delete id="delEquipmentRead" parameterType="String">
         delete from t_readequipment where e_r_id = #{erid}
     </delete>
-
+    <select id="showHaveEquipmentReadList" parameterType="com.ds.equipment.pojo.EquipmentRead" resultType="map">
+        select * from t_readequipment where user_id = #{user_id}
+    </select>
 </mapper>

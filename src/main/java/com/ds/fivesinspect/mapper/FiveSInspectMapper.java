@@ -54,7 +54,9 @@ public interface FiveSInspectMapper {
 
     void delFiveSRead(String[] id);
 
-    List ckFivesReadList(LoginUser loginUser);
+    Integer ckFivesReadListCount(FiveSInspect fiveSInspect);
+
+    List ckFivesReadList(FiveSInspect fiveSInspect);
 
     Integer findFiveSInspectLogqtCount();
 

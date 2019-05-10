@@ -41,4 +41,6 @@ public interface EquipmentService {
     int showEquipmentReadCount(EquipmentRead equipmentRead);
 
     List showEquipmentReadList(EquipmentRead equipmentRead);
+
+    List showHaveEquipmentReadList(EquipmentRead equipmentRead);
 }

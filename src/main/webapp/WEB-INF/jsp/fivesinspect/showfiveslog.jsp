@@ -44,7 +44,6 @@
 <div class="modal-body">
     <center>
         <jsp:include page="../../../public/but_inculd.jsp"/>
-
         <div style="margin-top: 20px">
             <table id="mytableidfs" border="1px" style="text-align: center;font-size: 16px">
             </table>

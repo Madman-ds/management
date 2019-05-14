@@ -16,9 +16,9 @@
     &nbsp;
     <button type="button" onclick="glzxjClick()" class="btn btn-primary">管理者巡检</button>
     &nbsp;
-    <button type="button" class="btn btn-primary">1200-TPM点检</button>
+    <button type="button" onclick="tpm1200Click()" class="btn btn-primary">1200-TPM点检</button>
     &nbsp;
-    <button type="button" class="btn btn-primary">650-TPM点检</button>
+    <button type="button" onclick="tpm650Click()" class="btn btn-primary">650-TPM点检</button>
     &nbsp;
     <button type="button" class="btn btn-primary" onclick="showfives()">5S点检</button>
 </div>
@@ -33,6 +33,12 @@
     }
     function showfives(){
         location.href = "<%=request.getContextPath() %>/toshowfiveslog"
+    }
+    function tpm1200Click() {
+        location.href = "<%=request.getContextPath() %>/toTpm1200List"
+    }
+    function tpm650Click() {
+        location.href = "<%=request.getContextPath() %>/toTop650Tpm"
     }
 </script>
 </body>

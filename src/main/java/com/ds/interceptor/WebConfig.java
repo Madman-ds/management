@@ -41,7 +41,9 @@ public class WebConfig implements WebMvcConfigurer {
                         "/topZhouJiHua","/findWeekPlan2",
                         "/toTopGlzxjm","/findGlzxj2",
                         "/topyibiaoTaiZheng","/findYbtz",
-                        "/toTopFiveBytq","/findFiveSInspectLogqt"
+                        "/toTopFiveBytq","/findFiveSInspectLogqt",
+                        "/toTop1200Tpm","/toTop650Tpm",
+                        "/topTpmList"
 
                 );
     }

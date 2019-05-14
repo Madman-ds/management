@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.tpm.mapper.TpmMapper">
+    <resultMap type="com.ds.tpm.pojo.TpmUser" id="tpmUser_tpm_map">
+        <id property="id" column="id" />
+        <result property="tpm_id" column="tpm_id" />
+        <result property="user_id" column="user_id" />
+        <result property="tq" column="tq" />
+
+        <result property="tpm.name" column="name" />
+        <result property="tpm.tpm_xh" column="tpm_xh" />
+        <result property="tpm.tpm_bh" column="tpm_bh" />
+        <result property="tpm.tpm_whbh" column="tpm_whbh" />
+        <result property="tpm.tpm_djxm" column="tpm_djxm" />
+        <result property="tpm.tpm_yq" column="tpm_yq" />
+    </resultMap>
+    <!--根据巡检人查询总条数-->
+    <select id="getTpmCount" resultType="integer">
+        SELECT COUNT(*) FROM t_tpm
+        WHERE 1=1 AND tpm_name IS NULL AND date_time IS NULL AND tpm_is IS NULL
+    </select>
+    <!--TPM查询-->
+    <select id="findAllTpm" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT * FROM t_tpm
+        WHERE 1=1 AND tpm_name IS NULL AND date_time IS NULL AND tpm_is IS NULL
+        order by id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+
+    <!--批量删除-->
+    <delete id="delAllTpm">
+        delete from t_tpm where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--添加TPM基础数据-->
+    <insert id="insertTpm" parameterType="com.ds.tpm.pojo.Tpm">
+        INSERT INTO t_tpm ( name,tpm_xh,tpm_bh,tpm_whbh ,tpm_djxm,tpm_yq)
+        VALUE (#{name},#{tpm_xh},#{tpm_bh},#{tpm_whbh},#{tpm_djxm},#{tpm_yq})
+    </insert>
+    <!--修改TPM基础数据-->
+    <update id="updTpm" parameterType="com.ds.tpm.pojo.Tpm">
+      UPDATE
+        t_tpm
+      SET
+        name = #{name},
+        tpm_xh = #{tpm_xh},
+        tpm_bh = #{tpm_bh},
+        tpm_whbh = #{tpm_whbh},
+        tpm_djxm = #{tpm_djxm},
+        tpm_yq = #{tpm_yq}
+      WHERE
+        id = #{id}
+    </update>
+
+    <!--根据idTPM基础数据-->
+    <select id="queryByid" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT * FROM t_tpm
+        WHERE id = #{id}
+    </select>
+
+    <select id="findtpmUser" parameterType="com.ds.tpm.pojo.TpmUser" resultType="com.ds.tpm.pojo.TpmUser">
+        SELECT * FROM tpm_user
+        WHERE 1 = 1
+        <if test="user_id != 0 and user_id != null">AND user_id = #{user_id}</if>
+        <if test="tpm_id != 0 and tpm_id != null">AND tpm_id = #{tpm_id}</if>
+        ORDER BY id DESC
+    </select>
+
+    <insert id="addtpmUser" parameterType="com.ds.tpm.pojo.TpmUser">
+        INSERT INTO tpm_user ( tpm_id,user_id,tq)
+        VALUE (#{tpm_id},#{user_id},#{tq})
+    </insert>
+
+    <select id="showTpmUser" parameterType="com.ds.tpm.pojo.TpmUser" resultMap="tpmUser_tpm_map">
+        SELECT
+            a.id,
+            a.tpm_id,
+            a.user_id,
+            a.tq,
+            b.name,
+            b.tpm_xh,
+            b.tpm_bh,
+            b.tpm_whbh,
+            b.tpm_djxm,
+            b.tpm_yq
+        FROM
+            tpm_user a
+        LEFT JOIN
+            t_tpm b
+        ON
+            a.tpm_id = b.id
+        WHERE
+            a.user_id = #{user_id}
+    </select>
+
+
+    <!--还原写权限操作表提取项-->
+    <update id="huanyuanTpmUser" parameterType="string">
+      UPDATE
+        tpm_user
+      SET
+        tq = 2
+      WHERE
+        id = #{ids}
+    </update>
+    <!--还原 日志表提取项-->
+    <update id="huanyuanTpm" parameterType="string">
+      UPDATE
+        t_tpm
+      SET
+        tpm_tq = 2
+      WHERE
+        id = (SELECT a.tpm_id AS id FROM tpm_user a WHERE a.id = #{ids})
+    </update>
+
+    <!--
+        写权限表 提取
+    -->
+    <update id="tiquTpmUser" parameterType="string">
+      UPDATE
+        tpm_user
+      SET
+        tq = 1
+      WHERE
+        id = #{ids}
+    </update>
+
+    <!--
+        删除用户对TPM数据的写权限操作
+    -->
+    <delete id="delTpmUser" parameterType="string">
+        DELETE  FROM tpm_user WHERE id = #{ids}
+    </delete>
+
+    <!--
+        删除用户对TPM数据的读权限
+    -->
+    <delete id="delReadtpm" parameterType="string">
+        DELETE  FROM t_readtpm WHERE id = #{ids}
+    </delete>
+
+    <!--
+        1200TPM打卡数据
+    -->
+    <select id="tpm1200List" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT
+            a.*
+        FROM
+            t_tpm a
+        LEFT JOIN
+            tpm_user b
+        ON
+            a.id = b.tpm_id
+        WHERE 1=1
+            AND b.user_id = #{user_id}
+            AND a.tpm_name IS NULL
+            AND a.date_time IS NULL
+            AND a.tpm_is IS NULL
+            <!-- AND a.tpm_tq IS NULL -->
+            AND a.tpm_whbh = "1200TPM"
+  </select>
+
+    <!--
+        650TPM打卡数据
+    -->
+    <select id="tpm650List" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT
+            a.*
+        FROM
+            t_tpm a
+        LEFT JOIN
+            tpm_user b
+        ON
+            a.id = b.tpm_id
+        WHERE 1=1
+            AND b.user_id = #{user_id}
+            AND a.tpm_name IS NULL
+            AND a.date_time IS NULL
+            AND a.tpm_is IS NULL
+            <!-- AND a.tpm_tq IS NULL -->
+            AND a.tpm_whbh = "650TPM"
+    </select>
+
+    <!--
+        查询是否提取
+        条件 主键 + 用户id
+    -->
+    <select id="queryTpmUserIsTQ" parameterType="com.ds.tpm.pojo.TpmUser" resultType="com.ds.tpm.pojo.TpmUser">
+        SELECT tq FROM tpm_user WHERE 1=1 AND tpm_id = #{tpm_id} AND user_id = #{user_id}
+    </select>
+
+
+    <!--
+        根据当前登陆人  查看TPM日志
+    -->
+    <select id="findTpmByTpmName" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT * FROM t_tpm WHERE tpm_name = #{tpm_name}
+    </select>
+
+    <!--
+        1200TPM打卡
+    -->
+    <insert id="insert1200Tpm" parameterType="com.ds.tpm.pojo.Tpm">
+        INSERT INTO t_tpm ( name,tpm_xh,tpm_bh,tpm_whbh,tpm_name,tpm_djxm,tpm_yq,date_time,tpm_is,tpm_tq)
+        VALUE (#{name},#{tpm_xh},#{tpm_bh},#{tpm_whbh},#{tpm_name},#{tpm_djxm},#{tpm_yq},now(),#{tpm_is},#{tpm_tq})
+    </insert>
+
+    <!--TPM 日志查询总条数-->
+    <select id="getTpmLogCount" resultType="integer">
+        SELECT COUNT(*) FROM t_tpm
+        WHERE 1=1 AND tpm_name IS NOT NULL AND date_time IS NOT NULL AND tpm_is IS NOT NULL
+    </select>
+    <!--TPM 日志查询-->
+    <select id="findAllTpmLog" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT * FROM t_tpm
+        WHERE 1=1 AND tpm_name IS NOT NULL AND date_time IS NOT NULL AND tpm_is IS NOT NULL
+        order by id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+
+    <!--
+        赋权限给用户 上版 这般字段去掉
+    -->
+    <update id="updateFQTpmUser" parameterType="com.ds.tpm.pojo.Tpm">
+        UPDATE
+          tpm_user
+        SET
+          qx = #{qx}
+        WHERE
+          id = #{id}
+    </update>
+
+
+    <!--TPM TOP总条数-->
+    <select id="topTpmListCount" resultType="integer">
+        SELECT COUNT(*) FROM t_tpm
+        WHERE 1=1 AND tpm_name IS NOT NULL AND date_time IS NOT NULL AND tpm_is IS NOT NULL AND tpm_tq = 1 AND tpm_whbh = #{tpm_whbh}
+    </select>
+    <!--TPM TOP查询-->
+    <select id="topTpmList" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT * FROM t_tpm
+        WHERE 1=1 AND tpm_name IS NOT NULL AND date_time IS NOT NULL AND tpm_is IS NOT NULL AND tpm_tq = 1 AND tpm_whbh = #{tpm_whbh}
+        order by id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+
+
+    <select id="findDuTpmCount" parameterType="com.ds.tpm.pojo.Tpm" resultType="integer">
+        SELECT
+            count(*)
+        FROM
+            tpm_user a
+            LEFT JOIN t_tpm b ON a.tpm_id = b.id
+            LEFT JOIN t_user c ON a.user_id = c.user_id
+        WHERE
+            1 =1
+    </select>
+    <select id="findDuTpmList" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT
+            a.id AS id,
+            b.name AS name,
+            b.tpm_xh AS tpm_xh,
+            b.tpm_bh AS tpm_bh,
+            b.tpm_whbh AS tpm_whbh,
+            c.user_name AS tpm_name,
+            b.tpm_djxm AS tpm_djxm,
+            b.tpm_yq AS tpm_yq
+        FROM
+            tpm_user a
+            LEFT JOIN t_tpm b ON a.tpm_id = b.id
+            LEFT JOIN t_user c ON a.user_id = c.user_id
+        WHERE
+            1 =1
+        order by id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+
+    <!--查询是否已有读权限-->
+    <select id="findReadTpm" parameterType="com.ds.tpm.pojo.ReadTpm" resultType="com.ds.tpm.pojo.ReadTpm">
+      select * from t_readtpm where user_id = #{user_id} and tpm_user_id = #{tpm_user_id}
+    </select>
+
+    <!--添加读权限-->
+    <insert id="addReadTpm" parameterType="com.ds.tpm.pojo.ReadTpm">
+        insert into t_readtpm (user_id,tpm_user_id) VALUES (#{user_id},#{tpm_user_id})
+    </insert>
+
+    <!--查询写权限-->
+    <select id="showReadtpm" parameterType="com.ds.tpm.pojo.ReadTpm" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT
+            rea.id AS id,
+            b.name AS name,
+            b.tpm_xh AS tpm_xh,
+            b.tpm_bh AS tpm_bh,
+            b.tpm_whbh AS tpm_whbh,
+            c.user_name AS tpm_name,
+            b.tpm_djxm AS tpm_djxm,
+            b.tpm_yq AS tpm_yq
+        FROM
+            t_readtpm rea
+            LEFT JOIN  tpm_user a on rea.tpm_user_id = a.id
+            LEFT JOIN t_tpm b ON a.tpm_id = b.id
+            LEFT JOIN t_user c ON a.user_id = c.user_id
+        WHERE
+            1 =1
+            and rea.user_id = #{user_id}
+            order by id desc
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+        个人查看：自己的数据 + 别人赋予自己的查看权限
+    -->
+    <select id="zjRead1200TpmCount" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT
+            count( * )
+        FROM
+            (
+              SELECT
+              *
+            FROM
+                t_tpm
+            WHERE
+                tpm_xh = #{tpm_xh}
+                AND tpm_bh = #{tpm_bh}
+                AND tpm_whbh = #{tpm_whbh}
+                AND tpm_djxm = #{tpm_djxm}
+                AND tpm_yq = #{tpm_yq}
+                AND tpm_name IS NOT NULL
+        UNION
+                SELECT
+                    a.*
+                FROM
+                    t_tpm a
+                LEFT JOIN tpm_user b ON a.id = b.tpm_id
+                WHERE
+                    1 = 1
+                    AND a.tpm_name = #{tpm_name}
+                    AND a.tpm_whbh = #{tpm_whbh}
+            ) s
+    </select>
+    <!--
+         个人查看：自己的数据 + 别人赋予自己的查看权限
+     -->
+    <select id="zjRead1200Tpm" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT
+            *
+        FROM
+            (
+            SELECT
+              *
+            FROM
+                t_tpm
+            WHERE
+                tpm_xh = #{tpm_xh}
+                AND tpm_bh = #{tpm_bh}
+                AND tpm_whbh = #{tpm_whbh}
+                AND tpm_djxm = #{tpm_djxm}
+                AND tpm_yq = #{tpm_yq}
+                AND tpm_name IS NOT NULL
+        UNION
+                SELECT
+                    a.*
+                FROM
+                    t_tpm a
+                LEFT JOIN tpm_user b ON a.id = b.tpm_id
+                WHERE
+                    1 = 1
+                    AND a.tpm_name = #{tpm_name}
+                    AND a.tpm_whbh = #{tpm_whbh}
+            ) s
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+
+
+
+
+
+
+    <update id="updateFQ" parameterType="com.ds.tpm.pojo.Tpm">
+        UPDATE
+          t_tpm
+        SET
+          glz_user = #{glz_user}
+        WHERE
+          glz_id = #{glz_id}
+    </update>
+
+<!--top 查询提取项-->
+    <select id="getGlzxjTiCount" resultType="integer">
+        select count(*) from t_tpm where glz_tq = 1
+    </select>
+    <!--top 查询提取项-->
+    <select id="findAllTiGlzxj" resultType="com.ds.tpm.pojo.Tpm">
+        select * from t_tpm where glz_tq = 1 order by glz_id desc
+        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
+    </select>
+
+    <!--
+        根据用户id 查询出用户名
+        作为子查询
+        修改管理者巡检中所有提取项（条件巡检人=子查询查出的巡检人）
+     -->
+    <update id="huanyuanGLZById" parameterType="string">
+      UPDATE
+        t_tpm
+      SET
+        glz_tq = 2
+      WHERE
+        glz_name = (select user_name  from t_user where user_id = #{ids})
+    </update>
+
+    <!--
+        查询赋予用户的权限
+    -->
+    <select id="queryQxByUserId" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.user.pojo.User">
+        select a.qx AS qx from  glzxj_user  a where user_id = #{user_id}
+    </select>
+
+</mapper>

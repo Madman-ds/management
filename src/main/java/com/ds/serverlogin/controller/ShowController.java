@@ -4,6 +4,8 @@ import com.ds.fivesinspect.pojo.FiveSInspect;
 import com.ds.fivesinspect.service.FiveSInspectService;
 import com.ds.glzxj.servcie.GlzxjService;
 import com.ds.serverlogin.pojo.LoginUser;
+import com.ds.tpm.pojo.Tpm;
+import com.ds.tpm.servcie.TpmService;
 import com.ds.user.pojo.User;
 import com.ds.user.servcie.UserService;
 import com.ds.weekPlan.pojo.WeekPlan;
@@ -42,6 +44,9 @@ public class ShowController {
 
     @Autowired
     private GlzxjService glzxjService;
+
+    @Autowired
+    private TpmService tpmService;
     /**
      * @作者: 段大神经
      * @功能描述: 登陆成功去展示页面
@@ -559,4 +564,159 @@ public class ShowController {
         return "WEB-INF/jsp/equipment/showHaveEquipmentRead";
     }
 
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: TPM——TPM
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTpmListM")
+    public String toTpmListM(){
+        return "WEB-INF/jsp/tpm/TpmListM";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: TPM——TPM添加基础数据
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toInsertTpmBasics")
+    public String toInsertTpmBasics(){
+        return "WEB-INF/jsp/tpm/addTpmBasics";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: TPM——TPM修改基础数据
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toUpdTpm")
+    public String toUpdTpm(Tpm tpm,Model model){
+        Tpm t = tpmService.queryByid(tpm);
+        model.addAttribute("tpm",t);
+        return "WEB-INF/jsp/tpm/updTpmBasics";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: tpm写权限管理
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTpmListMWrite")
+    public String toTpmListMWrite(){
+        return "WEB-INF/jsp/tpm/tpmListMWrite";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: tpm写权限管理——>查询用户拥有那也数据的写权限
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toQueryTopUser")
+    public String toShowFiveSInspecst(Model model,String userId){
+        model.addAttribute("userId",userId);
+        return "WEB-INF/jsp/tpm/queryTopUser";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: 1200TPM打卡页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTpm1200List")
+    public String toTpm1200List(){
+        return "WEB-INF/jsp/reception/viewlist_TPM_1200";
+    }
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: 650TPM打卡页面
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTpm650List")
+    public String toTpm650List(){
+        return "WEB-INF/jsp/reception/viewlist_TPM_650";
+    }/**
+     * @作者: YuBoYaKe
+     * @功能描述: M——TPM日志查询
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTpmLog")
+    public String toTpmLog(){
+        return "WEB-INF/jsp/tpm/tpmLog";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: TOP——1200TPM提取项
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTop1200Tpm")
+    public String toTop1200Tpm(){
+        return "Top/top1200Tpm";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: TOP——1200TPM提取项
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTop650Tpm")
+    public String toTop650Tpm(){
+        return "Top/top650Tpm";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: i——TPM——>个人查看
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("tozjRead1200Tpm")
+    public String tozjRead1200Tpm(){
+        return "WEB-INF/jsp/reception/zjRead1200Tpm";
+    }
+
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: TPM读权限
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toTpmReadList")
+    public String toTpmReadList(){
+        return "WEB-INF/jsp/tpm/tpmListMRead";
+    }
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: tpm写权限管理——>查询用户拥有那也数据的写权限
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("toQueryReadtpm")
+    public String toQueryReadtpm(Model model,String userId){
+        model.addAttribute("userId",userId);
+        return "WEB-INF/jsp/tpm/queryTReadtpm";
+    }
 }

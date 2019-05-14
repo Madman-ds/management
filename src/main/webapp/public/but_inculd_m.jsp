@@ -17,7 +17,7 @@
     &nbsp;
     <button type="button" onclick="yibiaoTaiZheng()" class="btn btn-primary">仪表台账</button>
     &nbsp;
-    <button type="button" class="btn btn-primary">1200-TPM点检</button>
+    <button type="button" onclick="tpm1200()" class="btn btn-primary">1200-TPM点检</button>
     &nbsp;
     <button type="button" class="btn btn-primary">650-TPM点检</button>
     &nbsp;
@@ -39,6 +39,10 @@
 
     function showfives(){
         location.href = "<%=request.getContextPath() %>/toTopFiveBytq"
+    }
+
+    function tpm1200(){
+        location.href = "<%=request.getContextPath() %>/toTop1200Tpm"
     }
 
 </script>

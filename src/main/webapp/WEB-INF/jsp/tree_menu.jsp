@@ -220,6 +220,7 @@
                             <a href="<%=request.getContextPath() %>/toYbtz" target="mainFrame"><li class="list_li">仪表台账</li></a>
                         </ul>
                     </dd>
+
                     <dt class="list_dt">
                         <span class="_after"></span>
                         <p>5S管理</p>
@@ -233,6 +234,21 @@
                             <a href="<%=request.getContextPath() %>/toFiveSLog" target="mainFrame"><li class="list_li">日志记录</li></a>
                         </ul>
                     </dd>
+
+                    <dt class="list_dt">
+                        <span class="_after"></span>
+                        <p>TPM管理</p>
+                        <i class="list_dt_icon"></i>
+                    </dt>
+                    <dd class="list_dd">
+                        <ul>
+                            <a href="<%=request.getContextPath() %>/toTpmListM" target="mainFrame"><li class="list_li">TPM</li></a>
+                            <a href="<%=request.getContextPath() %>/toTpmListMWrite" target="mainFrame"><li class="list_li">写操作</li></a>
+                            <a href="<%=request.getContextPath() %>/toTpmReadList" target="mainFrame"><li class="list_li">读操作</li></a>
+                            <a href="<%=request.getContextPath() %>/toTpmLog" target="mainFrame"><li class="list_li">日志记录</li></a>
+                        </ul>
+                    </dd>
+
             </div>
         </div>
         <!-- 左侧导航和正文内容的分隔线 -->

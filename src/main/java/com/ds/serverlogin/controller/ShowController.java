@@ -648,7 +648,8 @@ public class ShowController {
     @GetMapping("toTpm650List")
     public String toTpm650List(){
         return "WEB-INF/jsp/reception/viewlist_TPM_650";
-    }/**
+    }
+    /**
      * @作者: YuBoYaKe
      * @功能描述: M——TPM日志查询
      * @时间: 2019/4/18 20:22
@@ -694,6 +695,17 @@ public class ShowController {
     @GetMapping("tozjRead1200Tpm")
     public String tozjRead1200Tpm(){
         return "WEB-INF/jsp/reception/zjRead1200Tpm";
+    }
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: i——TPM——>个人查看
+     * @时间: 2019/4/18 20:22
+     * @参数:  * @param
+     * @返回值: java.lang.String
+     **/
+    @GetMapping("tozjRead650Tpm")
+    public String tozjRead650Tpm(){
+        return "WEB-INF/jsp/reception/zjRead650Tpm";
     }
 
     /**

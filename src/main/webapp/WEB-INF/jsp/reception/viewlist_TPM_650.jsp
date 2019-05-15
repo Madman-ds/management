@@ -70,7 +70,7 @@
                 </i>查看所有
             </button>
             &nbsp;--%>
-            <button onclick="tozjRead1200Tpm()" class="btn btn-primary" type="button">
+            <button onclick="tozjRead650Tpm()" class="btn btn-primary" type="button">
                 <i class="glyphicon glyphicon-share-alt">
                 </i>个人查看
             </button>
@@ -105,8 +105,8 @@
         location.href = "<%=request.getContextPath() %>/logout";
     }
 
-    function tozjRead1200Tpm(){
-        location.href = "<%=request.getContextPath() %>/tozjRead1200Tpm";
+    function tozjRead650Tpm(){
+        location.href = "<%=request.getContextPath() %>/tozjRead650Tpm";
     }
 
     //提交
@@ -153,7 +153,7 @@
             url:'<%=request.getContextPath() %>/insert1200Tpm',
             type:'post',
             data:{
-                "tpm":"1200TPM",
+                "tpm":"650TPM",
                 "numArr1":numArr1,
                 "numArr2":numArr2,
                 "numArr3":numArr3,
@@ -186,7 +186,7 @@
     //加载登陆用户所有可编辑的TPM打卡项信息
     $(function () {
             $.ajax({
-            url:'<%=request.getContextPath() %>/tpm1200List',
+            url:'<%=request.getContextPath() %>/tpm650List',
             type:'get',
             success:function(data){
                 var tbs = document.getElementById("mytableid");//获取表格

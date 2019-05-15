@@ -38,7 +38,7 @@
         location.href = "<%=request.getContextPath() %>/toTpm1200List"
     }
     function tpm650Click() {
-        location.href = "<%=request.getContextPath() %>/toTop650Tpm"
+        location.href = "<%=request.getContextPath() %>/toTpm650List"
     }
 </script>
 </body>

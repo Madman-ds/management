@@ -163,8 +163,8 @@ public class TpmController {
      * @返回值: void
      **/
     @GetMapping("showReadtpm")
-    public List<ReadTpm> showReadtpm(ReadTpm readTpm){
-        List<ReadTpm> ss = TpmService.showReadtpm(readTpm);
+    public List<Tpm> showReadtpm(ReadTpm readTpm){
+        List<Tpm> ss = TpmService.showReadtpm(readTpm);
         return ss;
     }
 
@@ -234,7 +234,7 @@ public class TpmController {
     }
     /**
      * @作者: YuBoYaKe
-     * @功能描述: 1200TPM打卡数据
+     * @功能描述: 650TPM打卡数据
      * @时间: 2019/4/21 14:16
      * @参数:  * @param ids
      * @返回值: void
@@ -256,8 +256,10 @@ public class TpmController {
     @PostMapping("insert1200Tpm")
     public int insert1200Tpm(HttpSession session, HttpServletRequest request){
         LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
+        String type = request.getParameter("tpm");
         Tpm tpm = new Tpm();
         tpm.setTpm_name(loginUser.getUser_name());
+        tpm.setTpm_whbh(type);
         List<Tpm> list = TpmService.findTpmByTpmName(tpm);
         if (list != null && list.size() > 0){
             tpm = list.get(0);
@@ -272,6 +274,7 @@ public class TpmController {
         String numArr5 = request.getParameter("numArr5");
         String numArr6 = request.getParameter("numArr6");
         String numArr7 = request.getParameter("numArr7");
+        String numArr8 = request.getParameter("numArr8");
         String[] s1 = numArr1.substring(1).replaceAll("]","").split(",");
         String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
         String[] s3 = numArr3.substring(1).replaceAll("]","").split(",");
@@ -279,9 +282,11 @@ public class TpmController {
         String[] s5 = numArr5.substring(1).replaceAll("]","").split(",");
         String[] s6 = numArr6.substring(1).replaceAll("]","").split(",");
         String[] s7 = numArr7.substring(1).replaceAll("]","").split(",");
+        String[] s8 = numArr8.substring(1).replaceAll("]","").split(",");
         Tpm addTpm = null;
         for (int i = 0; i < s1.length; i++){
             addTpm = new Tpm();
+            addTpm.setName(s8[i].substring(1, s1[i].length()-1));
             addTpm.setTpm_xh(s1[i].substring(1, s1[i].length()-1));
             addTpm.setTpm_bh(s2[i].substring(1, s2[i].length()-1));
             addTpm.setTpm_whbh(s3[i].substring(1, s3[i].length()-1));
@@ -385,12 +390,39 @@ public class TpmController {
      * @返回值: com.ds.util.PageUtil
      **/
     @GetMapping("zjRead1200Tpm")
-    public PageUtil zjRead1200Tpm(HttpSession session){
+    public PageUtil zjRead1200Tpm(ReadTpm readTpm,HttpSession session){
         PageUtil page = new PageUtil();
         LoginUser users = (LoginUser)session.getAttribute("loginUser");
+        readTpm.setUser_id(users.getUser_id());
+        readTpm.setUser_name(users.getUser_name());
+        readTpm.setTpm_whbh("1200TPM");
+        //查看用户有多少写权限
+        List<Tpm> tpm = TpmService.showReadtpm(readTpm);
+        Integer count = TpmService.zjRead1200TpmCount(tpm,readTpm);
+        List<Tpm> list = TpmService.zjRead1200Tpm(tpm,readTpm);
+        page.setTotal(count);
+        page.setRows(list);
+        return page;
+    }
 
-        Integer count = TpmService.zjRead1200TpmCount(users);
-        List<Tpm> list = TpmService.zjRead1200Tpm(users);
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: i——TPM——>个人查看
+     * @时间: 2018/9/29 14:44
+     * @参数:  * @param user
+     * @返回值: com.ds.util.PageUtil
+     **/
+    @GetMapping("zjRead650Tpm")
+    public PageUtil zjRead650Tpm(ReadTpm readTpm,HttpSession session){
+        PageUtil page = new PageUtil();
+        LoginUser users = (LoginUser)session.getAttribute("loginUser");
+        readTpm.setUser_id(users.getUser_id());
+        readTpm.setUser_name(users.getUser_name());
+        readTpm.setTpm_whbh("650TPM");
+        //查看用户有多少写权限
+        List<Tpm> tpm = TpmService.showReadtpm(readTpm);
+        Integer count = TpmService.zjRead1200TpmCount(tpm,readTpm);
+        List<Tpm> list = TpmService.zjRead1200Tpm(tpm,readTpm);
         page.setTotal(count);
         page.setRows(list);
         return page;

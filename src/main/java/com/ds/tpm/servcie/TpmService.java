@@ -72,9 +72,9 @@ public interface TpmService {
 
     List<Tpm> topTpmList(Tpm tpm);
 
-    Integer zjRead1200TpmCount(LoginUser tpm);
+    Integer zjRead1200TpmCount(List<Tpm> tpm,ReadTpm readTpm);
 
-    List<Tpm> zjRead1200Tpm(LoginUser tpm);
+    List<Tpm> zjRead1200Tpm(List<Tpm> tpm,ReadTpm readTpm);
 
     Integer findDkTpmListCount(Tpm tpm);
 
@@ -88,7 +88,7 @@ public interface TpmService {
 
     void addReadTpm(ReadTpm readTpm);
 
-    List<ReadTpm> showReadtpm(ReadTpm readTpm);
+    List<Tpm> showReadtpm(ReadTpm readTpm);
 
     void delReadtpm(String ids);
 }

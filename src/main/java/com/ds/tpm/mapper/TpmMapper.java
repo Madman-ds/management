@@ -8,6 +8,7 @@ import com.ds.user.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @接口名称: UserMappper
@@ -79,9 +80,9 @@ public interface TpmMapper {
 
     List<Tpm> topTpmList(Tpm tpm);
 
-    Integer zjRead1200TpmCount(Tpm t);
+    Integer zjRead1200TpmCount(Map map);
 
-    List<Tpm> zjRead1200Tpm(Tpm t);
+    List<Tpm> zjRead1200Tpm(Map map);
 
     Tpm queryByTpm1200(@Param("user_id") String user_id);
 
@@ -97,7 +98,9 @@ public interface TpmMapper {
 
     void addReadTpm(ReadTpm readTpm);
 
-    List<ReadTpm> showReadtpm(ReadTpm readTpm);
+    List<Tpm> showReadtpm(ReadTpm readTpm);
 
     void delReadtpm(String ids);
+
+    List<Tpm> showReadtpmLog(List<Tpm> readTpms);
 }

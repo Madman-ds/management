@@ -26,5 +26,8 @@ public class ReadTpm extends PageUtil {
      */
     private Long tpm_user_id;
 
+    private String user_name;
+
+    private String tpm_whbh;
 
 }

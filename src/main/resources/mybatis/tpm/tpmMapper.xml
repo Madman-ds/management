@@ -197,7 +197,7 @@
         根据当前登陆人  查看TPM日志
     -->
     <select id="findTpmByTpmName" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
-        SELECT * FROM t_tpm WHERE tpm_name = #{tpm_name}
+        SELECT * FROM t_tpm WHERE tpm_name = #{tpm_name} and tpm_whbh = #{tpm_whbh} order by id desc
     </select>
 
     <!--
@@ -305,9 +305,15 @@
             LEFT JOIN t_tpm b ON a.tpm_id = b.id
             LEFT JOIN t_user c ON a.user_id = c.user_id
         WHERE
-            1 =1
+            1=1
             and rea.user_id = #{user_id}
+            and b.tpm_whbh = #{tpm_whbh}
             order by id desc
+    </select>
+
+
+    <select id="showReadtpmLog" parameterType="java.util.List" resultType="com.ds.tpm.pojo.Tpm">
+
     </select>
 
 
@@ -331,64 +337,46 @@
     <!--
         个人查看：自己的数据 + 别人赋予自己的查看权限
     -->
-    <select id="zjRead1200TpmCount" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
-        SELECT
-            count( * )
-        FROM
-            (
-              SELECT
-              *
-            FROM
-                t_tpm
-            WHERE
-                tpm_xh = #{tpm_xh}
-                AND tpm_bh = #{tpm_bh}
-                AND tpm_whbh = #{tpm_whbh}
-                AND tpm_djxm = #{tpm_djxm}
-                AND tpm_yq = #{tpm_yq}
-                AND tpm_name IS NOT NULL
-        UNION
-                SELECT
-                    a.*
-                FROM
-                    t_tpm a
-                LEFT JOIN tpm_user b ON a.id = b.tpm_id
-                WHERE
-                    1 = 1
-                    AND a.tpm_name = #{tpm_name}
-                    AND a.tpm_whbh = #{tpm_whbh}
-            ) s
+    <select id="zjRead1200TpmCount" parameterType="map" resultType="integer">
+        select count(*) from (
+        <choose>
+            <when test="list.size() >0">
+                select * from t_tpm a
+                <where>
+                    <foreach collection="list" item="item" index="index" open="" separator="or" close="">
+                        (a.tpm_name = #{item.tpm_name} and a.name = #{item.name})
+                    </foreach>
+                </where>
+                union
+                select * from t_tpm a where a.tpm_name = #{user_name}
+            </when>
+            <otherwise>
+                select * from t_tpm a where a.tpm_name = #{user_name}
+            </otherwise>
+        </choose>
+        ) a  where a.tpm_whbh = #{tpm_whbh}
     </select>
     <!--
          个人查看：自己的数据 + 别人赋予自己的查看权限
      -->
-    <select id="zjRead1200Tpm" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
-        SELECT
-            *
-        FROM
-            (
-            SELECT
-              *
-            FROM
-                t_tpm
-            WHERE
-                tpm_xh = #{tpm_xh}
-                AND tpm_bh = #{tpm_bh}
-                AND tpm_whbh = #{tpm_whbh}
-                AND tpm_djxm = #{tpm_djxm}
-                AND tpm_yq = #{tpm_yq}
-                AND tpm_name IS NOT NULL
-        UNION
-                SELECT
-                    a.*
-                FROM
-                    t_tpm a
-                LEFT JOIN tpm_user b ON a.id = b.tpm_id
-                WHERE
-                    1 = 1
-                    AND a.tpm_name = #{tpm_name}
-                    AND a.tpm_whbh = #{tpm_whbh}
-            ) s
+    <select id="zjRead1200Tpm" parameterType="map" resultType="com.ds.tpm.pojo.Tpm">
+        select * from (
+            <choose>
+                <when test="list.size() >0">
+                    select * from t_tpm a
+                    <where>
+                        <foreach collection="list" item="item" index="index" open="" separator="or" close="">
+                            (a.tpm_name = #{item.tpm_name} and a.name = #{item.name})
+                        </foreach>
+                    </where>
+                    union
+                    select * from t_tpm a where a.tpm_name = #{user_name}
+                </when>
+                <otherwise>
+                    select * from t_tpm a where a.tpm_name = #{user_name}
+                </otherwise>
+            </choose>
+        ) a where a.tpm_whbh = #{tpm_whbh}
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
     </select>
 

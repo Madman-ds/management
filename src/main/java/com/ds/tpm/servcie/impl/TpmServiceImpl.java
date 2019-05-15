@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -175,29 +176,33 @@ public class TpmServiceImpl implements TpmService {
     }
 
     @Override
-    public Integer zjRead1200TpmCount(LoginUser user) {
-        String user_nane = user.getUser_name();
-        //user_id + "_" 区分like
-        String user_id = user.getUser_kh();
-        Integer offset = user.getOffset();
-        Integer limit = user.getLimit();
-        Tpm t = TpmMapper.queryByTpm1200(user_id);
-        t.setOffset(offset);
-        t.setLimit(limit);
-        return TpmMapper.zjRead1200TpmCount(t);
+    public Integer zjRead1200TpmCount(List<Tpm> user,ReadTpm readTpm) {
+        HashMap<String ,Object> map = new HashMap<String ,Object>();
+        Integer offset = readTpm.getOffset();
+        Integer limit = readTpm.getLimit();
+        String user_name = readTpm.getUser_name();
+        String tpm_whbh = readTpm.getTpm_whbh();
+        map.put("user_name",user_name);
+        map.put("tpm_whbh",tpm_whbh);
+        map.put("list",user);
+        map.put("offset",offset);
+        map.put("limit",limit);
+        return TpmMapper.zjRead1200TpmCount(map);
     }
 
     @Override
-    public List<Tpm> zjRead1200Tpm(LoginUser user) {
-        String user_nane = user.getUser_name();
-        //user_id + "_" 区分like
-        String user_id = user.getUser_kh();
-        Integer offset = user.getOffset();
-        Integer limit = user.getLimit();
-        Tpm t = TpmMapper.queryByTpm1200(user_id);
-        t.setOffset(offset);
-        t.setLimit(limit);
-        return TpmMapper.zjRead1200Tpm(t);
+    public List<Tpm> zjRead1200Tpm(List<Tpm> user,ReadTpm readTpm) {
+        HashMap<String ,Object> map = new HashMap<String ,Object>();
+        Integer offset = readTpm.getOffset();
+        Integer limit = readTpm.getLimit();
+        String user_name = readTpm.getUser_name();
+        String tpm_whbh = readTpm.getTpm_whbh();
+        map.put("user_name",user_name);
+        map.put("tpm_whbh",tpm_whbh);
+        map.put("list",user);
+        map.put("offset",offset);
+        map.put("limit",limit);
+        return TpmMapper.zjRead1200Tpm(map);
     }
 
     @Override
@@ -231,7 +236,7 @@ public class TpmServiceImpl implements TpmService {
     }
 
     @Override
-    public List<ReadTpm> showReadtpm(ReadTpm readTpm) {
+    public List<Tpm> showReadtpm(ReadTpm readTpm) {
         return TpmMapper.showReadtpm(readTpm);
     }
 

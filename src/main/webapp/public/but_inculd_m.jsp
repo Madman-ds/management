@@ -19,7 +19,7 @@
     &nbsp;
     <button type="button" onclick="tpm1200()" class="btn btn-primary">1200-TPM点检</button>
     &nbsp;
-    <button type="button" class="btn btn-primary">650-TPM点检</button>
+    <button type="button" onclick="tpm650()" class="btn btn-primary">650-TPM点检</button>
     &nbsp;
     <button type="button" class="btn btn-primary" onclick="showfives()">5S点检</button>
 
@@ -45,6 +45,9 @@
         location.href = "<%=request.getContextPath() %>/toTop1200Tpm"
     }
 
+    function tpm650(){
+        location.href = "<%=request.getContextPath() %>/toTop650Tpm"
+    }
 </script>
 </body>
 </html>

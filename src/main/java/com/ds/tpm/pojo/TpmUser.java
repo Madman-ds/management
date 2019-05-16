@@ -32,11 +32,6 @@ public class TpmUser extends PageUtil {
     private String tq;
 
     /**
-     * 权限
-     */
-    private String qx;
-
-    /**
      * tpm
      */
     private Tpm tpm;

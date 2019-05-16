@@ -59,44 +59,6 @@ public class TpmServiceImpl implements TpmService {
     }
 
     @Override
-    public void updateFQ(Tpm Tpm) {
-        TpmMapper.updateFQ(Tpm);
-    }
-
-    @Override
-    public Integer getTpmTiCount(Tpm Tpm) {
-        return  TpmMapper.getTpmTiCount(Tpm);
-    }
-
-    @Override
-    public List<Tpm> findAllTiTpm(Tpm Tpm) {
-        return  TpmMapper.findAllTiTpm(Tpm);
-    }
-
-    @Override
-    public Integer queryZjReadCount(LoginUser user) {
-        String user_nane = user.getUser_name();
-        String user_id = user.getUser_kh();
-        Integer offset = user.getOffset();
-        Integer limit = user.getLimit();
-        return  TpmMapper.queryZjReadCount(user_nane,user_id,offset,limit);
-    }
-
-    @Override
-    public List<Tpm> queryZjRead(LoginUser user) {
-        String user_nane = user.getUser_name();
-        String user_id = user.getUser_kh();
-        Integer offset = user.getOffset();
-        Integer limit = user.getLimit();
-        return  TpmMapper.queryZjRead(user_nane,user_id,offset,limit);
-    }
-
-    @Override
-    public User queryQxByUserId(LoginUser user) {
-        return TpmMapper.queryQxByUserId(user);
-    }
-
-    @Override
     public Tpm queryByid(Tpm tpm) {
         return TpmMapper.queryByid(tpm);
     }
@@ -203,16 +165,6 @@ public class TpmServiceImpl implements TpmService {
         map.put("offset",offset);
         map.put("limit",limit);
         return TpmMapper.zjRead1200Tpm(map);
-    }
-
-    @Override
-    public Integer findDkTpmListCount(Tpm tpm) {
-        return TpmMapper.findDkTpmListCount(tpm);
-    }
-
-    @Override
-    public List<Tpm> findDkTpmList(Tpm tpm) {
-        return TpmMapper.findDkTpmList(tpm);
     }
 
     @Override

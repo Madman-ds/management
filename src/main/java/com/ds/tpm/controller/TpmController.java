@@ -439,44 +439,4 @@ public class TpmController {
         return page;
     }
 
-//
-//    @PostMapping("updateFQ")
-//    public void updateFQ(Tpm Tpm){
-//        TpmService.updateFQ(Tpm);
-//    }
-//
-//    /**
-//     * Top——TPM——查询提取项
-//     * @param Tpm
-//     * @return
-//     */
-//    @GetMapping("findTpm2")
-//    public PageUtil findTpm2(Tpm Tpm){
-//        Tpm.setGlz_tq("1");
-//        Integer count = TpmService.getTpmTiCount(Tpm);
-//        List<Tpm> list = TpmService.findAllTiTpm(Tpm);
-//        PageUtil page = new PageUtil();
-//        page.setTotal(count);
-//        page.setRows(list);
-//        return page;
-//    }
-//
-//    /**
-//     * i——TPM——个人查看（查看自己的以及别人赋予自己的）
-//     * @param session
-//     * @return
-//     */
-//    @GetMapping("queryZjRead")
-//    public PageUtil queryZjRead(HttpSession session){
-//        PageUtil page = new PageUtil();
-//        LoginUser users = (LoginUser)session.getAttribute("loginUser");
-//        users.setUser_name(users.getUser_name());
-//        // 注:user_id 为long类型 无法实现后续逻辑
-//        users.setUser_kh(users.getUser_id()+"_");//只做形参
-//        Integer count = TpmService.queryZjReadCount(users);
-//        List<Tpm> list = TpmService.queryZjRead(users);
-//        page.setTotal(count);
-//        page.setRows(list);
-//        return page;
-//    }
 }

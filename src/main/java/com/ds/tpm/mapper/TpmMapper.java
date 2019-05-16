@@ -30,22 +30,6 @@ public interface TpmMapper {
 
     void tiquTpmUser(String ids);
 
-    void updateFQ(Tpm Tpm);
-
-    Integer getTpmTiCount(Tpm Tpm);
-
-    List<Tpm> findAllTiTpm(Tpm Tpm);
-
-    void huanyuanGLZById(String ids);
-
-    List<Tpm> queryZjRead(@Param("user_name") String user_name, @Param("user_id") String user_id,
-                            @Param("offset") Integer offset, @Param("limit") Integer limit);
-
-    Integer queryZjReadCount(@Param("user_name") String user_name, @Param("user_id") String user_id,
-                             @Param("offset") Integer offset, @Param("limit") Integer limit);
-
-    User queryQxByUserId(LoginUser user);
-
     Tpm queryByid(Tpm tpm);
 
     int updTpm(Tpm tpm);
@@ -84,12 +68,6 @@ public interface TpmMapper {
 
     List<Tpm> zjRead1200Tpm(Map map);
 
-    Tpm queryByTpm1200(@Param("user_id") String user_id);
-
-    Integer findDkTpmListCount(Tpm tpm);
-
-    List<Tpm> findDkTpmList(Tpm tpm);
-
     Integer findDuTpmCount(Tpm tpm);
 
     List<Tpm> findDuTpmList(Tpm tpm);
@@ -101,8 +79,6 @@ public interface TpmMapper {
     List<Tpm> showReadtpm(ReadTpm readTpm);
 
     void delReadtpm(String ids);
-
-    List<Tpm> showReadtpmLog(List<Tpm> readTpms);
 
     List<Tpm> findReadtpms(ReadTpm readTpm);
 

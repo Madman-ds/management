@@ -406,49 +406,4 @@
       AND tpm_tq IS NULL
     </select>
 
-
-
-
-
-
-    <update id="updateFQ" parameterType="com.ds.tpm.pojo.Tpm">
-        UPDATE
-          t_tpm
-        SET
-          glz_user = #{glz_user}
-        WHERE
-          glz_id = #{glz_id}
-    </update>
-
-<!--top 查询提取项-->
-    <select id="getGlzxjTiCount" resultType="integer">
-        select count(*) from t_tpm where glz_tq = 1
-    </select>
-    <!--top 查询提取项-->
-    <select id="findAllTiGlzxj" resultType="com.ds.tpm.pojo.Tpm">
-        select * from t_tpm where glz_tq = 1 order by glz_id desc
-        <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
-    </select>
-
-    <!--
-        根据用户id 查询出用户名
-        作为子查询
-        修改管理者巡检中所有提取项（条件巡检人=子查询查出的巡检人）
-     -->
-    <update id="huanyuanGLZById" parameterType="string">
-      UPDATE
-        t_tpm
-      SET
-        glz_tq = 2
-      WHERE
-        glz_name = (select user_name  from t_user where user_id = #{ids})
-    </update>
-
-    <!--
-        查询赋予用户的权限
-    -->
-    <select id="queryQxByUserId" parameterType="com.ds.serverlogin.pojo.LoginUser" resultType="com.ds.user.pojo.User">
-        select a.qx AS qx from  glzxj_user  a where user_id = #{user_id}
-    </select>
-
 </mapper>

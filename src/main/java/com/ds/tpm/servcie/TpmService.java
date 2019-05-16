@@ -28,18 +28,6 @@ public interface TpmService {
 
     void tiquTpmUser(String ids);
 
-    void updateFQ(Tpm Tpm);
-
-    Integer getTpmTiCount(Tpm Tpm);
-
-    List<Tpm> findAllTiTpm(Tpm Tpm);
-
-    Integer queryZjReadCount(LoginUser user);
-
-    List<Tpm> queryZjRead(LoginUser user);
-
-    User queryQxByUserId(LoginUser user);
-
     Tpm queryByid(Tpm tpm);
 
     int updTpm(Tpm tpm);
@@ -75,10 +63,6 @@ public interface TpmService {
     Integer zjRead1200TpmCount(List<Tpm> tpm,ReadTpm readTpm);
 
     List<Tpm> zjRead1200Tpm(List<Tpm> tpm,ReadTpm readTpm);
-
-    Integer findDkTpmListCount(Tpm tpm);
-
-    List<Tpm> findDkTpmList(Tpm tpm);
 
     Integer findDuTpmCount(Tpm tpm);
 

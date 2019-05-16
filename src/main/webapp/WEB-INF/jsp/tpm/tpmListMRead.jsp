@@ -52,8 +52,8 @@
         queryParams:function(){
 //	 		return 的数据 是传递到  action类中的参数
             return {
-                page:this.pageNumber,//当前页
-                rows:this.pageSize //每页条数
+                "offset":(this.pageNumber-1)*this.pageSize,
+                "limit":this.pageSize,
             }
         },
         columns:[

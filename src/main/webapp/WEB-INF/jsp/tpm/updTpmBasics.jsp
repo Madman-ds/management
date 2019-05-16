@@ -14,7 +14,7 @@
     <form id="updTpmForm">
         <input type="hidden" name="id" value="${tpm.id }" >
         <label>TPM名称:</label>
-        <input type="text" name="name" class="form-control" id="upd_name">
+        <input type="text" name="name" class="form-control" value="${tpm.name }" id="upd_name">
         <label>型号:</label>
         <input type="text" name="tpm_xh" class="form-control" value="${tpm.tpm_xh }"  id="upd_tpm_xh">
         <label>编号:</label>

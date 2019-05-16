@@ -72,18 +72,26 @@ public class TpmController {
      **/
     @PostMapping("insertTpm")
     public int insertTpm(Tpm tpm){
+        Tpm repeat = TpmService.queryRepeat(tpm);
+        if(repeat!=null){
+            return 2;
+        }
         return TpmService.insertTpm(tpm);
     }
 
     /**
      * @作者: YuBoYaKe
-     * @功能描述: 添加TPM
+     * @功能描述: 修改TPM
      * @时间: 2018/9/29 15:58
      * @参数:  * @param user
      * @返回值: int
      **/
     @PostMapping("updTpm")
     public int updTpm(Tpm tpm){
+        Tpm repeat = TpmService.queryRepeat(tpm);
+        if(repeat!=null){
+            return 2;
+        }
         return TpmService.updTpm(tpm);
     }
 

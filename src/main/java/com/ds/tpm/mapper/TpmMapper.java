@@ -105,4 +105,6 @@ public interface TpmMapper {
     List<Tpm> showReadtpmLog(List<Tpm> readTpms);
 
     List<Tpm> findReadtpms(ReadTpm readTpm);
+
+    Tpm queryRepeat(Tpm tpm);
 }

@@ -93,4 +93,6 @@ public interface TpmService {
     void delReadtpm(String ids);
 
     List<Tpm> findReadtpms(ReadTpm readTpm);
+
+    Tpm queryRepeat(Tpm tpm);
 }

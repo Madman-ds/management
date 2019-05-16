@@ -255,8 +255,12 @@
                         dataType:"text",
                         type:"post",
                         success:function(data){
-                            dialogItself.close();
-                            $('#TpmList').bootstrapTable("refresh");
+                            if(data==2){
+                                alert("TPM名称不可重复");
+                            }else{
+                                dialogItself.close();
+                                $('#TpmList').bootstrapTable("refresh");
+                            }
                         },
                         error:function(){
                             BootstrapDialog.show({
@@ -277,57 +281,6 @@
         });
     }
 
-    //tpm修改方法
-    function updateTpm(){
-        var ids=$.map($("#TpmList").bootstrapTable('getSelections'),function(row){
-            return row.id;
-        });
-        if(ids.length==1){
-            var id = ids[0];
-            BootstrapDialog.show({
-                title:"修改页面",
-                message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdTpm?id='+id),
-                buttons: [ {
-                    label: '保存',
-                    cssClass: 'btn-primary',
-                    action: function(dialogItself){
-                        var updTpmflag=chenckupdTpmForm();
-                        if(!updTpmflag){
-                            return;
-                        }
-                        $.ajax({
-                            url:"<%=request.getContextPath()%>/updTpm",
-                            data:$("#updTpmForm").serialize(),
-                            dataType:"text",
-                            type:"post",
-                            success:function(data){
-                                dialogItself.close();
-                                $('#TpmList').bootstrapTable("refresh");
-                            },
-                            error:function(){
-                                BootstrapDialog.show({
-                                    title:"温馨提示",
-                                    message: '系统出现BUG！请联系管理员！'
-                                });
-                            }
-
-                        })
-                    }
-                }, {
-                    label: '取消',
-                    cssClass: 'btn-warning ',
-                    action: function(dialogItself){
-                        dialogItself.close();
-                    }
-                }]
-            });
-        }else{
-            BootstrapDialog.show({
-                title:"温馨提示",
-                message: '请选择一行进行修改'
-            });
-        }
-    }
     //添加tpm
     function addTpm(){
         BootstrapDialog.show({
@@ -347,9 +300,13 @@
                         data:$("#addTpmForm").serialize(),
                         dataType:"text",
                         type:"post",
-                        success:function(){
-                            data.close();
-                            $("#TpmList").bootstrapTable('refresh');
+                        success:function(result){
+                            if(result==2){
+                                alert("TPM名称不可重复");
+                            }else{
+                                data.close();
+                                $('#TpmList').bootstrapTable("refresh");
+                            }
                         },
                         error:function(){
                             BootstrapDialog.show({

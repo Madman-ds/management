@@ -674,7 +674,7 @@ public class ShowController {
 
     /**
      * @作者: YuBoYaKe
-     * @功能描述: TOP——1200TPM提取项
+     * @功能描述: TOP——650TPM提取项
      * @时间: 2019/4/18 20:22
      * @参数:  * @param
      * @返回值: java.lang.String

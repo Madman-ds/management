@@ -58,26 +58,36 @@
                 "limit":this.pageSize,
             }
         },
-        columns:[{
+        columns:[
+            {
             checkbox:true,
             formatter:stateFormatter
-        },{
-            field:"id",
-            title:"tpm编号",
-            visible: false,
-            align:'center',
-            width:50
-        },{
-            field:"tpm_xh",
-            title:"型号",
-            align:'center',
-            width:200
-        },{
-            field:"tpm_bh",
-            title:"编号",
-            align:'center',
-            width:200
-        },
+            },
+            {
+                field:"id",
+                title:"tpm编号",
+                visible: false,
+                align:'center',
+                width:50
+            },
+            {
+                field:"name",
+                title:"TPM名称",
+                align:'center',
+                width:200
+            },
+            {
+                field:"tpm_xh",
+                title:"型号",
+                align:'center',
+                width:200
+            },
+            {
+                field:"tpm_bh",
+                title:"编号",
+                align:'center',
+                width:200
+            },
             {
                 field:"tpm_whbh",
                 title:"维护编号",

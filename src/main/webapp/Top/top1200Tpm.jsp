@@ -68,6 +68,11 @@
             align:'center',
             width:50
         },{
+            field:"name",
+            title:"TPM名称",
+            align:'center',
+            width:200
+        },{
             field:"tpm_xh",
             title:"型号",
             align:'center',

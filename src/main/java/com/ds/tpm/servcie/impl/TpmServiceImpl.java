@@ -250,5 +250,10 @@ public class TpmServiceImpl implements TpmService {
         return TpmMapper.findReadtpms(readTpm);
     }
 
+    @Override
+    public Tpm queryRepeat(Tpm tpm) {
+        return TpmMapper.queryRepeat(tpm);
+    }
+
 
 }

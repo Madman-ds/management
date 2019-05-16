@@ -20,11 +20,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @类名称: Controller
- * @作者: YuBoYaKe
- * @创建时间: 2018/9/29 14:36
- * @说明: TPM相关控制器
- */
+ * TpmController
+ * @时间: 2018/9/29 16:02
+ * @author: 段大神经,YuBoYaKe
+ * @version: 2.0
+ **/
 @RestController
 public class TpmController {
     @Autowired
@@ -32,12 +32,14 @@ public class TpmController {
     @Autowired
     private UserService userService;
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: M——查询tpm基础数据
-     * @时间: 2018/9/29 14:44
-     * @参数:  * @param user
-     * @返回值: com.ds.util.PageUtil
-     **/
+     * TPM
+     * <p>M——查询tpm基础数据<br>
+     * @时间: 2018/9/29 16:02
+     * @param tpm
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
+     */
     @GetMapping("findTpmList")
     public PageUtil findTpm(Tpm tpm){
         Integer count = TpmService.getTpmCount(tpm);
@@ -47,29 +49,16 @@ public class TpmController {
         page.setRows(list);
         return page;
     }
-//    /**
-//   * @作者: YuBoYaKe
-//   * @功能描述: M——查询打卡数据
-//   * @时间: 2018/9/29 14:44
-//   * @参数:  * @param user
-//   * @返回值: com.ds.util.PageUtil
-//   **/
-//    @GetMapping("findDkTpmList")
-//    public PageUtil findDkTpmList(Tpm tpm){
-//        Integer count = TpmService.findDkTpmListCount(tpm);
-//        List<Tpm> list = TpmService.findDkTpmList(tpm);
-//        PageUtil page = new PageUtil();
-//        page.setTotal(count);
-//        page.setRows(list);
-//        return page;
-//    }
+
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 添加TPM
-     * @时间: 2018/9/29 15:58
-     * @参数:  * @param user
-     * @返回值: int
-     **/
+     * TPM
+     * <p>添加TPM<br>
+     * @时间: 2018/9/29 16:02
+     * @param tpm
+     * @author: YuBoYaKe
+     * @return: int
+     * @version: 2.0
+     */
     @PostMapping("insertTpm")
     public int insertTpm(Tpm tpm){
         Tpm repeat = TpmService.queryRepeat(tpm);
@@ -80,12 +69,14 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 修改TPM
-     * @时间: 2018/9/29 15:58
-     * @参数:  * @param user
-     * @返回值: int
-     **/
+     * TPM
+     * <p>修改TPM<br>
+     * @时间: 2018/9/29 16:02
+     * @param tpm
+     * @author: YuBoYaKe
+     * @return: int
+     * @version: 2.0
+     */
     @PostMapping("updTpm")
     public int updTpm(Tpm tpm){
         Tpm repeat = TpmService.queryRepeat(tpm);
@@ -96,12 +87,15 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 删除TPM
+     * TPM
+     * <p>删除TPM<br>
      * @时间: 2018/9/29 16:02
-     * @参数:  * @param request
-     * @返回值: void
-     **/
+     * @param request
+     *         ids
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("delAllTpm")
     public void delAllTpm(HttpServletRequest request){
         String ids = request.getParameter("ids");
@@ -109,13 +103,15 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: tpm添加写权限
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
+     * TPM
+     * <p>tpm添加写权限<br>
+     * @时间: 2018/9/29 16:02
+     * @param ids
      * @param userId
-     * @返回值: void
-     **/
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("insertTpmUser")
     public void insertTpmUser(String ids, String userId){
         String[] idss = ids.split(",");
@@ -130,14 +126,17 @@ public class TpmController {
             }
         }
     }
+
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: tpm添加读权限
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
+     * TPM
+     * <p>tpm添加读权限<br>
+     * @时间: 2018/9/29 16:02
+     * @param ids
      * @param userId
-     * @返回值: void
-     **/
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("insertReadtpm")
     public void insertReadtpm(String ids, String userId){
         String[] idss = ids.split(",");
@@ -153,12 +152,14 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 根据用户id查询TPM读权限
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>根据用户id查询TPM读权限<br>
+     * @时间: 2018/9/29 16:02
+     * @param readTpm
+     * @author: YuBoYaKe
+     * @return: List<Tpm>
+     * @version: 2.0
+     */
     @GetMapping("findReadtpms")
     public List<Tpm> showReadsstpm(ReadTpm readTpm){
         List<Tpm> tpms = TpmService.findReadtpms(readTpm);
@@ -166,12 +167,14 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 根据用户id查询TPM写权限
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>根据用户id查询TPM写权限<br>
+     * @时间: 2018/9/29 16:02
+     * @param tpmUser
+     * @author: YuBoYaKe
+     * @return: List<TpmUser>
+     * @version: 2.0
+     */
     @GetMapping("showTpmUser")
     public List<TpmUser> showTpmUser(TpmUser tpmUser){
         List<TpmUser> tpmUsers = TpmService.showTpmUser(tpmUser);
@@ -180,12 +183,15 @@ public class TpmController {
 
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 还原
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>还原<br>
+     * @时间: 2018/9/29 16:02
+     * @param request
+     *         id
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("huanyuanTpmUser")
     public void huanyuanGLZ(HttpServletRequest request){
         String ids = request.getParameter("id");
@@ -193,12 +199,15 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 提取
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>提取<br>
+     * @时间: 2018/9/29 16:02
+     * @param request
+     *         id
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("tiquTpmUser")
     public void tiquTpmUser(HttpServletRequest request){
         String ids = request.getParameter("id");
@@ -206,24 +215,31 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 删除对TPM数据的写权限
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>删除对TPM数据的写权限<br>
+     * @时间: 2018/9/29 16:02
+     * @param request
+     *         id
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("delTpmUser")
     public void delTpmUser(HttpServletRequest request){
         String ids = request.getParameter("id");
         TpmService.delTpmUser(ids);
     }
+
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 删除对TPM数据的读权限
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>删除对TPM数据的读权限<br>
+     * @时间: 2018/9/29 16:02
+     * @param request
+     *         id
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("delReadtpm")
     public void delReadtpm(HttpServletRequest request){
         String ids = request.getParameter("id");
@@ -231,25 +247,30 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 1200TPM打卡数据
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>1200TPM打卡数据<br>
+     * @时间: 2018/9/29 16:02
+     * @param session
+     * @author: YuBoYaKe
+     * @return: List<Tpm>
+     * @version: 2.0
+     */
     @GetMapping("tpm1200List")
     public List<Tpm> tpm1200List(HttpSession session){
         LoginUser users = (LoginUser)session.getAttribute("loginUser");
         List<Tpm> tpm = TpmService.tpm1200List(users);
         return tpm;
     }
+
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 650TPM打卡数据
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>650TPM打卡数据<br>
+     * @时间: 2018/9/29 16:02
+     * @param session
+     * @author: YuBoYaKe
+     * @return: List<Tpm>
+     * @version: 2.0
+     */
     @GetMapping("tpm650List")
     public List<Tpm> tpm650List(HttpSession session){
         LoginUser users = (LoginUser)session.getAttribute("loginUser");
@@ -258,12 +279,14 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 1200TPM打卡
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
+     * TPM
+     * <p>1200TPM打卡<br>
+     * @时间: 2018/9/29 16:02
+     * @param session
+     * @author: YuBoYaKe
+     * @return: int
+     * @version: 2.0
+     */
     @PostMapping("insert1200Tpm")
     public int insert1200Tpm(HttpSession session, HttpServletRequest request){
         LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
@@ -321,12 +344,14 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: M——读权限管理
-     * @时间: 2018/9/29 14:44
-     * @参数:  * @param user
-     * @返回值: com.ds.util.PageUtil
-     **/
+     * TPM
+     * <p> M——读权限管理<br>
+     * @时间: 2018/9/29 16:02
+     * @param tpm
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
+     */
     @GetMapping("findDuTpmList")
     public PageUtil findDuTpmList(Tpm tpm){
         Integer count = TpmService.findDuTpmCount(tpm);
@@ -338,12 +363,14 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: M——查询日志
-     * @时间: 2018/9/29 14:44
-     * @参数:  * @param user
-     * @返回值: com.ds.util.PageUtil
-     **/
+     * TPM
+     * <p> M——查询日志<br>
+     * @时间: 2018/9/29 16:02
+     * @param tpm
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
+     */
     @GetMapping("findTpmLogList")
     public PageUtil findTpmLogList(Tpm tpm){
         Integer count = TpmService.getTpmLogCount(tpm);
@@ -355,12 +382,14 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: TOP——查询TPM提取
-     * @时间: 2018/9/29 14:44
-     * @参数:  * @param user
-     * @返回值: com.ds.util.PageUtil
-     **/
+     * TPM
+     * <p> TOP——查询TPM提取<br>
+     * @时间: 2018/9/29 16:02
+     * @param tpm
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
+     */
     @GetMapping("topTpmList")
     public PageUtil topTpmList(Tpm tpm){
         Integer count = TpmService.topTpmListCount(tpm);
@@ -372,12 +401,14 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: 用户赋查看权限给用户
-     * @时间: 2019/4/25 22:00
-     * @参数:  * @param httpSession
-     * @返回值: java.util.List
-     **/
+     * TPM
+     * <p> 用户赋查看权限给用户<br>
+     * @时间: 2018/9/29 16:02
+     * @param tpm
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("updateFQTpmUser")
     public void updateFQTpmUser(Tpm tpm){
         if(tpm.getQx()!=null && !"".equals(tpm.getQx())){
@@ -394,12 +425,15 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: i——TPM——>个人查看
-     * @时间: 2018/9/29 14:44
-     * @参数:  * @param user
-     * @返回值: com.ds.util.PageUtil
-     **/
+     * TPM
+     * <p> i——1200TPM——>个人查看<br>
+     * @时间: 2018/9/29 16:02
+     * @param readTpm
+     * @param session
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
+     */
     @GetMapping("zjRead1200Tpm")
     public PageUtil zjRead1200Tpm(ReadTpm readTpm,HttpSession session){
         PageUtil page = new PageUtil();
@@ -417,12 +451,15 @@ public class TpmController {
     }
 
     /**
-     * @作者: YuBoYaKe
-     * @功能描述: i——TPM——>个人查看
-     * @时间: 2018/9/29 14:44
-     * @参数:  * @param user
-     * @返回值: com.ds.util.PageUtil
-     **/
+     * TPM
+     * <p> i——650TPM——>个人查看<br>
+     * @时间: 2018/9/29 16:02
+     * @param readTpm
+     * @param session
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
+     */
     @GetMapping("zjRead650Tpm")
     public PageUtil zjRead650Tpm(ReadTpm readTpm,HttpSession session){
         PageUtil page = new PageUtil();

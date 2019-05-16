@@ -19,24 +19,28 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @类名称: Controller
- * @作者: 段聪祺
- * @创建时间: 2018/9/29 14:36
- * @说明: 管理者巡检相关控制器
- */
+ * GlzxjController
+ * <p>根据id删除管理者巡检<br>
+ * @时间: 2018/9/29 16:02
+ * @author: 段大神经,YuBoYaKe
+ * @version: 2.0
+ **/
 @RestController
 public class GlzxjController {
     @Autowired
     private GlzxjService glzxjService;
     @Autowired
     private UserService userService;
-  /**
-   * @作者: 段大神经
-   * @功能描述: M——查询管理者巡检
-   * @时间: 2018/9/29 14:44
-   * @参数:  * @param user
-   * @返回值: com.ds.util.PageUtil
-   **/
+
+    /**
+     * 删除管理者巡检
+     * <p>M——查询管理者巡检<br>
+     * @时间: 2018/9/29 16:02
+     * @param glzxj
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
+     */
     @GetMapping("findGlzxj")
     public PageUtil findGlzxj(Glzxj glzxj){
         Integer count = glzxjService.getGlzxjCount(glzxj);
@@ -47,12 +51,17 @@ public class GlzxjController {
         return page;
     }
     /**
-     * @作者: 段聪祺
-     * @功能描述: 添加管理者巡检
-     * @时间: 2018/9/29 15:58
-     * @参数:  * @param user
-     * @返回值: int
-     **/
+     * 添加管理者巡检
+     * <p>根据id删除管理者巡检<br>
+     * @时间: 2018/9/29 16:02
+     * @param request
+     *         glz_name
+     *         glz_count
+     *         user_id
+     * @author: YuBoYaKe
+     * @return: int
+     * @version: 2.0
+     */
     @PostMapping("insertGlzxj")
     public int insertGlzxj(HttpServletRequest request){
         String glz_name = request.getParameter("glz_name");
@@ -79,13 +88,17 @@ public class GlzxjController {
             return 0;
         }
     }
+
     /**
-     * @作者: 段聪祺
-     * @功能描述: 删除管理者巡检
+     * 删除管理者巡检
+     * <p>根据id删除管理者巡检<br>
      * @时间: 2018/9/29 16:02
-     * @参数:  * @param request
-     * @返回值: void
-     **/
+     * @param request
+     *         ids
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
+     */
     @PostMapping("delAllGlzxj")
     public void delAllGlzxj(HttpServletRequest request){
         String ids = request.getParameter("ids");
@@ -93,8 +106,14 @@ public class GlzxjController {
     }
 
     /**
-     * 还原(此版本不用)
+     * 还原
+     * <p>(此版本不用)<br>
+     * @时间: 2018/9/29 16:02
      * @param request
+     *         id
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
      */
     @PostMapping("huanyuanGLZ")
     public void huanyuanGLZ(HttpServletRequest request){
@@ -103,8 +122,14 @@ public class GlzxjController {
     }
 
     /**
-     * 提取(此版本不用)
+     * 提取
+     * <p>(此版本不用)<br>
+     * @时间: 2018/9/29 16:02
      * @param request
+     *         id
+     * @author: YuBoYaKe
+     * @return: void
+     * @version: 2.0
      */
     @PostMapping("tiquGLZ")
     public void tiquGLZ(HttpServletRequest request){
@@ -118,9 +143,13 @@ public class GlzxjController {
     }
 
     /**
-     * Top——管理者巡检——查询提取项
+     * 查询提取项
+     * <p>Top——管理者巡检——查询提取项<br>
+     * @时间: 2018/9/29 16:02
      * @param glzxj
-     * @return
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
      */
     @GetMapping("findGlzxj2")
     public PageUtil findGlzxj2(Glzxj glzxj){
@@ -134,9 +163,13 @@ public class GlzxjController {
     }
 
     /**
-     * i——管理者巡检——个人查看（查看自己的以及别人赋予自己的）
+     * 查询提取项
+     * <p>i——管理者巡检——个人查看（查看自己的以及别人赋予自己的）<br>
+     * @时间: 2018/9/29 16:02
      * @param session
-     * @return
+     * @author: YuBoYaKe
+     * @return: com.ds.util.PageUtil
+     * @version: 2.0
      */
     @GetMapping("queryZjRead")
     public PageUtil queryZjRead(HttpSession session){

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加用户页面</title>
+    <title>添加周计划页面</title>
 </head>
 <body>
     <form id="addUserForm">

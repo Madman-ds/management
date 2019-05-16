@@ -245,5 +245,10 @@ public class TpmServiceImpl implements TpmService {
         TpmMapper.delReadtpm(ids);
     }
 
+    @Override
+    public List<Tpm> findReadtpms(ReadTpm readTpm) {
+        return TpmMapper.findReadtpms(readTpm);
+    }
+
 
 }

@@ -55,12 +55,13 @@
         id = #{id}
     </update>
 
-    <!--根据idTPM基础数据-->
+    <!--根据id查询TPM基础数据-->
     <select id="queryByid" parameterType="com.ds.tpm.pojo.Tpm" resultType="com.ds.tpm.pojo.Tpm">
         SELECT * FROM t_tpm
         WHERE id = #{id}
     </select>
 
+    <!--根据用户id tpm_id查询是否已存在-->
     <select id="findtpmUser" parameterType="com.ds.tpm.pojo.TpmUser" resultType="com.ds.tpm.pojo.TpmUser">
         SELECT * FROM tpm_user
         WHERE 1 = 1
@@ -69,11 +70,13 @@
         ORDER BY id DESC
     </select>
 
+    <!--添加写权限-->
     <insert id="addtpmUser" parameterType="com.ds.tpm.pojo.TpmUser">
         INSERT INTO tpm_user ( tpm_id,user_id,tq)
         VALUE (#{tpm_id},#{user_id},#{tq})
     </insert>
 
+    <!--展示写权限-->
     <select id="showTpmUser" parameterType="com.ds.tpm.pojo.TpmUser" resultMap="tpmUser_tpm_map">
         SELECT
             a.id,
@@ -288,7 +291,9 @@
         insert into t_readtpm (user_id,tpm_user_id) VALUES (#{user_id},#{tpm_user_id})
     </insert>
 
-    <!--查询写权限-->
+    <!--
+        查询写权限
+     -->
     <select id="showReadtpm" parameterType="com.ds.tpm.pojo.ReadTpm" resultType="com.ds.tpm.pojo.Tpm">
         SELECT
             rea.id AS id,
@@ -308,6 +313,29 @@
             1=1
             and rea.user_id = #{user_id}
             and b.tpm_whbh = #{tpm_whbh}
+            order by id desc
+    </select>
+    <!--
+        查询写权限
+     -->
+    <select id="findReadtpms" parameterType="com.ds.tpm.pojo.ReadTpm" resultType="com.ds.tpm.pojo.Tpm">
+        SELECT
+            rea.id AS id,
+            b.name AS name,
+            b.tpm_xh AS tpm_xh,
+            b.tpm_bh AS tpm_bh,
+            b.tpm_whbh AS tpm_whbh,
+            c.user_name AS tpm_name,
+            b.tpm_djxm AS tpm_djxm,
+            b.tpm_yq AS tpm_yq
+        FROM
+            t_readtpm rea
+            LEFT JOIN  tpm_user a on rea.tpm_user_id = a.id
+            LEFT JOIN t_tpm b ON a.tpm_id = b.id
+            LEFT JOIN t_user c ON a.user_id = c.user_id
+        WHERE
+            1=1
+            and rea.user_id = #{user_id}
             order by id desc
     </select>
 

@@ -9,118 +9,17 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>查询TPM写权限页面</title>
+    <title>查询TPM写权限</title>
 </head>
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>
-<style>
-    .ms-choice {
-        display: block;
-        width: 80%;
-        height: 26px;
-        padding: 0;
-        overflow: hidden;
-        cursor: pointer;
-        border: 1px solid #aaa;
-        text-align: left;
-        white-space: nowrap;
-        line-height: 26px;
-        color: #444;
-        text-decoration: none;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-        background-color: #fff;
-    }
-    .ms-drop {
-        display: none;
-        top: 100%;
-        width: 80%;
-        -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
-        -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
-        box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
-    }
-    li{
-        list-style: none;
-    }
-    .ms-no-results{
-        display: none;
-    }
-</style>
 <body>
-<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form id="">
-                    <div class="dropup" style="position: relative;">
-                        <select id="mv" multiple="multiple">
-
-                        </select>
-                    </div>
-                    <input type="hidden" id="ids" name="id">
-                    <input type="hidden" id="tpm_qx" name="glz_user">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <%--<div class="col-sm-6 col-sm-offset-2" id="updateshow">--%>
-                <button class="btn btn-primary" type="button" id="updateQX">赋权</button>
-                <%--</div>--%>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
 
 <%--TPM--%>
-    <div><table id="myTable3"></table></div>
+    <table id="myTable3" style="width: 1000px"></table>
 
 </body>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/bootStrap-select/multiple-select.js"></script>
 <script type="text/javascript">
-    //初始化下拉多选数据
-    function initselect(id,qx){
-        $("#ids").val(id);
-        $("#mv").find("option").remove();
-        $.ajax({
-            type: "get",
-            url: "/findAll",
-            data: {
-                'user_id' : id,
-            },
-            dataType: "json",
-            success: function(result){
-                var data = result;
-                var html = "";
-                $.ajax({
-                    type: "get",
-                    url: "/findAllbyids",
-                    data: {
-                        'ids' : qx,
-                    },
-                    dataType: "text",
-                    success: function(a){
-                        // $("#userselect").html(result);
-                        for (var i = 0; i < data.length; i++) {
-                            var ar = data[i].user_id;
-                            if(a.indexOf(ar) !=-1){
-                                html +='<option selected value="'+data[i].user_id+'">'+data[i].user_name+'</option>';
-                            }else{
-                                html +='<option value="'+data[i].user_id+'">'+data[i].user_name+'</option>';
-                            }
-                        }
-                        $("#mv").append(html);
-                        $('#mv').change(function() {
-                            $("#tpm_qx").val($(this).val());
-                        }).multipleSelect({
-                            width: '100%'
-                        });
-                        return ;
-                    }
-                })
-
-            }
-        })
-    }
-
 
     //查询 表格展示
     $('#myTable3').bootstrapTable({
@@ -138,6 +37,12 @@
                 visible: false,
                 align:'center',
                 width:50
+            },
+            {
+                field:"tpm.name",
+                title:"名称",
+                align:'center',
+                width:200
             },
             {
                 field:"tpm.tpm_xh",
@@ -242,38 +147,6 @@
             }
         })
     }
-
-
-    //赋权模态窗口
-    function fuquans(id,qx) {
-        $('#myModal4').modal('toggle');
-        initselect(id,qx);
-    }
-    //赋权按钮事件
-    $("#updateQX").click(function(){
-        $.ajax({
-            url:"<%=request.getContextPath()%>/updateFQTpmUser",
-            data:{
-                'id':$("#ids").val(), //id
-                'qx':$("#tpm_qx").val() //权限
-            },
-            dataType:"text",
-            type:"post",
-            success:function(){
-                $("#ids").val("");
-                $("#tpm_qx").val("");
-                $('#myModal3').modal('hide');
-                alert("操作成功!");
-                location.reload();
-            },
-            error:function(){
-                BootstrapDialog.show({
-                    title:"fuck！！",
-                    message:'哇哦！系统走丢了！！'
-                })
-            }
-        })
-    })
 
 </script>
 </html>

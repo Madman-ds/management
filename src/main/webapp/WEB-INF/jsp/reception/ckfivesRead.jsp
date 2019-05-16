@@ -24,12 +24,13 @@
             <table id="zjRead" border="1px" style="text-align: center;font-size: 16px">
             </table>
         </div>
+        <input type="hidden" id="delTextId" />
     </center>
 </div>
 </body>
 <script type="text/javascript">
         $("#zjRead").bootstrapTable({
-            toolbar:'#toolbar',
+            // toolbar:'#toolbar',
             url:'<%=request.getContextPath() %>/ckFivesReadList',//获取数据地址
             pagination:true, //是否展示分页
             pageList:[5, 10, 20, 50],//分页组件

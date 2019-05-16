@@ -31,13 +31,13 @@ public class TpmController {
     private TpmService TpmService;
     @Autowired
     private UserService userService;
-  /**
-   * @作者: YuBoYaKe
-   * @功能描述: M——查询upd
-   * @时间: 2018/9/29 14:44
-   * @参数:  * @param user
-   * @返回值: com.ds.util.PageUtil
-   **/
+    /**
+     * @作者: YuBoYaKe
+     * @功能描述: M——查询tpm基础数据
+     * @时间: 2018/9/29 14:44
+     * @参数:  * @param user
+     * @返回值: com.ds.util.PageUtil
+     **/
     @GetMapping("findTpmList")
     public PageUtil findTpm(Tpm tpm){
         Integer count = TpmService.getTpmCount(tpm);
@@ -146,6 +146,19 @@ public class TpmController {
 
     /**
      * @作者: YuBoYaKe
+     * @功能描述: 根据用户id查询TPM读权限
+     * @时间: 2019/4/21 14:16
+     * @参数:  * @param ids
+     * @返回值: void
+     **/
+    @GetMapping("findReadtpms")
+    public List<Tpm> showReadsstpm(ReadTpm readTpm){
+        List<Tpm> tpms = TpmService.findReadtpms(readTpm);
+        return tpms;
+    }
+
+    /**
+     * @作者: YuBoYaKe
      * @功能描述: 根据用户id查询TPM写权限
      * @时间: 2019/4/21 14:16
      * @参数:  * @param ids
@@ -155,18 +168,8 @@ public class TpmController {
     public List<TpmUser> showTpmUser(TpmUser tpmUser){
         List<TpmUser> tpmUsers = TpmService.showTpmUser(tpmUser);
         return tpmUsers;
-    }/**
-     * @作者: YuBoYaKe
-     * @功能描述: 根据用户id查询TPM读权限
-     * @时间: 2019/4/21 14:16
-     * @参数:  * @param ids
-     * @返回值: void
-     **/
-    @GetMapping("showReadtpm")
-    public List<Tpm> showReadtpm(ReadTpm readTpm){
-        List<Tpm> ss = TpmService.showReadtpm(readTpm);
-        return ss;
     }
+
 
     /**
      * @作者: YuBoYaKe

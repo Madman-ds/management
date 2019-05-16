@@ -12,14 +12,20 @@
     <title>个人查看页面</title>
 </head>
 <!-- 核心样式文件 -->
-<jsp:include page="../../public/jscore.jsp"></jsp:include>
+<jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
-<button onclick="returnTo()" class="btn btn-danger" type="button">
-    <i class="glyphicon glyphicon-hand-left">
-    </i>返回
-</button>
-<table id="zjRead"></table>
+<center>
+    <button onclick="returnTo()" class="btn btn-danger" type="button">
+        <i class="glyphicon glyphicon-hand-left">
+        </i>返回
+    </button>
+    <div style="margin-top: 20px">
+        <table id="zjRead" border="1px" style="text-align: center;font-size: 16px">
+        </table>
+    </div>
+    <input type="hidden" id="delTextId" />
+</center>
 </body>
 <script type="text/javascript" >
 

@@ -9,7 +9,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>管理者巡检个人查看页面</title>
+    <title>650TPM个人查看</title>
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>

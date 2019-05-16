@@ -9,7 +9,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>tpm管理页面</title>
+    <title>TPM Log管理页面</title>
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>
@@ -139,7 +139,7 @@
                 width:300
             },
             {
-                field:"date_tmie",
+                field:"date_time",
                 title:"日期",
                 align:'center',
                 width:300,

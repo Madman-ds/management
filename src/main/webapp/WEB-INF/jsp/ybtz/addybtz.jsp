@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加仪表台账页面</title>
+    <title>添加仪表台账</title>
 </head>
 <style>
     .row {

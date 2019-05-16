@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>tpm写操作管理</title>
+    <title>TPM写操作管理</title>
 </head>
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
@@ -26,11 +26,12 @@
         </button>
     </div>
     <%--展示TPM--%>
-    <div id="myTable"></div>
+    <table id="tpmtables"></table>
 </body>
+</html>
 <script type="text/javascript">
     //查询 表格展示
-    $('#myTable').bootstrapTable({
+    $('#tpmtables').bootstrapTable({
         url:'<%=request.getContextPath() %>/findTpmList',//获取数据地址
         pagination:true, //是否展示分页
         pageList:[5, 10, 20, 50],//分页组件
@@ -56,44 +57,54 @@
                 rows:this.pageSize //每页条数
             }
         },
-        columns:[{
-            checkbox:true,
-        },{
-            field:"id",
-            title:"tpm编号",
-            visible: false,
-            align:'center',
-            width:50
-        },{
-            field:"tpm_xh",
-            title:"型号",
-            align:'center',
-            width:200
-        },{
-            field:"tpm_bh",
-            title:"编号",
-            align:'center',
-            width:200
-        },
-            {
-                field:"tpm_whbh",
-                title:"维护编号",
-                align:'center',
-                width:300
-            },
-            {
-                field:"tpm_djxm",
-                title:"点检项目",
-                align:'center',
-                width:300
-            },
-            {
-                field:"tpm_yq",
-                title:"数据/要求",
-                align:'center',
-                width:300
-            }
-        ]
+        columns:[
+                    {
+                        checkbox:true
+                    },
+                    {
+                        field:"id",
+                        title:"tpm编号",
+                        visible: false,
+                        align:'center',
+                        width:50
+                    },
+                    {
+                        field:"name",
+                        title:"TPM名称",
+                        align:'center',
+                        width:200
+                    },
+                    {
+                        field:"tpm_xh",
+                        title:"型号",
+                        align:'center',
+                        width:200
+                    },
+                    {
+                        field:"tpm_bh",
+                        title:"编号",
+                        align:'center',
+                        width:200
+                    },
+                    {
+                        field:"tpm_whbh",
+                        title:"维护编号",
+                        align:'center',
+                        width:300
+                    },
+                    {
+                        field:"tpm_djxm",
+                        title:"点检项目",
+                        align:'center',
+                        width:300
+                    },
+                    {
+                        field:"tpm_yq",
+                        title:"数据/要求",
+                        align:'center',
+                        width:300
+                    }
+                ]
     });
     $(function (){
         $.ajax({
@@ -115,37 +126,38 @@
         })
     })
     function addTPM(){
-       var rows = $('#myTable').bootstrapTable('getSelections');
+        var rows = $('#tpmtables').bootstrapTable('getSelections', function (row) {
+            return row;
+        });
         var userId = $("#user_id").val();
         console.log(userId)
         if(rows.length <= 0){
-           BootstrapDialog.show({
-               title:"提示！",
-               message:'请至少选择一条数据'
-           })
+            BootstrapDialog.show({
+                title:"提示！",
+                message:'请至少选择一条数据'
+            })
         }else if(userId == "0"&&userId==0){
             BootstrapDialog.show({
                 title:"提示！",
                 message:'请选择人员!'
             })
         }else{
-           var ids = "";
-           var fivess = "";
-           for (var i = 0;i < rows.length;i++){
-               ids += ids == ""?rows[i].id:","+rows[i].id;
-           }
-           $.ajax({
-               url:'<%=request.getContextPath() %>/insertTpmUser',
-               type:'post',
-               data:{
-                   "ids":ids,"userId":userId
-               },
-               dateType:'json',
-               success:function(data){
-                   alert("添加成功!");
-                    $("#myTable").bootstrapTable("refresh")
-               }
-           })
+            var ids = "";
+            for (var i = 0;i < rows.length;i++){
+                ids += ids == "" ? rows[i].id:","+ rows[i].id;
+            }
+            $.ajax({
+                url:'<%=request.getContextPath() %>/insertTpmUser',
+                type:'post',
+                data:{
+                    "ids":ids,"userId":userId
+                },
+                dateType:'json',
+                success:function(data){
+                    alert("添加成功!");
+                    $("#tpmtables").bootstrapTable("refresh")
+                }
+            })
         }
     }
     function showTPM(){
@@ -165,10 +177,10 @@
                     cssClass:'btn-warning',
                     action:function(data){
                         data.close();
+                        window.location.reload();
                     }
                 }]
             })
-          }
+        }
     }
 </script>
-</html>

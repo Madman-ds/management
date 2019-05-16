@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>tpm读操作管理</title>
+    <title>TPM读操作管理</title>
 </head>
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
@@ -56,25 +56,35 @@
                 rows:this.pageSize //每页条数
             }
         },
-        columns:[{
-            checkbox:true,
-        },{
-            field:"id",
-            title:"tpm编号",
-            visible: false,
-            align:'center',
-            width:50
-        },{
-            field:"tpm_xh",
-            title:"型号",
-            align:'center',
-            width:200
-        },{
-            field:"tpm_bh",
-            title:"编号",
-            align:'center',
-            width:200
-        },
+        columns:[
+            {
+                checkbox:true,
+            },
+            {
+                field:"id",
+                title:"tpm编号",
+                visible: false,
+                align:'center',
+                width:50
+            },
+            {
+                field:"name",
+                title:"TPM名称",
+                align:'center',
+                width:200
+            },
+            {
+                field:"tpm_xh",
+                title:"型号",
+                align:'center',
+                width:200
+            },
+            {
+                field:"tpm_bh",
+                title:"编号",
+                align:'center',
+                width:200
+            },
             {
                 field:"tpm_whbh",
                 title:"维护编号",
@@ -90,6 +100,12 @@
             {
                 field:"tpm_yq",
                 title:"数据/要求",
+                align:'center',
+                width:300
+            },
+            {
+                field:"tpm_name",
+                title:"点检人",
                 align:'center',
                 width:300
             }
@@ -165,6 +181,7 @@
                     cssClass:'btn-warning',
                     action:function(data){
                         data.close();
+                        window.location.reload();
                     }
                 }]
             })

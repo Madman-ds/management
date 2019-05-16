@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -92,7 +91,7 @@ public class ShowController {
      **/
     @GetMapping("/toIndex")
     public String index(){
-        return "index";
+        return "WEB-INF/login/index";
     }
     /**
      * @作者: 段大神经
@@ -147,7 +146,7 @@ public class ShowController {
      **/
     @GetMapping(value = "login")
     public String toViewLogin(){
-        return "Top/viewindex";
+        return "WEB-INF/login/viewindex";
     }
     /**
      * @作者: 段聪祺
@@ -158,7 +157,7 @@ public class ShowController {
      **/
     @GetMapping("toViewList")
     public String toViewList(){
-        return "WEB-INF/jsp/viewlist";
+        return "WEB-INF/jsp/reception/viewlist_wxddj";
     }
     /**
      * @作者: 段大神经
@@ -244,7 +243,7 @@ public class ShowController {
      */
     @GetMapping("zjRead")
     public String zjRead(){
-        return "WEB-INF/jsp/zjRead";
+        return "WEB-INF/jsp/reception/wxddjRead";
     }
 
     /**
@@ -491,7 +490,7 @@ public class ShowController {
     }
     @GetMapping("toshowfiveslog")
     public String toShowFivesLog(){
-        return "WEB-INF/jsp/fivesinspect/showfiveslog";
+        return "WEB-INF/jsp/reception/viewlist_fives";
     }
     /**
      * @作者: 老西儿
@@ -526,7 +525,7 @@ public class ShowController {
      **/
     @GetMapping("tockFivesRead")
     public String tockFivesRead(){
-        return "WEB-INF/jsp/fivesinspect/ckfivesread";
+        return "WEB-INF/jsp/reception/ckfivesRead";
     }
     /**
      * @作者: 老西儿

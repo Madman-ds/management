@@ -9,7 +9,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>添加仪表台账页面</title>
+    <title>修改仪表台账</title>
 </head>
 <style>
     .row {
@@ -73,7 +73,7 @@
                 <label>备注:</label>
             </div>
             <div class="col-sm-9">
-                <textarea type="text" name="ybtz_remarks" value="${ybtz.ybtz_remarks}" class="form-control" id="ybtz_remarks"></textarea>
+                <textarea type="text" name="ybtz_remarks" value="${ybtz.ybtz_remarks}" class="form-control" id="ybtz_remarks">${ybtz.ybtz_remarks}</textarea>
             </div>
         </div>
     </form>

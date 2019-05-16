@@ -9,7 +9,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>tpm管理页面</title>
+    <title>TPM管理页面</title>
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>

@@ -9,66 +9,21 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>查询TPM写权限页面</title>
+    <title>查询TPM读权限</title>
 </head>
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
 
 <%--TPM--%>
-    <div><table id="myTable3"></table></div>
+<table id="readTpmTable" style="width: 1000px"></table>
 
 </body>
 <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/bootStrap-select/multiple-select.js"></script>
 <script type="text/javascript">
-    //初始化下拉多选数据
-    function initselect(id,qx){
-        $("#ids").val(id);
-        $("#mv").find("option").remove();
-        $.ajax({
-            type: "get",
-            url: "/findAll",
-            data: {
-                'user_id' : id,
-            },
-            dataType: "json",
-            success: function(result){
-                var data = result;
-                var html = "";
-                $.ajax({
-                    type: "get",
-                    url: "/findAllbyids",
-                    data: {
-                        'ids' : qx,
-                    },
-                    dataType: "text",
-                    success: function(a){
-                        // $("#userselect").html(result);
-                        for (var i = 0; i < data.length; i++) {
-                            var ar = data[i].user_id;
-                            if(a.indexOf(ar) !=-1){
-                                html +='<option selected value="'+data[i].user_id+'">'+data[i].user_name+'</option>';
-                            }else{
-                                html +='<option value="'+data[i].user_id+'">'+data[i].user_name+'</option>';
-                            }
-                        }
-                        $("#mv").append(html);
-                        $('#mv').change(function() {
-                            $("#tpm_qx").val($(this).val());
-                        }).multipleSelect({
-                            width: '100%'
-                        });
-                        return ;
-                    }
-                })
-
-            }
-        })
-    }
-
 
     //查询 表格展示
-    $('#myTable3').bootstrapTable({
-        url:'<%=request.getContextPath() %>/showReadtpm?user_id=${userId}',//获取数据地址
+    $('#readTpmTable').bootstrapTable({
+        url:'<%=request.getContextPath() %>/findReadtpms?user_id=${userId}',//获取数据地址
         method:'GET',//发送请求的方式
         contentType:"application/x-www-form-urlencoded",//必须的否则条件查询时会乱码
         clickToSelect: true, //是否启用点击选中行
@@ -119,6 +74,12 @@
                 align:'center',
                 width:300
             },
+            {
+                field:"tpm_name",
+                title:"点检人",
+                align:'center',
+                width:300
+            },
             {field:'cc',title:'操作',align:'center',width:500,formatter:function(value,rows,index){
                     var str="";
                     str+="<button class='btn btn-info dim' type='button' onclick='delTpmUser(\""+rows.id+"\")' ><i class='fa fa-paste'></i>删除</button>";
@@ -136,7 +97,7 @@
                 id:id
             },
             success:function(){
-                $("#myTable3").bootstrapTable('refresh');
+                $("#readTpmTable").bootstrapTable('refresh');
             },
             error: function () {
                 BootstrapDialog.show({
@@ -156,7 +117,7 @@
                 id:id
             },
             success:function(){
-                $("#myTable3").bootstrapTable('refresh');
+                $("#readTpmTable").bootstrapTable('refresh');
             },
             error: function () {
                 BootstrapDialog.show({
@@ -176,7 +137,7 @@
                 "id":id
             },
             success:function(data){
-                $("#myTable3").bootstrapTable('refresh');
+                $("#readTpmTable").bootstrapTable('refresh');
             }
         })
     }

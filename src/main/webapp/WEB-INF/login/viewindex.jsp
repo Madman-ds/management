@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>前端index页</title>
-<jsp:include page="../public/jscore.jsp"/>
+<jsp:include page="../../public/jscore.jsp"/>
 </head>
 <style type="text/css">
     html{

@@ -91,4 +91,6 @@ public interface TpmService {
     List<Tpm> showReadtpm(ReadTpm readTpm);
 
     void delReadtpm(String ids);
+
+    List<Tpm> findReadtpms(ReadTpm readTpm);
 }

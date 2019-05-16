@@ -73,11 +73,11 @@
                 <i class="glyphicon glyphicon-share-alt">
                 </i>个人查看
             </button>
-            &nbsp;
+           <%-- &nbsp;
             <button onclick="toviewlist()" class="btn btn-warning" type="button">
                 <i class="glyphicon glyphicon-share-alt">
                 </i>返回
-            </button>
+            </button>--%>
             &nbsp;
             <button onclick="out()" class="btn btn-danger" type="button">
                 <i class="glyphicon glyphicon-off">

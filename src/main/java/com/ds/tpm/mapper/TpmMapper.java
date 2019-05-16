@@ -103,4 +103,6 @@ public interface TpmMapper {
     void delReadtpm(String ids);
 
     List<Tpm> showReadtpmLog(List<Tpm> readTpms);
+
+    List<Tpm> findReadtpms(ReadTpm readTpm);
 }

@@ -160,6 +160,12 @@
                 }
             },
             {
+                field:"remarks",
+                title:"备注",
+                align:'center',
+                width:300
+            },
+            {
                 title:"操作",
                 align:'center',
                 width:200,

@@ -42,19 +42,22 @@
     }
 </style>
 <body>
-<select  class="form-control" id="user_id" name="user_id">
-    <option value = "0">--请选择--</option>
-</select>
+<div class="col-sm-3" style="margin-top: 10px">
+    <select  class="form-control" id="user_id" name="user_id">
+        <option value = "0">--请选择人员--</option>
+    </select>
+</div>
 <div id="toolbar">
+    <button class="btn btn-success" type="button" onclick="addXieQX()">
+        <i class="glyphicon glyphicon-plus"></i>
+        添加写权限
+    </button>
+    <button class="btn btn-info" type="button" onclick="queryXieQX()">
+        查看写权限
+    </button>
     <button class="btn btn-danger" type="button" onclick="delALLuUser()">
         <i class="glyphicon glyphicon-minus">
         </i>删除
-    </button>
-    <button class="btn btn-danger" type="button" onclick="addXieQX()">
-        添加写权限
-    </button>
-    <button class="btn btn-danger" type="button" onclick="queryXieQX()">
-        查看写权限
     </button>
 </div>
 <table id="userList"></table>

@@ -309,6 +309,7 @@ public class TpmController {
         String numArr6 = request.getParameter("numArr6");
         String numArr7 = request.getParameter("numArr7");
         String numArr8 = request.getParameter("numArr8");
+        String numArr9 = request.getParameter("numArr9");
         String[] s1 = numArr1.substring(1).replaceAll("]","").split(",");
         String[] s2 = numArr2.substring(1).replaceAll("]","").split(",");
         String[] s3 = numArr3.substring(1).replaceAll("]","").split(",");
@@ -317,6 +318,7 @@ public class TpmController {
         String[] s6 = numArr6.substring(1).replaceAll("]","").split(",");
         String[] s7 = numArr7.substring(1).replaceAll("]","").split(",");
         String[] s8 = numArr8.substring(1).replaceAll("]","").split(",");
+        String[] s9 = numArr9.substring(1).replaceAll("]","").split(",");
         Tpm addTpm = null;
         for (int i = 0; i < s1.length; i++){
             addTpm = new Tpm();
@@ -327,6 +329,7 @@ public class TpmController {
             addTpm.setTpm_djxm(s4[i].substring(1, s4[i].length()-1));
             addTpm.setTpm_yq(s5[i].substring(1, s5[i].length()-1));
             addTpm.setTpm_is(s6[i].substring(1, s6[i].length()-1));
+            addTpm.setRemarks(s9[i].substring(1, s6[i].length()-1));
             addTpm.setTpm_name(loginUser.getUser_name());
             TpmUser tpmUser = new TpmUser();
             //根据tpm id 和 用户id锁定是否提取项
@@ -400,29 +403,29 @@ public class TpmController {
         return page;
     }
 
-    /**
-     * TPM
-     * <p> 用户赋查看权限给用户<br>
-     * @时间: 2018/9/29 16:02
-     * @param tpm
-     * @author: YuBoYaKe
-     * @return: void
-     * @version: 2.0
-     */
-    @PostMapping("updateFQTpmUser")
-    public void updateFQTpmUser(Tpm tpm){
-        if(tpm.getQx()!=null && !"".equals(tpm.getQx())){
-            String[] split = tpm.getQx().split(",");
-            String ids = "";
-            for (int i = 0; i < split.length; i++) {
-                ids += ","+split[i]+"_";
-            }
-            tpm.setQx(ids.substring(1));
-            TpmService.updateFQTpmUser(tpm);
-        }else{
-            TpmService.updateFQTpmUser(tpm);
-        }
-    }
+//    /**
+//     * TPM
+//     * <p> 用户赋查看权限给用户<br>
+//     * @时间: 2018/9/29 16:02
+//     * @param tpm
+//     * @author: YuBoYaKe
+//     * @return: void
+//     * @version: 2.0
+//     */
+//    @PostMapping("updateFQTpmUser")
+//    public void updateFQTpmUser(Tpm tpm){
+//        if(tpm.getQx()!=null && !"".equals(tpm.getQx())){
+//            String[] split = tpm.getQx().split(",");
+//            String ids = "";
+//            for (int i = 0; i < split.length; i++) {
+//                ids += ","+split[i]+"_";
+//            }
+//            tpm.setQx(ids.substring(1));
+//            TpmService.updateFQTpmUser(tpm);
+//        }else{
+//            TpmService.updateFQTpmUser(tpm);
+//        }
+//    }
 
     /**
      * TPM

@@ -132,6 +132,12 @@
                     }
                     return "异常";
                 }
+            },
+            {
+                field:"remarks",
+                title:"备注",
+                align:'center',
+                width:300
             }
         ],
         pagination:true,

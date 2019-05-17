@@ -67,8 +67,8 @@ public class Tpm extends PageUtil {
     private String tpm_tq;
 
     /**
-     * 权限
+     * 备注
      */
-    private String qx;
+    private String remarks;
 
 }

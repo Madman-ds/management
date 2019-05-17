@@ -207,8 +207,8 @@
         1200TPM打卡
     -->
     <insert id="insert1200Tpm" parameterType="com.ds.tpm.pojo.Tpm">
-        INSERT INTO t_tpm ( name,tpm_xh,tpm_bh,tpm_whbh,tpm_name,tpm_djxm,tpm_yq,date_time,tpm_is,tpm_tq)
-        VALUE (#{name},#{tpm_xh},#{tpm_bh},#{tpm_whbh},#{tpm_name},#{tpm_djxm},#{tpm_yq},now(),#{tpm_is},#{tpm_tq})
+        INSERT INTO t_tpm ( name,tpm_xh,tpm_bh,tpm_whbh,tpm_name,tpm_djxm,tpm_yq,date_time,tpm_is,tpm_tq,remarks)
+        VALUE (#{name},#{tpm_xh},#{tpm_bh},#{tpm_whbh},#{tpm_name},#{tpm_djxm},#{tpm_yq},now(),#{tpm_is},#{tpm_tq},#{remarks})
     </insert>
 
     <!--TPM 日志查询总条数-->

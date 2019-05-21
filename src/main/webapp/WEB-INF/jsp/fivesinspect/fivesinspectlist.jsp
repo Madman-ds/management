@@ -55,11 +55,11 @@
             {field:'f_fives',title:'5S',align:'center',width:350},
             {field:'f_clazzify',title:'分类',align:'center',width:450},
             {field:'f_content',title:'内容',align:'center',width:350},
-            {field:'cc',title:'操作',align:'center',width:350,formatter:function(value,rows,index){
-                    var str="";
-                        str += "<button class='btn btn-info dim' type='button' onclick='delFiveSInspect(\""+rows.f_id+"\")' ><i class='fa fa-paste'></i>删除</button>";
-                        str += "<button class='btn btn-info dim' type='button' onclick='updateFiveSInspect(\""+rows.f_id+"\")' ><i class='fa fa-paste'></i>修改</button>";
-                        return str;
+            {field:'cc',title:'操作',align:'center',width:350,
+                formatter:function(value,row,index){
+                    var str ="<button class='btn btn-info dim' type='button' onclick='updateFiveSInspect(\""+row.f_id+"\")' >修改</button>" +
+                        "&nbsp;<button class='btn btn-danger' type='button' onclick='delFiveSInspect(\""+row.f_id+"\")' >删除</button>";
+                    return str;
                 }
             }
 

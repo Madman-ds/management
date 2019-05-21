@@ -166,8 +166,8 @@
             align:'center',
             width:200,
             formatter:function(value,row,index){
-                var str ="<button class='btn btn-info warning' type='button' onclick='deleteByid(\""+row.z_id+"\")' >删除</button>" +
-                    "<button class='btn btn-info dim' type='button' onclick='updateByid(\""+row.z_id+"\")' >修改</button>";
+                var str ="<button class='btn btn-info dim' type='button' onclick='updateByid(\""+row.z_id+"\")' >修改</button>" +
+                    "<button class='btn btn-danger' type='button' onclick='deleteByid(\""+row.z_id+"\")' >删除</button>";
                 return str;
             }
         }
@@ -350,12 +350,7 @@
             dataType:"text",
             type:"post",
             success:function(data){
-                dialogItself.close();
-                if(arr.length == rows.length){
-                    $("#TpmList").bootstrapTable('refresh',{pageNumber:1});
-                }else{
-                    $("#TpmList").bootstrapTable('refresh');
-                }
+                $("#userList").bootstrapTable('refresh');
             },
             error:function(){
                 BootstrapDialog.show({

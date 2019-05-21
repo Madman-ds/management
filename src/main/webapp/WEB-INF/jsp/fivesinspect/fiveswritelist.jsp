@@ -12,10 +12,12 @@
 </head>
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
-    人员: <select  class="form-control" id="user_id" name="user_id">
-        <option value = "0">--请选择--</option>
-    </select>
-    <div id="toolBar">
+    <div class="col-sm-3" style="margin-top: 10px">
+        <select  class="form-control" id="user_id" name="user_id">
+            <option value = "0">--请选择人员--</option>
+        </select>
+    </div>
+    <div id="toolbar">
         <button onclick="addUserFiveSInspect()" class="btn btn-success"  type="button">
             <i class="glyphicon glyphicon-plus"></i>
             写操作授权
@@ -33,6 +35,7 @@
     $('#myTable').bootstrapTable({
         url:'<%=request.getContextPath() %>/findFiveSInspect',//获取数据地址
         pagination:true, //是否展示分页
+        toolbar : "#toolbar",
         pageList:[5, 10, 20, 50],//分页组件
         pageNumber:1,
         pageSize:5,//默认每页条数

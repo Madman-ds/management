@@ -12,20 +12,18 @@
 </head>
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
-<div class="rows">
-    <div id="toolBar">
-        <button onclick="addFiveSInspect()" class="btn btn-success"  type="button">
-            <i class="glyphicon glyphicon-plus"></i>
-            添加
+    <div id="toolbar">
+        <button class="btn btn-success" type="button" onclick="addFiveSInspect()">
+            <i class="glyphicon glyphicon-plus">
+            </i>新增
         </button>
     </div>
-    <%--展示5S--%>
-    <div id="myTable"></div>
+    <table id="myTable"></table>
 </body>
 <script type="text/javascript">
     //查询 表格展示
     $('#myTable').bootstrapTable({
-        toolbar:'#toolbar',
+        toolbar:'#toolbar',//工具栏   显示在id为toolbar的div中
         url:'<%=request.getContextPath() %>/findFiveSInspect',//获取数据地址
         pagination:true, //是否展示分页
         pageList:[5, 10, 20, 50],//分页组件

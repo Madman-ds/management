@@ -52,10 +52,6 @@
         <i class="glyphicon glyphicon-minus">
         </i>删除
     </button>
-    <%--<button type="button" class="btn btn-info" onclick="updateTpm()">
-        <i class="glyphicon glyphicon-wrench">
-        </i>修改
-    </button>--%>
 </div>
 <table id="TpmList"></table>
 </body>

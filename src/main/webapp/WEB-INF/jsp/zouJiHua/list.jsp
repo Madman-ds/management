@@ -52,10 +52,10 @@
         <i class="glyphicon glyphicon-minus">
         </i>删除
     </button>
-    <button type="button" class="btn btn-info" onclick="updateUser()">
+    <%--<button type="button" class="btn btn-info" onclick="updateUser()">
         <i class="glyphicon glyphicon-wrench">
         </i>修改
-    </button>
+    </button>--%>
 </div>
 <table id="userList"></table>
 </body>
@@ -160,6 +160,15 @@
             //获取日期列的值进行转换
             formatter: function (value, row, index) {
                 return changeDateFormat(value);
+            }
+        },{
+            title:"操作",
+            align:'center',
+            width:200,
+            formatter:function(value,row,index){
+                var str ="<button class='btn btn-info warning' type='button' onclick='deleteByid(\""+row.z_id+"\")' >删除</button>" +
+                    "<button class='btn btn-info dim' type='button' onclick='updateByid(\""+row.z_id+"\")' >修改</button>";
+                return str;
             }
         }
         ],
@@ -331,6 +340,70 @@
         })
     }
 
+
+
+    //删除
+    function deleteByid(id) {
+        $.ajax({
+            url:"<%=request.getContextPath()%>/delAllWeekPlan",
+            data:{"ids":id},
+            dataType:"text",
+            type:"post",
+            success:function(data){
+                dialogItself.close();
+                if(arr.length == rows.length){
+                    $("#TpmList").bootstrapTable('refresh',{pageNumber:1});
+                }else{
+                    $("#TpmList").bootstrapTable('refresh');
+                }
+            },
+            error:function(){
+                BootstrapDialog.show({
+                    message: '系统出现BUG！请联系管理员！'
+                });
+            }
+        })
+    }
+
+    function updateByid(id) {
+        BootstrapDialog.show({
+            title:"修改页面",
+            message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdWeekPlan?z_id='+id),
+            buttons: [ {
+                label: '保存',
+                cssClass: 'btn-primary',
+                action: function(dialogItself){
+                    var upduserflag=chenckUpdUserForm();
+                    if(!upduserflag){
+                        return;
+                    }
+                    $.ajax({
+                        url:"<%=request.getContextPath()%>/updWeekPlan",
+                        data:$("#updWeekPlan").serialize(),
+                        dataType:"text",
+                        type:"post",
+                        success:function(data){
+                            dialogItself.close();
+                            $('#userList').bootstrapTable("refresh");
+                        },
+                        error:function(){
+                            BootstrapDialog.show({
+                                title:"温馨提示",
+                                message: '系统出现BUG！请联系管理员！'
+                            });
+                        }
+
+                    })
+                }
+            }, {
+                label: '取消',
+                cssClass: 'btn-warning ',
+                action: function(dialogItself){
+                    dialogItself.close();
+                }
+            }]
+        });
+    }
 
 
 </script>

@@ -21,25 +21,32 @@
 <jsp:include page="../public/jscore.jsp"></jsp:include>
 <body>
 <img src="<%=request.getContextPath() %>/static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
-<div class="rows">
-    <div class="form-group">
-        <div class="col-sm-5">
-        </div>
-        <div class="col-sm-5">
-            <div class="input-group col-sm-10">
-                <button onclick="fanhui()" class="btn btn-success" type="button" style="margin-left: 20px">
-                    <i class="glyphicon glyphicon-hand-left">
-                    </i>返回
-                </button>
-            </div>
-        </div>
+
+<center>
+    <%--<jsp:include page="../public/but_inculd_m.jsp"  />--%>
+    <button type="button" onclick="topIndex()" class="btn btn-primary">危险点点检</button>
+    &nbsp;
+    <button type="button" onclick="glzxjClick()" class="btn btn-primary">管理者巡检</button>
+    &nbsp;
+    <button type="button" onclick="yibiaoTaiZheng()" class="btn btn-primary">仪表台账</button>
+    &nbsp;
+    <button type="button" onclick="tpm1200()" class="btn btn-primary">1200-TPM点检</button>
+    &nbsp;
+    <button type="button" onclick="tpm650()" class="btn btn-danger">650-TPM点检</button>
+    &nbsp;
+    <button type="button" class="btn btn-primary" onclick="showfives()">5S点检</button>
+    &nbsp;
+    <button type="button" onclick="tozhou()" class="btn btn-primary">周生产计划</button>
+    &nbsp;
+    <button type="button" onclick="tologin()" class="btn btn-primary">
+        <i class="glyphicon glyphicon-user"></i>
+        日常打卡
+    </button>
+    &nbsp;
+    <div style="margin-top: 20px">
+        <table id="dataBackupShows" class="table table-bordered"></table>
     </div>
-</div>
-
-<div id="dataShow" >
-    <table id="dataBackupShows" class="table table-bordered"></table>
-</div>
-
+</center>
 </body>
 <script type="text/javascript">
 
@@ -184,5 +191,41 @@
     function fanhui() {
         location.href="topIndex";
     }
+
+
+
+    //按钮----------------------S---------------------------------------
+    //管理者巡检
+    function glzxjClick() {
+        location.href = "<%=request.getContextPath() %>/toTopGlzxjm"
+    }
+    //危险点点检
+    function topIndex() {
+        location.href = "<%=request.getContextPath() %>/topIndex"
+    }
+
+    function yibiaoTaiZheng() {
+        location.href = "<%=request.getContextPath() %>/topyibiaoTaiZheng"
+    }
+
+    function showfives(){
+        location.href = "<%=request.getContextPath() %>/toTopFiveBytq"
+    }
+
+    function tpm1200(){
+        location.href = "<%=request.getContextPath() %>/toTop1200Tpm"
+    }
+
+    function tpm650(){
+        location.href = "<%=request.getContextPath() %>/toTop650Tpm"
+    }
+    //跳转回前端登陆页面
+    function tologin() {
+        location.href="<%=request.getContextPath() %>/login";
+    }
+    function tozhou(){
+        location.href="<%=request.getContextPath() %>/topZhouJiHua";
+    }
+    //按钮----------------------E---------------------------------------
 </script>
 </html>

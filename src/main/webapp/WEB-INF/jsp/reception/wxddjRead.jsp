@@ -9,23 +9,35 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>个人查看页面</title>
+    <title>危险点点检个人查看</title>
 </head>
 <!-- 核心样式文件 -->
 <jsp:include page="../../../public/jscore.jsp"></jsp:include>
 <body>
 <img src="./static/images/logo.png" alt=""     style="width: 60%;margin: 30px 20%;" >
-<center>
-    <button onclick="returnTo()" class="btn btn-danger" type="button">
-        <i class="glyphicon glyphicon-hand-left">
-        </i>返回
-    </button>
-    <div style="margin-top: 20px">
-        <table id="zjRead" border="1px" style="text-align: center;font-size: 16px">
-        </table>
-    </div>
-    <input type="hidden" id="delTextId" />
-</center>
+<div class="modal-body">
+    <center>
+        <button type="button" onclick="weixian()" class="btn btn-danger">危险点点检</button>
+        &nbsp;
+        <button type="button" onclick="glzxjClick()" class="btn btn-primary">管理者巡检</button>
+        &nbsp;
+        <button type="button" onclick="tpm1200Click()" class="btn btn-primary">1200-TPM点检</button>
+        &nbsp;
+        <button type="button" onclick="tpm650Click()" class="btn btn-primary">650-TPM点检</button>
+        &nbsp;
+        <button type="button" class="btn btn-primary" onclick="showfives()">5S点检</button>
+        &nbsp;
+        <button type="button" class="btn btn-success" onclick="returnTo()">
+            <i class="glyphicon glyphicon-hand-left"> </i>
+            返回
+        </button>
+        <div style="margin-top: 20px">
+            <table id="zjRead" border="1px" style="text-align: center;font-size: 16px">
+            </table>
+        </div>
+        <input type="hidden" id="delTextId" />
+    </center>
+</div>
 </body>
 <script type="text/javascript" >
 
@@ -65,9 +77,6 @@
         // sidePagination:"server",
     })
 
-    function returnTo() {
-        location.href="<%=request.getContextPath()%>/toViewList";
-    }
     $('#datetimepicker').datetimepicker({
         format: 'yyyy-mm-dd hh:mm:ss',     /*此属性是显示顺序，还有显示顺序是mm-dd-yyyy*/
         language:"zh-CN",
@@ -86,5 +95,28 @@
             return times;
         }
     }
+
+
+    //-----按钮----------S--------------------------------------------------
+    function glzxjClick() {
+        location.href = "<%=request.getContextPath() %>/GlzxjzjReadnew"
+    }
+
+    function weixian() {
+        location.href = "<%=request.getContextPath() %>/zjRead"
+    }
+    function showfives(){
+        location.href = "<%=request.getContextPath() %>/tockFivesRead"
+    }
+    function tpm1200Click() {
+        location.href = "<%=request.getContextPath() %>/tozjRead1200Tpm"
+    }
+    function tpm650Click() {
+        location.href = "<%=request.getContextPath() %>/tozjRead650Tpm"
+    }
+    function returnTo() {
+        location.href="<%=request.getContextPath()%>/toViewList";
+    }
+    //-----按钮----------E--------------------------------------------------
 </script>
 </html>

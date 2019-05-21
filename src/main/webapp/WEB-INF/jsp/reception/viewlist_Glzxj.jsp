@@ -47,7 +47,16 @@
 
 <div class="modal-body">
     <center>
-        <jsp:include page="../../../public/but_inculd.jsp"  />
+        <%--<jsp:include page="../../../public/but_inculd.jsp"  />--%>
+            <button type="button" onclick="weixian()" class="btn btn-primary">危险点点检</button>
+            &nbsp;
+            <button type="button" onclick="glzxjClick()" class="btn btn-danger">管理者巡检</button>
+            &nbsp;
+            <button type="button" onclick="tpm1200Click()" class="btn btn-primary">1200-TPM点检</button>
+            &nbsp;
+            <button type="button" onclick="tpm650Click()" class="btn btn-primary">650-TPM点检</button>
+            &nbsp;
+            <button type="button" class="btn btn-primary" onclick="showfives()">5S点检</button>
         <div style="margin-top: 20px">
             <label>问题数:</label>
             <textarea class="form-control" id="glz_count" name="glz_count" rows="1" style="width: 180px"></textarea>
@@ -149,62 +158,7 @@
         $('#dataBackUpForm')[0].reset();
         queryDataBackUp();
     }
-   /* //加载登陆用户所有可编辑的设备检查项信息
-    $(function () {
-            var user_name =$("#user_name").val();
-            var userId =$("#userId").val();
-            $.ajax({
-            <%--url:'<%=request.getContextPath() %>/equipment/findEquipmentInspectionitem',--%>
-            data:{"userId":userId},
-            type:'get',
-            success:function(data){
-                var tbs = document.getElementById("mytableid");//获取表格
-                var rows = tbs.insertRow();//添加行
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>名称</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>编号</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>属性</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>检查项</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>检查要求</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>检查结果</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>确认人</label></td>";
-                rows.innerHTML += "<td style='width:160px;height: 45px' align='center'><label>备注内容</label></td>";
-                var arr = data;
-                for (var i=0;i<arr.length;i++){
-                    var tb = document.getElementById("mytableid");//获取表格
-                    var row = tb.insertRow();//添加行
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td1' value='"+arr[i].sb_name+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td2' value='"+arr[i].sb_number+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td3' value='"+arr[i].sb_xh+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td4' value='"+arr[i].jcx_name+"' style='width:160px;height: 45px;text-align: center' align='center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><textarea  class='td5' value='' style='width:160px;height: 45px;text-align: center'  readonly>"+arr[i].jcx_v+"</textarea></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px' class='td6' align='center'>" +
-                        "<select style='width:160px;height: 45px;text-align: center'>" +
-                        "<option value='0'><span class='fonta'>正常</span></option>" +
-                        "<option value='1'><span class='fonta'>故障</span></option>" +
-                        "</select></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td7' value='"+user_name+"' style='width:160px;height: 45px;text-align: center'  type='text' readonly></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px'  align='center'><input class='td8' style='width:160px;height: 45px;text-align: center ' type='text'></td>";
-                    row.innerHTML += "<td style='width:160px;height: 30px;display: none'  align='center'><input class='td9' value='"+arr[i].jcx_id+"' style='width:160px;height: 45px;text-align: center' type='text'></td>";
-                }
-            }
-        })*/
 
-        /*$.ajax({
-            <%--url:'<%=request.getContextPath() %>/findDataBackup',--%>
-            type:'get',
-            success:function(data){
-                var arr = data.rows;
-                for (var i=0;i<arr.length;i++){
-                    var a = changeDateFormat(arr[i].qr_time);
-                    var b = arr[i].user_name;
-                    var c = arr[i].sb_name;
-                    var d = arr[i].bz_nr;
-                    var e = a+"     "+b+"   检查了"+c+"     "+d + "</br>";
-                    $("#dataBackupShow").append(e);
-                }
-            }
-        })*/
-    // })
     //转换日期格式(时间戳转换为datetime格式)
     function changeDateFormat(cellval) {
         if (cellval != null){
@@ -228,6 +182,24 @@
         var userId = $("#userId").val();
         location.href = "<%=request.getContextPath() %>/toread"
     }
-    
+
+    //-----按钮----------S--------------------------------------------------
+    function glzxjClick() {
+        location.href = "<%=request.getContextPath() %>/toGlzxjAdd"
+    }
+
+    function weixian() {
+        location.href = "<%=request.getContextPath() %>/toViewList"
+    }
+    function showfives(){
+        location.href = "<%=request.getContextPath() %>/toshowfiveslog"
+    }
+    function tpm1200Click() {
+        location.href = "<%=request.getContextPath() %>/toTpm1200List"
+    }
+    function tpm650Click() {
+        location.href = "<%=request.getContextPath() %>/toTpm650List"
+    }
+    //-----按钮----------E--------------------------------------------------
 </script>
 </html>

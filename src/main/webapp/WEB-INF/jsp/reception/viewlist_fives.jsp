@@ -43,7 +43,16 @@
 
 <div class="modal-body">
     <center>
-        <jsp:include page="../../../public/but_inculd.jsp"/>
+        <%--<jsp:include page="../../../public/but_inculd.jsp"/>--%>
+            <button type="button" onclick="weixian()" class="btn btn-primary">危险点点检</button>
+            &nbsp;
+            <button type="button" onclick="glzxjClick()" class="btn btn-primary">管理者巡检</button>
+            &nbsp;
+            <button type="button" onclick="tpm1200Click()" class="btn btn-primary">1200-TPM点检</button>
+            &nbsp;
+            <button type="button" onclick="tpm650Click()" class="btn btn-primary">650-TPM点检</button>
+            &nbsp;
+            <button type="button" class="btn btn-danger" onclick="showfives()">5S点检</button>
         <div style="margin-top: 20px">
             <table id="mytableidfs" border="1px" style="text-align: center;font-size: 16px">
             </table>
@@ -90,6 +99,7 @@
 <input id="user_name" type="hidden" value="<%=user_name%>" />
 <input id="userId" type="hidden" value="<%=userId%>" />
 </body>
+</html>
 <script type="text/javascript">
     //1分钟内不执行操作倒计时300秒执行退出方法
     var maxTime = 300; // seconds
@@ -201,19 +211,19 @@
         })
 
         <%--$.ajax({--%>
-            <%--url:'<%=request.getContextPath() %>/findDataBackup',--%>
-            <%--type:'get',--%>
-            <%--success:function(data){--%>
-                <%--var arr = data.rows;--%>
-                <%--for (var i=0;i<arr.length;i++){--%>
-                    <%--var a = changeDateFormat(arr[i].qr_time);--%>
-                    <%--var b = arr[i].user_name;--%>
-                    <%--var c = arr[i].sb_name;--%>
-                    <%--var d = arr[i].bz_nr;--%>
-                    <%--var e = a+"     "+b+"   检查了"+c+"     "+d + "</br>";--%>
-                    <%--$("#dataBackupShow").append(e);--%>
-                <%--}--%>
-            <%--}--%>
+        <%--url:'<%=request.getContextPath() %>/findDataBackup',--%>
+        <%--type:'get',--%>
+        <%--success:function(data){--%>
+        <%--var arr = data.rows;--%>
+        <%--for (var i=0;i<arr.length;i++){--%>
+        <%--var a = changeDateFormat(arr[i].qr_time);--%>
+        <%--var b = arr[i].user_name;--%>
+        <%--var c = arr[i].sb_name;--%>
+        <%--var d = arr[i].bz_nr;--%>
+        <%--var e = a+"     "+b+"   检查了"+c+"     "+d + "</br>";--%>
+        <%--$("#dataBackupShow").append(e);--%>
+        <%--}--%>
+        <%--}--%>
         <%--})--%>
     })
 
@@ -235,5 +245,24 @@
         language:"zh-CN",
         autoclose:true
     });
+
+
+    //-----按钮----------S--------------------------------------------------
+    function glzxjClick() {
+        location.href = "<%=request.getContextPath() %>/toGlzxjAdd"
+    }
+
+    function weixian() {
+        location.href = "<%=request.getContextPath() %>/toViewList"
+    }
+    function showfives(){
+        location.href = "<%=request.getContextPath() %>/toshowfiveslog"
+    }
+    function tpm1200Click() {
+        location.href = "<%=request.getContextPath() %>/toTpm1200List"
+    }
+    function tpm650Click() {
+        location.href = "<%=request.getContextPath() %>/toTpm650List"
+    }
+//-----按钮----------E--------------------------------------------------
 </script>
-</html>

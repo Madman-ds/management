@@ -147,7 +147,7 @@
             })
         }else{
             BootstrapDialog.show({
-                title:"查询5S读权限",
+                title:"查询危险点读权限",
                 closable: false,
                 message:$('<div><div>').load('<%=request.getContextPath()%>/toShowHaveEquipmentRead?userId='+userId),
                 buttons:[{

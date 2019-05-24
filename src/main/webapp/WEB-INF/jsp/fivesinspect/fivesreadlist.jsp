@@ -20,11 +20,11 @@
     <div id="toolbar">
         <button onclick="addUserFiveSInspect()" class="btn btn-success"  type="button">
             <i class="glyphicon glyphicon-plus"></i>
-            写操作授权
+            读操作授权
         </button>
         <button onclick="showHaveFiveSRead()" class="btn btn-info"  type="button">
             <i class="glyphicon glyphicon-pushpin"></i>
-            查看写操作权限
+            查看读操作权限
         </button>
     </div>
     <%--展示5S--%>

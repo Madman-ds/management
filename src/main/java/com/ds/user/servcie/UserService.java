@@ -56,7 +56,7 @@ public interface UserService {
 
     Integer findAllUserGlzxjCount();
 
-    List<User> findAllUserGlzxj();
+    List<User> findAllUserGlzxj(User user);
 
     void delUserGlzxj(String id);
 

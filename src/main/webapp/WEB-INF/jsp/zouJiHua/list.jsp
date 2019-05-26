@@ -256,7 +256,7 @@
         if(ids.length==1){
             var id = ids[0];
             BootstrapDialog.show({
-                title:"修改页面",
+                title:"修改周计划信息",
                 message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdWeekPlan?z_id='+id),
                 buttons: [ {
                     label: '保存',
@@ -302,7 +302,7 @@
     //添加用户
     function addUser(){
         BootstrapDialog.show({
-            title:"添加商品信息",
+            title:"添加周计划信息",
             closable: false,
             message:$('<div><div>').load('<%=request.getContextPath()%>/addZhuJiHua'),
             buttons:[{

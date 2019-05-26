@@ -230,7 +230,7 @@
     
     function updateByid(id) {
         BootstrapDialog.show({
-            title:"修改页面",
+            title:"修改TPM信息",
             message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdTpm?id='+id),
             buttons: [ {
                 label: '保存',
@@ -275,7 +275,7 @@
     //添加tpm
     function addTpm(){
         BootstrapDialog.show({
-            title:"添加商品信息",
+            title:"添加TPM信息",
             closable: false,
             message:$('<div><div>').load('<%=request.getContextPath()%>/toInsertTpmBasics'),
             buttons:[{

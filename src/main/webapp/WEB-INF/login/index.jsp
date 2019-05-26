@@ -33,7 +33,7 @@
 
 <form id="userForm">
     <div class="mycenter">
-        <div class="mysign row col-lg-6">
+        <div class="mysign row col-lg-8">
             <div class="col-lg-12" style="margin-top: 50px";>
                 <input type="text" class="form-control" id="user_name" name="user_name" placeholder="请输入账户名" required
                        autofocus />

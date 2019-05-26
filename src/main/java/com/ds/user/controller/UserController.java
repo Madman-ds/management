@@ -204,9 +204,9 @@ public class UserController {
      * @返回值: java.util.List
      **/
     @GetMapping("/findAllUserGlzxj")
-    public PageUtil findAllUserGlzxj(){
+    public PageUtil findAllUserGlzxj(User user){
         Integer count = userService.findAllUserGlzxjCount();
-        List<User> list = userService.findAllUserGlzxj();
+        List<User> list = userService.findAllUserGlzxj(user);
         PageUtil page = new PageUtil();
         page.setTotal(count);
         page.setRows(list);

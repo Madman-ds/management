@@ -25,7 +25,7 @@
 <script type="text/javascript">
     function chenckupUserForm() {
         if ($("#f_fives").val()==""){
-            alert("5S内容不能为空")
+            alert("5S不能为空")
             return false;
         }
         else if ($("#f_clazzify").val()=="" ){
@@ -33,7 +33,7 @@
             return false;
         }
         else if ($("#f_content").val()==""){
-            alert("卡号不能为空")
+            alert("内容不能为空")
             return false;
         }return true;
     }

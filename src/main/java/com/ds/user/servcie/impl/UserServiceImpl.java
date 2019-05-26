@@ -132,8 +132,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUserGlzxj() {
-        return userMapper.findAllUserGlzxj();
+    public List<User> findAllUserGlzxj(User user) {
+        return userMapper.findAllUserGlzxj(user);
     }
 
     @Override

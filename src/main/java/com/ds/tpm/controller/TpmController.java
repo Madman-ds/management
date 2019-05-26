@@ -322,14 +322,14 @@ public class TpmController {
         Tpm addTpm = null;
         for (int i = 0; i < s1.length; i++){
             addTpm = new Tpm();
-            addTpm.setName(s8[i].substring(1, s1[i].length()-1));
+            addTpm.setName(s8[i].substring(1, s8[i].length()-1));
             addTpm.setTpm_xh(s1[i].substring(1, s1[i].length()-1));
             addTpm.setTpm_bh(s2[i].substring(1, s2[i].length()-1));
             addTpm.setTpm_whbh(s3[i].substring(1, s3[i].length()-1));
             addTpm.setTpm_djxm(s4[i].substring(1, s4[i].length()-1));
             addTpm.setTpm_yq(s5[i].substring(1, s5[i].length()-1));
             addTpm.setTpm_is(s6[i].substring(1, s6[i].length()-1));
-            addTpm.setRemarks(s9[i].substring(1, s6[i].length()-1));
+            addTpm.setRemarks(s9[i].substring(1, s9[i].length()-1));
             addTpm.setTpm_name(loginUser.getUser_name());
             TpmUser tpmUser = new TpmUser();
             //根据tpm id 和 用户id锁定是否提取项

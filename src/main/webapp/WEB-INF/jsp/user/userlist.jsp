@@ -271,7 +271,7 @@
     //添加用户
     function addUser(){
         BootstrapDialog.show({
-            title:"添加商品信息",
+            title:"添加用户信息",
             closable: false,
             message:$('<div><div>').load('<%=request.getContextPath()%>/toInsertUser'),
             buttons:[{

@@ -179,7 +179,7 @@
         注：没有创建user_glzxj实体
             故使用User作为形参使用
     -->
-    <select id="findAllUserGlzxj" parameterType="map" resultType="com.ds.user.pojo.User">
+    <select id="findAllUserGlzxj" parameterType="com.ds.user.pojo.User" resultType="com.ds.user.pojo.User">
         select b.id AS user_id,a.user_name,b.tq AS top ,b.qx AS qx from t_user a,glzxj_user b
         where a.user_id = b.user_id
         order by user_id desc
@@ -188,8 +188,8 @@
     <!--
         查询管理者巡检写权限总条数
     -->
-    <select id="findAllUserGlzxjCount" resultType="integer">
-        select count(*) from t_user
+    <select id="findAllUserGlzxjCount"  resultType="integer">
+      select count(*) from glzxj_user
     </select>
 
     <!--

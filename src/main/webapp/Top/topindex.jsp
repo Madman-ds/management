@@ -64,13 +64,11 @@
             {field:'jc_yq',title:'检查要求',align:'center',width:10},
             {field:'jc_jg',title:'确认结果',align:'center',
                 formatter:function (value,rows,index){
-                    if (value == 0){
-                        return "正常";
-                    } else if(value == 2){
-                        return "未操作"
+                    if (value == 1){
+                        return "异常";
                     }
                     else {
-                        return "异常"
+                        return "正常"
                     }
                 }
             },

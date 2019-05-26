@@ -214,11 +214,7 @@
                             type:"post",
                             success:function(data){
                                 dialogItself.close();
-                                if(arr.length == rows.length){
-                                    $("#TpmList").bootstrapTable('refresh',{pageNumber:1});
-                                }else{
-                                    $("#TpmList").bootstrapTable('refresh');
-                                }
+                                $("#TpmList").bootstrapTable('refresh');
                             },
                             error:function(){
                                 BootstrapDialog.show({
@@ -251,12 +247,7 @@
             dataType:"text",
             type:"post",
             success:function(data){
-                dialogItself.close();
-                if(arr.length == rows.length){
-                    $("#TpmList").bootstrapTable('refresh',{pageNumber:1});
-                }else{
-                    $("#TpmList").bootstrapTable('refresh');
-                }
+                $("#TpmList").bootstrapTable('refresh');
             },
             error:function(){
                 BootstrapDialog.show({
@@ -266,136 +257,8 @@
         })
     }
     
-    function updateByid(id) {
-        BootstrapDialog.show({
-            title:"修改页面",
-            message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdTpm?id='+id),
-            buttons: [ {
-                label: '保存',
-                cssClass: 'btn-primary',
-                action: function(dialogItself){
-                    var updTpmflag=chenckupdTpmForm();
-                    if(!updTpmflag){
-                        return;
-                    }
-                    $.ajax({
-                        url:"<%=request.getContextPath()%>/updTpm",
-                        data:$("#updTpmForm").serialize(),
-                        dataType:"text",
-                        type:"post",
-                        success:function(data){
-                            dialogItself.close();
-                            $('#TpmList').bootstrapTable("refresh");
-                        },
-                        error:function(){
-                            BootstrapDialog.show({
-                                title:"温馨提示",
-                                message: '系统出现BUG！请联系管理员！'
-                            });
-                        }
 
-                    })
-                }
-            }, {
-                label: '取消',
-                cssClass: 'btn-warning ',
-                action: function(dialogItself){
-                    dialogItself.close();
-                }
-            }]
-        });
-    }
 
-    //tpm修改方法
-    function updateTpm(){
-        var ids=$.map($("#TpmList").bootstrapTable('getSelections'),function(row){
-            return row.id;
-        });
-        if(ids.length==1){
-            var id = ids[0];
-            BootstrapDialog.show({
-                title:"修改页面",
-                message: $('<div></div>').load('<%=request.getContextPath()%>/toUpdTpm?id='+id),
-                buttons: [ {
-                    label: '保存',
-                    cssClass: 'btn-primary',
-                    action: function(dialogItself){
-                        var updTpmflag=chenckupdTpmForm();
-                        if(!updTpmflag){
-                            return;
-                        }
-                        $.ajax({
-                            url:"<%=request.getContextPath()%>/updTpm",
-                            data:$("#updTpmForm").serialize(),
-                            dataType:"text",
-                            type:"post",
-                            success:function(data){
-                                dialogItself.close();
-                                $('#TpmList').bootstrapTable("refresh");
-                            },
-                            error:function(){
-                                BootstrapDialog.show({
-                                    title:"温馨提示",
-                                    message: '系统出现BUG！请联系管理员！'
-                                });
-                            }
 
-                        })
-                    }
-                }, {
-                    label: '取消',
-                    cssClass: 'btn-warning ',
-                    action: function(dialogItself){
-                        dialogItself.close();
-                    }
-                }]
-            });
-        }else{
-            BootstrapDialog.show({
-                title:"温馨提示",
-                message: '请选择一行进行修改'
-            });
-        }
-    }
-    //添加tpm
-    function addTpm(){
-        BootstrapDialog.show({
-            title:"添加商品信息",
-            closable: false,
-            message:$('<div><div>').load('<%=request.getContextPath()%>/toInsertTpmBasics'),
-            buttons:[{
-                label:"提交",
-                cssClass:'btn-primary',
-                action:function(data){
-                    var addTpmflag = chenckAddTpmForm();
-                    if (!addTpmflag){
-                        return;
-                    }
-                    $.ajax({
-                        url:"<%=request.getContextPath()%>/insertTpm",
-                        data:$("#addTpmForm").serialize(),
-                        dataType:"text",
-                        type:"post",
-                        success:function(){
-                            data.close();
-                            $("#TpmList").bootstrapTable('refresh');
-                        },
-                        error:function(){
-                            BootstrapDialog.show({
-                                title:"fuck！！",
-                                message:'哇哦！系统走丢了！！'
-                            })
-                        }
-                    })
-                }
-            },{
-                label:"取消",
-                cssClass:'btn-warning',
-                action:function(data){
-                    data.close();
-                }
-            }]
-        })
-    }
 </script>
 </html>

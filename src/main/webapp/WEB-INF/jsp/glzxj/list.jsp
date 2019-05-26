@@ -384,10 +384,7 @@
                 },
                 dateType:'json',
                 success:function(data){
-                    BootstrapDialog.show({
-                        title:"提示！",
-                        message:'添加成功!'
-                    })
+                    alert("添加成功");
                     location.reload()
                 }
             })
@@ -404,6 +401,7 @@
                 cssClass:'btn-warning',
                 action:function(data){
                     data.close();
+                    location.reload();
                 }
             }]
         })

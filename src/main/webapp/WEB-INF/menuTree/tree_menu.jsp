@@ -124,34 +124,16 @@
             <div class="tree well " style="padding: 0px;background: #4e4e4e;width: 130px;">
                     <dt class="list_dt">
                         <span class="_after"></span>
-                        <p>设备管理</p>
+                        <p>危险点点检</p>
                         <i class="list_dt_icon"></i>
                     </dt>
                     <dd class="list_dd">
                         <ul>
                             <a href="<%=request.getContextPath() %>/equipment/toEquipmentList" target="mainFrame" ><li class="list_li">设备管理</li></a>
-                        </ul>
-                    </dd>
-
-                    <dt class="list_dt">
-                        <span class="_after"></span>
-                        <p>检查项赋权</p>
-                        <i class="list_dt_icon"></i>
-                    </dt>
-                    <dd class="list_dd">
-                        <ul>
-                            <a href="<%=request.getContextPath() %>/toInspectionItem" target="mainFrame"><li class="list_li">检查项赋权</li></a>
-                        </ul>
-                    </dd>
-
-                    <dt class="list_dt">
-                        <span class="_after"></span>
-                        <p>危险点</p>
-                        <i class="list_dt_icon"></i>
-                    </dt>
-                    <dd class="list_dd">
-                        <ul>
                             <a href="<%=request.getContextPath() %>/toDanger" target="mainFrame"><li class="list_li">读权限</li></a>
+                            <a href="<%=request.getContextPath() %>/toDatabackUp" target="mainFrame"><li class="list_li">数据备份</li></a>
+                            <a href="<%=request.getContextPath() %>/toDataTiqu" target="mainFrame"><li class="list_li">提取管理</li></a>
+                            <a href="<%=request.getContextPath() %>/toInspectionItem" target="mainFrame"><li class="list_li">检查项赋权</li></a>
                         </ul>
                     </dd>
 
@@ -163,28 +145,6 @@
                     <dd class="list_dd">
                         <ul>
                             <a href="<%=request.getContextPath() %>/toUserList" target="mainFrame"><li class="list_li">用户管理</li></a>
-                        </ul>
-                    </dd>
-
-                    <dt class="list_dt">
-                        <span class="_after"></span>
-                        <p>数据备份</p>
-                        <i class="list_dt_icon"></i>
-                    </dt>
-                    <dd class="list_dd">
-                        <ul>
-                            <a href="<%=request.getContextPath() %>/toDatabackUp" target="mainFrame"><li class="list_li">数据备份</li></a>
-                        </ul>
-                    </dd>
-
-                    <dt class="list_dt">
-                        <span class="_after"></span>
-                        <p>提取管理</p>
-                        <i class="list_dt_icon"></i>
-                    </dt>
-                    <dd class="list_dd">
-                        <ul>
-                            <a href="<%=request.getContextPath() %>/toDataTiqu" target="mainFrame"><li class="list_li">提取管理</li></a>
                         </ul>
                     </dd>
 

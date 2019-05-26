@@ -75,7 +75,7 @@
         $("#mss").find("option").remove();
         $.ajax({
             type: "get",
-            url: "/findAll",
+            url: "<%=request.getContextPath()%>/findAll",
             data: {
                 'user_id' : id,
             },
@@ -85,7 +85,7 @@
                 var html = "";
                 $.ajax({
                     type: "get",
-                    url: "/findAllbyids",
+                    url: "<%=request.getContextPath()%>/findAllbyids",
                     data: {
                         'ids' : qx,
                     },

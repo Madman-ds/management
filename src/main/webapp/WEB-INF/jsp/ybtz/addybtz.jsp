@@ -105,10 +105,6 @@
             alert("下次校验时间不能为空")
             return false;
         }
-        else if ($("#ybtz_remarks").val()==""){
-            alert("备注不能为空")
-            return false;
-        }
         return true;
     }
 

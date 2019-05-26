@@ -57,7 +57,7 @@ public interface UserMapper {
 
     Integer findAllUserGlzxjCount();
 
-    List<User> findAllUserGlzxj();
+    List<User> findAllUserGlzxj(User user);
 
     void delUserGlzxj(String id);
 

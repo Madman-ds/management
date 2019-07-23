@@ -109,9 +109,11 @@ public class InspectionitemController {
             UserEquipment userEquipment1 = inspectionitemService.selectUserequipment(userEquipment);
             if (userEquipment1 == null){
                 userEquipment.setQx(1);
+                userEquipment.setTop(1);
                 inspectionitemService.insertUserEquipment(userEquipment);
             }else if (userEquipment1.getQx() == 0){
                 userEquipment1.setQx(1);
+                userEquipment.setTop(1);
                 inspectionitemService.updUserEquipment(userEquipment1);
             }
         }

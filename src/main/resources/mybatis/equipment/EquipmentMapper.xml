@@ -69,6 +69,7 @@
         <if test="sb_xh !='' and sb_xh != null ">
             and sb_xh like CONCAT('%',#{sb_xh},'%')
         </if>
+        order by sb_id desc
     </sql>
     <!-- 查询设备详细信息  用于检查项赋权 -->
     <select id="selectEquipmentInspectionitemBySbId" parameterType="long" resultMap="EquipmentInspectionitemMap">
@@ -94,6 +95,7 @@
             t.sb_id = m.sb_id
         AND m.jcx_id = u.jcx_id
         AND u.qx = 1
+        AND u.user_id = #{userId}
     </select>
 
     <select id="findReadEquipmentInspectionitem" parameterType="long" resultType="map">

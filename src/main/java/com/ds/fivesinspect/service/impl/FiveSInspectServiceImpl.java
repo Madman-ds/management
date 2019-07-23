@@ -220,8 +220,8 @@ public class FiveSInspectServiceImpl implements FiveSInspectService{
      * @返回值: java.lang.Integer
      **/
     @Override
-    public Integer findFiveSInspectLogqtCount() {
-        return fiveSInspectMapper.findFiveSInspectLogqtCount();
+    public Integer findFiveSInspectLogqtCount(FiveSInspect fiveSInspect) {
+        return fiveSInspectMapper.findFiveSInspectLogqtCount(fiveSInspect);
     }
     /**
      * @作者: 老西儿

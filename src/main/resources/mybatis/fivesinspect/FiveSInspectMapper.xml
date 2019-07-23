@@ -143,61 +143,88 @@
         </foreach>
     </delete>
     <select id="ckFivesReadListCount" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultType="Integer">
-        select count(*) from
-        (select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate from
-        t_readfive rf,
-        t_userfivesinspect uf,
-        t_fivesinspect f,
-        t_user u where
-        rf.u_f_id = uf.u_f_id and
-        uf.f_fives = f.f_fives and
-        uf.user_id = u.user_id and
-        f.f_inspectdate is not null and
-        f.f_inspectuser is not null and
-        f.f_ifmeet is not null and
-        rf.user_id = #{f_userid}
-        union
-        select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate from
-        t_userfivesinspect uf ,
-        t_fivesinspect f,
-        t_user u where
-        uf.f_fives = f.f_fives and
-        uf.user_id = u.user_id and
-        uf.user_id = #{f_userid}
-        )
-        as total
+
+            SELECT
+                count( * )
+            FROM
+                (
+            SELECT
+                f.f_fives,
+                f.f_clazzify,
+                f.f_content,
+                u.user_name,
+                f.f_inspectdate
+            FROM
+                t_readfive rf,
+                t_userfivesinspect uf,
+                t_fivesinspect f,
+                t_user u
+            WHERE
+                rf.u_f_id = uf.u_f_id
+                AND uf.f_fives = f.f_fives
+                AND uf.user_id = u.user_id
+                AND f.f_inspectdate IS NOT NULL
+                AND f.f_inspectuser IS NOT NULL
+                AND f.f_ifmeet IS NOT NULL
+                AND rf.user_id = #{f_userid}
+        UNION
+            SELECT
+                f.f_fives,
+                f.f_clazzify,
+                f.f_content,
+                u.user_name,
+                f.f_inspectdate
+            FROM
+                t_userfivesinspect uf,
+                t_fivesinspect f,
+                t_user u
+            WHERE
+                uf.f_fives = f.f_fives
+                AND uf.user_id = u.user_id
+                AND f.f_inspectdate IS NOT NULL
+                AND f.f_inspectuser IS NOT NULL
+                AND f.f_ifmeet IS NOT NULL
+                AND uf.user_id = #{f_userid}
+                ) AS total
     </select>
     <select id="ckFivesReadList" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultType="map">
-         select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate from
-         t_readfive rf,
-         t_userfivesinspect uf,
-         t_fivesinspect f,
-         t_user u where
-         rf.u_f_id = uf.u_f_id and
-         uf.f_fives = f.f_fives and
-         uf.user_id = u.user_id and
-         f.f_inspectdate is not null and
-         f.f_inspectuser is not null and
-         f.f_ifmeet is not null and
-         rf.user_id = #{f_userid}
+         select
+              f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate
+         from
+             t_readfive rf,
+             t_userfivesinspect uf,
+             t_fivesinspect f,
+             t_user u where
+             rf.u_f_id = uf.u_f_id and
+             uf.f_fives = f.f_fives and
+             uf.user_id = u.user_id and
+             f.f_inspectdate is not null and
+             f.f_inspectuser is not null and
+             f.f_ifmeet is not null and
+             rf.user_id = #{f_userid}
          union
-         select f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate
-         from t_userfivesinspect uf ,t_fivesinspect f, t_user u
-         where
-         uf.f_fives = f.f_fives and
-         uf.user_id = u.user_id and
-         uf.user_id = #{f_userid} LIMIT #{startIndex},#{rows}
+             select
+                  f.f_fives,f.f_clazzify,f.f_content,u.user_name,f.f_inspectdate
+             from
+                  t_userfivesinspect uf ,t_fivesinspect f, t_user u
+             where
+                 uf.f_fives = f.f_fives and
+                 uf.user_id = u.user_id
+                 AND f.f_inspectdate IS NOT NULL
+                 AND f.f_inspectuser IS NOT NULL
+                 AND f.f_ifmeet IS NOT NULL
+                 AND uf.user_id = #{f_userid} LIMIT #{startIndex},#{rows}
     </select>
     <select id="findFiveSInspectLogqtCount" resultType="java.lang.Integer">
         select count(*) from
          t_fivesinspect f,
          t_userfivesinspect uf
-         where f.f_id = uf.f_id and
+         where f.f_fives = uf.f_fives and
           f_userid is not null and
           f_inspectuser is not null and
           f_inspectdate is not null and
           f_ifmeet is not null and
-          uf.ifextract = 1 ORDER BY f.f_inspectdate DESC
+          uf.ifextract = 1
     </select>
     <select id="findFiveSInspectLogqt" parameterType="com.ds.fivesinspect.pojo.FiveSInspect" resultMap="t_fivesinspect">
          select f.f_fives,f.f_clazzify,f.f_content,f.f_inspectdate,f.f_inspectuser,f.f_ifmeet from

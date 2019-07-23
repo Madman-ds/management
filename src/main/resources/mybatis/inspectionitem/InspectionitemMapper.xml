@@ -7,7 +7,7 @@
     </select>
     <!-- 新增赋权数据 -->
     <insert id="insertUserEquipment" parameterType="com.ds.inspectionitem.pojo.UserEquipment">
-        insert into t_userequipment(jcx_id,user_id,qx) value(#{jcx_id},#{user_id},#{qx})
+        insert into t_userequipment(jcx_id,user_id,qx,top) value(#{jcx_id},#{user_id},#{qx},#{top})
     </insert>
 
     <!-- 新增检查项 -->
@@ -32,7 +32,7 @@
     </select>
     <!-- 根据id修改用户检查项关联权限 -->
     <update id="updUserEquipment" parameterType="com.ds.inspectionitem.pojo.UserEquipment">
-        update t_userequipment set jcx_id = #{jcx_id},user_id = #{user_id},qx = #{qx} where ju_id = #{ju_id}
+        update t_userequipment set jcx_id = #{jcx_id},user_id = #{user_id},qx = #{qx},top = #{top} where ju_id = #{ju_id}
     </update>
 
     <update id="updateInspectionitem" parameterType="com.ds.inspectionitem.pojo.Inspectionitem">

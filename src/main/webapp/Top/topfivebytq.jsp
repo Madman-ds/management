@@ -45,8 +45,8 @@
     $('#dataBackupShows').bootstrapTable({
         toolbar:'#toolbar',
         url:'<%=request.getContextPath() %>/findFiveSInspectLogqt',//获取数据地址
-        pagination:false, //是否展示分页
-        pageList:[5, 10, 20, 50],//分页组件
+        pagination:true, //是否展示分页
+        pageList:[5, 10, 15, 20],//分页组件
         pageNumber:1,
         pageSize:5,//默认每页条数
         //search:true,//是否显示搜索框

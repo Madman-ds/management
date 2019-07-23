@@ -58,7 +58,7 @@ public interface FiveSInspectService {
 
     List ckFivesReadList(FiveSInspect fiveSInspect);
 
-    Integer findFiveSInspectLogqtCount();
+    Integer findFiveSInspectLogqtCount(FiveSInspect fiveSInspect);
 
     List<FiveSInspect> findFiveSInspectLogqt(FiveSInspect fiveSInspect);
 

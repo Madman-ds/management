@@ -109,7 +109,7 @@ To change this template use File | Settings | File Templates.
         pagination:true,
         pageNumber:1,
         pageSize:5,
-        pageList:[2,4,6,20],
+        pageList:[5,10,15,20],
         clickToSelect: true,
         cache搜索: false,
         sidePagination:"server"

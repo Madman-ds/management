@@ -63,7 +63,7 @@
             c.sb_id,
             b.ju_id,
             b.top
-            FROM
+        FROM
             t_user a,
             t_userequipment b,
             t_equipment c,
@@ -72,6 +72,7 @@
             a.user_id = b.user_id
             AND b.jcx_id = d.jcx_id
             AND c.sb_id = d.sb_id
+            AND b.qx = 1
         <if test="offset!=null and limit!=null">limit #{offset},#{limit}</if>
     </select>
 
@@ -82,13 +83,11 @@
             t_user a,
             t_userequipment b,
             t_equipment c,
-            t_inspectionitem d,
-            t_inspectionrecord e
+            t_inspectionitem d
         WHERE
             a.user_id = b.user_id
-            and b.jcx_id = d.jcx_id
-            and c.sb_id = d.sb_id
-            and d.jcx_id = e.jcx_id
+            AND b.jcx_id = d.jcx_id
+            AND c.sb_id = d.sb_id
             AND b.qx = 1
     </select>
 

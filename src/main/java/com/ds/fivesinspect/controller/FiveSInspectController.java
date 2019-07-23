@@ -290,7 +290,8 @@ public class FiveSInspectController {
      **/
     @GetMapping("findFiveSInspectLogqt")
     public Map<String,Object> findFiveSInspectLogqt(FiveSInspect fiveSInspect){
-        Integer count = fiveSInspectService.findFiveSInspectLogqtCount();
+        fiveSInspect.calculate();
+        Integer count = fiveSInspectService.findFiveSInspectLogqtCount(fiveSInspect);
         List<FiveSInspect> fiveSInspects = fiveSInspectService.findFiveSInspectLogqt(fiveSInspect);
         Map<String,Object> map = new HashMap<>();
         map.put("total",count);
